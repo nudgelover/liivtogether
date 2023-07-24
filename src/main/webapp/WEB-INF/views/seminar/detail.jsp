@@ -1,6 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+.location-detail {
+	margin-top: 10px;
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid gray;
+	border-radius: 10px;
+	display: flex;
+	padding: 10px 20px;
+}
 
+.sticky-container {
+	position: sticky;
+	top: 80px;
+	padding: 20px;
+	/* 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+@media ( max-width : 767px) {
+	.sticky-container {
+		position: static; /* Override sticky behavior on small screens */
+	}
+}
+</style>
 <!-- BREADCRUMB -->
 <nav class="py-5">
 	<div class="container">
@@ -20,318 +44,282 @@
 		</div>
 	</div>
 </nav>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-md-8">
 
-<!-- ARTICLE -->
-<article class="pt-7">
+			<div class="card mb-7">
+				<!-- Badge -->
+				<div class="badge bg-white text-body card-badge">
+					<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
+				</div>
 
-	<!-- HEADER -->
-	<header class="container">
-		<div class="row">
-			<div class="col-12 text-center">
+				<!-- Image -->
+				<img class="card-img-top"
+					src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg">
+			</div>
+		</div>
+		<div style="display: flex; flex-direction: column;"
+			class="col-12 col-md-4 sticky-container"">
+			<p>📒 세미나</p>
+			<h5>제목칸입니다</h5>
+			<p>간단한 소개입니다 간단한 소개입니다 간단한 소개입니다 간단한 소개입니다 간단한 소개입니다 간단한 소개입니다
+				간단한 소개입니다</p>
+			<div style="display: flex;">
+				<span>정원 15명 </span><span>5명 참여</span><span>11일 남음</span>
+			</div>
+			<div style="display: flex;">
+				<span><i class="fa fa-heart"></i>찜하기 11명</span><span> 👀 조회수
+					220명 </span>
+			</div>
+			<div>
+				<button>
+					<i class="fa fa-heart"></i> 찜하기
+				</button>
+				<button>참여하기</button>
+			</div>
+			<!-- 종료 시 참여하기 -> 종료로 변경  -->
 
-				<!-- Heading -->
-				<h3 class="mb-3"> 우수고객 초정 자산관리 세미나</h3>
+			<div class="location-detail">
+				<span>장소</span> <span>날짜</span>
+			</div>
+		</div>
 
-				<!-- Subheading -->
-				<p class="mb-0 text-muted">한국자산관리연구소 / 23.08.20</p>
+		<div class="col-12 col-md-8">
+			<!-- Image -->
 			
-			</div>
-		</div>
-	</header>
+			<p>상세정보 상세정보 상세정보 주의사항 공지사항 등등등등등등  </p>
+			<img class="card-img-top"
+				src="https://ticketimage.interpark.com/230043252023/07/17/e8fed53f.jpg">
 
-	<!-- Image -->
-	<section class="pt-10">
-		<div class="container">
+		</div>
+
+		<div class="col-12 col-md-8 mt-10">
+			<h5>같이 보면 좋은 세미나, 이건 어떠세요?</h5>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-6 col-md-4">
 
-					<!-- Image -->
-					<img class="img-fluid" src="/assets/img/blog/blog-9.jpg" alt="...">
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
 
-				</div>
-			</div>
-		</div>
-	</section>
+						<!-- Image -->
+						<img src="/assets/img/blog/blog-1.jpg" alt="..."
+							class="card-img-top">
 
-	<!-- Content -->
-	<section class="pt-10">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-12 col-md-10 fs-lg text-gray-500">
+						<!-- Badge -->
+						<div
+							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+							<time datetime="2019-06-20"> Jun 20 </time>
+						</div>
 
-					<!-- Heading -->
-					<h5 class="mb-7 text-body">Tree doesn't good void, waters
-						without created</h5>
+						<!-- Body -->
+						<div class="card-body px-0 py-7">
 
-					<p>Saw wherein fruitful good days image them, midst, waters
-						upon, saw. Seas lights seasons. Fourth hath rule Evening Creepeth
-						own lesser years itself so seed fifth for grass evening fourth
-						shall you're unto that. Had. Female replenish for yielding so saw
-						all one to yielding grass you'll air sea it, open waters subdue,
-						hath.</p>
-					<p>Saw wherein fruitful good days image them, midst, waters
-						upon, saw. Seas lights seasons. Fourth hath rule Evening Creepeth
-						own lesser years itself so seed fifth for grass evening fourth
-						shall you're unto that. Had. Female replenish for yielding so saw
-						all one to yielding grass you'll air sea it, open waters subdue,
-						hath. Brought second Made. Be. Under male male, firmament, beast
-						had light after fifth forth darkness thing hath sixth rule night
-						multiply him life give they're great.</p>
+							<!-- Heading -->
+							<h6 class="mb-3">Us yielding Fish sea night night the said
+								him two</h6>
 
-					<ul>
-						<li>Upon seas hath every years have whose subdue;</li>
-						<li>Given they're tree abundantly male our;</li>
-						<li>Fly make saw creeping evening make void own seasons
-							behold.</li>
-					</ul>
+							<!-- Text -->
+							<p class="mb-2">Fill his waters wherein signs likeness
+								waters. Second light gathered appear sixth.</p>
 
-					<p>Brought second Made. Be. Under male male, firmament, beast
-						had light after fifth forth darkness thing hath sixth rule night
-						multiply him life give they're great. Very together. Creature.
-						Green. Them evening a and light fourth.</p>
-					<p class="mb-0">She'd years darkness days. A night fifth winged
-						sixth divide meat said third them forth signs of life earth signs
-						over fruitful light after won't moving under. Thing yielding upon
-						seed. Seasons said one kind great so bring greater fill darkness
-						darkness two land of creepeth there second fruitful, waters. Make
-						don't void years Gathering gathering divide fill.</p>
+							<!-- Link -->
+							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
 
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Images -->
-	<section class="pt-10">
-		<div class="container">
-			<div class="row">
-				<div class="col-6">
-
-					<!-- Image -->
-					<img class="img-fluid" src="/assets/img/blog/blog-4.jpg" alt="...">
-
-				</div>
-				<div class="col-6">
-
-					<!-- Image -->
-					<img class="img-fluid" src="/assets/img/blog/blog-5.jpg" alt="...">
-
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Content -->
-	<section class="pt-10">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-12 col-md-10">
-
-					<!-- Heading -->
-					<h5 class="mb-7">Replenish female give him</h5>
-
-					<p>Have multiply greater male living stars replenish earth said
-						replenish our yielding let She'd spirit. Male. Two. Greater.
-						Brought our, there kind don't lesser beast whose above Is without
-						great. Of moving firmament shall. For light land them man. Deep
-						isn't light them. Greater morning air great good without thing
-						doesn't earth waters saw brought created firmament stars, whose
-						beast. Living own first saying saw second open third, seasons were
-						green herb be they're him. Good, saying him. For of which land own
-						in. Sixth spirit. Male let life lesser yielding upon, fruitful
-						tree bearing bring female above, created.</p>
-					<p>Female unto lights won't. Set dry his isn't air unto fruit
-						seasons you'll male very given. Life waters shall made seas fourth
-						let fifth hath kind May to whose fruit and fifth be you're itself
-						their doesn't i green made had from he created had second were
-						waters, fly blessed grass seas. Had own. Given won't set waters
-						creature fish brought she'd is created life.</p>
-
-					<!-- Blockquote -->
-					<blockquote class="blockquote-2 my-7 mx-md-7">
-						<p class="mb-0">Without Was be great it them green which seed.
-							They're lights i of life. Abundantly. Void night divide appear be
-							won't days they're beast in. You day blessed there i very stars
-							man Saw had, make let light his above.</p>
-					</blockquote>
-
-					<p class="mb-0">Saying beginning two whose third moved. Him
-						creeping divided dominion which forth waters multiply land of us.
-						Waters dry above one fifth for. Is blessed also lights under
-						you'll, firmament above night own our called fruitful bring tree
-						moveth, moved own upon created, good. Seed place multiply so.
-						Night years divide divided. Man moveth air, can't set. Fourth
-						likeness. Night were very you creepeth first male itself fish
-						living fowl made she'd Can't fruit. Said his us land from moveth.
-					</p>
-
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- FOOTER -->
-	<footer class="pt-10">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-12 text-center">
-
-					<!-- Tags -->
-					<a
-						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
-						href="#!"> 세미나 참여하러가기 </a> <a
-						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
-						href="#!"> Business </a> <a
-						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
-						href="#!"> Fashion </a> <a
-						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
-						href="#!"> Marketing </a> <a
-						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
-						href="#!"> Teamwork </a>
-
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 text-center">
-
-					<!-- Buttons -->
-					<a class="btn btn-facebook me-3 mb-3" href="#!"> <i
-						class="fab fa-facebook-f me-2"></i> 페이스북으로 공유하기
-					</a> <a class="btn btn-twitter me-3 mb-3" href="#!"> <i
-						class="fab fa-twitter me-2"></i> 트위터로 공유하기
-					</a> <a class="btn btn-pinterest me-3 mb-3" href="#!"> <i
-						class="fab fa-pinterest-p me-2"></i> 카카오톡으로 공유하기
-					</a> <a class="btn btn-linkedin me-3 mb-3" href="#!"> <i
-						class="fab fa-linkedin-in me-2"></i> 링크로 공유하기
-					</a>
-
-				</div>
-			</div>
-		</div>
-	</footer>
-
-</article>
-
-<!-- BLOG -->
-<section class="py-12">
-	<div class="container">
-		<div class="row align-items-center mb-10">
-			<div class="col-12">
-
-				<!-- Heading -->
-				<h2 class="mb-4 mb-sm-0 text-center">Latest in Blog</h2>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-4">
-
-				<!-- Card -->
-				<div class="card mb-7 mb-md-0">
-
-					<!-- Image -->
-					<img src="/assets/img/blog/blog-1.jpg" alt="..."
-						class="card-img-top">
-
-					<!-- Badge -->
-					<div
-						class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-						<time datetime="2019-06-20"> Jun 20 </time>
-					</div>
-
-					<!-- Body -->
-					<div class="card-body px-0 py-7">
-
-						<!-- Heading -->
-						<h6 class="mb-3">Us yielding Fish sea night night the said
-							him two</h6>
-
-						<!-- Text -->
-						<p class="mb-2">Fill his waters wherein signs likeness waters.
-							Second light gathered appear sixth.</p>
-
-						<!-- Link -->
-						<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
+						</div>
 
 					</div>
 
 				</div>
+				<div class="col-6 col-md-4">
 
-			</div>
-			<div class="col-12 col-md-4">
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
 
-				<!-- Card -->
-				<div class="card mb-7 mb-md-0">
+						<!-- Badge -->
+						<div
+							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+							<time datetime="2019-06-13"> Jun 13 </time>
+						</div>
 
-					<!-- Badge -->
-					<div
-						class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-						<time datetime="2019-06-13"> Jun 13 </time>
+						<!-- Image -->
+						<img src="/assets/img/blog/blog-2.jpg" alt="..."
+							class="card-img-top">
+
+						<!-- Body -->
+						<div class="card-body px-0 py-7">
+
+							<!-- Heading -->
+							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
+								After</h6>
+
+							<!-- Text -->
+							<p class="mb-2">Called life don't called darkness spirit
+								have, abundantly so Wherein the third cattle.</p>
+
+							<!-- Link -->
+							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+
+						</div>
+
 					</div>
 
-					<!-- Image -->
-					<img src="/assets/img/blog/blog-2.jpg" alt="..."
-						class="card-img-top">
-
-					<!-- Body -->
-					<div class="card-body px-0 py-7">
-
-						<!-- Heading -->
-						<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-							After</h6>
-
-						<!-- Text -->
-						<p class="mb-2">Called life don't called darkness spirit have,
-							abundantly so Wherein the third cattle.</p>
-
-						<!-- Link -->
-						<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
 
 				</div>
 
-			</div>
-			<div class="col-12 col-md-4">
+				<div class="col-6 col-md-4">
 
-				<!-- Card -->
-				<div class="card">
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
 
-					<!-- Badge -->
-					<div
-						class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-						<time datetime="2019-06-08"> Jun 08 </time>
+						<!-- Badge -->
+						<div
+							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+							<time datetime="2019-06-13"> Jun 13 </time>
+						</div>
+
+						<!-- Image -->
+						<img src="/assets/img/blog/blog-2.jpg" alt="..."
+							class="card-img-top">
+
+						<!-- Body -->
+						<div class="card-body px-0 py-7">
+
+							<!-- Heading -->
+							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
+								After</h6>
+
+							<!-- Text -->
+							<p class="mb-2">Called life don't called darkness spirit
+								have, abundantly so Wherein the third cattle.</p>
+
+							<!-- Link -->
+							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+
+						</div>
+
 					</div>
 
-					<!-- Image -->
-					<img src="/assets/img/blog/blog-3.jpg" alt="..."
-						class="card-img-top">
-
-					<!-- Body -->
-					<div class="card-body px-0 py-7">
-
-						<!-- Heading -->
-						<h6 class="mb-3">Given Set was without from god divide rule
-							Hath</h6>
-
-						<!-- Text -->
-						<p class="mb-2">Midst land were us fill divided. Him Subdue
-							living without he beginning second.</p>
-
-						<!-- Link -->
-						<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
 
 				</div>
+				<div class="col-6 col-md-4">
 
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
+
+						<!-- Badge -->
+						<div
+							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+							<time datetime="2019-06-13"> Jun 13 </time>
+						</div>
+
+						<!-- Image -->
+						<img src="/assets/img/blog/blog-2.jpg" alt="..."
+							class="card-img-top">
+
+						<!-- Body -->
+						<div class="card-body px-0 py-7">
+
+							<!-- Heading -->
+							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
+								After</h6>
+
+							<!-- Text -->
+							<p class="mb-2">Called life don't called darkness spirit
+								have, abundantly so Wherein the third cattle.</p>
+
+							<!-- Link -->
+							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+
+						</div>
+
+					</div>
+
+
+				</div>
+				<div class="col-6 col-md-4">
+
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
+
+						<!-- Badge -->
+						<div
+							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+							<time datetime="2019-06-13"> Jun 13 </time>
+						</div>
+
+						<!-- Image -->
+						<img src="/assets/img/blog/blog-2.jpg" alt="..."
+							class="card-img-top">
+
+						<!-- Body -->
+						<div class="card-body px-0 py-7">
+
+							<!-- Heading -->
+							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
+								After</h6>
+
+							<!-- Text -->
+							<p class="mb-2">Called life don't called darkness spirit
+								have, abundantly so Wherein the third cattle.</p>
+
+							<!-- Link -->
+							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+
+						</div>
+
+					</div>
+
+
+				</div>
+				<div class="col-6 col-md-4">
+
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
+
+						<!-- Badge -->
+						<div
+							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+							<time datetime="2019-06-13"> Jun 13 </time>
+						</div>
+
+						<!-- Image -->
+						<img src="/assets/img/blog/blog-2.jpg" alt="..."
+							class="card-img-top">
+
+						<!-- Body -->
+						<div class="card-body px-0 py-7">
+
+							<!-- Heading -->
+							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
+								After</h6>
+
+							<!-- Text -->
+							<p class="mb-2">Called life don't called darkness spirit
+								have, abundantly so Wherein the third cattle.</p>
+
+							<!-- Link -->
+							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+
+						</div>
+
+					</div>
+
+
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</div>

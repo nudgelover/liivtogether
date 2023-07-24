@@ -18,7 +18,7 @@
 }
 
 .red {
-	color: lightgray; /* Adjust the color of the bookmark icon here */
+	color: red; /* Adjust the color of the bookmark icon here */
 	font-size: 16px;
 }
 
