@@ -62,6 +62,19 @@ body {
 .heart :hover {
 	color: darkorange;
 }
+
+#userpageDropdown {
+	margin: 8px 20px 0 0;
+}
+
+.fe-user {
+	color: black !important;
+	/* 호버 시 오랜지 생각 스타일 안먹음 */
+}
+
+#userpageDropdown a {
+	outline: none !important;
+}
 </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="91"
@@ -117,34 +130,42 @@ body {
 						data-smoothscroll>ESG#</a></li>
 					<li class="nav-item"><a class="nav-link" href="/review"
 						data-smoothscroll>후기</a></li>
-						<li class="nav-item"><a class="nav-link" href="/faq"
+					<li class="nav-item"><a class="nav-link" href="/faq"
 						data-smoothscroll>FAQ</a></li>
 				</ul>
 
 				<!-- Nav -->
 				<ul class="navbar-nav ms-xl-4">
-					<li class="nav-item"><a class="nav-link"
-						data-bs-toggle="offcanvas" href="#modalSearch"> <i
-							class="fe fe-search"></i>
-					</a></li>
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						href="./account-orders.html"> <i class="fe fe-user"></i>
+						data-bs-toggle="offcanvas" href="#modalSearch"> 
+						<i
+							class="fe fe-search"></i>
+					</a></li> 
+					<li class="nav-item ms-lg-n4"><a class="nav-link"
+						data-bs-toggle="offcanvas" href="#modalShoppingCart"> <span
+							data-cart-items="2"> <i class="fe fe-bell"></i>
+						</span>
 					</a></li>
+
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
 						href="./account-wishlist.html"> <i class="fe fe-heart"></i>
 					</a></li>
+					<div id="userpageDropdown" class="dropdown">
+						<a href="#" role="button" id="userpage" data-bs-toggle="dropdown"
+							aria-expanded="false"> <i class="fe fe-user"></i>
+						</a>
+
+						<ul class="dropdown-menu" aria-labelledby="userpage">
+							<li><a class="dropdown-item" href="#">마이페이지</a></li>
+							<li><a class="dropdown-item" href="#">채팅방</a></li>
+							<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
+						</ul>
+					</div>
+
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						data-bs-toggle="offcanvas" href="#modalShoppingCart"> <span
-							data-cart-items="2"> <i class="fe fe-shopping-cart"></i>
-						</span>
-					</a></li>
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						href="/login"> 로그인
-					</a></li>
+						href="/login"> 로그인 </a></li>
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
 						href="/register"> 회원가입 </a></li>
-							<li class="nav-item ms-lg-n4"><a class="nav-link"
-						href="/logout"> 로그아웃 </a></li>
 				</ul>
 
 			</div>

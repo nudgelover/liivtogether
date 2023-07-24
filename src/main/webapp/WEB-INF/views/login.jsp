@@ -29,6 +29,7 @@
 }
 
 body {
+	margin-top: 20px;
 	font-family: 'NanumSquareNeo-Variable', sans-serif;
 	background-color: rgba(247, 247, 248);
 }
@@ -188,14 +189,14 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col-12 ">
-				<a href="/"><img style="height: 5rem" src="/assets/img/logo/logo.png"></a>
+				<a href="/"><img style="height: 4rem" src="/assets/img/logo/logo.png"></a>
 
 				<div class="outer-container">
 					<div class="left-div">
 						<img src="/assets/img/starfriends/bibiheart.png">
 					</div>
 					<div class="right-div">
-						안녕하세요. 고객님<br><span style="color:gray">로그인 후에 고객님의 정보를 확인해주세요.</span>
+						안녕하세요. 고객님<br><span style="color:gray; font-size: 13px;">로그인 후에 고객님의 정보를 확인해주세요.</span>
 					</div>
 				</div>
 				<div class="card card-xl">
@@ -225,7 +226,7 @@ body {
 
 							</div>
 							<div class="card-body before-write">로그인검증전</div>
-							<div class="card-body after-write">로그인검증후</div>
+						<!-- 	<div class="card-body after-write">로그인검증후</div> -->
 						</form>
 					</div>
 					
@@ -301,7 +302,7 @@ body {
 						
 					</div>
 					<div class="card-body before-write">로그인검증전</div>
-					<div class="card-body after-write">로그인검증후</div>
+<!-- 					<div class="card-body after-write">로그인검증후</div>-->	
 				</form>
 			</div>
 					
@@ -315,7 +316,7 @@ body {
 					
 				</div>
 
-				<div>
+				<div class="mt-3">
 				<!-- 아직 css 없음 -->
 					<span>* 아이디, 비밀번호를 잊으셨나요?</span>
 					<a href="#">아이디 찾기</a>||<a href="#">비밀번호 찾기</a> </br>

@@ -34,16 +34,47 @@
 }
 
 .event-info span {
-	margin-right: 5px;
-	padding: 5px;
-	background-color: #F2F2F2;
-	border-radius: 10px;
-	margin-right: 5px;
+	font-weight: 800;
+	color: #00b2b2;
 }
 
-.event-info img {
-	width: 20px;
+
+
+/* 진행 막대 컨테이너 스타일 */
+.progress {
+	margin-bottom: 5px;
+	height: 10px;
+	background-color: #f0f0f0;
+	border-radius: 10px;
 }
+
+/* 애니메이션 효과 */
+.progress-bar.progress-bar-striped {
+	background-color: #00b2b2 !important; /* 진행 바의 색상 */
+	background-size: 40px 40px; /* 애니메이션 스트라이프 크기 조절 */
+	animation: progress-animation 2s linear infinite;
+	/* 애니메이션 지속 시간 및 반복 설정 */
+}
+
+
+@keyframes progress-animation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 80px 0;
+  }
+}
+/* 
+@keyframes progress-animation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 80px 0;
+  }
+} */
+
 </style>
 
 <!-- BREADCRUMB -->
@@ -56,7 +87,7 @@
 				<ol class="breadcrumb mb-0 fs-xs text-gray-400">
 					<li class="breadcrumb-item"><a class="text-gray-400" href="/">Home</a>
 					</li>
-					<li class="breadcrumb-item active">Seminar</li>
+					<li class="breadcrumb-item active">Donation</li>
 				</ol>
 
 			</div>
@@ -77,11 +108,12 @@
 					<div class="card-body px-md-10 py-11">
 
 						<!-- Heading -->
-						<h4>곧 마감하는 세미나 배너띄우기</h4>
+						<h4>곧 마감하는 기부 배너띄우기</h4>
 
 						<!-- Button -->
-						<a class="btn btn-link px-0 text-body" href="shop.html"> View
-							Collection <i class="fe fe-arrow-right ms-2"></i>
+						<a class="btn btn-link px-0 text-body" href="shop.html"> 100%e
+							달성하면 국민은행이 얼마 보태고 30%이상하면 뭐하고~ 기부는 고객들이름이 다 기재되고..영수증발행해주고..? <i
+							class="fe fe-arrow-right ms-2"></i>
 						</a>
 
 					</div>
@@ -154,34 +186,36 @@
 			<div class="col-12">
 
 				<!-- Heading -->
-				<h3 class="mb-7 text-center">세미나</h3>
+				<h3 class="mb-7 text-center">기부</h3>
 
 				<!-- Nav -->
-				<nav class="nav justify-content-center mb-5">
+				<!-- 	<nav class="nav justify-content-center mb-5">
 					<a class="nav-link active" href="#">All</a> <a class="nav-link"
-						href="#">자산관리</a> <a class="nav-link" href="#">인문학</a> <a
-						class="nav-link" href="#">디지털</a> <a class="nav-link" href="#">북클럽</a>
-					<a class="nav-link" href="#">기타</a>
-				</nav>
+						href="#">국내</a> <a class="nav-link" href="#">해외</a> <a
+						class="nav-link" href="#">기타</a>
+				</nav> -->
 
 			</div>
 		</div>
 		<div style="display: flex; justify-content: right;">
 			<div class="col-12 col-md-4">
 				<div class="input-group input-group-merge mb-5">
-				  <input class="form-control" type="search" placeholder="Search">
-				  <div class="input-group-append">
-				    <button class="btn btn-outline-border" type="submit">
-				      <i class="fe fe-search"></i>
-				    </button>
-				  </div>
+					<input class="form-control" type="search" placeholder="Search">
+					<div class="input-group-append">
+						<button class="btn btn-outline-border" type="submit">
+							<i class="fe fe-search"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
+
+
+
 		<div class="menulist">
 			<h2>전체</h2>
 			<div>
-				<span>인기순</span><span>마감임박순</span><span>신청률순</span><span>최신순</span><span>조회순</span>
+				<span>인기순</span><span>모집금액순</span><span>마감임박순</span><span>최신순</span><span>조회순</span>
 			</div>
 		</div>
 		<div class="row">
@@ -200,29 +234,35 @@
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
+						alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>사랑의 연탄봉사</h6>
 						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+							<div class="progress">
+								<div class="progress-bar bg-info progress-bar-striped"
+									style="width: 60%"></div>
+							</div>
+
+							<div style="display: flex; align-items: center;">
+
+								<span style="margin-right: auto;"> 120% 달성 <span
+									style="color: gray; font-size: 12px; font-weight: 200;">
+										13,024,310원</span></span> <span
+									style="color: gray; font-size: 12px; font-weight: 200;">종료
+									<span style="font-size: 12px; font-weight: 200;">성공</span>
+								</span>
+							</div>
 
 						</div>
 						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
+						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
+							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+
 						<!-- Button -->
 						<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/seminar/detail"> 참여하러가기 <i
@@ -247,29 +287,34 @@
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
+						alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>사랑의 연탄봉사</h6>
 						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+							<div class="progress">
+								<div class="progress-bar bg-info progress-bar-striped"
+									style="width: 60%"></div>
+							</div>
 
+							<div style="display: flex; align-items: center;">
+
+								<span style="margin-right: auto;"> 120% 달성 <span
+									style="color: gray; font-size: 12px; font-weight: 200;">
+										13,024,310원</span></span> <span
+									style="color: gray; font-size: 12px; font-weight: 200;">종료
+									<span style="font-size: 12px; font-weight: 200;">성공</span>
+								</span>
+							</div>
 						</div>
 						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
+						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
+							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+
 						<!-- Button -->
 						<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/seminar/detail"> 참여하러가기 <i
@@ -294,29 +339,33 @@
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
+						alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>사랑의 연탄봉사</h6>
 						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+							<div class="progress">
+								<div class="progress-bar bg-info progress-bar-striped"
+									style="width: 60%"></div>
+							</div>
+							<div style="display: flex; align-items: center;">
 
+								<span style="margin-right: auto;"> 60% 달성 <span
+									style="color: gray; font-size: 12px; font-weight: 200;">
+										13,024,310원</span></span> <span
+									style="color: gray; font-size: 12px; font-weight: 200;">종료
+									<span style="font-size: 12px; font-weight: 200;"></span>
+								</span>
+							</div>
 						</div>
 						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
+						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
+							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+
 						<!-- Button -->
 						<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/seminar/detail"> 참여하러가기 <i
@@ -341,29 +390,33 @@
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
+						alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>사랑의 연탄봉사</h6>
 						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+							<div class="progress">
+								<div class="progress-bar bg-info progress-bar-striped"
+									style="width: 60%"></div>
+							</div>
+							<div style="display: flex; align-items: center;">
 
+								<span style="margin-right: auto;"> 60% 달성 <span
+									style="color: gray; font-size: 12px; font-weight: 200;">
+										13,024,310원</span></span> <span
+									style="color: gray; font-size: 12px; font-weight: 200;">진행중
+									<span style="color:red; font-size: 12px; font-weight: 200;">마감임박</span>
+								</span>
+							</div>
 						</div>
 						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
+						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
+							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+
 						<!-- Button -->
 						<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/seminar/detail"> 참여하러가기 <i
@@ -388,29 +441,32 @@
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
+						alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>사랑의 연탄봉사</h6>
 						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+							<div class="progress">
+								<div class="progress-bar bg-info progress-bar-striped"
+									style="width: 60%"></div>
+							</div>
+							<div style="display: flex; align-items: center;">
 
+								<span style="margin-right: auto;"> 60% 달성 <span
+									style="color: gray; font-size: 12px; font-weight: 200;">
+										13,024,310원</span></span> <span
+									style="color: gray; font-size: 12px; font-weight: 200;">진행중
+								</span>
+							</div>
 						</div>
 						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
+						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
+							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+
 						<!-- Button -->
 						<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/seminar/detail"> 참여하러가기 <i
@@ -435,29 +491,32 @@
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
+						alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>사랑의 연탄봉사</h6>
 						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+							<div class="progress">
+								<div class="progress-bar bg-info progress-bar-striped"
+									style="width: 60%"></div>
+							</div>
+								<div style="display: flex; align-items: center;">
 
+								<span style="margin-right: auto;"> 60% 달성 <span
+									style="color: gray; font-size: 12px; font-weight: 200;">
+										13,024,310원</span></span> <span
+									style="color: gray; font-size: 12px; font-weight: 200;">진행중
+								</span>
+							</div>
 						</div>
 						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
+						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
+							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+
 						<!-- Button -->
 						<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/seminar/detail"> 참여하러가기 <i

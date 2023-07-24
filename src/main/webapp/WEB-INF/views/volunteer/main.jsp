@@ -34,7 +34,7 @@
 }
 
 .event-info span {
-	margin-right: 5px;
+	margin-right : 5px;
 	padding: 5px;
 	background-color: #F2F2F2;
 	border-radius: 10px;
@@ -56,7 +56,7 @@
 				<ol class="breadcrumb mb-0 fs-xs text-gray-400">
 					<li class="breadcrumb-item"><a class="text-gray-400" href="/">Home</a>
 					</li>
-					<li class="breadcrumb-item active">Seminar</li>
+					<li class="breadcrumb-item active">Volunteer</li>
 				</ol>
 
 			</div>
@@ -77,11 +77,13 @@
 					<div class="card-body px-md-10 py-11">
 
 						<!-- Heading -->
-						<h4>곧 마감하는 세미나 배너띄우기</h4>
+						<h4>곧 마감하는 봉사 배너띄우기</h4>
 
 						<!-- Button -->
-						<a class="btn btn-link px-0 text-body" href="shop.html"> View
-							Collection <i class="fe fe-arrow-right ms-2"></i>
+						<a class="btn btn-link px-0 text-body" href="shop.html"> 
+						봉사하면 스타코인받고 봉사시간 인정받고 증명서 발급? 
+						
+						<i class="fe fe-arrow-right ms-2"></i>
 						</a>
 
 					</div>
@@ -154,14 +156,18 @@
 			<div class="col-12">
 
 				<!-- Heading -->
-				<h3 class="mb-7 text-center">세미나</h3>
+				<h3 class="mb-7 text-center">봉사</h3>
 
 				<!-- Nav -->
 				<nav class="nav justify-content-center mb-5">
-					<a class="nav-link active" href="#">All</a> <a class="nav-link"
-						href="#">자산관리</a> <a class="nav-link" href="#">인문학</a> <a
-						class="nav-link" href="#">디지털</a> <a class="nav-link" href="#">북클럽</a>
-					<a class="nav-link" href="#">기타</a>
+					<a class="nav-link active" href="#">All</a>
+					 <a class="nav-link"
+						href="#"></a> 
+						<a class="nav-link" href="#">방문봉사</a>
+						 <a
+						class="nav-link" href="#">언택트봉사</a> 
+						<a class="nav-link" href="#">유기견</a>
+					<a class="nav-link" href="#">재능기부</a>
 				</nav>
 
 			</div>

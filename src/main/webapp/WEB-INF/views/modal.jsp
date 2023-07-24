@@ -442,26 +442,11 @@
 		aria-label="Close">
 		<i class="fe fe-x" aria-hidden="true"></i>
 	</button>
-
-	<!-- Header-->
-	<div class="offcanvas-header lh-fixed fs-lg">
-		<strong class="mx-auto">Search Products</strong>
-	</div>
-
 	<!-- Body: Form -->
-	<div class="offcanvas-body">
+	<div class="offcanvas-body mt-5">
 		<form>
-			<div class="form-group">
-				<label class="visually-hidden" for="modalSearchCategories">Categories:</label>
-				<select class="form-select" id="modalSearchCategories">
-					<option selected>All Categories</option>
-					<option>Women</option>
-					<option>Men</option>
-					<option>Kids</option>
-				</select>
-			</div>
 			<div class="input-group input-group-merge">
-				<input class="form-control" type="search" placeholder="Search">
+				<input class="form-control" type="search" placeholder="검색어를 입력해주세요">
 				<div class="input-group-append">
 					<button class="btn btn-outline-border" type="submit">
 						<i class="fe fe-search"></i>
@@ -475,8 +460,14 @@
 	<div class="offcanvas-body border-top fs-sm">
 
 		<!-- Heading -->
-		<p>Search Results:</p>
-
+		<p>최근검색어</p>
+		<p>전체삭제</p>
+		<p>기부</p>
+		
+		<p>인기검색어</p>
+		<p>1  기부</p>
+		<p>2 봉사</p>
+		<p>3  증명서</p>
 		<!-- Items -->
 		<div class="row align-items-center position-relative mb-5">
 			<div class="col-4 col-md-3">
@@ -496,79 +487,7 @@
 
 			</div>
 		</div>
-		<div class="row align-items-center position-relative mb-5">
-			<div class="col-4 col-md-3">
-
-				<!-- Image -->
-				<img class="img-fluid" src="/assets/img/products/product-6.jpg"
-					alt="...">
-
-			</div>
-			<div class="col position-static">
-
-				<!-- Text -->
-				<p class="mb-0 fw-bold">
-					<a class="stretched-link text-body" href="./product.html">Cotton
-						floral print Dress</a> <br> <span class="text-muted">$40.00</span>
-				</p>
-
-			</div>
-		</div>
-		<div class="row align-items-center position-relative mb-5">
-			<div class="col-4 col-md-3">
-
-				<!-- Image -->
-				<img class="img-fluid" src="/assets/img/products/product-7.jpg"
-					alt="...">
-
-			</div>
-			<div class="col position-static">
-
-				<!-- Text -->
-				<p class="mb-0 fw-bold">
-					<a class="stretched-link text-body" href="./product.html">Leather
-						Sneakers</a> <br> <span class="text-primary">$85.00</span>
-				</p>
-
-			</div>
-		</div>
-		<div class="row align-items-center position-relative mb-5">
-			<div class="col-4 col-md-3">
-
-				<!-- Image -->
-				<img class="img-fluid" src="/assets/img/products/product-8.jpg"
-					alt="...">
-
-			</div>
-			<div class="col position-static">
-
-				<!-- Text -->
-				<p class="mb-0 fw-bold">
-					<a class="stretched-link text-body" href="./product.html">Cropped
-						cotton Top</a> <br> <span class="text-muted">$29.00</span>
-				</p>
-
-			</div>
-		</div>
-		<div class="row align-items-center position-relative mb-5">
-			<div class="col-4 col-md-3">
-
-				<!-- Image -->
-				<img class="img-fluid" src="/assets/img/products/product-9.jpg"
-					alt="...">
-
-			</div>
-			<div class="col position-static">
-
-				<!-- Text -->
-				<p class="mb-0 fw-bold">
-					<a class="stretched-link text-body" href="./product.html">Floral
-						print midi Dress</a> <br> <span class="text-muted">$50.00</span>
-				</p>
-
-			</div>
-		</div>
-
+	
 		<!-- Button -->
 		<a class="btn btn-link px-0 text-reset" href="./shop.html"> View
 			All <i class="fe fe-arrow-right ms-2"></i>

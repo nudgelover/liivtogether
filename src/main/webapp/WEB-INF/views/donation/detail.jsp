@@ -12,8 +12,9 @@
 					<li class="breadcrumb-item"><a class="text-gray-400"
 						href="index.html">Home</a></li>
 					<li class="breadcrumb-item"><a class="text-gray-400"
-						href="blog.html">Seminar</a></li>
-					<li class="breadcrumb-item active">글번호_TITLE</li>
+						href="blog.html">Blog</a></li>
+					<li class="breadcrumb-item active">B5 Tips to Increase Your
+						Online Saleslog</li>
 				</ol>
 
 			</div>
@@ -30,11 +31,12 @@
 			<div class="col-12 text-center">
 
 				<!-- Heading -->
-				<h3 class="mb-3"> 우수고객 초정 자산관리 세미나</h3>
+				<h3 class="mb-3">5 Tips to Increase Your Online Sales</h3>
 
 				<!-- Subheading -->
-				<p class="mb-0 text-muted">한국자산관리연구소 / 23.08.20</p>
-			
+				<p class="mb-0 text-muted">By Oliver Barrett in Company / July
+					18, 2019</p>
+
 			</div>
 		</div>
 	</header>
@@ -179,7 +181,7 @@
 					<!-- Tags -->
 					<a
 						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
-						href="#!"> 세미나 참여하러가기 </a> <a
+						href="#!"> Communication </a> <a
 						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
 						href="#!"> Business </a> <a
 						class="btn btn-xs btn-outline-border fw-normal text-gray-500 me-3 mb-3"
@@ -196,13 +198,13 @@
 
 					<!-- Buttons -->
 					<a class="btn btn-facebook me-3 mb-3" href="#!"> <i
-						class="fab fa-facebook-f me-2"></i> 페이스북으로 공유하기
+						class="fab fa-facebook-f me-2"></i> Share on Facebook
 					</a> <a class="btn btn-twitter me-3 mb-3" href="#!"> <i
-						class="fab fa-twitter me-2"></i> 트위터로 공유하기
+						class="fab fa-twitter me-2"></i> Share on Twitter
 					</a> <a class="btn btn-pinterest me-3 mb-3" href="#!"> <i
-						class="fab fa-pinterest-p me-2"></i> 카카오톡으로 공유하기
+						class="fab fa-pinterest-p me-2"></i> Share on Pinterest
 					</a> <a class="btn btn-linkedin me-3 mb-3" href="#!"> <i
-						class="fab fa-linkedin-in me-2"></i> 링크로 공유하기
+						class="fab fa-linkedin-in me-2"></i> Share on LinkedIn
 					</a>
 
 				</div>
