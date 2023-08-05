@@ -11,9 +11,9 @@ import java.util.Date;
 @Getter
 @ToString
 public class Comment {
-	private String comment_id;
-	private String review_id;
-    private String cust_id;
-    private String review_comment;
+	private String commentId;
+	private String reviewId;
+    private String custId;
+    private String reviewComment;
     private String rdate;
 }

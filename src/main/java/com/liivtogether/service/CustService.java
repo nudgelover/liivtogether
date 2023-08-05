@@ -16,36 +16,30 @@ public class CustService implements LIIVService<String, Cust> {
     @Autowired
     CustMapper mapper;
 
-    public void register(Cust cust) throws Exception {
-        mapper.insert(cust);
-    }
+	@Override
+	public void register(Cust v) throws Exception {
+		mapper.insert(v);
+	}
 
-    @Override
-    public void remove(String s) throws Exception {
-        mapper.delete(s);
-    }
+	@Override
+	public void remove(String k) throws Exception {
+		mapper.delete(k);
+	}
 
-    @Override
-    public void modify(Cust cust) throws Exception {
-        mapper.update(cust);
-    }
-    public void withdraw(String cust_id) throws Exception {
-        mapper.withdraw(cust_id);
-    }
+	@Override
+	public void modify(Cust v) throws Exception {
+		mapper.update(v);
+	}
 
-    @Override
-    public Cust get(String s) throws Exception {
-        return mapper.select(s);
-    }
+	@Override
+	public Cust get(String k) throws Exception {
+		return mapper.select(k);
+	}
 
-    @Override
-    public List<Cust> get() throws Exception {
-        return mapper.selectall();
-    }
-    public Cust getPhone(String s) throws Exception {
-        return mapper.selectphone(s);
-    }
-    public Cust getEmail(String s) throws Exception {
-        return mapper.selectemail(s);
-    }
+	@Override
+	public List<Cust> get() throws Exception {
+		return mapper.selectall();
+	}
+
+
 }

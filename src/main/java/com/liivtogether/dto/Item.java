@@ -12,12 +12,12 @@ import java.util.List;
 @Getter
 @ToString
 public class Item {
-    private String item_id;
-    private String cust_id;
+    private String itemId;
+    private String custId;
     private String img;
-    private int price_coin;
+    private int priceCoin;
     private int cnt;
     private String rdate;
-    private String is_vaild;
+    private String isVaild;
     
 }

@@ -9,15 +9,15 @@ import java.sql.Date;
 @Setter
 @Getter
 @ToString
-public class Order {
-    private String order_id;
-    private String cust_id;
-    private String item_id;
+public class Orders {
+    private String orderId;
+    private String custId;
+    private String itemId;
     private int amount;
-    private Date order_date;
+    private Date orderDate;
     private String status;
-    private String rcv_name;
+    private String rcv_Name;
     private String addr;
-    private String phone_no;
+    private String phoneNo;
     private String req;   
 }
