@@ -11,12 +11,11 @@ import java.util.Date;
 @Getter
 @ToString
 public class Seminar {
-    private String semi_id;
+	private String semi_id;
     private String topic_big;
     private String topic_small;
     private String title;
-    private String location;
-    private String rdate;
+    private String location;    
     private String edate;
     private String ddate;
     private int target;
@@ -25,5 +24,7 @@ public class Seminar {
     private String image_sub;
     private String comment;
     private String content;
+    private int reward_coin;
     private int view;
+    private String rdate;
 }

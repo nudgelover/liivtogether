@@ -16,7 +16,7 @@ public class Order {
     private int amount;
     private Date order_date;
     private String status;
-    private String cust_name;
+    private String rcv_name;
     private String addr;
     private String phone_no;
     private String req;   
