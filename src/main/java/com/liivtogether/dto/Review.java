@@ -11,14 +11,10 @@ import java.util.Date;
 @Getter
 @ToString
 public class Review {
+	private String review_id;
     private String cust_id;
-    private String cust_name;
-    private String cust_pwd;
-    private String phone;
-    private int age;
-    private String gender;
-    private String email;
-    private Date cust_rdate;
-    private Date cust_del_date;
-
+    private String rdate;
+    private String review_contents;
+    private int review_score;    
+    private String review_reply;
 }
