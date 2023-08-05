@@ -10,11 +10,10 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class Review {
+public class Comment {
+	private String comment_id;
 	private String review_id;
-	private String contents_id;
-	private String cust_id;
-    private String review_contents;
-    private int review_score;    
+    private String cust_id;
+    private String review_comment;
     private String rdate;
 }

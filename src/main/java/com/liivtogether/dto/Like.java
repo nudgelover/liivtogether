@@ -11,13 +11,10 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class Item {
-    private String item_id;
+public class Like {
+    private String like_id;
+    private String contents_id;
     private String cust_id;
-    private String img;
-    private int price_coin;
-    private int cnt;
-    private String rdate;
-    private String is_vaild;
+    private String is_like;
     
 }
