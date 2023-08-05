@@ -17,7 +17,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/assets/css/theme.bundle.css" />
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Title -->
 <title>Liiv Together</title>
 <style>
@@ -53,6 +53,13 @@ body {
 	width: 80%; /* 밑줄 스타일 및 색상 설정 */
 }
 
+/* Styles for screens smaller than 1200px */
+@media (max-width: 1199px) {
+	.navbar-nav.ms-xl-auto li.nav-item a.nav-link.orange-underline::after {
+		display: none; /* Hide the orange underline on smaller screens */
+	}
+}
+
 .heart {
 	color: black !important;
 	text-decoration: none !important;
@@ -81,6 +88,7 @@ body {
 	style="padding-top: 90px;">
 
 	<jsp:include page="modal.jsp" />
+	<jsp:include page="search.jsp" />
 
 	<!-- 상단 네비바 -->
 	<nav class="navbar navbar-expand-xl navbar-light fixed-top bg-white">
@@ -137,10 +145,9 @@ body {
 				<!-- Nav -->
 				<ul class="navbar-nav ms-xl-4">
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						data-bs-toggle="offcanvas" href="#modalSearch"> 
-						<i
+						data-bs-toggle="offcanvas" href="#modalSearch"> <i
 							class="fe fe-search"></i>
-					</a></li> 
+					</a></li>
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
 						data-bs-toggle="offcanvas" href="#modalShoppingCart"> <span
 							data-cart-items="2"> <i class="fe fe-bell"></i>
@@ -156,7 +163,7 @@ body {
 						</a>
 
 						<ul class="dropdown-menu" aria-labelledby="userpage">
-							<li><a class="dropdown-item" href="#">마이페이지</a></li>
+							<li><a class="dropdown-item" href="/mypage">마이페이지</a></li>
 							<li><a class="dropdown-item" href="#">채팅방</a></li>
 							<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
 						</ul>

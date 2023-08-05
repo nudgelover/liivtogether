@@ -3,13 +3,11 @@
 <style>
 .location-detail {
 	margin-top: 10px;
-	padding: 10px 20px;
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	border: 1px solid gray;
 	border-radius: 10px;
-	display: flex;
-	padding: 10px 20px;
 }
 
 .sticky-container {
@@ -24,7 +22,67 @@
 		position: static; /* Override sticky behavior on small screens */
 	}
 }
+
+.recruitment {
+	margin: 10px 3px;
+	border-radius: 10px 10px;
+	padding: 3px 10px;
+	background-color: #E6E6E6;
+}
+
+.participants {
+	margin: 10px 3px;
+	border-radius: 10px 10px;
+	padding: 3px 10px;
+	background-color: #CEF6F5;
+}
+
+/* 마감임박 시 빨간 배경 스타일 */
+.deadline-red {
+	margin: 10px 3px;
+	border-radius: 10px 10px;
+	padding: 3px 10px;
+	background-color: red;
+	color: white;
+}
+
+/*일반 마감날짜는 주황 배경 스타일 */
+.deadline-orange {
+	margin: 10px 3px;
+	border-radius: 10px 10px;
+	padding: 3px 10px;
+	background-color: #F3E2A9;
+}
+
+.preference {
+	display: flex;
+	padding: 4px;
+}
+
+.preference span {
+	margin-right: 10px;
+	color: #585858;
+}
+
+#buttons {
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	display: flex;
+}
+
+#buttons button {
+	border-radius: 5px;
+	font-weight: 700;
+	color: white;
+	height: 3.5rem;
+	border: none;
+	background-color: #FFBF00;
+	border: none;
+	font-weight: 700;
+}
 </style>
+
 <!-- BREADCRUMB -->
 <nav class="py-5">
 	<div class="container">
@@ -66,29 +124,37 @@
 			<p>간단한 소개입니다 간단한 소개입니다 간단한 소개입니다 간단한 소개입니다 간단한 소개입니다 간단한 소개입니다
 				간단한 소개입니다</p>
 			<div style="display: flex;">
-				<span>정원 15명 </span><span>5명 참여</span><span>11일 남음</span>
+				<span class="recruitment">정원 15명 </span><span class="participants">5명
+					참여</span> <span class="deadline-orange">11일 남음</span>
+				<!--  디비 연결 후 남은 일짜 deadline으로 값보내기 -->
+				<%-- 				<span class="${(deadline <= 5) ? 'deadline-red' : 'deadline-orange'}">${deadline}</span>
+ --%>
 			</div>
-			<div style="display: flex;">
-				<span><i class="fa fa-heart"></i>찜하기 11명</span><span> 👀 조회수
-					220명 </span>
+			<div class="preference">
+				<span><i class="fa fa-heart"></i> 찜하기 11명 </span><span> 👀조회
+					22명 </span>
 			</div>
-			<div>
-				<button>
+			<div id="buttons">
+				<button style="width: 33%">
 					<i class="fa fa-heart"></i> 찜하기
 				</button>
-				<button>참여하기</button>
+				<button style="width: 66%">참여하기</button>
 			</div>
 			<!-- 종료 시 참여하기 -> 종료로 변경  -->
 
 			<div class="location-detail">
-				<span>장소</span> <span>날짜</span>
+				<span class="mb-3"><img style="width: 20px;"
+					src="https://cdn-icons-png.flaticon.com/512/727/727606.png">
+					장소 : 성수동 알파코 캠퍼스</span> <span><img style="width: 20px;"
+					src="https://cdn-icons-png.flaticon.com/512/10691/10691802.png">
+					날짜 : 2023년 11월 23일</span>
 			</div>
 		</div>
 
 		<div class="col-12 col-md-8">
 			<!-- Image -->
-			
-			<p>상세정보 상세정보 상세정보 주의사항 공지사항 등등등등등등  </p>
+
+			<p>상세정보 상세정보 상세정보 주의사항 공지사항 등등등등등등</p>
 			<img class="card-img-top"
 				src="https://ticketimage.interpark.com/230043252023/07/17/e8fed53f.jpg">
 

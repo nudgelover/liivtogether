@@ -161,8 +161,6 @@
 				<!-- Nav -->
 				<nav class="nav justify-content-center mb-5">
 					<a class="nav-link active" href="#">All</a>
-					 <a class="nav-link"
-						href="#"></a> 
 						<a class="nav-link" href="#">방문봉사</a>
 						 <a
 						class="nav-link" href="#">언택트봉사</a> 
