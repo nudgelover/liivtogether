@@ -9,9 +9,18 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(isA/3GQJV5WNjdgpiWWKxw4McdGiL6XmLKgJfYe9Zz5W+GKwEACYkiFwqJfto9hFbUOOTRptal6x4SX5mHVsjWyDiEBBuYl8l58V1wkPkssJHYUhTp7jcX1xVqLD4VA9)
+    username: ENC(pcAfOpGOtXRjXyqhuOGfYTIIfnQcWwYx)
+    password: ENC(Zqj59ySaK+PrFpXHL7M0IFWcW5UeYuZ0)
 logging:
   level:
     root: info
+
+mybatis:
+  type-aliases-package: com.liivtogether.dto
+  mapper-locations: classpath:/mybatis/*.xml
 
 # ?? ??(?? ??) ?? ?? ?? ??
 #  logging.level.root=info
