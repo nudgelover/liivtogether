@@ -9,8 +9,15 @@ public class MypageController {
 	
     String dir = "mypage/";
     @RequestMapping("")
-    public String donation(Model model) throws Exception {
+    public String mypage(Model model) throws Exception {
     	 model.addAttribute("center", dir + "main");
+        return "index";
+    }
+ 
+    
+    @RequestMapping("/wish")
+    public String wish(Model model) throws Exception {
+    	 model.addAttribute("center", dir + "wish");
         return "index";
     }
  

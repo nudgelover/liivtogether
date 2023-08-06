@@ -13,12 +13,12 @@
 }
 
 .white {
-	color: lightgray; /* Adjust the color of the bookmark icon here */
+	color: lightgray; 
 	font-size: 16px;
 }
 
 .red {
-	color: lightgray; /* Adjust the color of the bookmark icon here */
+	color: red; 
 	font-size: 16px;
 }
 
