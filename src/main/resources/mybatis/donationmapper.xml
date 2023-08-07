@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.DonationMapper">
+
+    <select id="select" parameterType="String" resultType="donation">
+        SELECT * FROM contents WHERE id=#{dona_id}
+    </select>
+
+    <select id="selectdona" resultType="donation">
+        SELECT * FROM contents WHERE topic_bic='기부'
+    </select>
+
+
+
+   <!-- 안하면 지우기 -->
+    <insert id="insert" parameterType="donation">
+        INSERT INTO contents
+        VALUES (#{topic_big}, #{topic_small}, #{title}, #{location}, #{edate}, #{ddate}, #{target}, #{image_main}, #{image_sub}, #{comment}, #{content}, #{reward_coin}, SYSDATE)
+    </insert>
+
+    <update id="update" parameterType="donation">
+        UPDATE contents
+        SET cust_name=#{cust_name},
+            cust_pwd=#{cust_pwd},
+            phone=#{phone},
+            age=#{age},
+            gender=#{gender}
+            email=#{email}
+        WHERE cust_id = #{cust_id}
+    </update>
+
+
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM contents
+        WHERE cust_id = #{cust_id}
+    </delete>
+
+</mapper>
