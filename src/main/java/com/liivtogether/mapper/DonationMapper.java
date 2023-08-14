@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 @Mapper
 public interface DonationMapper extends LIIVMapper<String, Donation> {
-    
+	List<Donation> selectall();
 }
