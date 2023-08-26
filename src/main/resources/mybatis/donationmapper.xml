@@ -5,16 +5,48 @@
 <mapper namespace="com.liivtogether.mapper.DonationMapper">
 
     <select id="selectall" resultType="donation">
-        SELECT * FROM contents WHERE topic_big='D'
+        SELECT id as donaId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate 
+		, ddate
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE topic_big = 'D'
+		ORDER BY donaId DESC
     </select>
 
-    <select id="select" parameterType="String" resultType="donation">
-        SELECT * FROM contents WHERE id=#{dona_id}
+    <select id="select" parameterType="Integer" resultType="donation">
+		SELECT id as donaId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate
+		, ddate 
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE id=#{donaId}
     </select>
 
-    <select id="selectdona" resultType="donation">
-        SELECT * FROM contents WHERE topic_bic='기부'
-    </select>
 
 
 
