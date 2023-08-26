@@ -77,11 +77,11 @@
 					<div class="card-body px-md-10 py-11">
 
 						<!-- Heading -->
-						<h4>Esg Shop 배너띄우기</h4>
+						<h4>지속 가능한 내일, KB가 함께합니다</h4>
 
 						<!-- Button -->
-						<a class="btn btn-link px-0 text-body" href="shop.html"> View
-							Collection <i class="fe fe-arrow-right ms-2"></i>
+						<a class="btn btn-link px-0 text-body" href="https://omoney.kbstar.com/quics?page=C101240#loading">
+						 ESG STAR 보러가기 <i class="fe fe-arrow-right ms-2"></i>
 						</a>
 
 					</div>
@@ -102,16 +102,10 @@
 				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
 					<div class="card-body px-md-10 py-11">
 						<!-- Heading -->
-						<h4 class="mb-5">Get -50% from Summer Collection</h4>
-
-						<!-- Text -->
-						<p class="mb-7">
-							Appear, dry there darkness they're seas. <br> <strong
-								class="text-primary">Use code 4GF5SD</strong>
-						</p>
+						<h4 class="mb-5">지구에게 더 다정한 오늘을 선물하세요!</h4>
 
 						<!-- Button -->
-						<a class="btn btn-outline-dark" href="shop.html"> Shop Now <i
+						<a class="btn btn-outline-dark" href="https://ko.wikipedia.org/wiki/%EC%83%88%ED%99%9C%EC%9A%A9"> 업사이클링이란? <i
 							class="fe fe-arrow-right ms-2"></i>
 						</a>
 
@@ -130,14 +124,13 @@
 					<div class="card-body px-md-10 py-11 text-center text-white">
 
 						<!-- Preheading -->
-						<p class="text-uppercase">Enjoy an extra</p>
+						<p class="text-uppercase">KB금융그룹</p>
 
 						<!-- Heading -->
-						<h1 class="display-4 text-uppercase">50% off</h1>
+						<h1 class="display-4 text-uppercase">ESG REPORTING</h1>
 
 						<!-- Link -->
-						<a class="link-underline text-reset" href="shop.html">Shop
-							Collection</a>
+						<a class="link-underline text-reset" href="https://kbfg.com/Kor/about/sustainability/sustainability.jsp">지속가능경영보고서 보러가기</a>
 
 					</div>
 				</div>
@@ -159,9 +152,9 @@
 				<!-- Nav -->
 				<nav class="nav justify-content-center mb-5">
 					<a class="nav-link active" href="#">All</a> <a class="nav-link"
-						href="#">가방</a> <a class="nav-link" href="#">팔찌</a> <a
-						class="nav-link" href="#">목걸이</a> <a class="nav-link" href="#">반지</a>
-					<a class="nav-link" href="#">기타</a>
+						href="#">에코백</a> <a class="nav-link" href="#">텀블러</a> <a
+						class="nav-link" href="#">종이테이프</a> <a class="nav-link" href="#">업사이클링 스타프렌즈 상품</a>
+					<a class="nav-link" href="#">우대금리쿠폰</a>
 				</nav>
 
 			</div>
@@ -207,7 +200,7 @@
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6> 
+						<h6>업사이클링 스타프렌즈 인형(아거)</h6> 
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
@@ -254,7 +247,7 @@
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>업사이클링 스타프렌즈 인형(비비)</h6>
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
@@ -301,7 +294,7 @@
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>업사이클링 스타프렌즈 인형(콜리)</h6>
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
@@ -348,7 +341,7 @@
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>업사이클링 스타프렌즈 인형(키키)</h6>
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
@@ -395,7 +388,7 @@
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>업사이클링 스타프렌즈 인형(라무)</h6>
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
@@ -442,7 +435,7 @@
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>업사이클링 스타프렌즈 담요</h6>
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
