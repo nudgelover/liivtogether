@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class DonationService implements LIIVService<String, Donation> {
+public class DonationService implements LIIVService<Integer, Donation> {
 
     @Autowired
     DonationMapper mapper;
@@ -21,7 +21,7 @@ public class DonationService implements LIIVService<String, Donation> {
     }
 
     @Override
-    public void remove(String s) throws Exception {
+    public void remove(Integer s) throws Exception {
         mapper.delete(s);
     }
 
@@ -31,7 +31,7 @@ public class DonationService implements LIIVService<String, Donation> {
     }
 
     @Override
-    public Donation get(String s) throws Exception {
+    public Donation get(Integer s) throws Exception {
         return mapper.select(s);
     }
 
@@ -39,10 +39,5 @@ public class DonationService implements LIIVService<String, Donation> {
     public List<Donation> get() throws Exception {
         return mapper.selectall();
     }
-//    public Donation getPhone(String s) throws Exception {
-//        return mapper.selectphone(s);
-//    }
-//    public Donation getEmail(String s) throws Exception {
-//        return mapper.selectemail(s);
-//    }
+
 }
