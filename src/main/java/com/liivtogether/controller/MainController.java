@@ -1,5 +1,7 @@
 package com.liivtogether.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +27,10 @@ public class MainController {
         return "login";
     }
     
-    @RequestMapping("/logout")
-    public String logout(Model model){
+    @RequestMapping("/logouts")
+    public String logouts(Model model, HttpSession session){
     	model.addAttribute("center", "logout");
+    	session.invalidate();
         return "index";
     }
     
@@ -41,6 +44,7 @@ public class MainController {
     public String registerimpl(Model model, Cust cust) throws Exception {
     	try {
 			custService.register(cust);
+			model.addAttribute("center", "center");
 		} catch (Exception e) {
 //			throw new Exception("registerimpl error");
 			e.printStackTrace();

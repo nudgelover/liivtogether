@@ -117,7 +117,7 @@ $(function(){
 		$("#register_form").submit();
 	})
 	
-	// id중복체크
+	// id중복체크. 중복체크 확인을 누르면 비활성화로 만듦
 	$("#idcheck").click(function(){
 		let cust_id = $("#custId").val();
 		console.log("idcheck 눌림" + cust_id);
