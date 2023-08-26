@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  <!-- FOOTER -->
     <footer class="">
-      <div class="py-12 bg-dark bg-cover text-center" style="background-image: url(/assets/img/patterns/pattern-2.svg)">
+      <div class="py-12 bg-cover text-center" style="background-image: url(/assets/img/patterns/footer.png)">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -13,46 +13,46 @@
               <!-- Links -->
               <ul class="list-inline mb-7">
                 <li class="list-inline-item px-3">
-                  <a class="text-gray-300" href="./contact-us.html">Contact Us</a>
+                  <a class="text-gray-400" href="./contact-us.html">Contact Us</a>
                 </li>
                 <li class="list-inline-item px-3">
-                  <a class="text-gray-300" href="/faq">FAQs</a>
+                  <a class="text-gray-400" href="/faq">FAQs</a>
                 </li>
                 <li class="list-inline-item px-3">
-                  <a class="text-gray-300" data-bs-toggle="modal" href="#modalSizeChart">Size Guide</a>
+                  <a class="text-gray-400" data-bs-toggle="modal" href="#modalSizeChart">Size Guide</a>
                 </li>
                 <li class="list-inline-item px-3">
-                  <a class="text-gray-300" href="./shipping-and-returns.html">Shipping & Returns</a>
+                  <a class="text-gray-400" href="./shipping-and-returns.html">Shipping & Returns</a>
                 </li>
                 <li class="list-inline-item px-3">
-                  <a class="text-gray-300" href="./about.html">Our Story</a>
+                  <a class="text-gray-400" href="./about.html">Our Story</a>
                 </li>
               </ul>
     
               <!-- Links -->
               <ul class="list-inline fs-lg">
                 <li class="list-inline-item">
-                  <a class="text-gray-300" href="#!">
+                  <a class="text-gray-400" href="#!">
                     <i class="fab fa-facebook"></i>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="text-gray-300" href="#!">
+                  <a class="text-gray-400" href="#!">
                     <i class="fab fa-youtube"></i>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="text-gray-300" href="#!">
+                  <a class="text-gray-400" href="#!">
                     <i class="fab fa-twitter"></i>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="text-gray-300" href="#!">
+                  <a class="text-gray-400" href="#!">
                     <i class="fab fa-instagram"></i>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="text-gray-300" href="#!">
+                  <a class="text-gray-400" href="#!">
                     <i class="fab fa-medium"></i>
                   </a>
                 </li>

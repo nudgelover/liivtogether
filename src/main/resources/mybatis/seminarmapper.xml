@@ -4,35 +4,285 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liivtogether.mapper.SeminarMapper">
 
-    <select id="select" parameterType="String" resultType="seminar">
-        SELECT * FROM contents WHERE cust_id=#{cust_id}
-    </select>
 
-    <select id="selectall" resultType="seminar">
-        SELECT * FROM contents
-    </select>
+	<select id="select" parameterType="Integer" resultType="Seminar">
+		SELECT id as semiId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate
+		, ddate
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE id=#{semiId}
+	</select>
 
-    <insert id="insert" parameterType="seminar">
-        INSERT INTO contents
-        VALUES (#{cust_id}, #{cust_name}, #{cust_pwd}, #{phone}, #{age}, #{gender}, #{email}, SYSDATE, NULL)
-    </insert>
+	<select id="selectall" resultType="Seminar">
+		SELECT id as semiId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate
+		, ddate
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE topic_big = 'S'
+		ORDER BY semiId DESC
+	</select>
 
-    <update id="update" parameterType="seminar">
-        UPDATE contents
-        SET cust_name=#{cust_name},
-            cust_pwd=#{cust_pwd},
-            phone=#{phone},
-            age=#{age},
-            gender=#{gender}
-            email=#{email}
-        WHERE cust_id = #{cust_id}
-    </update>
+
+	<select id="getBrandNewOrderWithClosed" parameterType="String" resultType="Seminar">
+		SELECT id as semiId
+		    , topic_big as topicBig
+		    , topic_small as topicSmall
+		    , title
+		    , edate
+		    , ddate
+		    , target
+		    , target_in as targetIn
+		    , image_main as imageMain
+		    , reword_coin as rewardCoin
+		    , view
+		    , rdate
+		FROM contents
+		WHERE topic_big = 'S'
+		<if test="topicSmall != null and topicSmall != ''">
+		    AND topic_small = #{topicSmall}
+		</if>
+		ORDER BY semiId DESC;
+	</select>
+
+	<select id="getPopularOrderWithClosed" parameterType="String" resultType="Seminar">
+	<!-- 찜기능 구현 후! 조인해서!! -->
+
+	</select>
+	
+		
+	<select id="getDeadlineOrderWithClosed" parameterType="String" resultType="Seminar">
+		SELECT id as semiId
+		    , topic_big as topicBig
+		    , topic_small as topicSmall
+		    , title
+		    , edate
+		    , ddate
+		    , target
+		    , target_in as targetIn
+		    , image_main as imageMain
+		    , reword_coin as rewardCoin
+		    , view
+		    , rdate
+		FROM contents
+		WHERE topic_big = 'S'
+		<if test="topicSmall != null and topicSmall != ''">
+		    AND topic_small = #{topicSmall}
+		</if>
+		ORDER BY edate ASC;
+	</select>
+	
+	
+		
+	<select id="getTargetInOrderWithClosed" parameterType="String" resultType="Seminar">
+		SELECT id as semiId
+		    , topic_big as topicBig
+		    , topic_small as topicSmall
+		    , title
+		    , edate
+		    , ddate
+		    , target
+		    , target_in as targetIn
+		    , image_main as imageMain
+		    , reword_coin as rewardCoin
+		    , view
+		    , rdate
+		FROM contents
+		WHERE topic_big = 'S'
+		<if test="topicSmall != null and topicSmall != ''">
+		    AND topic_small = #{topicSmall}
+		</if>
+		ORDER BY (target_in / target) DESC;
+	</select>
+	
+	
+	<select id="getViewsOrderWithClosed"  parameterType="String" resultType="Seminar">
+		SELECT id as semiId
+		    , topic_big as topicBig
+		    , topic_small as topicSmall
+		    , title
+		    , edate
+		    , ddate
+		    , target
+		    , target_in as targetIn
+		    , image_main as imageMain
+		    , reword_coin as rewardCoin
+		    , view
+		    , rdate
+		FROM contents
+		WHERE topic_big = 'S'
+		<if test="topicSmall != null and topicSmall != ''">
+		    AND topic_small = #{topicSmall}
+		</if>
+		ORDER BY view DESC
+
+	</select>
 
 
-    <delete id="delete" parameterType="String">
-        DELETE
-        FROM contents
-        WHERE cust_id = #{cust_id}
-    </delete>
+	<select id="getBrandNewOrder" parameterType="String" resultType="Seminar">
+	   SELECT id as semiId
+	       , topic_big as topicBig
+	       , topic_small as topicSmall
+	       , title
+	       , edate
+	       , ddate
+	       , target
+	       , target_in as targetIn
+	       , image_main as imageMain
+	       , reword_coin as rewardCoin
+	       , view
+	       , rdate
+	   FROM contents
+	   WHERE topic_big = 'S'
+	       AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
+	       <if test="topicSmall != null and topicSmall != ''">
+	           AND topic_small = #{topicSmall}
+	       </if>
+	   ORDER BY id DESC;
+	</select>
+	
+	<select id="getPopularOrder" parameterType="String" resultType="Seminar">
+	
+	</select>
+	
+	
+	<select id="getDeadlineOrder" parameterType="String" resultType="Seminar">
+  <!--    SELECT id as semiId
+        , topic_big as topicBig
+        , topic_small as topicSmall
+        , title
+        , edate
+        , ddate
+        , target
+        , target_in as targetIn
+        , image_main as imageMain
+        , reword_coin as rewardCoin
+        , view
+        , rdate
+        , CASE WHEN edate >= #{currentDate} THEN 1 ELSE 0 END as isFuture
+    FROM contents
+    WHERE topic_big = 'S'
+        <if test="topicSmall != null and topicSmall != ''">
+            AND topic_small = #{topicSmall}
+        </if>
+    ORDER BY isFuture DESC, edate ASC; 
+    -->
+   
+	    SELECT id as semiId
+	        , topic_big as topicBig
+	        , topic_small as topicSmall
+	        , title
+	        , edate
+	        , ddate
+	        , target
+	        , target_in as targetIn
+	        , image_main as imageMain
+	        , reword_coin as rewardCoin
+	        , view
+	        , rdate
+	    FROM contents
+	    WHERE topic_big = 'S'
+	        AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
+	        <if test="topicSmall != null and topicSmall != ''">
+	            AND topic_small = #{topicSmall}
+	        </if>
+	    ORDER BY edate ASC;
+	</select>
+	
+	
+	
+	<select id="getTargetInOrder" parameterType="String" resultType="Seminar">
+       SELECT id as semiId
+	        , topic_big as topicBig
+	        , topic_small as topicSmall
+	        , title
+	        , edate
+	        , ddate
+	        , target
+	        , target_in as targetIn
+	        , image_main as imageMain
+	        , reword_coin as rewardCoin
+	        , view
+	        , rdate
+	    FROM contents
+	    WHERE topic_big = 'S'
+	        AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
+	        <if test="topicSmall != null and topicSmall != ''">
+	            AND topic_small = #{topicSmall}
+	        </if>
+	    ORDER BY (target_in / target) DESC;
+	</select>
+
+	
+	
+	<select id="getViewsOrder" parameterType="String" resultType="Seminar">
+       SELECT id as semiId
+	        , topic_big as topicBig
+	        , topic_small as topicSmall
+	        , title
+	        , edate
+	        , ddate
+	        , target
+	        , target_in as targetIn
+	        , image_main as imageMain
+	        , reword_coin as rewardCoin
+	        , view
+	        , rdate
+	    FROM contents
+	    WHERE topic_big = 'S'
+	        AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
+	        <if test="topicSmall != null and topicSmall != ''">
+	            AND topic_small = #{topicSmall}
+	        </if>
+	    ORDER BY view DESC;
+		
+	</select>
+
+	<update id="updateViews" parameterType="Integer">
+	    UPDATE contents
+	    SET view = view + 1
+	    WHERE id = #{semiId}
+	</update>
+
+	
+	
+	<insert id="insert" parameterType="Seminar">
+	
+	</insert>
+
+	<update id="update" parameterType="Seminar">
+	</update>
+
+	<delete id="delete" parameterType="String">
+		DELETE
+		FROM contents
+		WHERE id =
+		#{semiId}
+	</delete>
 
 </mapper>

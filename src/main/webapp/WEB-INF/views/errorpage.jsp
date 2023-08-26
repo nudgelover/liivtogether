@@ -15,9 +15,9 @@
 				<!-- Text -->
 				<p class="mb-7 text-gray-500">Sorry, we couldn't find the page
 					you where looking for. We suggest that you return to home page.</p>
-				${msg}입니다
+				MSG: ${msg}
 				<!-- Button -->
-				<a class="btn btn-dark" href="index.html"> Go to Homepage </a>
+				</br> <a class="btn btn-dark" href="index.html"> Go to Homepage </a>
 
 			</div>
 		</div>
