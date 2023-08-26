@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.CustMapper">
+
+    <select id="select" parameterType="String" resultType="Cust">
+        SELECT cust_id as custId
+        	 , cust_pwd as custPwd
+        	 , cust_name as custName
+        	 , phone_no as phoneNo
+        	 , birth
+        	 , img
+        	 , pointree
+        	 , starcoin
+        	 , is_master as isMaster 
+        FROM cust
+        WHERE cust_id=#{custId}
+    </select>
+
+    <select id="selectall" resultType="Cust">
+        SELECT cust_id as custId
+        	 , cust_pwd as custPwd
+        	 , cust_name as custName
+        	 , phone_no as phoneNo
+        	 , birth
+        	 , img
+        	 , pointree
+        	 , starcoin
+        	 , is_master as isMaster 
+        FROM cust
+    </select>
+
+    <insert id="insert" parameterType="Cust">
+        INSERT INTO cust
+        (cust_id, cust_pwd, cust_name, phone_no, birth, img, pointree, starcoin, is_master)
+        VALUES 
+        (#{custId}, #{custPwd}, #{custName}, #{phoneNo}, #{birth}, #{img}, #{pointree}, #{starcoin}, #{isMaster})
+    </insert>
+
+    <update id="update" parameterType="cust">
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM cust
+        WHERE cust_id = #{custId}
+    </delete>
+
+</mapper>

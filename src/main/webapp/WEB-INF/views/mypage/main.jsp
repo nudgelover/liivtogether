@@ -213,6 +213,7 @@
 	}
 }
 </style>
+
 <div class="container  mt-5">
 	<div class="row">
 		<div class="col-12 col-lg-3">
@@ -298,7 +299,7 @@
 							발급하기<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
-						<div class="col-12 col-lg-6 section-list">
+						<div class="col-12 col-lg-6 section-list" onclick="goToWish()">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
@@ -338,7 +339,7 @@
 							발급하기<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
-						<div class="col-12 col-lg-6 section-list">
+						<div class="col-12 col-lg-6 section-list" onclick="goToJjim()">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">

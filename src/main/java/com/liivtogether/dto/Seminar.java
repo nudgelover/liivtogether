@@ -11,14 +11,20 @@ import java.util.Date;
 @Getter
 @ToString
 public class Seminar {
-    private String cust_id;
-    private String cust_name;
-    private String cust_pwd;
-    private String phone;
-    private int age;
-    private String gender;
-    private String email;
-    private Date cust_rdate;
-    private Date cust_del_date;
-
+	private String semiId;
+    private String topicBig;
+    private String topicSmall;
+    private String title;
+    private String location;    
+    private String edate;
+    private String ddate;
+    private int target;
+    private int targetIn;
+    private String imageMain;
+    private String imageSub;
+    private String comment;
+    private String content;
+    private int rewardCoin;
+    private int view;
+    private String rdate;
 }

@@ -11,14 +11,21 @@ import java.util.Date;
 @Getter
 @ToString
 public class Donation {
-    private String cust_id;
-    private String cust_name;
-    private String cust_pwd;
-    private String phone;
-    private int age;
-    private String gender;
-    private String email;
-    private Date cust_rdate;
-    private Date cust_del_date;
-
+    private String id;
+    private String topic_big;
+    private String topic_small;
+    private String title;
+    private String location;    
+    private String edate;
+    private String ddate;
+    private int target;
+    private int target_in;
+    private String image_main;
+    private String image_sub;
+    private String comment;
+    private String content;
+    private int reward_coin;
+    private int view;
+    private String rdate;
+     
 }
