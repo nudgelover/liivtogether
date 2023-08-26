@@ -36,7 +36,7 @@
 <script>
 	$(document).ready(function() {
 		openNoticePopup();
-
+		registerFinishPopup();
 	});
 
 	function fnBannerclose(param) {
@@ -86,6 +86,17 @@
 		popup.style.display = 'block';
 
 	}
+	
+	//회원가입 완료 시 alert창 표출 및 로그인 안내
+	function registerFinishPopup(){
+		//let previousPage = document.referrer; //이전 페이지
+		let currentURL = window.location.href;
+		console.log(currentURL);
+		if(currentURL.includes('registerimpl')){
+			alert("회원가입을 환영합니다. 로그인하여 이용해주세요.");
+		}
+	}
+	
 </script>
 <!-- WELCOME -->
 <section class="py-14" id="welcome" data-jarallax data-speed=".8"

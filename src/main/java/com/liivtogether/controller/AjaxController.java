@@ -1,5 +1,7 @@
 package com.liivtogether.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.liivtogether.dto.Cust;
 import com.liivtogether.service.CustService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class AjaxController {
 
@@ -28,7 +33,31 @@ public class AjaxController {
 		if(cust == null) {
 			result = 1;
 		}
-		return result;
-		
+		return result;	
 	}
+
+	// 0 아이디 없음, 1 정상 로그인, 2 비밀번호 불일치
+	@RequestMapping("/logins")
+	public int login(String custId, String custPwd, HttpSession session) throws Exception {
+		int result = 0;
+		Cust cust = null;
+		try {
+			cust = custService.get(custId);
+			if(cust != null) {
+				if(!custPwd.equals(cust.getCustPwd())){
+//					log.info("custPwd={}", custPwd);
+//					log.info("getCustPwd={}", cust.getCustPwd());
+					result = 2; //패스워드 불일치
+				} else {
+		            session.setMaxInactiveInterval(3600);
+		            session.setAttribute("logincust", cust);
+					result = 1; //일치. 정상로그인
+				}
+			}
+			return result;
+		} catch (Exception e) {
+			throw new Exception("login error");
+		}
+	}
+	
 }
