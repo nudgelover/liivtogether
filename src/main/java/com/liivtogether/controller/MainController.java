@@ -1,10 +1,19 @@
 package com.liivtogether.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.liivtogether.dto.Cust;
+import com.liivtogether.service.CustService;
+
 @Controller
 public class MainController {
+	
+	@Autowired
+	CustService custService = new CustService();
+	
     @RequestMapping("/")
     public String main(){
     	 
@@ -28,6 +37,16 @@ public class MainController {
         return "index";
     }
     
+    @RequestMapping("/registerimpl")
+    public String registerimpl(Model model, Cust cust) throws Exception {
+    	try {
+			custService.register(cust);
+		} catch (Exception e) {
+//			throw new Exception("registerimpl error");
+			e.printStackTrace();
+		}
+    	return "index";
+    }
     
   
 }

@@ -71,6 +71,8 @@ input:focus {
 }
 </style>
 <script>
+
+
 function selectAllAgreements() {
   const agreeAllCheckbox = document.getElementById('agreeAll');
   const essentialCheckboxes = document.getElementById('essential');
@@ -90,19 +92,61 @@ function selectAllAgreements() {
     agreeAdCheckbox.checked = false;
   }
 
-  let allChecked = true;
-  // 사용자가 전체 선택 이후, 하나의 체크박스라도 해제를 한다면 전체 동의도 false로, 근데 이 스크립트 작동안됨..다시 짜야팜
-  if (essentialCheckboxes.checked == false) {
-    allChecked = false;
-  }
-  if (essential2Checkboxes.checked == false) {
-    allChecked = false;
-  }
-  if (agreeAdCheckbox.checked == false) {
-    allChecked = false;
-  }
-  agreeAllCheckbox.checked = allChecked;
 }
+
+function selectBackAllAgreements(){
+  const agreeAllCheckbox = document.getElementById('agreeAll');
+  const essentialCheckboxes = document.getElementById('essential');
+  const essential2Checkboxes = document.getElementById('essential2');
+  const agreeAdCheckbox = document.getElementById('agreeAd');
+  // 사용자가 전체 선택 이후, 하나의 체크박스라도 해제를 한다면 전체 동의도 false로, 근데 이 스크립트 작동안됨..다시 짜야팜
+  if (essentialCheckboxes.checked == false || essential2Checkboxes.checked == false || agreeAdCheckbox.checked == false){
+	agreeAllCheckbox.checked = false;  
+  }
+}
+
+$(function(){
+	selectAllAgreements();
+	
+	// 회원가입 form 전송하는 함수
+	$("#register_btn").click(function(){
+		$("#register_form").attr({
+			action : '/registerimpl',
+			method : 'post'
+		});
+		$("#register_form").submit();
+	})
+	
+	// id중복체크
+	$("#idcheck").click(function(){
+		let cust_id = $("#custId").val();
+		console.log("idcheck 눌림" + cust_id);
+		param = {
+				cust_id : cust_id
+		};
+		$.ajax({
+			url : '/idcheck',
+			dataType : 'json',
+			data : param
+		})
+		.done(function(result){
+			if(result == 1){
+				let a = confirm("사용 가능한 아이디입니다. 사용하시겠습니까?")
+				if(a){
+		            $("#custId").attr("readonly", "readonly");
+				} else{
+					return;
+				}
+			} else {
+				alert("중복된 아이디입니다.")
+			}
+		})
+		.fail(function(){
+			alert("에러가 발생했습니다.")
+		})
+	})
+	
+})
 </script>
 
 
@@ -193,22 +237,27 @@ function selectAllAgreements() {
 		</div>
 
 		<div class="card">
-			<h6 style="font-weight: bold">아이디 회원가입</h6>
-			<form>
+			<h6 style="font-weight: bold">일반 회원가입</h6>
+			<form id = "register_form">
+			<input type="hidden" id="img" name = "img" value = "default.jpg">
+			<input type="hidden" id="pointree" name = "pointree" value = 0>
+			<input type="hidden" id="starcoin" name = "starcoin" value = 0>
+			<input type="hidden" id="isMaster" name = "isMaster" value = "0">
+			
 				<div class="mb-3">
 					<label for="exampleInputID" class="form-label">아이디 </label>
 					<div style="display: flex;">
-						<input type="id" class="form-control" id="exampleInputID"
+						<input type="id" class="form-control" id="custId" name="custId"
 							aria-describedby="idhelp">
-						<button class="idcheck">중복확인</button>
+						<button type = "button" class="idcheck" id="idcheck">중복확인</button>
 					</div>
 
 					<div id="idhelp" class="form-text">아이디는 6자리이상으로 입력해주세요.</div>
 				</div>
 
 				<div class="mb-3">
-					<label for="exampleInputID" class="form-label">이름 </label> <input
-						type="id" class="form-control" id="exampleInputID"
+					<label for="exampleInputID" class="form-label">이름 </label> 
+					<input type="id" class="form-control" id="custName" name="custName"
 						aria-describedby="idhelp">
 					<div id="idhelp" class="form-text">이름을 입력해주세요</div>
 				</div>
@@ -217,16 +266,28 @@ function selectAllAgreements() {
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">비밀번호</label>
 					<input type="password" class="form-control mb-1"
-						placeholder="비밀번호 입력" id="exampleInputPassword1"> <input
-						type="password" class="form-control" id="exampleInputPassword2"
+						placeholder="비밀번호 입력" id="custPwd" name="custPwd"> 
+					<input
+						type="password" class="form-control" id="custPwdCheck"
 						placeholder="비밀번호 확인">
 					<div id="passwordHelpBlock" class="form-text">비밀번호는 영문, 숫자,
 						특수문자를 포함하여 8~20자리 입니다.</div>
 				</div>
 
+				<div class="mb-3">
+					<label for="exampleInputID" class="form-label">연락처 </label> 
+					<input type="id" class="form-control" id="phoneNo" name="phoneNo"
+						aria-describedby="idhelp">
+					<div id="idhelp" class="form-text">연락처를 입력해주세요</div>
+				</div>
 
-
-
+				<div class="mb-3">
+					<label for="exampleInputID" class="form-label">생년월일</label> 
+					<input type="id" class="form-control" id="birth" name="birth"
+						aria-describedby="idhelp">
+					<div id="idhelp" class="form-text">생년월일을 입력해주세요</div>
+				</div>
+				
 				<div style="position: relative;" class="form-check">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">
 					<label class="form-check-label" for="exampleCheck1">전체동의 </label> <a
@@ -239,7 +300,7 @@ function selectAllAgreements() {
 
 				<div style="padding: 0 0 0 35px;" class="form-text mb-3 ">회원·서비스(필수),
 					스타트업찾기 서비스 (선택), 이벤트·혜택알림 동의(선택), 만 14세 이상(필수)</div>
-				<button class="btn">완료</button>
+				<button class="btn" id="register_btn">완료</button>
 			</form>
 		</div>
 	</div>
@@ -280,7 +341,7 @@ function selectAllAgreements() {
 				style="display: grid; grid-template-columns: 1fr auto;">
 				<div>
 					<input class="form-check-input" type="checkbox" id="essential"
-						value="option1"> <label style="margin-left: 14px;"
+						value="option1" onclick="selectBackAllAgreements()"> <label style="margin-left: 14px;"
 						class="form-check-label" for="essential">회원·서비스 가입<span
 						style="color: orange;">(필수)</span></label>
 				</div>
@@ -294,20 +355,12 @@ function selectAllAgreements() {
 
 			<div style="padding: 0 0 0 32px;" class="collapse" id="essentialText">
 				<div>
-					<p class="mb-0 fs-sm text-gray-400">전체동의 클릭시 전체선택 스크립트 안넣음
-						브라랍르ㅏ브라블바ㅡㄹ바ㅡ를바ㅡ라브라브라브 안녕하세요 가갸거격오요요요 전체동의 미클릭시 버튼 회색 이다가 클릭하면
-						노랑색으로 바꾸는 스크립트도 안만듬 yo전체동의 클릭시 전체선택 스크립트 안넣음
-						브라랍르ㅏ브라블바ㅡㄹ바ㅡ를바ㅡ라브라브라브 안녕하세요 가갸거격오요요요 전체동의 미클릭시 버튼 회색 이다가 클릭하면
-						노랑색으로 바꾸는 스크립트도 안만듬 yo전체동의 클릭시 전체선택 스크립트 안넣음
-						브라랍르ㅏ브라블바ㅡㄹ바ㅡ를바ㅡ라브라브라브 안녕하세요 가갸거격오요요요 전체동의 미클릭시 버튼 회색 이다가 클릭하면
-						노랑색으로 바꾸는 스크립트도 안만듬 yo전체동의 클릭시 전체선택 스크립트 안넣음
-						브라랍르ㅏ브라블바ㅡㄹ바ㅡ를바ㅡ라브라브라브 안녕하세요 가갸거격오요요요 전체동의 미클릭시 버튼 회색 이다가 클릭하면
-						노랑색으로 바꾸는 스크립트도 안만듬 yo</p>
+					<p class="mb-0 fs-sm text-gray-400">전체동의 클릭시</p>
 				</div>
 			</div>
 			<div class="form-check form-check-inline mt-5">
 				<input class="form-check-input" type="checkbox" id="essential2"
-					value="option1"> <label class="form-check-label"
+					value="option1" onclick="selectBackAllAgreements()"> <label class="form-check-label"
 					for="essential2">만 14세 이상입니다.<span style="color: orange;">(필수)</span></label>
 			</div>
 
@@ -317,7 +370,7 @@ function selectAllAgreements() {
 				style="display: grid; grid-template-columns: 1fr auto;">
 				<div>
 					<input class="form-check-input" type="checkbox" id="agreeAd"
-						value="option1"> <label style="margin-left: 14px;"
+						value="option1" onclick="selectBackAllAgreements()"> <label style="margin-left: 14px;"
 						class="form-check-label" for="agreeAd">서비스 이벤트 혜택 알림(선택)</span></label>
 				</div>
 
@@ -338,7 +391,7 @@ function selectAllAgreements() {
 
 
 			<p style="font-size: 10px; color: gray; font-weight: 200;">·선택
-				동의를 거부하셔도 리브투게터 서비스 이용이 가능합니다.</p>
+				동의를 거부하셔도 리브투게더 서비스 이용이 가능합니다.</p>
 			<div
 				style="position: sticky; bottom: 0px; background-color: white; margin-top: 10rem; height: 80px;">
 				<button class="btn">확인</button>
