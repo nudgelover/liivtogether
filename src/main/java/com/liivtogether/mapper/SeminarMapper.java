@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 @Mapper
+
 public interface SeminarMapper extends LIIVMapper<Integer, Seminar> {
 
    public void updateViews(Integer seminarId) throws Exception;
@@ -35,5 +36,5 @@ public interface SeminarMapper extends LIIVMapper<Integer, Seminar> {
    public List<Seminar> getTargetInOrderWithClosed(String topicSmall) throws Exception;
    
    public List<Seminar> getViewsOrderWithClosed(String topicSmall) throws Exception;
-   
+  
 }
