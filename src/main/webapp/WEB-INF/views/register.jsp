@@ -91,7 +91,7 @@ function selectAllAgreements() {
   }
 
   let allChecked = true;
-  // 사용자가 전체 선택 이후, 하나의 체크박스라도 해제를 한다면 전체 동의도 false로
+  // 사용자가 전체 선택 이후, 하나의 체크박스라도 해제를 한다면 전체 동의도 false로, 근데 이 스크립트 작동안됨..다시 짜야팜
   if (essentialCheckboxes.checked == false) {
     allChecked = false;
   }

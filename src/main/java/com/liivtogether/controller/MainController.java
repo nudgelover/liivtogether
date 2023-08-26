@@ -27,4 +27,7 @@ public class MainController {
     	model.addAttribute("center", "register");
         return "index";
     }
+    
+    
+  
 }
