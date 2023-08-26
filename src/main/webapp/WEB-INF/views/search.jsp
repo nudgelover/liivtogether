@@ -242,42 +242,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		<p>1 기부</p>
 		<p>2 봉사</p>
 		<p>3 증명서</p>
-		<!-- Items -->
-		<div class="row align-items-center position-relative mb-5">
-			<div class="col-4 col-md-3">
-
-				<!-- Image -->
-				<img class="img-fluid" src="/assets/img/products/product-5.jpg"
-					alt="...">
-
-			</div>
-			<div class="col position-static">
-
-				<!-- Text -->
-				<p class="mb-0 fw-bold">
-					<a class="stretched-link text-body" href="./product.html">Leather
-						mid-heel Sandals</a> <br> <span class="text-muted">$129.00</span>
-				</p>
-
-			</div>
-		</div>
-
-		<!-- Button -->
-		<a class="btn btn-link px-0 text-reset" href="./shop.html"> View
-			All <i class="fe fe-arrow-right ms-2"></i>
-		</a>
 
 	</div>
-
-	<!-- Body: Empty (remove `.d-none` to enable it) -->
-	<div class="offcanvas-body d-none">
-
-		<!-- Text -->
-		<p class="mb-3 fs-sm text-center">Nothing matches your search</p>
-
-		<!-- Smiley -->
-		<p class="mb-0 fs-sm text-center">😞</p>
-
-	</div>
-
 </div>
