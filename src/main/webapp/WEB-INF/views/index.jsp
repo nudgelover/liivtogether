@@ -141,10 +141,18 @@ body {
 							href="/mypage"><img style="width: 25px; border-radius: 50%" src="http://localhost/assets/img/avatars/avatar-1.jpg"></i>
 						</a>
 					</li>
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-							href="/login"> 로그인 </a></li>
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-							href="/register"> 회원가입 </a></li>
+					<c:choose>
+						<c:when test="${logincust == null}">
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/login"> 로그인 </a></li>
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/register"> 회원가입 </a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/logouts"> 로그아웃 </a></li>
+						</c:otherwise>
+					</c:choose>	
 					<li style="display: none;"><a class="nav-link"
 							href="./account-wishlist.html"> <i class="fe fe-heart"></i>
 						</a></li>

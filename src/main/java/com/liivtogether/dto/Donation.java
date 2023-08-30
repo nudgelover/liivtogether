@@ -11,21 +11,30 @@ import java.util.Date;
 @Getter
 @ToString
 public class Donation {
-    private String id;
-    private String topic_big;
-    private String topic_small;
-    private String title;
-    private String location;    
-    private String edate;
-    private String ddate;
-    private int target;
-    private int target_in;
-    private String image_main;
-    private String image_sub;
-    private String comment;
-    private String content;
-    private int reward_coin;
-    private int view;
-    private String rdate;
+	private int donaId;
+	private String topicBig;
+	private String topicSmall;
+	private String title;
+	private String location;
+	private String edate;
+	private String ddate;
+	private int target;
+	private int targetIn;
+	private String imageMain;
+	private String imageSub;
+	private String comment;
+	private String content;
+	private int rewardCoin;
+	private int view;
+	private String rdate;
+	private int dDay;
+	private String currentDate;
      
+	
+	public int getdDay() {
+		return dDay;
+	}
+	public void setdDay(int dDay) {
+		this.dDay = dDay;
+	}
 }
