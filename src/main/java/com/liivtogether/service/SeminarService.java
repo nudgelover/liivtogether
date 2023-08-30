@@ -3,7 +3,6 @@ package com.liivtogether.service;
 import com.liivtogether.dto.Seminar;
 import com.liivtogether.frame.LIIVService;
 import com.liivtogether.mapper.SeminarMapper;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +11,11 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class SeminarService implements LIIVService<Integer, Seminar> {
 
+public class SeminarService implements LIIVService<Integer, Seminar> {
     @Autowired
     SeminarMapper mapper;
+
 
 	@Override
 	public void register(Seminar v) throws Exception {

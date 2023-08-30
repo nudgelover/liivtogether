@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.ItemMapper">
+
+    <select id="select" parameterType="String" resultType="item">
+        SELECT * FROM item WHERE cust_id=#{cust_id}
+    </select>
+
+    <select id="selectall" resultType="cust">
+        SELECT * FROM item
+    </select>
+
+    <insert id="insert" parameterType="item">
+        INSERT INTO item
+        VALUES (#{cust_id}, #{cust_name}, #{cust_pwd}, #{phone}, #{age}, #{gender}, #{email}, SYSDATE, NULL)
+    </insert>
+
+    <update id="update" parameterType="item">
+        UPDATE item
+        SET cust_name=#{cust_name},
+            cust_pwd=#{cust_pwd},
+            phone=#{phone},
+            age=#{age},
+            gender=#{gender}
+            email=#{email}
+        WHERE cust_id = #{cust_id}
+    </update>
+
+
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM item
+        WHERE cust_id = #{cust_id}
+    </delete>
+
+</mapper>

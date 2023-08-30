@@ -11,20 +11,20 @@ import java.util.Date;
 @Getter
 @ToString
 public class Donation {
-    private String donaId;
-    private String topicBig;
-    private String topicSmall;
+    private String id;
+    private String topic_big;
+    private String topic_small;
     private String title;
     private String location;    
     private String edate;
     private String ddate;
     private int target;
-    private int targetIn;
-    private String imageMain;
-    private String imageSub;
+    private int target_in;
+    private String image_main;
+    private String image_sub;
     private String comment;
     private String content;
-    private int rewardCoin;
+    private int reward_coin;
     private int view;
     private String rdate;
      
