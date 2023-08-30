@@ -178,8 +178,9 @@
 
 <h1 class="title">
 	콜리를 잡아라~!
+	
 </h1>
-
+지금 콜리 여러면 누르면 점수쭉쭉올라감,,,에러해결필요
 <div class="main">
 	<div id="ending" class="ending">
 		<p id="ending-box"></p>
@@ -223,12 +224,13 @@ let randomNum;
 let preNum;
 let getPoint = 0; // getPoint 변수 초기화
 let turn = 0; // turn 변수 초기화
+/*
 let hammer;
 
 const gameContainer = document.getElementById('gameContainer');
 
 gameContainer.addEventListener('mouseenter', () => {
-	console.log('들어왔다');
+
   hammer = document.createElement('div');
   hammer.classList.add('hammer');
   gameContainer.appendChild(hammer);
@@ -261,7 +263,7 @@ function moveHammer(e) {
   }
 }
 
-
+*/
 
 function randomHole(){
 	  randomNum = Math.floor(Math.random() * 10);
@@ -341,7 +343,7 @@ function seeMole() { // 함수 이름 수정
 }
 
 function catchMole() {
-	console.log('잡았따'+moleNumber);
+	//console.log('잡았따'+moleNumber);
 	moleNumber.src = '/assets/img/starfriends/우는콜리.png';
 	getPoint++;
 	cntBox.innerHTML = getPoint;

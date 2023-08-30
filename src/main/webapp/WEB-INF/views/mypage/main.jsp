@@ -293,7 +293,7 @@
 				<div class="col-12">
 					<p class="section-header">나의 활동</p>
 					<div class="col-12 mysection">
-						<div class="col-12 col-lg-6 section-list">
+						<div class="col-12 col-lg-6 section-list" onclick="goToCertificate()">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3022/3022251.png">증명서
 							발급하기<img

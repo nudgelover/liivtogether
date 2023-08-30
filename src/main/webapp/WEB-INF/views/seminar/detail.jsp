@@ -117,7 +117,30 @@ $(document).ready(function() {
 
     console.log(formattedDate);
     $("#seminar-date").html(formattedDate);
+    
+    
+    
+    var likesBtn = document.getElementById('likesBtn');
+	//만약 조회했을 때, 좋아요 누른적이없으면
+    likesBtn.addEventListener('click', function() {
+    	popup('해당 세미나를 관심세미나로 등록하시겠습니까?', true, regLike , "");
+  
+    });
+	//만약 조회했을 때, 좋아요 누른기록이 있으나, 좋아요 취소한 상태일떄
+  //  likesBtn.addEventListener('click', function() {
+    //	popup('해당 세미나를 관심세미나로 등록하시겠습니까?<br', true, "egLike , "");
+  
+   // });
+	
+  //만약 조회했을 때, 좋아요 누른 상태이면
+   // likesBtn.addEventListener('click', function() {
+   // 	popup('이미 관심상품으로 등록하셨습니다. 관심상품 페이지로 이동할까요?', true, goTOJJIM , "");
+  
+  //  });
+    
+    
 });
+
 
 function updateViews() {
 
@@ -141,8 +164,16 @@ function updateViews() {
     });
 }
 
-
-
+function regLike() {
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    
+    //여기서 나중에 에이젝스로.. update를 보내야하는데....
+    //db를 조회해서... 이사람이 좋아요를 누른적이 없으면 -> insert
+    //좋아요를 누른적이 있으면 ->update로 좋아요 넣었다 뺏다가쟈나...
+	
+}
 
 
 </script>
@@ -177,7 +208,7 @@ function updateViews() {
 
 				<!-- Image -->
 				<img class="card-img-top"
-					src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg">
+					src="/uimg/${seminar.imageMain}">
 			</div>
 		</div>
 		<div style="display: flex; flex-direction: column;"
@@ -209,7 +240,8 @@ function updateViews() {
 			</div>
 			<div class="preference">
 				<span><img style="width: 25px;" src="/assets/img/starfriends/starcoin.png"> ${seminar.rewardCoin}개</span> 
-				<span style="margin-left: 3px;"><img style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"> 찜하기 11명 </span> <span>👀조회
+				<span style="margin-left: 3px;"><img style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">찜하기<span id="likesNum">0</span>명 </span> 
+				<span>👀조회
 				<span style="margin-right: 0" id="view-count"> ${seminar.view}</span>명</span>
 			</div>
 			<div id="buttons">
@@ -222,7 +254,7 @@ function updateViews() {
 	            	  	 <button style="width: 66%; background-color: #E6E6E6; cursor: default;">종료</button>
 	          		</c:when>
 					<c:otherwise>
-						<button style="width: 33%">
+						<button  id="likesBtn" style="width: 33%">
 						<i class="fa fa-heart"></i> 찜하기
 						</button>
         	    		<button style="width: 66%" onclick="joinSeminarPopup()">참여하기</button>
@@ -255,7 +287,7 @@ function updateViews() {
 
 			<div>${seminar.content}</div>
 			<img class="card-img-top"
-				src="https://ticketimage.interpark.com/230043252023/07/17/e8fed53f.jpg">
+				src="/uimg/${seminar.imageSub}">
 
 		</div>
 

@@ -21,5 +21,17 @@ public class MypageController {
         return "index";
     }
  
+    
+    @RequestMapping("/certificate")
+    public String certificate(Model model) throws Exception {
+    	 model.addAttribute("center", dir + "certificate");
+        return "index";
+    }
+    
+    @RequestMapping("/chat")
+    public String chat(Model model) throws Exception {
+    	 model.addAttribute("center", dir + "chat");
+        return "index";
+    }
  
 }

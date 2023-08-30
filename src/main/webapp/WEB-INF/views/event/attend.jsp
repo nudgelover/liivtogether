@@ -143,6 +143,9 @@ td div img {
 		return value;
 	}
 </script>
+<input id="cust_id" value="rlawls2422">
+
+
 <div id="calTitle" style="display: flex; justify-content: center;">
 	<span id="calYear"></span> 년  <span style="margin-left: 10px;" id="calMonth"></span> 월
 </div>
