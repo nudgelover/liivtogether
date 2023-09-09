@@ -70,6 +70,8 @@ input:focus {
 	cursor: pointer;
 }
 </style>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 
 
@@ -144,6 +146,29 @@ $(function(){
 		.fail(function(){
 			alert("에러가 발생했습니다.")
 		})
+	})
+	
+	
+	Kakao.init("${kakaojs}"); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	
+ 	//카카오로그인
+ 	function kakaoLogin() {
+ 	    let a = confirm("카카오 계정으로 로그인 합니다. 계정이 없으면 회원가입 후 진행됩니다. 회원가입 후 핸드폰 번호를 수정하세요.")
+ 	    if (a){
+			$.ajax({
+	 	        url: '/login/getKakaoAuthUrl',
+	 	        type: 'get',
+	 	    }).done(function (res) {
+	 	        console.log("res"+res);
+	 	    	location.href = res;
+	 	    });
+ 	    }
+ 	  }
+	
+	//카카오 로그인 클릭시
+ 	$("#kakaoLoginBtn").click(function(){
+		kakaoLogin();
 	})
 	
 })
