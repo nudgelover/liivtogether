@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.LikesMapper">
+
+	<select id="checkLikes" parameterType="java.util.Map" resultType="Likes">
+	    SELECT contents_id as contentsId, cust_id as custId, is_like as isLike
+	    FROM likes
+	    WHERE contents_id = #{contentsId}
+	      AND cust_id = #{custId}
+	</select>
+	
+	
+	<select id="select" parameterType="String" resultType="Likes">
+
+	</select>
+
+	<select id="selectall" resultType="Event">
+	
+	</select>
+	
+	
+	<insert id="insert" parameterType="Event">
+		INSERT INTO likes
+			(contents_id, cust_id, is_like)
+		VALUES(#{contentsId}, #{custId}, 'Y')
+	</insert>
+
+	<update id="update" parameterType="Event">
+		UPDATE likes
+		SET is_like='Y'
+		WHERE contents_id=#{contentsId} 
+			AND cust_id=#{custId}
+	</update>
+
+	<delete id="delete" parameterType="String">
+
+	</delete>
+</mapper>

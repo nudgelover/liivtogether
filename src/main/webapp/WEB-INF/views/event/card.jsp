@@ -2,27 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <style>
-
 .card {
-    display: inline-block;
- 	width: calc(25% - 30px);
-    height: 15rem;
+	display: inline-block;
+	width: calc(25% - 30px);
+	height: 15rem;
 	padding: 20px;
-    perspective: 140px;
-
+	perspective: 140px;
 }
-
 
 /* 화면 크기가 768px 이하일 때 카드 크기 조정 */
-@media (max-width: 768px) {
-    .card {
-     	width: calc(30% - 30px);
-     	padding: 5px;
-        height: 12rem;
-
-    }
+@media ( max-width : 768px) {
+	.card {
+		width: calc(30% - 30px);
+		padding: 5px;
+		height: 12rem;
+	}
 }
+
 .card-inner {
 	/* position: absolute를 이용하여 카드 앞뒤를 곂쳐지게 함*/
 	position: relative;
@@ -43,7 +41,7 @@
 	height: 100%;
 	backface-visibility: hidden;
 	border: 1px solid #F3EAEA;
-    border-radius: 10px;
+	border-radius: 10px;
 }
 
 .card-front {
@@ -56,15 +54,46 @@
 	transform: rotateY(180deg);
 }
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const startButton = document.getElementById("startButton");
+    const countdownElement = document.getElementById("countdown");
+
+    let countdown;
+    let remainingTime = 60;
+
+    function updateCountdown() {
+        countdownElement.textContent = remainingTime;
+        if (remainingTime <= 0) {
+            clearInterval(countdown);
+            alert("게임 종료");
+        }
+        remainingTime--;
+    }
+
+    startButton.addEventListener("click", function () {
+        countdown = setInterval(updateCountdown, 1000);
+        startButton.disabled = true;
+    });
+});
+
+
+</script>
 
 <section class="pt-7 pb-12">
 	<div class="container">
 		<div class="row">
-			<div style="display: flex; justify-content: center; " class="col-12">
-			
-				<div class="col-12 col-md-8" style="text-align: center;" id="wrapper"></div>
+			1분 시간 제한걸고, 아래에 시간 지나는 거 표출해주기. 하루한번만 참여할 수있고, 기 참여시에는 참가 불가! 게임 시작
+			버튼을 눌러야 화면 나오게끔 변경하기
+			<div style="display: flex; justify-content: center;" class="col-12">
+
+				<div class="col-12 col-md-8" style="text-align: center;"
+					id="wrapper"></div>
 			</div>
 		</div>
+		  <button id="startButton">게임 시작</button>
+   		 <div id="timer">남은 시간: <span id="countdown">60</span>초</div>
+
 	</div>
 </section>
 <script>
@@ -183,6 +212,8 @@ function cardSetting(x, y) {
     }, 3000);
   }
 }
+
+
 
 shuffle();
 cardSetting(x, y);

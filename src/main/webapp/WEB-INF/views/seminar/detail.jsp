@@ -66,7 +66,7 @@
 .preference {
 	display: flex;
 	padding: 4px;
-    align-items: center;
+	align-items: center;
 }
 
 .preference span {
@@ -90,9 +90,9 @@
 	background-color: #FFBF00;
 }
 
-#sharingBtn{
+#sharingBtn {
 	display: flex;
-	justify-content:center;
+	justify-content: center;
 }
 
 #sharingBtn img {
@@ -101,13 +101,22 @@
 	border-radius: 3px;
 	cursor: pointer;
 }
+
+.recent-title{
+	color: black;
+	font-size:  1.1rem;
+	font-weight: 600;
+}
+.recent-title:hover {
+	color: darkorange;
+}
 </style>
 <script>
 
 $(document).ready(function() {
     // 페이지 로드시 조회수 업데이트 요청 보내기
     updateViews();
-    
+
 
     var seminarDateStr = "${seminar.ddate}"; // 날짜 문자열
     var seminarDate = new Date(seminarDateStr);
@@ -117,7 +126,11 @@ $(document).ready(function() {
 
     console.log(formattedDate);
     $("#seminar-date").html(formattedDate);
+    
+    
 });
+
+
 
 function updateViews() {
 
@@ -142,11 +155,111 @@ function updateViews() {
 }
 
 
+function checkLikesOrNot() {
+    // 사용자가 좋아요를 누른 상태인지 아닌지 체크
+    console.log('좋아요 누른 이력을 확인합니다.');
+    
+    var seminarId = ${seminar.semiId};
+    let loginCustId = $('#loginCustId').val();
+    
+    if (loginCustId) {
+    	console.log(loginCustId+'님접속')
+    	
+   	  $.ajax({
+   	        type: "POST", 
+   	        url: "/seminar/check-likes",
+   	        data: { contentsId: seminarId,
+   	        		custId: loginCustId}, 
+   	        success: function(response) {
+   	            console.log(response + ' response');
 
+   	       		if (response === 0){
+	            	// 좋아요 한번도 안누른 상태 
+   	       			popup('해당 세미나를 관심세미나로 등록하시겠습니까?', true, regLike , "");
+	                
+	            }else if (response === 1) {
+	            	//이미 좋아요 누른상태
+	            	popup('이미 관심상품으로 등록하셨습니다. 관심상품 페이지로 이동할까요?', true, "" , "");
+   	                
+   	            }else if (response === 2) {
+   	           		//좋아요 눌렀던 이력이 있으나, is_likes N 인상태
+   	       			popup('해당 세미나를 관심세미나로 등록하시겠습니까?', true, updateLike , "");
+   	            }
+	            else{
+   	            	popup('일시적인 오류가 발생했습니다. 다시 시도해 주세요.', false, "" , "");
+   	                
+   	            }
+   	            
+   	        },
+   	        error: function() {
+   	            console.error("Error checkLikesOrNot.");
+   	        }
+   	    });
+      
+    }else{
+    	popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+    };
+    
+    
+}
 
+function regLike() {
+	console.log('처음으로 찜을 하신 고객님이십니다.');
+	
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    var seminarId = ${seminar.semiId};
+    var loginCustId = $('#loginCustId').val();
+    
+    $.ajax({
+        type: "POST", 
+        url: "/seminar/reg-like",
+        data: { contentsId: seminarId,
+       			custId: loginCustId}, // 세미나 아이디를 전달
+        success: function(response) {
+            console.log(response + ' response');
+           
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, "" , "");
+        },
+        error: function() {
+            console.error("Error updating views.");
+        }
+    });
+    
+    
+}
+
+function updateLike() {
+	console.log('이전에 찜했다가 삭제하신 고객님이십니다.');
+	
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    var seminarId = ${seminar.semiId};
+    var loginCustId = $('#loginCustId').val();
+    
+    $.ajax({
+        type: "POST", 
+        url: "/seminar/update-like",
+        data: { contentsId: seminarId,
+       			custId: loginCustId}, // 세미나 아이디를 전달
+        success: function(response) {
+            console.log(response + ' response');
+           
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, "" , "");
+        },
+        error: function() {
+            console.error("Error updating views.");
+        }
+    });
+    
+    
+}
 
 </script>
 <!-- BREADCRUMB -->
+<input type="hidden" id="loginCustId" value="${logincust.custId}">
 <nav class="py-5">
 	<div class="container">
 		<div class="row">
@@ -154,8 +267,7 @@ function updateViews() {
 
 				<!-- Breadcrumb -->
 				<ol class="breadcrumb mb-0 fs-xs text-gray-400">
-					<li class="breadcrumb-item"><a class="text-gray-400"
-						href="/">Home</a></li>
+					<li class="breadcrumb-item"><a class="text-gray-400" href="/">Home</a></li>
 					<li class="breadcrumb-item"><a class="text-gray-400"
 						href="/seminar">Seminar</a></li>
 					<li class="breadcrumb-item active">No.${seminar.semiId}</li>
@@ -176,8 +288,7 @@ function updateViews() {
 				</div>
 
 				<!-- Image -->
-				<img class="card-img-top"
-					src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg">
+				<img class="card-img-top" src="/uimg/${seminar.imageMain}">
 			</div>
 		</div>
 		<div style="display: flex; flex-direction: column;"
@@ -208,26 +319,34 @@ function updateViews() {
 
 			</div>
 			<div class="preference">
-				<span><img style="width: 25px;" src="/assets/img/starfriends/starcoin.png"> ${seminar.rewardCoin}개</span> 
-				<span style="margin-left: 3px;"><img style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"> 찜하기 11명 </span> <span>👀조회
-				<span style="margin-right: 0" id="view-count"> ${seminar.view}</span>명</span>
+				<span><img style="width: 25px;"
+					src="/assets/img/starfriends/starcoin.png">
+					${seminar.rewardCoin}개</span> <span style="margin-left: 3px;" oncl><img
+					style="width: 25px;"
+					src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">찜하기<span
+					id="likesNum">${seminar.likesCount}</span>명 </span> <span>👀조회 <span
+					style="margin-right: 0" id="view-count"> ${seminar.view}</span>명
+				</span>
 			</div>
 			<div id="buttons">
-				
+
 				<c:choose>
 					<c:when test="${seminar.dDay < 0}">
-						<button style="width: 33%; background-color: #E6E6E6; cursor: default;">
-						<i class="fa fa-heart"></i> 찜하기
+						<button
+							style="width: 33%; background-color: #E6E6E6; cursor: default;">
+							<i class="fa fa-heart"></i> 찜하기
 						</button>
-	            	  	 <button style="width: 66%; background-color: #E6E6E6; cursor: default;">종료</button>
-	          		</c:when>
+						<button
+							style="width: 66%; background-color: #E6E6E6; cursor: default;">종료</button>
+					</c:when>
 					<c:otherwise>
-						<button style="width: 33%">
-						<i class="fa fa-heart"></i> 찜하기
+						<button id="likesBtn" style="width: 33%"
+							onclick="checkLikesOrNot()">
+							<i class="fa fa-heart"></i> 찜하기
 						</button>
-        	    		<button style="width: 66%" onclick="joinSeminarPopup()">참여하기</button>
-        	    		
-		           	</c:otherwise>
+						<button style="width: 66%" onclick="joinSeminarPopup()">참여하기</button>
+
+					</c:otherwise>
 				</c:choose>
 
 			</div>
@@ -240,251 +359,36 @@ function updateViews() {
 					src="https://cdn-icons-png.flaticon.com/512/10691/10691802.png">
 					날짜 : <span id="seminar-date"></span></span>
 			</div>
-			
+
 			<div id="sharingBtn">
-				<img src="/assets/img/logo/liivtalktalk.png" onclick="sharingLiivTT()">
-				<img src="/assets/img/logo/KakaoTalk.png" onclick="sharingKakao()">
+				<img src="/assets/img/logo/liivtalktalk.png"
+					onclick="sharingLiivTT()"> <img
+					src="/assets/img/logo/KakaoTalk.png" onclick="sharingKakao()">
 				<img src="/assets/img/logo/facebook.png" onclick="sharingFacebook()">
-				<img src="/assets/img/logo/twitter.png" onclick="sharingTwitter()">					
+				<img src="/assets/img/logo/twitter.png" onclick="sharingTwitter()">
 			</div>
-			
+
 		</div>
 
 		<div class="col-12 col-md-8">
 			<!-- Image -->
 
 			<div>${seminar.content}</div>
-			<img class="card-img-top"
-				src="https://ticketimage.interpark.com/230043252023/07/17/e8fed53f.jpg">
+			<img class="card-img-top" src="/uimg/${seminar.imageSub}">
 
 		</div>
 
 		<div class="col-12 col-md-8 mt-10">
-			<h5>같이 보면 좋은 세미나, 이건 어떠세요?</h5>
-			<div class="row">
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-1.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-20"> Jun 20 </time>
-						</div>
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Us yielding Fish sea night night the said
-								him two</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Fill his waters wherein signs likeness
-								waters. Second light gathered appear sixth.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-			</div>
+			<c:choose>
+				<c:when test="${logincust.custName != null}">
+					<h5>${logincust.custName}님께서최근에 보신 세미나에요👀</h5>
+				</c:when>
+				<c:otherwise>
+					<h5>고객님께서 최근에 보신 세미나에요👀</h5>
+				</c:otherwise>
+			</c:choose>
+
+			<div id="recentlyViewedList" class="row"></div>
 		</div>
 	</div>
 </div>
@@ -492,8 +396,123 @@ function updateViews() {
 <input id="title" style="display: none;" value="${seminar.title}">
 <input id="location" style="display: none;" value="${seminar.location}">
 <input id="ddate" style="display: none;" value="${seminar.ddate}">
-<input id="starcoin" style="display: none;" value="${seminar.rewardCoin}">
+<input id="starcoin" style="display: none;"
+	value="${seminar.rewardCoin}">
+<input type="hidden" id="loginCustId" value="${logincust.custId}">
 <script>
+	const urlParams = new URLSearchParams(window.location.search);
+	const seminarId = urlParams.get('id');
+	console.log('seminarId:', seminarId);
+	
+	// 사용자 ID를 어딘가에서 가져오거나 하드코딩합니다.
+	const userId = $('#loginCustId').val();
+	
+	// 사용자의 최근 세미나 목록을 로컬 스토리지에서 가져옵니다.
+	let recentSeminars = localStorage.getItem(userId + '_recent_seminars');
+	if (!recentSeminars) {
+	    recentSeminars = [];
+	} else {
+	    recentSeminars = JSON.parse(recentSeminars);
+	}
+	
+	// 중복을 체크하여 세미나 ID를 목록에 추가합니다.
+	if (!recentSeminars.includes(seminarId)) {
+	    // 최대 6개까지만 유지하도록 처리
+	    if (recentSeminars.length >= 7) {
+	    	//7개를 저장하는 이유는.. 지금 저장된 거(즉 현재 페이지의 세미나는 제외하고 뿌릴려고...)
+	        recentSeminars.pop(); // 맨 뒤의 항목 제거
+	    }
+	    recentSeminars.unshift(seminarId); // 맨 앞에 항목 추가
+	}
+
+
+	// 최근 세미나 목록을 로컬 스토리지에 저장합니다.
+	localStorage.setItem(userId + '_recent_seminars', JSON.stringify(recentSeminars));
+	
+	getRecentlyViewed();
+	
+function getRecentlyViewed() {
+    console.log('최근에 조회한 세미나 리스트를 뿌리자');
+
+    const storedRecentSeminars = JSON.parse(localStorage.getItem(userId + '_recent_seminars'));
+
+    // 현재 사용자가 조회하고 있는 세미나의 ID, 이건 제외하고 뿌린다.
+    const currentSeminarId = $('#semiId').val(); 
+	console.log(currentSeminarId+'currentSeminarId');
+    // 확인을 위한 로그 출력
+    console.log(userId + '_recent_seminars:', storedRecentSeminars);
+
+    if (storedRecentSeminars && storedRecentSeminars.length > 0) {
+        // 현재 사용자가 조회하고 있는 세미나 ID를 배열에서 제외합니다.
+        const filteredRecentSeminars = storedRecentSeminars.filter(seminarId => seminarId !== currentSeminarId);
+
+        const seminarDetails = [];
+
+        filteredRecentSeminars.forEach(seminarId => {
+            const ajaxUrl = '/seminar/recently-viewed?id=' + seminarId;
+
+            fetch(ajaxUrl)
+                .then(response => response.json())
+                .then(data => {
+                    seminarDetails.push(data);
+
+                    if (seminarDetails.length === filteredRecentSeminars.length) {
+                        console.log('Fetched seminar details:', seminarDetails);
+                        displaySeminars(seminarDetails);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching seminar details:', error);
+                });
+        });
+    } else {
+        console.log('No recent seminars found.');
+    }
+}
+
+
+function displaySeminars(seminarDetails) {
+    seminarDetails.forEach(seminar => {
+        // 세미나 정보를 이용하여 각 요소를 동적으로 생성합니다.
+		const seminarTitleElement = $('<div></div>').addClass('col-6 col-md-4');
+		const cardElement = $('<div></div>').addClass('card mb-7 mb-md-0');
+		
+		// 이미지를 감싸는 링크 엘리먼트 생성
+		const imageLinkElement = $('<a></a>').attr('href', 'http://localhost/seminar/detail?id=' + seminar.semiId);
+		
+		// 이미지 엘리먼트 생성
+		const imgElement = $('<img>').attr('src', '/uimg/' + seminar.imageMain).addClass('card-img-top');
+		
+		const badgeElement = $('<div></div>').addClass('badge bg-white text-body card-badge card-badge-start text-uppercase');
+		const timeElement = $('<time>').text(seminar.ddate);
+		const cardBodyElement = $('<div></div>').addClass('card-body px-0 py-7');
+		
+		// 제목을 감싸는 링크 엘리먼트 생성
+		const titleLinkElement = $('<a></a>').attr('href', 'http://localhost/seminar/detail?id=' + seminar.semiId);
+		
+		// 제목 엘리먼트 생성
+		const titleElement = $('<p></p>').addClass('mb-3 recent-title').text(seminar.title);
+		
+		const contentElement = $('<p></p>').addClass('mb-2').text(seminar.comment);
+		const linkElement = $('<a></a>').addClass('btn btn-link px-0 text-body').attr('href', 'http://localhost/seminar/detail?id=' + seminar.semiId).text('자세히 보러가기');
+		const iconElement = $('<i></i>').addClass('fe fe-arrow-right ms-2');
+		
+		// 이미지를 링크 엘리먼트에 추가
+		imageLinkElement.append(imgElement);
+		
+		// 링크 엘리먼트들을 적절한 위치에 추가
+		titleLinkElement.append(titleElement);
+		cardBodyElement.append(titleLinkElement, contentElement, linkElement.append(iconElement));
+		cardElement.append(imageLinkElement, badgeElement, cardBodyElement);
+		seminarTitleElement.append(cardElement);
+
+
+        // 생성한 요소를 #recentlyViewedList 요소에 추가합니다.
+      	 $("#recentlyViewedList").append(seminarTitleElement);
+    });
+}
+
+
 function joinSeminarPopup() {
 	const semiId = document.getElementById('semiId').value;
 	const title = document.getElementById('title').value;

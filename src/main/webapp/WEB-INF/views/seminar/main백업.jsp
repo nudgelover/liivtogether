@@ -7,7 +7,7 @@
 	display: block;
 }
 
-#tab_1, #tab_2, #tab3, #tab4, #tab5 {
+#tab1, #tab2, #tab3, #tab4, #tab5 {
 	display: none;
 }
 
@@ -94,12 +94,24 @@
 <script>
 
 $(document).ready(function() {
-    // 초기에 전체보기 최신순을 로드
+    // 초기 정렬 순서와 topicSmall을 전달하여 fetchOrder 함수 호출
     fetchOrder('brandNew', '');
+    
+    
+    $(".heart-icon").click(function() {
+        var heartIcon = $(this).find("svg"); // 클릭한 하트 아이콘 내의 <i> 요소 선택
+
+        if (heartIcon.hasClass('red-heart')) {
+            heartIcon.removeClass('red-heart'); // 이미 빨간색인 경우 다시 회색으로 변경
+        } else {
+            heartIcon.addClass('red-heart'); // 빨간색이 아닌 경우 빨간색으로 변경
+        }
+    });
+
+
 });
 
 let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
-
 
 	function showTab(tab) {
 
@@ -111,8 +123,10 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
         selectedTab.classList.add('active');
 		
 		document.getElementById('taball').style.display = 'none';
-		document.getElementById('tab_1').style.display = 'none';
-		document.getElementById('tab_2').style.display = 'none';
+		
+		
+		document.getElementById('tab1').style.display = 'none';
+		document.getElementById('tab2').style.display = 'none';
 		document.getElementById('tab3').style.display = 'none';
 		document.getElementById('tab4').style.display = 'none';
 		document.getElementById('tab5').style.display = 'none';
@@ -121,13 +135,14 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 		case 'taball':
 			document.getElementById('taball').style.display = 'block';
 			fetchOrder('brandNew',''); 
+			//여기 로직 좀 수정해야할듯...
 			break;
-		case 'tab_1':
-			document.getElementById('tab_1').style.display = 'block';
+		case 'tab1':
+			document.getElementById('tab1').style.display = 'block';
 			fetchOrder('brandNew','A');
 			break;
-		case 'tab_2':
-			document.getElementById('tab_2').style.display = 'block';
+		case 'tab2':
+			document.getElementById('tab2').style.display = 'block';
 			fetchOrder('brandNew','B');
 			break;
 		case 'tab3':
@@ -151,13 +166,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	    currentOrder = order; // 현재 정렬 순서 업데이트
 	    console.log(currentOrder+'currentOrder');
 	    
-	    //페이지네이션 값 초기화
-	    let pageOffset = $('#offset').val();
-	    //이거 9로 바꿔야한다!!!!!!!!!!!!!!!!
-	    $('#offset').val('3');
-	    $('.loadmore').css('display', 'inline-block');
-	    $('.loadmore-message').css('display', 'none');
-	    
 	    $("span:contains('최신순')").css('color', '');
 	    $("span:contains('인기순')").css('color', '');
 	    $("span:contains('마감임박순')").css('color', '');
@@ -170,6 +178,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			break;
 		case 'popular':
 			$("span:contains('인기순')").css('color', 'orange');
+			alert('찜기능 완성후 구현 예정');
 			break;
 		case 'deadline':
 			 $("span:contains('마감임박순')").css('color', 'orange');
@@ -260,103 +269,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	   fetchOrder(currentOrder, topicSmall);
 	}
 	
-	function getMoreList(topicSmall) {
-	    console.log('나클릭함');
-	    console.log('topicSmall :' + topicSmall);
-	    console.log('currentOrder : ' + currentOrder);
-
-	    const includeClosed = $("#includeClosed" + topicSmall).prop("checked");
-	    console.log(includeClosed + 'includeClosed');
-
-	    let pageOffset = $('#offset').val();
-	    console.log(pageOffset + 'pageOffset');
-
-		    
-	    $.ajax({
-	        type: "GET",
-	        url: "/seminar/order",
-	        data: {
-	            topicSmall: topicSmall,
-	            includeClosed: includeClosed,
-	            order: currentOrder, // 현재 정렬 순서 전달
-	            currentDate: new Date().toISOString().split('T')[0],
-	            offset : pageOffset
-	        },
-	        success: function(data) {
-	            console.log(data);
-	            // 나중에 이거 9로 변경!!!!!!!!9개씩 불러올거니까
-	    	    pageOffset = parseInt(pageOffset) + 3;
-
-	    	    // 페이지 오프셋 값을 업데이트
-	    	    $('#offset').val(pageOffset);
-	    	    console.log(pageOffset + 'pageOffset (updated)');
-
-	    	 	
-	    	 // 만약 data가 빈 배열인 경우, 아무것도 없음
-	    	    if (data.length === 0) {
-	    	        $('.loadmore').css('display', 'none');
-	    	        // 새로운 메시지를 추가합니다.
-	    	        $('.loadmore-message').css('display', 'inline-block');
-	    	    }
-
-
-	    	    var viewsOrderList = data;
-       			  viewsOrderList.forEach(function(obj) {
-	            	
-                    var card = $('<div></div>').addClass('col-12 col-md-4');
-                    var cardInner = $('<div></div>').addClass('card mb-7');
-                    var heartIcon = $('<div></div>').addClass('heart-icon').attr('data-id', obj.semiId).append($('<i></i>').addClass('fa-solid fa-heart white'));
-                    var badge = $('<div></div>').addClass('badge bg-white text-body card-badge').append($('<time></time>').addClass('text-uppercase').attr('datetime', obj.ddate).text(obj.ddate));
-                    var cardImage = $('<img/>').addClass('card-img-top').attr('src', 'uimg/' + obj.imageMain);
-                    var cardBody = $('<div></div>').addClass('card-body px-0');
-                    
-                
-
-                    var title = obj.title;
-                    var rewardCoin = obj.rewardCoin;
-                    var targetIn = obj.targetIn;
-                    var target = obj.target;
-                    var view = obj.view;
-                    var dDayText = ""; // dDayText 처리는 동일하게 유지
-
-                    // D-Day 텍스트 처리
-                    if (obj.dDay > 3) {
-                        dDayText = "<span class='dday'>마감 " + obj.dDay + "일 전";
-                    } else if (obj.dDay > 0) {
-                        dDayText = "<span class='dday' style='color: red; font-weight: 800'>마감 " + obj.dDay + "일 전</span>";
-                    } else if (obj.dDay == 0) {
-                        dDayText = "<span class='dday' style='color: red; font-weight: 800'>금일마감</span>";
-                    } else {
-                        dDayText = "<span class='dday' style='color: darkgray'>마감</span>";
-                    }
-                    
-
-
-                    // 요소를 순서대로 추가
-                    card.append(cardInner);
-                    cardInner.append(heartIcon);
-                    cardInner.append(badge);
-                    cardInner.append(cardImage);
-                    cardInner.append(cardBody);
-
-                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span></span>').html(dDayText)));
-                    cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/1286/1286827.png'), ' '+targetIn + '/' + target + '명 참가'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
-                    cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/seminar/detail?id=' + obj.semiId).text('참여하러가기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
-
-                    $('.seminar-list').append(card);
-
-                    
-                });
-	        },
-	        error: function(error) {
-	        	
-	            console.error("Error fetching views order:", error);
-	        }
-	    });
-	    
-	}
-
-
 </script>
 
 <!-- BREADCRUMB -->
@@ -382,40 +294,34 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	data-flickity='{"pageDots": true}'>
 	
 
-	<c:forEach items="${bannerList}" var="obj">
-		<div class="w-100">
-			<div class="card bg-cover"
-				style="background-image: url('/uimg/${obj.imageMain}');">
-				<div class="row align-items-center" style="height: 15rem">
-					<div class="col-12 col-md-10 col-lg-8 col-xl-6">
-						<div class="card-body px-md-10 py-5">
-							<!-- Heading -->
-							<h4 class="mb-5">${obj.title}</h4>
-						
-					   
-						    <!-- obj의 다른 속성에 접근할 수도 있습니다. 예: ${obj.imageMain}, ${obj.comment}, 등 -->
-						
-							<!-- Text -->
-							<p class="mb-7">
-								${obj.comment} <br> <strong
-									class="text-primary">마감이 얼마 남지 않았어요!</strong>
-							</p>
-	
-							<!-- Button -->
-							<a class="btn btn-outline-dark" href="/seminar/detail?id=${obj.semiId}"> 참여하러가기 <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-	
-						</div>
+	<!-- 여기서 부터 광고 foreach 걸면 됨  -->
+	<div class="w-100">
+		<div class="card bg-cover"
+			style="background-color: pink;">
+			<div class="row align-items-center" style="height: 15rem">
+				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
+					<div class="card-body px-md-10 py-5">
+						<!-- Heading -->
+						<h4 class="mb-5">하트구현하기 광고구현하기 loadmore 스크롤 맨위로 가기</h4>
+
+						<!-- Text -->
+						<p class="mb-7">
+							Appear, dry there darkness they're seas. <br> <strong
+								class="text-primary">Use code 4GF5SD</strong>
+						</p>
+
+						<!-- Button -->
+						<a class="btn btn-outline-dark" href="shop.html"> Shop Now <i
+							class="fe fe-arrow-right ms-2"></i>
+						</a>
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</c:forEach>
+	</div>
+	<!-- 여기까지 광고 foreach 걸면 됨  -->
 </div>
-<input type="hidden" id="offset" value="3">
-
-
 
 <!-- CONTENT -->
 <section class="pt-7 pb-12">
@@ -431,8 +337,8 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 					<a id="tabAllBtn" class="nav-link active"
 						href="javascript:void(0);" onclick="showTab('taball')">All</a> <a
 						class="nav-link" href="javascript:void(0);"
-						onclick="showTab('tab_1')">자산관리</a> <a class="nav-link"
-						href="javascript:void(0);" onclick="showTab('tab_2')">인문학</a> <a
+						onclick="showTab('tab1')">자산관리</a> <a class="nav-link"
+						href="javascript:void(0);" onclick="showTab('tab2')">인문학</a> <a
 						class="nav-link" href="javascript:void(0);"
 						onclick="showTab('tab3')">디지털</a> <a class="nav-link"
 						href="javascript:void(0);" onclick="showTab('tab4')">북클럽</a> <a
@@ -464,24 +370,9 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			
 
 			</div>
-			<div class="row">
-				<div class="col-12">
-	
-					<!-- Progress -->
-					<div class="row justify-content-center mt-7">
-						<div class="col-12 text-center load-more-box">
-						
-							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
-						</div>
-					</div>
-	
-				</div>
-			</div>
 		</div>
 
-		<div id="tab_1" style="display: none;">
+		<div id="tab1" style="display: none;">
 			<div class="menulist">
 				<h2>자산관리</h2>
 						<div>
@@ -501,26 +392,11 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 				
 
 			</div>
-			<div class="row">
-				<div class="col-12">
-	
-					<!-- Progress -->
-					<div class="row justify-content-center mt-7">
-						<div class="col-12 text-center load-more-box">
-						
-							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('A')">Load more</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
-						</div>
-					</div>
-	
-				</div>
-			</div>
 		</div>
 
 
 
-		<div id="tab_2" style="display: none;">
+		<div id="tab2" style="display: none;">
 			<div class="menulist">
 				<h2>인문학</h2>
 						<div>
@@ -538,21 +414,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 
 			<div class="row seminar-list">
 				
-			</div>
-			<div class="row">
-				<div class="col-12">
-	
-					<!-- Progress -->
-					<div class="row justify-content-center mt-7">
-						<div class="col-12 text-center load-more-box">
-						
-							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('B')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
-						</div>
-					</div>
-	
-				</div>
 			</div>
 		</div>
 
@@ -574,21 +435,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 
 			<div class="row seminar-list">
 				
-			</div>
-			<div class="row">
-				<div class="col-12">
-	
-					<!-- Progress -->
-					<div class="row justify-content-center mt-7">
-						<div class="col-12 text-center load-more-box">
-						
-							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('C')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
-						</div>
-					</div>
-	
-				</div>
 			</div>
 		</div>
 		<div id="tab4" style="display: none;">
@@ -613,21 +459,10 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			
 
 			</div>
-			<div class="row">
-				<div class="col-12">
-	
-						<!-- Progress -->
-					<div class="row justify-content-center mt-7">
-						<div class="col-12 text-center load-more-box">
-						
-							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('D')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
-						</div>
-					</div>
-	
-				</div>
-			</div>
+
+
+
+
 		</div>
 		<div id="tab5" style="display: none;">
 			<div class="menulist">
@@ -648,22 +483,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			<div class="row seminar-list">
 			
 
-			</div>
-			
-			<div class="row">
-				<div class="col-12">
-	
-					<!-- Progress -->
-					<div class="row justify-content-center mt-7">
-						<div class="col-12 text-center load-more-box">
-						
-							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('E')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
-						</div>
-					</div>
-	
-				</div>
 			</div>
 		</div>
 

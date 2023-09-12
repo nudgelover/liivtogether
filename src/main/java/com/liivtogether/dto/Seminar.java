@@ -28,6 +28,8 @@ public class Seminar {
 	private String rdate;
 	private int dDay;
 	private String currentDate;
+	private int likesCount;
+	private String isLike;
 	
 	
 	
