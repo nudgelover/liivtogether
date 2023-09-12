@@ -25,6 +25,17 @@ function goToCertificate() {
 	window.location.href = "http://localhost/mypage/certificate";
 }
 
+function goToLogin() {
+	window.location.href = "http://localhost/login";
+}
+
+	
+function goToLogout() {
+	window.location.href = "http://localhost/logouts";
+}
+function goToChat() {
+	window.location.href = "http://localhost/mypage/chat";
+}
 
 function popup(message, isPrompt, onConfirm, onCancel) {
 	//모달 팝업띄울 때 쓰는 함수. 사용하는 방법은 다음과 같습니다. 
@@ -76,22 +87,35 @@ function popup(message, isPrompt, onConfirm, onCancel) {
     }
 }
 
-function ohyLayer(titleUse, title, content, type, closeUse) {
-    // 레이어 생성
+function layerup(titleUse, title, content, type, closeUse) {
+	//ohyLayer(true,'title','content,'bottom',true)
+    // 레이어 생성 - 바텀시트... css 완전 재정비 필용,,,
     var layer = document.createElement('div');
     layer.className = 'layer';
 
+    // 닫기 버튼 생성
+    if (closeUse) {
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'layer-close';
+        closeBtn.textContent = '닫기';
+        closeBtn.onclick = function() {
+            document.body.removeChild(layer);
+        };
+        layer.appendChild(closeBtn);
+    }
+    
+    
     // 타이틀 영역 생성
     if (titleUse) {
         var titleDiv = document.createElement('div');
-        titleDiv.className = 'title';
+        titleDiv.className = 'layer-title';
         titleDiv.textContent = title;
         layer.appendChild(titleDiv);
     }
 
     // 콘텐츠 영역 생성
     var contentDiv = document.createElement('div');
-    contentDiv.className = 'content';
+    contentDiv.className = 'layer-content';
     contentDiv.innerHTML = content;
     layer.appendChild(contentDiv);
 
@@ -100,16 +124,7 @@ function ohyLayer(titleUse, title, content, type, closeUse) {
         layer.style.bottom = '0';
     }
 
-    // 닫기 버튼 생성
-    if (closeUse) {
-        var closeBtn = document.createElement('button');
-        closeBtn.className = 'close';
-        closeBtn.textContent = '닫기';
-        closeBtn.onclick = function() {
-            document.body.removeChild(layer);
-        };
-        layer.appendChild(closeBtn);
-    }
+   
 
     // body에 레이어 추가
     document.body.appendChild(layer);

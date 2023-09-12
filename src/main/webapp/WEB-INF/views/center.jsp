@@ -19,10 +19,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .popup-close {
@@ -44,6 +40,7 @@
 		if (param == "stop") {
 			//오늘 하루 그만보기 
 			setCookieMainNoticePopup("mainbanner", "1");
+			 popup.style.display = 'none';
 		}else{
 		    popup.style.display = 'none';
 			
@@ -106,13 +103,13 @@
 			<div class="col-12 col-md-7 col-lg-5 text-white">
 
 				<!-- Heading -->
-				<h1 class="display-4">Your Eyes are our Inspiration</h1>
+				<h1 class="display-4">I Liiv You,<br>Liiv Together</h1>
 
 				<!-- Text -->
-				<p class="mb-8 fs-lg">*Starts from $29.99</p>
+				<p class="mb-8 fs-lg">더 나은 세상을 위해 KB국민은행이 함께합니다.</p>
 
 				<!-- Button -->
-				<a href="#!" class="btn btn-primary"> Get Sample Pack </a>
+				<a href="#!" class="btn btn-primary">작은 손길 더하기</a>
 
 			</div>
 		</div>
@@ -1314,11 +1311,54 @@
 
 <div id="mainBanner" class="popup">
 	<div class="popup-content">
-		<span class="popup-close" onclick="closeAdPopup()">&times;</span>
+		<span class="popup-close" onclick="fnBannerclose('')">&times;</span>
 		<h2>광고 팝업</h2>
-		<p>이곳에 광고 내용을 추가하세요.</p>
+		<button onclick="goToApp()">앱설치하기</button>
 		<button data-cation="close" onClick="fnBannerclose('stop');">오늘
 			그만보기</button>
 		<button data-cation="close" onClick="fnBannerclose('');">닫기</button>
 	</div>
 </div>
+
+
+
+
+
+<script>
+function goToApp() {
+    const redirectUrl = "/";
+    const userAgent = navigator.userAgent;
+    console.log("userAgent:" + userAgent);
+
+    let typeOS;
+
+    if (userAgent.match(/iPhone|iPad|iPod/i)) {
+        typeOS = "ios";
+    } else if (userAgent.match(/Android/i)) {
+        typeOS = "android";
+    } else {
+        typeOS = "others";
+    }
+
+    console.log(typeOS + "typeOS");
+
+    if (typeOS == "android") {
+        setTimeout(function () {
+            if (document.hasFocus()) {
+             	location.href = "https://play.google.com/store/apps/details?id=com.kbstar.liivmobile";
+            }
+        }, 1000);
+    }
+    // ios
+    else if (typeOS == "ios") {
+        setTimeout(function () {
+            if (document.hasFocus()) {
+                location.href = "https://itunes.apple.com/app/id1659980349?mt=8";
+            }
+        }, 1000);
+
+    }
+}
+
+
+</script>
