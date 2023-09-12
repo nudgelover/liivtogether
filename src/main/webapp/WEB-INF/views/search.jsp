@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	  // 로컬 스토리지에서 저장된 검색어 배열을 가져오는 함수
 	  function getSearchHistory() {
 	    const searchHistoryJSON = localStorage.getItem("searchHistory");
-	    console.log(searchHistoryJSON);
+	    //console.log(searchHistoryJSON);
 	    return searchHistoryJSON ? JSON.parse(searchHistoryJSON) : [];
 	  }
 

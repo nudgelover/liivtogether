@@ -70,7 +70,7 @@ body {
 
 	<jsp:include page="modal.jsp" />
 	<jsp:include page="search.jsp" />
-
+	<jsp:include page="alarm.jsp" />
 	<!-- 상단 네비바 -->
 	<nav class="navbar navbar-expand-xl navbar-light fixed-top bg-white">
 		<div class="container">
@@ -133,12 +133,12 @@ body {
 					</a></li>
 
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
-					data-bs-toggle="offcanvas" href="#modalShoppingCart"> <span
+					data-bs-toggle="offcanvas" href="#alarmModal"> <span
 						data-cart-items="2"> <i class="fe fe-bell"></i>
 					</span>
 					</a></li>
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
-							href="/mypage"><img style="width: 25px; border-radius: 50%" src="http://localhost/assets/img/avatars/avatar-1.jpg"></i>
+							href="/mypage"><img style="width: 25px; border-radius: 50%" src="/assets/img/starfriends/profile1.png"></i>
 						</a>
 					</li>
 					<c:choose>

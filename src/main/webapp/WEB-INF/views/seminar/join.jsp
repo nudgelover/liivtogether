@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <style>
-.tab-content {
+.join-tab-content {
 	display: none;
 }
 
@@ -158,7 +158,7 @@ $(document).ready(function() {
 				class="col-12 col-md-10 col-lg-8 col-xl-6 row text-center">
 
 
-				<div style="display: block;" class="tab-content" id="tab1">
+				<div style="display: block;" class="join-tab-content" id="tab1">
 					<h3>💡선택하시는 세미나의 정보입니다.</h3>
 					<img style="width: 90%" src="/uimg/${seminar.imageMain}">
 					<p style="font-size: 1.5rem;">세미나명 : ${seminar.title}</p>
@@ -172,7 +172,7 @@ $(document).ready(function() {
 					</p>
 				</div>
 
-				<div class="tab-content" id="tab2">
+				<div class="join-tab-content" id="tab2">
 					<!-- 개인정보 이용동의 탭 내용 -->
 					<h2>개인정보 이용동의 [필수]</h2>
 					<div class="mt-6" style="text-align: left;">
@@ -232,7 +232,7 @@ $(document).ready(function() {
 					</div>
 				</div>
 
-				<div class="tab-content" id="tab3">
+				<div class="join-tab-content" id="tab3">
 					<!-- 결제 탭 내용 -->
 					<h2>결제</h2>
 					<img class="starcoin" src="/assets/img/starfriends/starcoin.png">
@@ -253,18 +253,19 @@ $(document).ready(function() {
 </section>
 <script>
 	let currentTabIndex = 1;
-	const tabContents = document.querySelectorAll('.tab-content');
+	let joinTabContents = document.querySelectorAll('.join-tab-content');
 	const prevBtn = document.getElementById('prevBtn');
 	const nextBtn = document.getElementById('nextBtn');
 
 	function openNextTab() {
-		if (currentTabIndex < tabContents.length) {
-			tabContents[currentTabIndex - 1].style.display = 'none'; // 현재 탭 숨김
+		
+		if (currentTabIndex < joinTabContents.length) {
+			joinTabContents[currentTabIndex - 1].style.display = 'none'; // 현재 탭 숨김
 			currentTabIndex += 1;
-			tabContents[currentTabIndex - 1].style.display = 'block'; // 다음 탭 표시
+			joinTabContents[currentTabIndex - 1].style.display = 'block'; // 다음 탭 표시
 
 		}
-		if (currentTabIndex === tabContents.length) {
+		if (currentTabIndex === joinTabContents.length) {
 			nextBtn.classList.add('grayBtn');
 
 		} else {
@@ -281,14 +282,11 @@ $(document).ready(function() {
 	}
 
 	function openPrevTab() {
-		const tabContents = document.querySelectorAll('.tab-content');
-		const prevBtn = document.getElementById('prevBtn');
-		const nextBtn = document.getElementById('nextBtn');
 
 		if (currentTabIndex > 1) {
-			tabContents[currentTabIndex - 1].style.display = 'none'; // 현재 탭 숨김
+			joinTabContents[currentTabIndex - 1].style.display = 'none'; // 현재 탭 숨김
 			currentTabIndex -= 1;
-			tabContents[currentTabIndex - 1].style.display = 'block'; // 이전 탭 표시
+			joinTabContents[currentTabIndex - 1].style.display = 'block'; // 이전 탭 표시
 		}
 
 		if (currentTabIndex === 1) {
@@ -306,9 +304,9 @@ $(document).ready(function() {
 		currentTabIndex = 2;
 
 		// 현재 탭 숨김
-		tabContents[currentTabIndex].style.display = 'none';
+		joinTabContents[currentTabIndex].style.display = 'none';
 		// 이전탭 표시
-		tabContents[currentTabIndex - 1].style.display = 'block';
+		joinTabContents[currentTabIndex - 1].style.display = 'block';
 		// 다음 버튼 활성화
 		nextBtn.classList.remove('grayBtn');
 	}
