@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 .card-img-top {
 	height: 13rem;
@@ -219,6 +221,7 @@
 			</div>
 		</div>
 		<div class="row">
+		<c:forEach var="obj" items="${dlist}">
 			<div class="col-12 col-md-4">
 				<!-- Card -->
 				<div class="card mb-7">
@@ -227,306 +230,73 @@
 					<div class="heart-icon">
 						<i class="fa-solid fa-heart white"></i>
 					</div>
+					
 					<!-- Badge -->
 					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
+						<time class="text-uppercase" datetime="${obj.ddate}">Jun 20</time>
 					</div>
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
-						alt="/donation/detail">
+						 src="/uimg/${obj.imageMain}"
+						 alt="/donation/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
-
+								<c:set var="achiQuo" value="${(obj.targetIn)/(obj.target)*100}"/>
+								<fmt:formatNumber value="${achiQuo}" pattern="###" var="formattedAchiQuo" />
 						<!-- Heading -->
-						<h6>사랑의 연탄봉사</h6>
+						<h6>${obj.title}</h6>
 						<div class="event-info">
 							<div class="progress">
 								<div class="progress-bar bg-info progress-bar-striped"
-									style="width: 60%"></div>
+									style="width: ${formattedAchiQuo}%"></div>
 							</div>
 
 							<div style="display: flex; align-items: center;">
-
-								<span style="margin-right: auto;"> 120% 달성 <span
+								
+								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <span
 									style="color: gray; font-size: 12px; font-weight: 200;">
-										13,024,310원</span></span> <span
-									style="color: gray; font-size: 12px; font-weight: 200;">종료
-									<span style="font-size: 12px; font-weight: 200;">성공</span>
-								</span>
+										<fmt:formatNumber value="${obj.targetIn}" pattern="###,###원"/></span></span> 
+									<c:choose>
+									  <c:when test="${formattedAchiQuo >= 100}">
+										<span style="color: gray; font-size: 12px; font-weight: 200;">종료
+										<span style="font-size: 12px; font-weight: 200;">성공</span></span>
+									  </c:when>
+									  <c:otherwise>
+        								<span style="font-size: 12px; font-weight: 300;">진행중</span>
+    								  </c:otherwise>
+									  
+									</c:choose>
+								
 							</div>
 
 						</div>
 						<!-- Text -->
-						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
-							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
+						<p class="mb-0 text-gray-500">${obj.comment}</p>
 
 						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
+						<c:choose>
+							  <c:when test="${formattedAchiQuo < 100}">
+								<a class="btn btn-link stretched-link px-0 text-reset"
+							href="/donation/detail?id=${obj.donaId}"> 참여하러가기 <i
 							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
-						alt="/donation/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>사랑의 연탄봉사</h6>
-						<div class="event-info">
-							<div class="progress">
-								<div class="progress-bar bg-info progress-bar-striped"
-									style="width: 60%"></div>
-							</div>
-
-							<div style="display: flex; align-items: center;">
-
-								<span style="margin-right: auto;"> 120% 달성 <span
-									style="color: gray; font-size: 12px; font-weight: 200;">
-										13,024,310원</span></span> <span
-									style="color: gray; font-size: 12px; font-weight: 200;">종료
-									<span style="font-size: 12px; font-weight: 200;">성공</span>
+								</a>
+							  </c:when>
+							  <c:otherwise>
+      							<span class="btn btn-link stretched-link px-0 text-reset">
+      								참여종료
 								</span>
-							</div>
-						</div>
-						<!-- Text -->
-						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
-							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
-
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
+  							  </c:otherwise>
+					  	</c:choose>
+				
+						
 
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
-						alt="/donation/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>사랑의 연탄봉사</h6>
-						<div class="event-info">
-							<div class="progress">
-								<div class="progress-bar bg-info progress-bar-striped"
-									style="width: 60%"></div>
-							</div>
-							<div style="display: flex; align-items: center;">
-
-								<span style="margin-right: auto;"> 60% 달성 <span
-									style="color: gray; font-size: 12px; font-weight: 200;">
-										13,024,310원</span></span> <span
-									style="color: gray; font-size: 12px; font-weight: 200;">종료
-									<span style="font-size: 12px; font-weight: 200;"></span>
-								</span>
-							</div>
-						</div>
-						<!-- Text -->
-						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
-							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
-
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
-						alt="/donation/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>사랑의 연탄봉사</h6>
-						<div class="event-info">
-							<div class="progress">
-								<div class="progress-bar bg-info progress-bar-striped"
-									style="width: 60%"></div>
-							</div>
-							<div style="display: flex; align-items: center;">
-
-								<span style="margin-right: auto;"> 60% 달성 <span
-									style="color: gray; font-size: 12px; font-weight: 200;">
-										13,024,310원</span></span> <span
-									style="color: gray; font-size: 12px; font-weight: 200;">진행중
-									<span style="color:red; font-size: 12px; font-weight: 200;">마감임박</span>
-								</span>
-							</div>
-						</div>
-						<!-- Text -->
-						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
-							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
-
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
-						alt="/donation/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>사랑의 연탄봉사</h6>
-						<div class="event-info">
-							<div class="progress">
-								<div class="progress-bar bg-info progress-bar-striped"
-									style="width: 60%"></div>
-							</div>
-							<div style="display: flex; align-items: center;">
-
-								<span style="margin-right: auto;"> 60% 달성 <span
-									style="color: gray; font-size: 12px; font-weight: 200;">
-										13,024,310원</span></span> <span
-									style="color: gray; font-size: 12px; font-weight: 200;">진행중
-								</span>
-							</div>
-						</div>
-						<!-- Text -->
-						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
-							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
-
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://wimg.mk.co.kr/meet/neds/2019/01/image_readtop_2019_2746_15464041933590219.jpg"
-						alt="/donation/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>사랑의 연탄봉사</h6>
-						<div class="event-info">
-							<div class="progress">
-								<div class="progress-bar bg-info progress-bar-striped"
-									style="width: 60%"></div>
-							</div>
-								<div style="display: flex; align-items: center;">
-
-								<span style="margin-right: auto;"> 60% 달성 <span
-									style="color: gray; font-size: 12px; font-weight: 200;">
-										13,024,310원</span></span> <span
-									style="color: gray; font-size: 12px; font-weight: 200;">진행중
-								</span>
-							</div>
-						</div>
-						<!-- Text -->
-						<p class="mb-0 text-gray-500">2011년을 시작으로 9년째 이어지고 있는 사랑의
-							연탄봉사, 올해는 당신과 함께하고 싶어요.</p>
-
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-		</div>
+			</c:forEach>
+			
 		<div class="row">
 			<div class="col-12">
 

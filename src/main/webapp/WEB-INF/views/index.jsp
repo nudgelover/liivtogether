@@ -17,8 +17,11 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/assets/css/theme.bundle.css" />
+<!-- 공통 css -->
+<link rel="stylesheet" href="/assets/css/common.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/assets/js/url.js"></script>
+<script src="/assets/js/common.js"></script>
+
 <!-- Title -->
 <title>Liiv Together</title>
 <style>
@@ -61,28 +64,6 @@ body {
 	}
 }
 
-.heart {
-	color: black !important;
-	text-decoration: none !important;
-	border-bottom: none !important;
-}
-
-.heart :hover {
-	color: darkorange;
-}
-
-#userpageDropdown {
-	margin: 8px 20px 0 0;
-}
-
-.fe-user {
-	color: black !important;
-	/* 호버 시 오랜지 생각 스타일 안먹음 */
-}
-
-#userpageDropdown a {
-	outline: none !important;
-}
 </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="91"
@@ -130,34 +111,60 @@ body {
 						data-smoothscroll>Get Started</a></li>
 						 -->
 					<li class="nav-item"><a class="nav-link " href="/donation"
-						data-smoothscroll>기부</a></li>
+						>기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="/volunteer"
-						data-smoothscroll>봉사</a></li>
+						>봉사</a></li>
 					<li class="nav-item"><a class="nav-link" href="/seminar"
-						data-smoothscroll>세미나</a></li>
+						>세미나</a></li>
 					<li class="nav-item"><a class="nav-link" href="/esgshop"
-						data-smoothscroll>ESG#</a></li>
+						>ESG#</a></li>
+						
 					<li class="nav-item"><a class="nav-link" href="/review"
-						data-smoothscroll>후기</a></li>
+						>후기</a></li>
+					<li class="nav-item"><a class="nav-link" href="/event"
+					>이벤트</a></li>
 					<li class="nav-item"><a class="nav-link" href="/faq"
-						data-smoothscroll>FAQ</a></li>
+						>FAQ</a></li>
+				
+					
+						
+					<li class="nav-item ms-lg-n4"><a class="nav-link"
+					data-bs-toggle="offcanvas" href="#modalSearch"> <i
+						class="fe fe-search"></i>
+					</a></li>
+
+					<li class="nav-item ms-lg-n4"><a class="nav-link"
+					data-bs-toggle="offcanvas" href="#modalShoppingCart"> <span
+						data-cart-items="2"> <i class="fe fe-bell"></i>
+					</span>
+					</a></li>
+					<li class="nav-item ms-lg-n4"><a class="nav-link"
+							href="/mypage"><img style="width: 25px; border-radius: 50%" src="http://localhost/assets/img/avatars/avatar-1.jpg"></i>
+						</a>
+					</li>
+					<c:choose>
+						<c:when test="${logincust == null}">
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/login"> 로그인 </a></li>
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/register"> 회원가입 </a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/logouts"> 로그아웃 </a></li>
+						</c:otherwise>
+					</c:choose>	
+					<li style="display: none;"><a class="nav-link"
+							href="./account-wishlist.html"> <i class="fe fe-heart"></i>
+						</a></li>
 				</ul>
 
-				<!-- Nav -->
+				<!-- Nav 
 				<ul class="navbar-nav ms-xl-4">
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						data-bs-toggle="offcanvas" href="#modalSearch"> <i
-							class="fe fe-search"></i>
-					</a></li>
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						data-bs-toggle="offcanvas" href="#modalShoppingCart"> <span
-							data-cart-items="2"> <i class="fe fe-bell"></i>
-						</span>
-					</a></li>
-
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
+					<li style="display: none;"><a class="nav-link"
 						href="./account-wishlist.html"> <i class="fe fe-heart"></i>
 					</a></li>
+					
 					<div id="userpageDropdown" class="dropdown">
 						<a href="#" role="button" id="userpage" data-bs-toggle="dropdown"
 							aria-expanded="false"> <i class="fe fe-user"></i>
@@ -174,7 +181,7 @@ body {
 						href="/login"> 로그인 </a></li>
 					<li class="nav-item ms-lg-n4"><a class="nav-link"
 						href="/register"> 회원가입 </a></li>
-				</ul>
+				</ul> -->
 
 			</div>
 

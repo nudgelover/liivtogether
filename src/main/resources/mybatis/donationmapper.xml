@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.DonationMapper">
+
+    <select id="selectall" resultType="donation">
+        SELECT id as donaId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate 
+		, ddate
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE topic_big = 'D'
+		ORDER BY donaId DESC
+    </select>
+
+    <select id="select" parameterType="Integer" resultType="donation">
+		SELECT id as donaId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate
+		, ddate 
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE id=#{donaId}
+    </select>
+
+
+
+
+   <!-- 안하면 지우기 -->
+    <insert id="insert" parameterType="donation">
+        INSERT INTO contents
+        VALUES (#{topic_big}, #{topic_small}, #{title}, #{location}, #{edate}, #{ddate}, #{target}, #{image_main}, #{image_sub}, #{comment}, #{content}, #{reward_coin}, SYSDATE)
+    </insert>
+
+    <update id="update" parameterType="donation">
+        UPDATE contents
+        SET cust_name=#{cust_name},
+            cust_pwd=#{cust_pwd},
+            phone=#{phone},
+            age=#{age},
+            gender=#{gender}
+            email=#{email}
+        WHERE cust_id = #{cust_id}
+    </update>
+
+
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM contents
+        WHERE cust_id = #{cust_id}
+    </delete>
+
+</mapper>
