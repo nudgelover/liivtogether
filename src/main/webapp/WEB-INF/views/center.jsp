@@ -81,6 +81,7 @@
 	$(document).ready(function() {
 		openNoticePopup();
 		registerFinishPopup();
+		
 	});
 
 	function fnBannerclose(param) {
@@ -117,19 +118,17 @@
 
 		if (isEmpty(isTodayX)) {
 			console.log('광고 o')
-			//여기서 noticePopYn은 스크립트 최상단에서 let noticePopYn = "${noticePopYn}"; 백엔드에서 값가져온거
 			setNoticePopupSwiper();
 		} else {
 			console.log('광고 x')
-
+			const mainBanner = document.getElementById('mainBanner'); // 이게 없어두 되어야 되는데,,이게 없으면 이상하게 휴대폰에서 오늘하루 보지않기 누르면 터치가 아무것도 안먹음
+			mainBanner.style.display = 'none';// 이게 없어두 되어야 되는데,,,?
 		}
 	}
 
 	function setNoticePopupSwiper() {
 		console.log('광고팝업');
-		//나중에 swiper.js로 예쁘게 만드러주기
-		const popup = document.getElementById('mainBanner');
-		//popup.style.display = 'block';
+
 		setTimeout(() => {
 			openMainPopup();
 		}, 300);
@@ -146,6 +145,8 @@
 		}
 	}
 </script>
+
+
 <!-- WELCOME -->
 <section class="py-14" id="welcome" data-jarallax data-speed=".8"
 	style="background-image: url(assets/img/covers/cover-18.jpg);">
@@ -1380,8 +1381,6 @@
 
 <script>
 
-
-
 	//팝업 열기 함수
 	function openMainPopup() {
 	    document.getElementById('mainBanner').classList.add('active');
@@ -1433,6 +1432,15 @@
 						}
 					}, 1000);
 
+		}else{
+			setTimeout(
+					function() {
+						if (document.hasFocus()) {
+							location.href = "https://play.google.com/store/apps/details?id=com.kbstar.liivmobile";
+						}
+					}, 1000);
+
+			
 		}
 	}
 </script>

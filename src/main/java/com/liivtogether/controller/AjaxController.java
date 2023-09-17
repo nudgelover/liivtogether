@@ -1,5 +1,7 @@
 package com.liivtogether.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.liivtogether.dto.Cust;
+import com.liivtogether.dto.Search;
+import com.liivtogether.dto.Seminar;
 import com.liivtogether.service.CustService;
+import com.liivtogether.service.SearchService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +23,8 @@ public class AjaxController {
 	@Autowired
 	CustService custService;
 	
+	@Autowired
+	SearchService searchService;
 	//id 중복확인 로직. 사용가능 1, 중복 0
 	@RequestMapping("/idcheck")
 	public int idcheck(String cust_id) throws Exception {
@@ -60,4 +67,14 @@ public class AjaxController {
 		}
 	}
 	
+	
+	@RequestMapping("/search")
+	public List<Search> search(String keword) throws Exception {
+	    log.info("여까지옵네까");
+
+	    List<Search> searchList = searchService.getkewordList(keword);
+
+	    return searchList;
+	}
+
 }

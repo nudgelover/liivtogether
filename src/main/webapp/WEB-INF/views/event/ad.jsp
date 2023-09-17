@@ -2,14 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
 
 
+</style>
+<section style="display: flex; flex-direction: column; align-items: center; padding: 10px;">	
+	<div class="col-12 col-md-8">
 <h1>광고 시청 시 포인트지급</h1>
 
     <video id="videoPlayer" controls width="640" height="360">
         <source src="/assets/videos/똑똑1388.mp4" type="video/mp4">
     </video>
-
+</div>
+</section>
 
     <script>
         var videoPlayer = document.getElementById('videoPlayer');
