@@ -16,8 +16,8 @@
 	
 	<insert id="insert" parameterType="Point">
 	INSERT INTO phistory
-	(contents_id, cust_id, memo, topic_big, agree, rdate)
-	VALUES(#{contentsId}, #{custId}, #{memo}, #{topicBig}, #{agree}, NOW())
+	(pointcoin, gplace, uplace, rdate, cust_id, mount)
+	VALUES(#{pointcoin}, #{gplace}, #{uplace}, NOW(), #{custId}, #{mount})
 	</insert>
 
 	<update id="update" parameterType="Point">

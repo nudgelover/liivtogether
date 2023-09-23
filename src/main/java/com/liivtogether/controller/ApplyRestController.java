@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.liivtogether.dto.Apply;
+import com.liivtogether.dto.Point;
 import com.liivtogether.service.ApplyService;
+import com.liivtogether.service.PointService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +25,8 @@ public class ApplyRestController {
 
 	@Autowired
 	ApplyService applyService;
+	@Autowired
+	PointService pointService;
 
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
@@ -44,12 +48,28 @@ public class ApplyRestController {
 	
 	
 	@PostMapping("/apply/register")
-	public Object applyregister(Apply apply) throws Exception {
+	public Object applyregister(Apply apply, Point point, int mount) throws Exception {
 		log.info("-----도착했니?");
+		log.info("-----도착했니?"+ point);
 		// 등록 하는거 
 		int result = 0;
+		applyService.register(apply);
 		try {
-			applyService.register(apply);
+			log.info("-----도착했니?"+apply.getTopicBig());
+			if(apply.getTopicBig()=="D") {
+				log.info("-----되는거니??"+apply.getTopicBig());
+				point.setPointcoin("pointree");
+				point.setUplace("기부");
+				point.setMount(mount);
+				log.info("++++++++++++++++++++"+ point);
+				pointService.register(point);
+				
+				point.setPointcoin("starcoin");
+				point.setUplace("기부");
+				point.setMount(5);
+				log.info("====================="+ point);
+				pointService.register(point);								
+			}
 			
 			result = 1;
 
