@@ -24,7 +24,6 @@ public class ApplyRestController {
 	@Autowired
 	ApplyService applyService;
 
-
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
 		// 내가 해당 콘텐트를 참여한적이  있는 지 여부 체크
@@ -51,6 +50,7 @@ public class ApplyRestController {
 		int result = 0;
 		try {
 			applyService.register(apply);
+			
 			result = 1;
 
 		} catch (Exception e) {

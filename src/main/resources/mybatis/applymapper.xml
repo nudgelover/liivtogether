@@ -15,7 +15,9 @@
 	
 	
 	<insert id="insert" parameterType="Apply">
-
+	INSERT INTO apply
+	(contents_id, cust_id, memo, topic_big, agree, rdate)
+	VALUES(#{contentsId}, #{custId}, #{memo}, #{topicBig}, #{agree}, NOW())
 	</insert>
 
 	<update id="update" parameterType="Apply">

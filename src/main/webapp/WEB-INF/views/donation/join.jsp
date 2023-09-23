@@ -155,23 +155,51 @@ function setInputValue(amount) {
 	}
 
 let dona_form = {
-		init: function(){
-			 $('#donaBtn').click(function() {
-				 console.log("form");
-				 dona_form.send();
-			 });	
-		},
-		send: function(){
-			var donaPoint = $('#donaPoint').val();
-			
-			 $('#donaForm').attr({
-			        'action':'/apply/register',
-			        'method':'post'
-			      });
-			      $('#donaForm').submit();
-			      console.log("send");
+		  init: function(){
+		    $('#donaBtn').click(function() {
+		      console.log("form");
+		      dona_form.send();
+		    }); 
+		  },
+		  
+		  send: function(){
+		    let token = $("meta[name='_csrf']").attr("content");
+		    let header = $("meta[name='_csrf_header']").attr("content");
+		    var donaId = $('#contents_id').val();
+		    var loginCustId = $('#cust_id').val();
+		    var topicBig = $('#topic_big').val();
+		    var agree = $('#agreeornot').val();
+		    var memo = $('#memo').val();
+		    var donaPoint = $("#donaPoint").val();
+		    console.log(donaPoint);
+		
+		    $.ajax({
+		      url: '/apply/register',
+		      method: 'POST',
+		      data: {contentsId: donaId,
+		      		topicBig : topicBig,
+		      		custId: loginCustId,
+		      		agree : agree,
+		      		memo : memo,
+		      		donaPoint : donaPoint},
+		      beforeSend: function(xhr) {
+		        xhr.setRequestHeader("X-CSRF-Token", token);
+		        xhr.setRequestHeader(header, token);
+		      },
+		      success: function(response) {
+		    	  if(response === 1){
+		    		  window.location.href = '/donation/success';
+		    	  }
+		      },
+		      error: function(xhr, status, error) {
+		        // Ajax 요청이 실패한 경우 실행될 코드
+		      }
+		    });
+
+		    console.log("send");
+		  }   
 		}
-} 
+
 
 $(function(){
 	dona_form.init();
@@ -180,6 +208,9 @@ $(function(){
 function donaSubmit(){
 	console.log("Dona");
 }
+
+
+
 
 </script>
 <section class="py-8">
@@ -197,7 +228,7 @@ function donaSubmit(){
 						<input type="hidden" name="custId" value="{logincust.custId">
 						<input type="hidden" name="topicBic" value="{donation.topicBig}">
 						<input type="hidden" name="contentsId" value="{donation.contentsId}">
-						<input type="hidden" name="agree" value="{donation.contentsId}">
+						<input type="hidden" name="agree" id="agreeornot" value="Y">
 										
 						<p>${donation.title}</p>
 						<p><img class="mainImg" src="/uimg/${donation.imageMain}"></p>
@@ -223,7 +254,7 @@ function donaSubmit(){
 							<div class="col-17"><button type="button" class="pointreeSetBtn" id="allP" value="1000000" onclick="setInputValue(1000000)">전액</button></div>
 						</div>
 						<br/>
-						<p><input type="textarea" name="memo" placeholder="기부와 함께 소중한 마음을 전달해드립니다(선택)"></textarea></p>
+						<p><input type="textarea" id ="memo" name="memo" placeholder="기부와 함께 소중한 마음을 전달해드립니다(선택)"></textarea></p>
 					</form>
 				</div>
 
@@ -235,6 +266,10 @@ function donaSubmit(){
 			</div>
 		</div>
 	</div>
+<input type="text" id="cust_id" value="${logincust.custId}">
+<input type="text" id="topic_big" value="D">
+<input type="text" id="contents_id" value="${donation.donaId}">
+<input type="text" id="agreeornot" value="0">
 </section>
 <script>
 

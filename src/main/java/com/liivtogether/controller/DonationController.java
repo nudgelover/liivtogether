@@ -20,6 +20,10 @@ import java.util.List;
 public class DonationController {
     @Autowired
     DonationService Donationservice;
+    @Autowired
+    ApplyService Applyservice;
+    
+    
     
     String dir = "donation/";
     @RequestMapping("")
@@ -71,5 +75,12 @@ public class DonationController {
 		return "index";
 	}
 	
+	@RequestMapping("/success")
+	public String success(Model model,Apply apply) throws Exception {
+
+		model.addAttribute("apply", apply);
+		model.addAttribute("center", dir + "success");
+		return "index";
+	}
 	
 }
