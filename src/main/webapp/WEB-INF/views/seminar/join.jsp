@@ -53,6 +53,11 @@
     }
 }
 
+.running-img{
+  width: 130px;
+
+}
+
 /* 스피너의 배경 레이어 */
 .loading-overlay {
 	position: fixed;
@@ -77,6 +82,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    flex-direction: column;
 }
 
 /* 로딩 텍스트 스타일 */
@@ -127,8 +133,11 @@ $(document).ready(function() {
 
 		var payBtn = document.getElementById('payBtn');
 		// 실제 결제 처리 로직을 작성해야 함 (Ajax 등으로 서버와 통신)
-		// 결제 성공시  
+		// 결제 성공시  -- 밑에 임의로 true 처리해놈. 에이젝스에서 값 정상으로 떨어지면 true!
 		const paymentSuccess = true;
+		
+		
+		
 		if (paymentSuccess) {
 			console.log(payBtn+'payBtn');
 			payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
@@ -332,6 +341,13 @@ $(document).ready(function() {
 		spinner.style.left = '50%';
 		spinner.style.transform = 'translate(-50%, -50%)';
 
+		
+		  // 이미지 추가
+		const image = document.createElement('img');
+		image.src = 'https://media0.giphy.com/media/vOOjguTG3XUKNxfd7R/giphy.gif'; 
+		image.classList.add('running-img');
+		spinner.appendChild(image);
+		
 		// "로딩 중입니다" 텍스트 추가
 		const loadingText = document.createElement('div');
 		loadingText.textContent = '결제 중입니다. 잠시만 기다려주세요.';
