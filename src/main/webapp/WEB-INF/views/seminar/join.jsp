@@ -104,61 +104,9 @@ $(document).ready(function() {
 
 	$("#seminar-date").html(formattedDate);
 
-	var agreeBtn = document.getElementById('agreeBtn');
-	var agreeornot = document.getElementById('agreeornot');
 
-	agreeBtn.addEventListener('click', function() {
-		agreeornot.value = '1';
-		popup('개인정보이용동의에 동의하셨습니다.', false, '', '');
-		agreeBtn.classList.add('grayBtn');
-	});
-
-	var payBtn = document.getElementById('payBtn');
-
-	// 이벤트 리스너 함수를 저장해둘 변수
-	var payBtnClickListener = function() {
-	    var starCoin = ${seminar.rewardCoin};
-	    var text = "<span style='font-size: 1.4rem;'>" + starCoin + " 스타코인이 소요됩니다.</span></br>신청하신 세미나는 취소하실 수 없습니다. 정말로 결제하시겠습니까?";
-	    popup(text, true, goToPay, '');
-	};
-
-	// 클릭 이벤트 리스너 추가
-	payBtn.addEventListener('click', payBtnClickListener);
-
-	
-	function goToPay() {
-		console.log('결제시작.');
-		// "결제중입니다" 로딩바를 표시하는 로직
-		showLoadingSpinner();
-
-		var payBtn = document.getElementById('payBtn');
-		// 실제 결제 처리 로직을 작성해야 함 (Ajax 등으로 서버와 통신)
-		// 결제 성공시  -- 밑에 임의로 true 처리해놈. 에이젝스에서 값 정상으로 떨어지면 true!
-		const paymentSuccess = true;
-		
-		
-		
-		if (paymentSuccess) {
-			console.log(payBtn+'payBtn');
-			payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
-			payBtn.removeEventListener('click', payBtnClickListener);
-
-			setTimeout(function() {
-				popup('세미나 신청이 완료되었습니다. 신청 내역 페이지로 이동하시겠습니까? ', true, goToMyPayments,'');
-				hideLoadingSpinner(); // 로딩 스피너 숨기기
-			}, 2000); 
-		}
-		// 결제 실패시
-		else {
-			setTimeout(function() {
-				popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', true, goToMyPayments);
-				hideLoadingSpinner(); // 로딩 스피너 숨기기
-			}, 2000); 
-
-		}
-	}
 });
-</script>
+</script> 
 <section class="py-8">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -234,7 +182,7 @@ $(document).ready(function() {
 						</p>
 						<p>개인 정보의 수집 및 이용 목적 달성 시 즉시 파기되며, 법적인 규정에 따라 보관해야 할 필요가 있는
 							경우에는 해당 기간 종료 후 파기됩니다.</p>
-						<input type="hidden" id="agreeornot" value="0">
+					
 					</div>
 					<div class="button-container">
 						<button id="agreeBtn">동의합니다</button>
@@ -259,13 +207,36 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
+<input type="text" id="cust_id" value="${logincust.custId}">
+<input type="text" id="topic_big" value="S">
+<input type="text" id="contents_id" value="${seminar.semiId}">
+<input type="text" id="agreeornot" value="0">
 </section>
 <script>
+
 	let currentTabIndex = 1;
 	let joinTabContents = document.querySelectorAll('.join-tab-content');
 	const prevBtn = document.getElementById('prevBtn');
 	const nextBtn = document.getElementById('nextBtn');
 
+	function openPrevTab() {
+
+		if (currentTabIndex > 1) {
+			joinTabContents[currentTabIndex - 1].style.display = 'none'; // 현재 탭 숨김
+			currentTabIndex -= 1;
+			joinTabContents[currentTabIndex - 1].style.display = 'block'; // 이전 탭 표시
+		}
+
+		if (currentTabIndex === 1) {
+			prevBtn.classList.add('grayBtn');
+
+		} else {
+			nextBtn.classList.remove('grayBtn');
+
+		}
+
+	}
+	
 	function openNextTab() {
 		
 		if (currentTabIndex < joinTabContents.length) {
@@ -290,23 +261,7 @@ $(document).ready(function() {
 		}
 	}
 
-	function openPrevTab() {
 
-		if (currentTabIndex > 1) {
-			joinTabContents[currentTabIndex - 1].style.display = 'none'; // 현재 탭 숨김
-			currentTabIndex -= 1;
-			joinTabContents[currentTabIndex - 1].style.display = 'block'; // 이전 탭 표시
-		}
-
-		if (currentTabIndex === 1) {
-			prevBtn.classList.add('grayBtn');
-
-		} else {
-			nextBtn.classList.remove('grayBtn');
-
-		}
-
-	}
 
 	function goToTab2() {
 		console.log('goToTab2');
@@ -319,7 +274,94 @@ $(document).ready(function() {
 		// 다음 버튼 활성화
 		nextBtn.classList.remove('grayBtn');
 	}
+	
+	
+	var agreeBtn = document.getElementById('agreeBtn');
+	var agreeornot = document.getElementById('agreeornot');
 
+	agreeBtn.addEventListener('click', function() {
+		agreeornot.value = '1';
+		popup('개인정보이용동의에 동의하셨습니다.', false, '', '');
+		agreeBtn.classList.add('grayBtn');
+	});
+
+	var payBtn = document.getElementById('payBtn');
+
+	// 이벤트 리스너 함수를 저장해둘 변수
+	var payBtnClickListener = function() {
+	    var starCoin = ${seminar.rewardCoin};
+	    var text = "<span style='font-size: 1.4rem;'>" + starCoin + " 스타코인이 소요됩니다.</span></br>신청하신 세미나는 취소하실 수 없습니다. 정말로 결제하시겠습니까?";
+	    popup(text, true, goToPay, '');
+	};
+
+	// 클릭 이벤트 리스너 추가
+	payBtn.addEventListener('click', payBtnClickListener);
+
+	
+	function goToPay() {
+		console.log('결제시작.');
+		// "결제중입니다" 로딩바를 표시하는 로직
+		showLoadingSpinner();
+		
+		var payBtn = document.getElementById('payBtn');
+	    var seminarId = $('#contents_id').val();
+	    var loginCustId = $('#cust_id').val();
+	    var topicBig = $('#topic_big').val();
+	    var agree = $('#agreeornot').val();
+	
+	    console.log(seminarId+loginCustId+topicBig+agree)
+	    
+ 		if(agree === '0'){
+
+ 			console.log(' 동의안함');
+ 			popup('개인정보 이용동의는 필수동의사항입니다.',false,'','');
+ 			hideLoadingSpinner(); // 로딩 스피너 숨기기
+	
+ 		}else{
+			$.ajax({
+			      type: "POST", 
+			      url: "/apply/register",
+			      data: {contentsId: seminarId,
+			      		topicBig : topicBig,
+			      		custId: loginCustId,
+			      		agree : agree},
+				  beforeSend : function(xhr,set){
+					let token = $("meta[name='_csrf']").attr("content");
+					let header =$("meta[name='_csrf_header']").attr("content");
+
+					xhr.setRequestHeader("X-CSRF-Token", token);
+					xhr.setRequestHeader(header,token);
+				  },
+			      success: function(response) {
+			    	  if(response === 1){
+			    		payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
+						payBtn.removeEventListener('click', payBtnClickListener);
+							
+						setTimeout(function() {
+							popup('세미나 신청이 완료되었습니다. 신청 내역 페이지로 이동하시겠습니까? ', true, goToMyPayments,'');
+							hideLoadingSpinner(); // 로딩 스피너 숨기기
+						}, 2000);   		  
+			    	  }else{
+			    		  console.error("Error checkLikesOrNot.");
+				          setTimeout(function() {
+								popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
+								hideLoadingSpinner(); // 로딩 스피너 숨기기
+							}, 2000); 
+			    	  } 		
+			          
+			      },
+			      error: function() {
+			          console.error("Error checkLikesOrNot.");
+			          setTimeout(function() {
+							popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
+							hideLoadingSpinner(); // 로딩 스피너 숨기기
+						}, 2000); 
+			      }
+			});
+		}
+
+	}
+	
 
 	function showLoadingSpinner() {
 		// 배경을 어둡게 만들기 위한 레이어
@@ -342,7 +384,7 @@ $(document).ready(function() {
 		spinner.style.transform = 'translate(-50%, -50%)';
 
 		
-		  // 이미지 추가
+	 	// 이미지 추가
 		const image = document.createElement('img');
 		image.src = 'https://media0.giphy.com/media/vOOjguTG3XUKNxfd7R/giphy.gif'; 
 		image.classList.add('running-img');
@@ -372,6 +414,13 @@ $(document).ready(function() {
 
 	}
 
+
+	
+
+
+	
+	
+	
 	function goToMyPayments() {
 		alert('결제함으로 이동합니다....');
 	}

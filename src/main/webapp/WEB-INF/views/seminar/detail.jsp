@@ -169,7 +169,7 @@ function checkLikesOrNot() {
     // 사용자가 좋아요를 누른 상태인지 아닌지 체크
     console.log('좋아요 누른 이력을 확인합니다.');
     
-    var seminarId = ${seminar.semiId};
+    let seminarId = ${seminar.semiId};
     let loginCustId = $('#loginCustId').val();
     
     if (loginCustId) {
@@ -181,7 +181,7 @@ function checkLikesOrNot() {
    	        data: { contentsId: seminarId,
    	        		custId: loginCustId},
        		beforeSend : function(xhr,set){
-        		console.log('beforeSend 탄다. csrf 토큰확인');
+        		console.log('beforeSend 탄다. csrf 토큰확인!!');
     			let token = $("meta[name='_csrf']").attr("content");
     			//let token = 'fd6d1c70-afcd-4f76-80b1-69bba0910809' //내가 임의로 토큰값 수정해서 보내면 오류난다..!!신기함
     			let header =$("meta[name='_csrf_header']").attr("content");
@@ -412,12 +412,12 @@ function updateLike() {
 		</div>
 	</div>
 </div>
-<input id="semiId" style="display: none;" value="${seminar.semiId}">
-<input id="title" style="display: none;" value="${seminar.title}">
-<input id="location" style="display: none;" value="${seminar.location}">
-<input id="ddate" style="display: none;" value="${seminar.ddate}">
-<input id="starcoin" style="display: none;"
-	value="${seminar.rewardCoin}">
+<input type="hidden" id="semiId"  value="${seminar.semiId}">
+<input type="hidden" id="topicBig"  value="${seminar.topicBig}">
+<input type="hidden" id="title"  value="${seminar.title}">
+<input type="hidden" id="location"  value="${seminar.location}">
+<input type="hidden" id="ddate"  value="${seminar.ddate}">
+<input type="hidden" id="starcoin" value="${seminar.rewardCoin}">
 <input type="hidden" id="loginCustId" value="${logincust.custId}">
 <script>
 	const urlParams = new URLSearchParams(window.location.search);
@@ -541,8 +541,52 @@ function joinSeminarPopup() {
 	const starcoin = document.getElementById('starcoin').value;
     const text = "<span style='font-size: 1.4rem;'>세미나 '" + title + "'를 신청하시겠습니까?</span><br>🔸장소  : " + location + "<br>🔸날짜 : " + ddate +"<br>🔸스타코인 : " + starcoin +"개 사용";
 
-	popup(text, true, joinSeminar, "");
+	popup(text, true, preCheck, "");
 
+	
+	
+}
+
+function preCheck() {
+    var seminarId = $('#semiId').val();
+    var loginCustId = $('#loginCustId').val();
+    var topicBig = $('#topicBig').val();
+	
+    if (loginCustId) {
+   	
+   	  $.ajax({
+   	        type: "GET", 
+   	        url: "/apply/pre-check",
+   	        data: { contentsId: seminarId,
+   	        		topicBig : topicBig,
+   	        		custId: loginCustId},
+   	        success: function(response) {
+   	        	console.log(response)
+   	     		if(response === 0){
+   	     			joinSeminar() 
+   	     			
+   	     		}else if(response === 1){
+   	     	   	
+   					popup('이미 신청하신 세미나 입니다. 신청 내역 페이지로 이동하시겠습니까? ', true, goToMyPayments,'');
+   	     			
+   	     		}else{
+   					popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
+   	     			
+   	     		}
+   	            
+   	        },
+   	        error: function() {
+   	            console.error("Error checkLikesOrNot.");
+   	     		popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
+   	        }
+   	    });
+
+      
+    }else{
+    	popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+    };
+	
+	
 	
 	
 }
@@ -577,6 +621,8 @@ function sharingTwitter() {
 	//가짜로라도 비슷하게 만들어보쟈 ㅎㅎ
 	
 }
-
+function goToMyPayments() {
+	alert('결제함으로 이동합니다....');
+}
 
 </script>
