@@ -182,7 +182,7 @@
 					</div>
 
 					<div class="user-namebox">
-						<span class="user-name">김진희님</span> <span class="user-grade">🌱새싹회원</span>
+						<span class="user-name">${logincust.custName}님</span> <span class="user-grade">🌱새싹회원</span>
 
 					</div>
 				</div>
