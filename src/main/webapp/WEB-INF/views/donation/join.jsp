@@ -181,7 +181,7 @@ let dona_form = {
 		      		custId: loginCustId,
 		      		agree : agree,
 		      		memo : memo,
-		      		donaPoint : donaPoint},
+		      		mount : donaPoint},
 		      beforeSend: function(xhr) {
 		        xhr.setRequestHeader("X-CSRF-Token", token);
 		        xhr.setRequestHeader(header, token);

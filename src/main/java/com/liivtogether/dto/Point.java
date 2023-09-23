@@ -19,5 +19,5 @@ public class Point {
     private String uplace;
     private String rdate;
     private String custId;
-    private String mount;
+    private int mount;
 }
