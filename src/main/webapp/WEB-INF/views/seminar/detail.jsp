@@ -504,6 +504,8 @@ function joinSeminarPopup() {
 
 	popup(text, true, joinSeminar, "");
 
+	
+	
 }
 
 function joinSeminar() {
