@@ -19,7 +19,7 @@ public class ApplyService implements LIIVService<Integer, Apply> {
 
 	@Override
 	public void register(Apply v) throws Exception {
-		// TODO Auto-generated method stub
+		mapper.insert(v);
 		
 	}
 
