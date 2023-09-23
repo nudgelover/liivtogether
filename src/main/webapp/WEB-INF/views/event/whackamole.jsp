@@ -3,50 +3,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-.title {
+.catch-title {
 	color: #f2ecff;
 	text-align: center;
 	line-height: 1.5;
 }
 
-.main {
-	position: relative;
-	width: 100%;
-}
-
 .whack-a-mole {
-	background-color: #028f3f;
+	background: no-repeat center/cover url('/assets/img/event/gress.png'); 
+    padding: 40px 10px 10px 10px;
 	margin: 0 auto;
-	width: 600px;
+	width: 100%;
 	border-radius: 20px;
+	display: flex;
+	flex-wrap: wrap; /* 요소가 넘치면 줄 바꿈하도록 설정 */
+	justify-content: center;
+	align-items: center;
 }
 
 .mole {
-	float: left;
-	width: 160px;
-	height: 160px;
-	margin: 10px;
-	overflow: hidden;
-	cursor: pointer;
-	border-radius: 20px;
-	background: no-repeat center/cover
-		url('https://emojis.wiki/thumbs/emojis/hole.webp');
+  width: calc(33.33% - 20px); /* 3개 요소가 한 줄에 들어가도록 너비 설정 */
+  aspect-ratio: 1/1;
+  margin: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 20px;
+  background: no-repeat center/cover url('/assets/img/event/mole.png');
 }
 
+
 .mole>img {
-	position: relative;
-	bottom: -5px;
-	display: block;
-	width: 100%;
-	opacity: 0;
-	transition: 0.05s ease-out;
+  position: relative;
+  bottom: -5px;
+  display: block;
+  width: 80%;
+  margin: 0 10%;
+  opacity: 0;
+  transition: 0.05s ease-out;
 }
 
 .whack-a-mole .active {
-	bottom: 0;
-	opacity: 1;
-	animation: shake 0.5s;
-	animation-iteration-count: infinite;
+  bottom: 3px;
+  opacity: 1;
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes shake {
@@ -76,23 +76,17 @@
 }
 
 .point-wrap {
-	float: left;
-	width: 100%;
-	height: 60px;
-	margin: 20px 0 0 0;
+    display: flex;
+    justify-content: center;
 }
 
-.btn-wrap {
-	float: right;
-	width: 100%;
-}
 
 .start-btn {
 	width: 50%;
 	height: 70px;
 	font-size: 20px;
 	font-weight: 900;
-	margin: 20px 0 30px 0;
+	margin: 20px;
 	background: #222;
 	border: none;
 	color: #f2ecff;
@@ -106,8 +100,8 @@
 
 .point-box {
 	background-color: #4e4e4e;
-	width: 600px;
-	margin: 30px auto 0 auto;
+	width: 100%;
+	margin: 10px 0 30px 0;
 	text-align: center;
 	border-radius: 20px;
 }
@@ -117,7 +111,7 @@
 	font-size: 24px;
 	font-weight: bold;
 	color: #f2ecff;
-	margin: 15px 0 0 20%;
+	margin: 15px 0 0 0;
 }
 
 #count-mole {
@@ -136,86 +130,55 @@
 	margin: 15px 0 0 0;
 }
 
-.ending {
-	display: none;
-	position: absolute;
-	border-radius: 20px;
-	font-size: 20px;
-	text-align: center;
-	top: 20%;
-	left: 30%;
-	width: 400px;
-	height: 250px;
-	margin: 0 auto;
-	background: #3d3f43;
-	z-index: 2;
-}
 
-#ending-box {
-	margin: 50px 0 0 0;
-	font-size: 30px;
-	line-height: 1.8;
-	color: #f2ecff;
-}
-
-#ending-box .last {
-	color: #fbb666;
-}
-
-.ending-bg {
-	display: none;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.4);
-	z-index: 1;
-}
-
-.finalEnding {
-	display: block;
-}
 </style>
 
-<h1 class="title">
-	콜리를 잡아라~!
-</h1>
+<div style="text-align: center;">
+	<div style="width: 100%; background-color: #89C43E;">
+		<img style="width:100%; max-width:35rem; height: 10rem;'" src="/assets/img/event/catchEvent.png">
+	</div>
 
-<div class="main">
-	<div id="ending" class="ending">
-		<p id="ending-box"></p>
-	</div>
-	<div id="ending-bg" class="ending-bg"></div>
-	<ul id="gameContainer" class="whack-a-mole clearfix">
-		<li class="mole"><img id="1" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="2" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="3" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="4" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="5" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="6" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="7" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="8" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-		<li class="mole"><img id="9" src="/assets/img/starfriends/점프콜리.png">
-		</li>
-	</ul>
-	<div class="point-box clearfix">
-		<div class="point-wrap">
-			<p id="point-text">포인트 :</p>
-			<p id="count-mole">0</p>
-			<p id="count-mole2">/10</p>
-		</div>
-		<div class="btn-wrap">
-			<button id="start-btn" type="button" class="start-btn">START</button>
-		</div>
-	</div>
 </div>
+<section style="display: flex; flex-direction: column; align-items: center; padding: 10px;">	
+	<div class="col-12 col-md-4 col-sm-6">
+		<div>
+			<div id="ending" class="ending">
+				<p id="ending-box"></p>
+			</div>
+			<div id="ending-bg" class="ending-bg"></div>
+			<ul id="gameContainer" class="whack-a-mole clearfix">
+				<li class="mole"><img id="1" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="2" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="3" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="4" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="5" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="6" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="7" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="8" src="/assets/img/event/점프콜리.png">
+				</li>
+				<li class="mole"><img id="9" src="/assets/img/event/점프콜리.png">
+				</li>
+			</ul>
+			<div class="point-box clearfix">
+				<div class="point-wrap">
+					<p id="point-text">포인트 :</p>
+					<p id="count-mole">0</p>
+					<p id="count-mole2">/10</p>
+				</div>
+				<div>
+					<button id="start-btn" type="button" class="start-btn">게임시작</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <script>
 let flag = 0;
 let moleNumber;
@@ -223,12 +186,14 @@ let randomNum;
 let preNum;
 let getPoint = 0; // getPoint 변수 초기화
 let turn = 0; // turn 변수 초기화
+let isClickable = true; //중복클릭이벤트방지
+/*
 let hammer;
 
 const gameContainer = document.getElementById('gameContainer');
 
 gameContainer.addEventListener('mouseenter', () => {
-	console.log('들어왔다');
+
   hammer = document.createElement('div');
   hammer.classList.add('hammer');
   gameContainer.appendChild(hammer);
@@ -261,7 +226,7 @@ function moveHammer(e) {
   }
 }
 
-
+*/
 
 function randomHole(){
 	  randomNum = Math.floor(Math.random() * 10);
@@ -274,24 +239,7 @@ function randomHole(){
 	 }
 
 
-function bling(){
 
-  if (flag === 0) {
-    document.querySelector('h1').style.color = '#d6806e';
-    flag ++;
-  } else if(flag === 1) {
-    document.querySelector('h1').style.color = '#fbb666';
-    flag ++;
-  }else if(flag === 2){
-    document.querySelector('h1').style.color = '#f9f871';
-    flag ++;
-  }else{
-    document.querySelector('h1').style.color = '#f2ecff';
-    flag = 0;
-  }
-}
-
-setInterval(bling, 1000);
 
 
 let startBtn = document.getElementById('start-btn');
@@ -314,21 +262,33 @@ function moleHide(num) {
 }
 var moleCatch = 0;
 
+
+
+
 function showingMole() {
-	
-	if (turn < 10) {
+	isClickable = true; 
+
+	if (turn < 10 && isClickable) {
+		isClickable = false; 
+
 		moleNumber = document.getElementById(randomHole().toString()); // 문자열 연결 사용
-		moleNumber.src = '/assets/img/starfriends/점프콜리.png';
+		moleNumber.src = '/assets/img/event/점프콜리.png';
 		moleActive(moleNumber);
 		moleNumber.addEventListener('click', catchMole);
 		moleCatch = setTimeout(seeMole, 3000); // 함수 이름 수정
 		turn++;
 	} else {
-		modalEvent();
-		startBtn.addEventListener('click', startMole);
-		startBtn.textContent = 'PRESS AGAIN';
-		startBtn.style.color = '#f2ecff';
+		resultModal();
+		//startBtn.addEventListener('click', startMole);
+		//startBtn.textContent = '재도전'; 재도전막기!
+		//startBtn.style.color = '#f2ecff';
 	}
+}
+
+function restart() {
+	startBtn.addEventListener('click', startMole);
+	startBtn.textContent = '다시 도전하기'; 
+	startBtn.style.color = '#f2ecff';
 }
 
 var cntBox = document.querySelector('#count-mole');
@@ -341,36 +301,36 @@ function seeMole() { // 함수 이름 수정
 }
 
 function catchMole() {
-	console.log('잡았따'+moleNumber);
-	moleNumber.src = '/assets/img/starfriends/우는콜리.png';
-	getPoint++;
-	cntBox.innerHTML = getPoint;
 	
-	setTimeout(() => {
-    // 1초 후에 다시 원래의 이미지로 변경
-   		seeMole();
-		clearTimeout(moleCatch);
-    }, 300);
+	if (!isClickable) {
+		isClickable = true; // 클릭 가능한 상태로 변경
+		event.target.removeEventListener('click', catchMole);
+		moleNumber.src = '/assets/img/event/우는콜리.png';
+		getPoint++;
+		cntBox.innerHTML = getPoint;
+	
+		setTimeout(() => {
+		  		seeMole();
+			clearTimeout(moleCatch);
+		   }, 300);
+		 }
 }
 
-var endingBtn = document.querySelector('#ending-bg');
-var finalEnding = "finalEnding";
 
-endingBtn.addEventListener('click', hideModal);
 
-function modalEvent() {
+function resultModal() {
 	let point = (getPoint / 10) * 100;
-	if (point <= 70) {
-		ending.children[0].innerHTML = "<span>GAME OVER </span></br>YOUR SCORE IS&nbsp;&nbsp;<span class='last'>" + point + '</span>!';
-	} else {
-		ending.children[0].innerHTML = "<span>YOU WIN</span></br>YOUR SCORE IS&nbsp;&nbsp;<span class='last'>" + point + '</span>!';
+	if (point < 50) {
+		popup('안타깝지만 '+ point +'점으로 게임 실패에요. 다시 도전해보세요!',false,restart(),'');
+
+	} else if(point == 100) {
+		popup('축하합니다! 모든 콜리를 잡으셨네요!</br>' + point + '점으로 30포인트리가 내일 적립됩니다!',false,'','');
+	}else{
+		popup('축하합니다!</br>' + point + '점으로 10포인트리가 내일 적립됩니다!',false,'','');
+		
 	}
-	ending.classList.add(finalEnding);
-	endingBtn.classList.add(finalEnding);
+
 }
-function hideModal() {
-	ending.classList.remove(finalEnding);
-	endingBtn.classList.remove(finalEnding);
-}
+
 
 </script>

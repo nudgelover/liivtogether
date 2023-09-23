@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface DonationMapper extends LIIVMapper<String, Donation> {
+public interface DonationMapper extends LIIVMapper<Integer, Donation> {
 	List<Donation> selectall();
 }

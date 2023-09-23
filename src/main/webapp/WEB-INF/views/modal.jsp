@@ -433,7 +433,7 @@
 	</div>
 </div>
 
-<!-- Shopping Cart -->
+<!-- 알람창모달-->
 <div class="offcanvas offcanvas-end" id="modalShoppingCart"
 	tabindex="-1" role="dialog" aria-hidden="true">
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.EventMapper">
+
+
+	<select id="select" parameterType="String" resultType="Event">
+
+	</select>
+
+	<select id="selectall" resultType="Event">
+	
+	</select>
+	
+	
+	<insert id="insert" parameterType="Event">
+	
+	</insert>
+
+	<update id="update" parameterType="Event">
+	</update>
+
+	<delete id="delete" parameterType="String">
+
+	</delete>
+	
+	
+	<select id="checkTodayDo" parameterType="String" resultType="Integer">
+		SELECT
+		    COUNT(*) as cnt
+		FROM event
+		WHERE cust_id = #{custId}
+		    AND event_name = #{eventName}
+		    AND record_datetime >= #{today}
+	</select>
+	
+	
+	<select id="checkThisMonthDo" parameterType="String" resultType="Integer">
+		SELECT
+		    COUNT(*) as cnt
+		FROM event
+		WHERE cust_id = #{custId}
+		    AND event_name = #{eventName}
+		    AND record_datetime >= #{thisMonth}
+	</select>
+	
+
+	<select id="getEventData" parameterType="String" resultType="Event">
+		SELECT event_id as eventId
+			,cust_id as custId
+			, event_name as eventName
+			, points_awarded as pointsAwarded
+			, record_datetime as recordDatetime
+			from event
+			WHERE cust_id = #{custId}
+			AND event_name = #{eventName}
+			AND record_datetime > #{thisMonth}
+	</select>
+	
+	<insert id="insertEventData" parameterType="Event">
+		INSERT INTO event (cust_id, event_name, points_awarded, record_datetime)
+		VALUES (#{custId}, #{eventName}, #{pointsAwarded}, NOW());
+	</insert>
+</mapper>
