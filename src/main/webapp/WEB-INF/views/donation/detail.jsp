@@ -126,7 +126,7 @@ function updateViews() {
     $.ajax({
         type: "POST", 
         url: "/donation/update-views",
-        data: { id: donationId }, // 세미나 아이디를 전달
+        data: { id: donationId }, // 아이디를 전달
         success: function(response) {
             console.log(response + ' response');
             if (response === 1) {
@@ -186,8 +186,8 @@ function updateViews() {
 			<h5>${donation.title}</h5>
 			<p>${donation.comment}</p>
 			<div style="display: flex;">
-				<span class="recruitment">목표금액 ${donation.target}원</span><span
-					class="participants">${donation.targetIn}원 기부중</span> <span
+				<span class="recruitment">목표금액 <br/> ${donation.target}원</span><span
+					class="participants">${donation.targetIn}원 <br/> 기부중</span> <span
 					class="${(donation.dDay == 0) ? 'deadline-red' : (donation.dDay < 0) ? 'deadline-gray' : (donation.dDay <= 3) ? 'deadline-red' : 'deadline-orange'}">
 					<c:choose>
 						<c:when test="${donation.dDay <= 0}">
@@ -201,7 +201,7 @@ function updateViews() {
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-				       	 마감 ${donation.dDay}일 전
+				       	 마감 <br/> ${donation.dDay}일 전
 				    	</c:otherwise>
 					</c:choose>
 				</span>
@@ -498,26 +498,23 @@ function updateViews() {
 
 <script>
 
-
-
 function donationPopup() {
-	const donaId = document.getElementById('donaId').value;
-	const title = document.getElementById('title').value;
-	const location = document.getElementById('location').value;
-	const ddate = document.getElementById('ddate').value;
-	const starcoin = document.getElementById('starcoin').value;
-    const text = "<span style='font-size: 1.4rem;'>" + title + "에 기부하실 포인트리를 입력해주세요.<br></span><br>🔸기부가능 포인트리: " + starcoin +"P" + "<br><input id='donaPoint' type='number'/>";
+    const donaId = document.getElementById('donaId').value;
+    const title = document.getElementById('title').value;
+    const location = document.getElementById('location').value;
+    const ddate = document.getElementById('ddate').value;
+    const starcoin = document.getElementById('starcoin').value;
+
+    const text = "<span style='font-size: 1.4rem;'>" + title + "에 기부하시겠습니까? <br></span><br>🔸기부가능 포인트리: " + starcoin + "P";
     
     popup(text, true, donation, "");
-    
-	
 }
 
+
 function donation() {
-	const donaPoint = document.getElementById('donaPoint').value;
-	alert(donaPoint);
-	
+	window.location.href = "http://localhost/donation/join?id=${donation.donaId}";
 }
+
 
 
 function sharingLiivTT() {
@@ -546,6 +543,5 @@ function sharingTwitter() {
 	//가짜로라도 비슷하게 만들어보쟈 ㅎㅎ
 	
 }
-
 
 </script>
