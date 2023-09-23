@@ -36,19 +36,18 @@
 
 					<!-- Heading -->
 					<h6 class="mb-6">
-						<i class="fe fe-phone text-primary me-4"></i> Call to Us:
+						<i class="fe fe-phone text-primary me-4"></i> 문의전화:
 					</h6>
 
 					<!-- Text -->
-					<p class="text-gray-500">We're available from 10 am - 10 pm
-						EST, 7 days a week.</p>
-					<p>
-						<strong>Customer Service:</strong><br> <a
-							class="text-gray-500" href="tel:60146-389-574">6-146-389-574</a>
+
+						<strong>고객센터:</strong><br> <a
+							class="text-gray-500" href="tel:1588-9999">1588-9999</a>
 					</p>
 					<p class="mb-0">
-						<strong>Careers:</strong><br> <a class="text-gray-500"
-							href="tel:60146-389-574">6-146-389-574</a>
+						<strong>영업시간:</strong><br> <a class="text-gray-500"
+							href="오전 9시 - 오후 6시">오전 9시 - 오후 6시
+						주말, 공휴일 휴무입니다</a>
 					</p>
 
 					<!-- Divider -->
