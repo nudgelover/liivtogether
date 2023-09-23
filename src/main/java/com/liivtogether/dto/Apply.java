@@ -20,3 +20,6 @@ public class Apply {
     private String memo;
     private String agree;
 }
+
+
+
