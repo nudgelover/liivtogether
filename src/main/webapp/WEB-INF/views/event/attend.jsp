@@ -110,6 +110,7 @@ td div img {
 	        },
 	        error: function(xhr, status, error) {
 	            console.error('AJAX 요청 실패:', error);
+	            popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
 	        }
 	    });
 		
@@ -138,6 +139,7 @@ td div img {
 	        },
 	        error: function(xhr, status, error) {
 	            console.error('AJAX 요청 실패:', error);
+	            popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
 	        }
 	    });
 		
@@ -264,11 +266,13 @@ td div img {
 	                 
 	             } catch (error) {
 	                 console.error('JSON 파싱 오류:', error);
+	                 popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
 	             }
 	           
 	        },
 	        error: function(xhr, status, error) {
 	            console.error('AJAX 요청 실패:', error);
+	            popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
 	        }
 	    });
 	}
@@ -288,6 +292,16 @@ td div img {
 	            eventName: 'attend',
             	pointsAwarded : 10
 	        },
+	    	beforeSend : function(xhr,set){
+	    		console.log('beforeSend 탄다. csrf 토큰확인');
+				let token = $("meta[name='_csrf']").attr("content");
+				//let token = 'fd6d1c70-afcd-4f76-80b1-69bba0910809' //내가 임의로 토큰값 수정해서 보내면 오류난다..!!신기함
+				let header =$("meta[name='_csrf_header']").attr("content");
+				
+			
+		        xhr.setRequestHeader("X-CSRF-Token", token);
+				xhr.setRequestHeader(header,token);
+			},
 	        success: function(response) {
 	            console.log('저장완료')
 	            popup('출석완료되었습니다! 10포인트가 지급 되었습니다.', false, '', '');

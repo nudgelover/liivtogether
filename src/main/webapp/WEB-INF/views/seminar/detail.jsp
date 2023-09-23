@@ -140,6 +140,16 @@ function updateViews() {
         type: "POST", 
         url: "/seminar/update-views",
         data: { id: seminarId }, // 세미나 아이디를 전달
+    	beforeSend : function(xhr,set){
+    		console.log('beforeSend 탄다. csrf 토큰확인');
+			let token = $("meta[name='_csrf']").attr("content");
+			//let token = 'fd6d1c70-afcd-4f76-80b1-69bba0910809' //내가 임의로 토큰값 수정해서 보내면 오류난다..!!신기함
+			let header =$("meta[name='_csrf_header']").attr("content");
+			
+		
+	        xhr.setRequestHeader("X-CSRF-Token", token);
+			xhr.setRequestHeader(header,token);
+		},
         success: function(response) {
             console.log(response + ' response');
             if (response === 1) {
@@ -169,7 +179,17 @@ function checkLikesOrNot() {
    	        type: "POST", 
    	        url: "/seminar/check-likes",
    	        data: { contentsId: seminarId,
-   	        		custId: loginCustId}, 
+   	        		custId: loginCustId},
+       		beforeSend : function(xhr,set){
+        		console.log('beforeSend 탄다. csrf 토큰확인');
+    			let token = $("meta[name='_csrf']").attr("content");
+    			//let token = 'fd6d1c70-afcd-4f76-80b1-69bba0910809' //내가 임의로 토큰값 수정해서 보내면 오류난다..!!신기함
+    			let header =$("meta[name='_csrf_header']").attr("content");
+    			
+    		
+    	        xhr.setRequestHeader("X-CSRF-Token", token);
+    			xhr.setRequestHeader(header,token);
+    		},
    	        success: function(response) {
    	            console.log(response + ' response');
 
@@ -381,7 +401,7 @@ function updateLike() {
 		<div class="col-12 col-md-8 mt-10">
 			<c:choose>
 				<c:when test="${logincust.custName != null}">
-					<h5>${logincust.custName}님께서최근에 보신 세미나에요👀</h5>
+					<h5>${logincust.custName}님께서 최근에 보신 세미나에요👀</h5>
 				</c:when>
 				<c:otherwise>
 					<h5>고객님께서 최근에 보신 세미나에요👀</h5>
@@ -533,8 +553,7 @@ function joinSeminar() {
 
 
 function sharingLiivTT() {
-	alert('리브똑똑 공유하기  : 죄송합니다. 준비 중입니다.');
-	//가짜로라도 비슷하게 만들어보쟈 ㅎㅎ
+	popup('리브똑똑으로 공유하기 : </br> 죄송합니다. 준비 중입니다.', false, '' ,'');
 	
 }
 
