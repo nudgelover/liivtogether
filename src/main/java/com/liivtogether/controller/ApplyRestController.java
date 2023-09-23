@@ -28,10 +28,6 @@ public class ApplyRestController {
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
 		// 내가 해당 콘텐트를 참여한적이  있는 지 여부 체크
-	
-		System.out.print("여기------"+contentsId);
-		System.out.print(topicBig);
-		System.out.print(custId);
 		int result = 0;
 		try {
 			
@@ -40,15 +36,17 @@ public class ApplyRestController {
 			result = applyService.preCheck(contentsId,topicBig,custId);
 			
 		} catch (Exception e) {
+			
 			result = 999;
 		}
-		System.out.print(result + "result");
+
 		return result;
 	}
 	
 	
 	@PostMapping("/apply/register")
 	public Object applyregister(Apply apply) throws Exception {
+		log.info("-----도착했니?");
 		// 등록 하는거 
 		int result = 0;
 		try {
