@@ -6,24 +6,33 @@
 
 
 	<select id="select" parameterType="Integer" resultType="Seminar">
-		SELECT id as semiId
-		, topic_big as topicBig
-		, topic_small as topicSmall
-		, title
-		, location
-		, edate
-		, ddate
-		, target
-		, target_in as targetIn
-		, image_main as imageMain
-		, image_sub as imageSub
-		, comment
-		, content
-		, reword_coin as rewardCoin
-		, view
-		, rdate
-		FROM contents
-		WHERE id=#{semiId}
+ 	   SELECT c.id as semiId
+	        , c.topic_big as topicBig
+	        , c.topic_small as topicSmall
+	        , c.title
+       		, c.location
+	        , c.edate
+	        , c.ddate
+	        , c.target
+	        , IFNULL(COUNT(DISTINCT a.cust_id), 0) as targetIn
+	   		, IFNULL(COUNT(DISTINCT l.like_id), 0) as likesCount
+	        , c.image_main as imageMain
+			, c.image_sub as imageSub
+			, c.comment
+			, c.content
+	        , c.reword_coin as rewardCoin
+	        , c.view
+	        , c.rdate
+	    FROM contents c
+	    LEFT JOIN
+	   		apply a
+	    ON
+	    	c.id = a.contents_id
+	    LEFT JOIN 
+	   		likes l
+		ON 
+	   		c.id = l.contents_id
+		WHERE c.id=#{semiId}
 	</select>
 
 	<select id="selectall" resultType="Seminar">
@@ -49,219 +58,82 @@
 	</select>
 
 
-	<select id="getBrandNewOrderWithClosed" parameterType="String" resultType="Seminar">
-		SELECT id as semiId
-		    , topic_big as topicBig
-		    , topic_small as topicSmall
-		    , title
-		    , edate
-		    , ddate
-		    , target
-		    , target_in as targetIn
-		    , image_main as imageMain
-		    , reword_coin as rewardCoin
-		    , view
-		    , rdate
-		FROM contents
-		WHERE topic_big = 'S'
-		<if test="topicSmall != null and topicSmall != ''">
-		    AND topic_small = #{topicSmall}
-		</if>
-		ORDER BY semiId DESC;
-	</select>
 
-	<select id="getPopularOrderWithClosed" parameterType="String" resultType="Seminar">
-	<!-- 찜기능 구현 후! 조인해서!! -->
-
-	</select>
-	
-		
-	<select id="getDeadlineOrderWithClosed" parameterType="String" resultType="Seminar">
-		SELECT id as semiId
-		    , topic_big as topicBig
-		    , topic_small as topicSmall
-		    , title
-		    , edate
-		    , ddate
-		    , target
-		    , target_in as targetIn
-		    , image_main as imageMain
-		    , reword_coin as rewardCoin
-		    , view
-		    , rdate
-		FROM contents
-		WHERE topic_big = 'S'
-		<if test="topicSmall != null and topicSmall != ''">
-		    AND topic_small = #{topicSmall}
-		</if>
-		ORDER BY edate ASC;
-	</select>
-	
-	
-		
-	<select id="getTargetInOrderWithClosed" parameterType="String" resultType="Seminar">
-		SELECT id as semiId
-		    , topic_big as topicBig
-		    , topic_small as topicSmall
-		    , title
-		    , edate
-		    , ddate
-		    , target
-		    , target_in as targetIn
-		    , image_main as imageMain
-		    , reword_coin as rewardCoin
-		    , view
-		    , rdate
-		FROM contents
-		WHERE topic_big = 'S'
-		<if test="topicSmall != null and topicSmall != ''">
-		    AND topic_small = #{topicSmall}
-		</if>
-		ORDER BY (target_in / target) DESC;
-	</select>
-	
-	
-	<select id="getViewsOrderWithClosed"  parameterType="String" resultType="Seminar">
-		SELECT id as semiId
-		    , topic_big as topicBig
-		    , topic_small as topicSmall
-		    , title
-		    , edate
-		    , ddate
-		    , target
-		    , target_in as targetIn
-		    , image_main as imageMain
-		    , reword_coin as rewardCoin
-		    , view
-		    , rdate
-		FROM contents
-		WHERE topic_big = 'S'
-		<if test="topicSmall != null and topicSmall != ''">
-		    AND topic_small = #{topicSmall}
-		</if>
-		ORDER BY view DESC
+	<select id="getBannerList" resultType="Seminar">
+	 <![CDATA[
+	    SELECT
+	        id AS semiId,
+	        title,
+	        image_main AS imageMain,
+	        comment,
+	        content
+	    FROM
+	        liivtogether.contents
+	    WHERE
+	        topic_big = 'S'
+	        AND edate >= CURDATE() -- 오늘보다 크거나 같은 날짜
+	        AND (target_in < target) -- 인원이 차지 않은 경우만 포함
+	    ORDER BY
+	        edate ASC
+	    LIMIT 3;
+    ]]>
 
 	</select>
 
 
-	<select id="getBrandNewOrder" parameterType="String" resultType="Seminar">
-	   SELECT id as semiId
-	       , topic_big as topicBig
-	       , topic_small as topicSmall
-	       , title
-	       , edate
-	       , ddate
-	       , target
-	       , target_in as targetIn
-	       , image_main as imageMain
-	       , reword_coin as rewardCoin
-	       , view
-	       , rdate
-	   FROM contents
-	   WHERE topic_big = 'S'
-	       AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
-	       <if test="topicSmall != null and topicSmall != ''">
-	           AND topic_small = #{topicSmall}
-	       </if>
-	   ORDER BY id DESC;
+	<select id="getSeminarList" parameterType="java.util.Map" resultType="Seminar">
+	    SELECT c.id as semiId
+	        , c.topic_big as topicBig
+	        , c.topic_small as topicSmall
+	        , c.title
+	        , c.edate
+	        , c.ddate
+	        , c.target
+	        , IFNULL(COUNT(DISTINCT a.cust_id), 0) as targetIn
+	   		, IFNULL(COUNT(DISTINCT l.like_id), 0) as likesCount
+	        , c.image_main as imageMain
+	        , c.reword_coin as rewardCoin
+	        , c.view
+	        , c.rdate
+	    FROM contents c
+	    LEFT JOIN
+	   		apply a
+	    ON
+	    	c.id = a.contents_id
+	    LEFT JOIN 
+	   		likes l
+		ON 
+	   		c.id = l.contents_id
+	    WHERE c.topic_big = 'S'
+	    <if test="topicSmall != null and topicSmall != ''">
+	        AND c.topic_small = #{topicSmall}
+	    </if>
+	    <if test="includeClosed == false">
+	        AND (c.edate >= #{currentDate} OR c.edate IS NULL)
+	    </if>
+	    GROUP BY 
+	    c.id, c.topic_big, c.topic_small, c.title, c.edate, c.ddate, c.target, c.image_main, c.reword_coin, c.view, c.rdate
+	    <if test="order == 'brandNew'">
+	        ORDER BY semiId DESC
+	    </if>
+	    <if test="order == 'popular'">
+	        ORDER BY likesCount DESC
+	    </if>
+	    <if test="order == 'deadline'">
+	        ORDER BY c.edate ASC
+	    </if>
+	    <if test="order == 'targetIn'">
+	        ORDER BY targetIn DESC
+	    </if>
+	    <if test="order == 'views'">
+	        ORDER BY c.view DESC
+	    </if>
+	    LIMIT 3
+	    <if test="offset != null and offset != ''">
+	        OFFSET #{offset}
+	    </if> 
 	</select>
 	
-	<select id="getPopularOrder" parameterType="String" resultType="Seminar">
-	
-	</select>
-	
-	
-	<select id="getDeadlineOrder" parameterType="String" resultType="Seminar">
-  <!--    SELECT id as semiId
-        , topic_big as topicBig
-        , topic_small as topicSmall
-        , title
-        , edate
-        , ddate
-        , target
-        , target_in as targetIn
-        , image_main as imageMain
-        , reword_coin as rewardCoin
-        , view
-        , rdate
-        , CASE WHEN edate >= #{currentDate} THEN 1 ELSE 0 END as isFuture
-    FROM contents
-    WHERE topic_big = 'S'
-        <if test="topicSmall != null and topicSmall != ''">
-            AND topic_small = #{topicSmall}
-        </if>
-    ORDER BY isFuture DESC, edate ASC; 
-    -->
-   
-	    SELECT id as semiId
-	        , topic_big as topicBig
-	        , topic_small as topicSmall
-	        , title
-	        , edate
-	        , ddate
-	        , target
-	        , target_in as targetIn
-	        , image_main as imageMain
-	        , reword_coin as rewardCoin
-	        , view
-	        , rdate
-	    FROM contents
-	    WHERE topic_big = 'S'
-	        AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
-	        <if test="topicSmall != null and topicSmall != ''">
-	            AND topic_small = #{topicSmall}
-	        </if>
-	    ORDER BY edate ASC;
-	</select>
-	
-	
-	
-	<select id="getTargetInOrder" parameterType="String" resultType="Seminar">
-       SELECT id as semiId
-	        , topic_big as topicBig
-	        , topic_small as topicSmall
-	        , title
-	        , edate
-	        , ddate
-	        , target
-	        , target_in as targetIn
-	        , image_main as imageMain
-	        , reword_coin as rewardCoin
-	        , view
-	        , rdate
-	    FROM contents
-	    WHERE topic_big = 'S'
-	        AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
-	        <if test="topicSmall != null and topicSmall != ''">
-	            AND topic_small = #{topicSmall}
-	        </if>
-	    ORDER BY (target_in / target) DESC;
-	</select>
-
-	
-	
-	<select id="getViewsOrder" parameterType="String" resultType="Seminar">
-       SELECT id as semiId
-	        , topic_big as topicBig
-	        , topic_small as topicSmall
-	        , title
-	        , edate
-	        , ddate
-	        , target
-	        , target_in as targetIn
-	        , image_main as imageMain
-	        , reword_coin as rewardCoin
-	        , view
-	        , rdate
-	    FROM contents
-	    WHERE topic_big = 'S'
-	        AND (edate >= #{currentDate} OR edate IS NULL) -- 현재 날짜와 비교하여 과거인 것은 제외
-	        <if test="topicSmall != null and topicSmall != ''">
-	            AND topic_small = #{topicSmall}
-	        </if>
-	    ORDER BY view DESC;
-		
-	</select>
 
 	<update id="updateViews" parameterType="Integer">
 	    UPDATE contents
@@ -269,8 +141,7 @@
 	    WHERE id = #{semiId}
 	</update>
 
-	
-	
+
 	<insert id="insert" parameterType="Seminar">
 	
 	</insert>

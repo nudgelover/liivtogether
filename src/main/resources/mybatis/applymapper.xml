@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.ApplyMapper">
+
+
+	<select id="select" parameterType="String" resultType="Apply">
+
+	</select>
+
+	<select id="selectall" resultType="Apply">
+	
+	</select>
+	
+	
+	<insert id="insert" parameterType="Apply">
+	INSERT INTO apply
+	(contents_id, cust_id, memo, topic_big, agree, rdate)
+	VALUES(#{contentsId}, #{custId}, #{memo}, #{topicBig}, #{agree}, NOW())
+	</insert>
+
+	<update id="update" parameterType="Apply">
+	</update>
+
+	<delete id="delete" parameterType="String">
+
+	</delete>
+	
+	
+	<select id="preCheck" parameterType="String" resultType="Integer">
+		SELECT
+		    COUNT(*) as cnt
+		FROM apply
+		WHERE cust_id = #{custId}
+		    AND topic_big = #{topicBig}
+		    AND contents_id = #{contentsId}
+	</select>
+	
+	
+
+</mapper>

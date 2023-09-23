@@ -21,11 +21,26 @@ function goToWish() {
 }
 
 
+function goToCertificate() {
+	window.location.href = "http://localhost/mypage/certificate";
+}
+
+function goToLogin() {
+	window.location.href = "http://localhost/login";
+}
+
+	
+function goToLogout() {
+	window.location.href = "http://localhost/logouts";
+}
+function goToChat() {
+	window.location.href = "http://localhost/mypage/chat";
+}
 
 function popup(message, isPrompt, onConfirm, onCancel) {
 	//모달 팝업띄울 때 쓰는 함수. 사용하는 방법은 다음과 같습니다. 
 	//popup('이벤트에 참여하시겠습니까?', true, goToJoin, gotoMain);
-	//popup('이벤트는 내일부터 참여하실 수있습니다.', false, "", "");
+	//popup('이벤트는 내일부터 참여하실 수있습니다.', false, gotoMain, "");
     const modal = document.createElement('div');
     modal.classList.add('popup-modal');
 
@@ -44,7 +59,7 @@ function popup(message, isPrompt, onConfirm, onCancel) {
     confirmButton.classList.add('confirm-button');
     confirmButton.addEventListener('click', () => {
         closeModal();
-        if (isPrompt && typeof onConfirm === 'function') {
+        if (typeof onConfirm === 'function') {
             onConfirm();
         }
     });
@@ -71,6 +86,50 @@ function popup(message, isPrompt, onConfirm, onCancel) {
         document.body.removeChild(modal);
     }
 }
+
+function layerup(titleUse, title, content, type, closeUse) {
+	//ohyLayer(true,'title','content,'bottom',true)
+    // 레이어 생성 - 바텀시트... css 완전 재정비 필용,,,
+    var layer = document.createElement('div');
+    layer.className = 'layer';
+
+    // 닫기 버튼 생성
+    if (closeUse) {
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'layer-close';
+        closeBtn.textContent = '닫기';
+        closeBtn.onclick = function() {
+            document.body.removeChild(layer);
+        };
+        layer.appendChild(closeBtn);
+    }
+    
+    
+    // 타이틀 영역 생성
+    if (titleUse) {
+        var titleDiv = document.createElement('div');
+        titleDiv.className = 'layer-title';
+        titleDiv.textContent = title;
+        layer.appendChild(titleDiv);
+    }
+
+    // 콘텐츠 영역 생성
+    var contentDiv = document.createElement('div');
+    contentDiv.className = 'layer-content';
+    contentDiv.innerHTML = content;
+    layer.appendChild(contentDiv);
+
+    // 레이어 타입 설정
+    if (type === 'bottom') {
+        layer.style.bottom = '0';
+    }
+
+   
+
+    // body에 레이어 추가
+    document.body.appendChild(layer);
+}
+
 
 
 function isEmpty(value) {

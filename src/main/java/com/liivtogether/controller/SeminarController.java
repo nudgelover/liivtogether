@@ -2,7 +2,6 @@ package com.liivtogether.controller;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,10 @@ public class SeminarController {
 
 	@RequestMapping("")
 	public String seminar(Model model) throws Exception {
-
-		// 광고에 띄울꺼 리스트로 보내기
+		List<Seminar> list = seminarService.getBannerList();
+		log.info(list.toString());
+		
+		model.addAttribute("bannerList", list);
 		model.addAttribute("center", dir + "main");
 
 		return "index";

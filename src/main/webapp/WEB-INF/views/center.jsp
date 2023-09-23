@@ -3,40 +3,85 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-.popup {
-    display: none;
+.main-popup {
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 사라짐*/
 }
 
-.popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.main-popup.active {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 표출*/
 }
 
-.popup-close {
+.main-popup-content {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
+    bottom: -100%; /* 초기에는 아래로 숨김 */
+    left: 0;
+    width: 100%;
+    background-color: snow;
+    padding: 30px 30px 20px 30px;
+    border-radius: 25px 25px 0 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transform: translateY(100%); /* 초기에는 아래로 숨김 */
+    transition: transform 0.3s ease-in-out;
 }
+
+.main-popup.active .main-popup-content {
+    bottom: 0;
+    transform: translateY(0); /* 팝업이 나타날 때 위로 올라오는 효과 */
+    transition: transform 0.3s ease-in-out;
+}
+
+.main-popup.remove .main-popup-content {
+ 	bottom: 0;
+    transform: translateY(100%); /* 팝업이 내려갈 때 아래로 숨기기효과 */
+    transition: transform 0.3s ease-in-out;
+}
+
+#mainBanner button {
+	color: white;
+    border: none;
+    margin: 15px 0;
+    background-color: darkorange;
+    padding: 15px;
+    width: 100%;
+    border-radius: 25px;
+}
+
+@media (min-width: 768px) {
+    #mainBanner button {
+        width: 50%;
+    }
+}
+
+#mainBanner p {
+	color: #767676;
+	cursor: pointer;
+	margin-bottom: 10px !important;
+	font-size: small;
+}
+
+#mainBanner img{ 
+	width: 7rem;
+    margin: 30px;
+    border-radius: 10px;
+
+}
+
 </style>
 <script>
 	$(document).ready(function() {
 		openNoticePopup();
 		registerFinishPopup();
+		
 	});
 
 	function fnBannerclose(param) {
@@ -44,11 +89,13 @@
 		if (param == "stop") {
 			//오늘 하루 그만보기 
 			setCookieMainNoticePopup("mainbanner", "1");
-		}else{
-		    popup.style.display = 'none';
-			
+			//popup.style.display = 'none';
+			closePopup()
+		} else {
+			//popup.style.display = 'none';
+			closePopup()
 		}
-		
+
 	}
 
 	function setCookieMainNoticePopup(name, value) {
@@ -71,33 +118,35 @@
 
 		if (isEmpty(isTodayX)) {
 			console.log('광고 o')
-			//여기서 noticePopYn은 스크립트 최상단에서 let noticePopYn = "${noticePopYn}"; 백엔드에서 값가져온거
 			setNoticePopupSwiper();
 		} else {
 			console.log('광고 x')
-
+			const mainBanner = document.getElementById('mainBanner'); // 이게 없어두 되어야 되는데,,이게 없으면 이상하게 휴대폰에서 오늘하루 보지않기 누르면 터치가 아무것도 안먹음
+			mainBanner.style.display = 'none';// 이게 없어두 되어야 되는데,,,?
 		}
 	}
 
 	function setNoticePopupSwiper() {
 		console.log('광고팝업');
-		//나중에 swiper.js로 예쁘게 만드러주기
-		const popup = document.getElementById('mainBanner');
-		popup.style.display = 'block';
+
+		setTimeout(() => {
+			openMainPopup();
+		}, 300);
 
 	}
-	
+
 	//회원가입 완료 시 alert창 표출 및 로그인 안내
-	function registerFinishPopup(){
+	function registerFinishPopup() {
 		//let previousPage = document.referrer; //이전 페이지
 		let currentURL = window.location.href;
 		console.log(currentURL);
-		if(currentURL.includes('registerimpl')){
+		if (currentURL.includes('registerimpl')) {
 			alert("회원가입을 환영합니다. 로그인하여 이용해주세요.");
 		}
 	}
-	
 </script>
+
+
 <!-- WELCOME -->
 <section class="py-14" id="welcome" data-jarallax data-speed=".8"
 	style="background-image: url(assets/img/covers/cover-18.jpg);">
@@ -106,13 +155,15 @@
 			<div class="col-12 col-md-7 col-lg-5 text-white">
 
 				<!-- Heading -->
-				<h1 class="display-4">Your Eyes are our Inspiration</h1>
+				<h1 class="display-4">
+					I Liiv You,<br>Liiv Together
+				</h1>
 
 				<!-- Text -->
-				<p class="mb-8 fs-lg">*Starts from $29.99</p>
+				<p class="mb-8 fs-lg">더 나은 세상을 위해 KB국민은행이 함께합니다.</p>
 
 				<!-- Button -->
-				<a href="#!" class="btn btn-primary"> Get Sample Pack </a>
+				<a href="#!" class="btn btn-primary">작은 손길 더하기</a>
 
 			</div>
 		</div>
@@ -1312,13 +1363,84 @@
 
 
 
-<div id="mainBanner" class="popup">
-	<div class="popup-content">
-		<span class="popup-close" onclick="closeAdPopup()">&times;</span>
-		<h2>광고 팝업</h2>
-		<p>이곳에 광고 내용을 추가하세요.</p>
-		<button data-cation="close" onClick="fnBannerclose('stop');">오늘
-			그만보기</button>
-		<button data-cation="close" onClick="fnBannerclose('');">닫기</button>
+<div id="mainBanner" class="main-popup">
+	<div class="main-popup-content">
+		<span class="main-popup-close" onclick="fnBannerclose('')"></span>
+		<img src="https://cdn.psnews.co.kr/news/photo/202208/2013078_56856_1222.png">
+		<h5>리브투게더 앱출시!🥳</h5>
+		<p>리브투게더 앱은 더욱 다양한 혜택과 고객 맞춤 서비스를 제공합니다.</p>
+		<button onclick="goToApp()">앱 이용하기</button>
+		<p style="color: coral;" onClick="fnBannerclose('');">괜찮아요. 모바일웹으로 볼게요.</p>
+		<p style="text-align: left; margin-top: 20px !important;" onClick="fnBannerclose('stop');">오늘 그만보기</p>
 	</div>
 </div>
+
+
+
+
+
+<script>
+
+	//팝업 열기 함수
+	function openMainPopup() {
+	    document.getElementById('mainBanner').classList.add('active');
+	}
+	
+	// 팝업 닫기 함수
+	function closePopup() {
+	    document.getElementById('mainBanner').classList.remove('active');
+	    document.getElementById('mainBanner').classList.add('remove');
+		setTimeout(() => {
+			const popup = document.getElementById('mainBanner');
+			popup.style.display = 'none';
+		}, 500);
+	}
+
+
+
+	function goToApp() {
+		const redirectUrl = "/";
+		const userAgent = navigator.userAgent;
+		console.log("userAgent:" + userAgent);
+
+		let typeOS;
+
+		if (userAgent.match(/iPhone|iPad|iPod/i)) {
+			typeOS = "ios";
+		} else if (userAgent.match(/Android/i)) {
+			typeOS = "android";
+		} else {
+			typeOS = "others";
+		}
+
+		console.log(typeOS + "typeOS");
+
+		if (typeOS == "android") {
+			setTimeout(
+					function() {
+						if (document.hasFocus()) {
+							location.href = "https://play.google.com/store/apps/details?id=com.kbstar.liivmobile";
+						}
+					}, 1000);
+		}
+		// ios
+		else if (typeOS == "ios") {
+			setTimeout(
+					function() {
+						if (document.hasFocus()) {
+							location.href = "https://itunes.apple.com/app/id1659980349?mt=8";
+						}
+					}, 1000);
+
+		}else{
+			setTimeout(
+					function() {
+						if (document.hasFocus()) {
+							location.href = "https://play.google.com/store/apps/details?id=com.kbstar.liivmobile";
+						}
+					}, 1000);
+
+			
+		}
+	}
+</script>

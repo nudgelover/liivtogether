@@ -18,6 +18,7 @@
   background-color: #f0f0f0;
   padding: 5px 15px;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 #recentSearchValues span {
@@ -50,6 +51,7 @@
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+
 	  const modalSearch = document.getElementById("modalSearch");
 	  const searchInput = document.getElementById("search");
 	  const searchBtn = document.getElementById("searchBtn");
@@ -77,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	  // 로컬 스토리지에서 저장된 검색어 배열을 가져오는 함수
 	  function getSearchHistory() {
 	    const searchHistoryJSON = localStorage.getItem("searchHistory");
-	    console.log(searchHistoryJSON);
+	    //console.log(searchHistoryJSON);
 	    return searchHistoryJSON ? JSON.parse(searchHistoryJSON) : [];
 	  }
 
@@ -96,6 +98,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	    for (const searchItem of searchHistory) {
 	      const span = document.createElement("span");
 	      span.textContent = searchItem;
+	      span.addEventListener('click', function() {
+	    	    search(searchItem);
+    	  });
 	      
 	      const deleteButton = document.createElement("button");
 	      deleteButton.textContent = "X";
@@ -113,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	      
 	      const searchHeader = document.getElementById("searchHeader");
 	      searchHeader.style.display = "block"; 
-	     
+	 
 	    }
 	  }
 	  
@@ -133,8 +138,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	  }
 	  
 	  
-
-
 	  // 검색어를 입력하는 input 요소에 Enter 키가 눌렸을 때의 이벤트를 처리
 	  searchInput.addEventListener("keyup", function(event) {
 	    if (event.keyCode === 13) {
@@ -165,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    if (searchValue) {
 	      // 로컬 스토리지에서 검색어 배열 가져오기
 	      const searchHistory = getSearchHistory();
+	      search(searchValue);
 
 	      if (!searchHistory.includes(searchValue)) {
 	     	  // 검색어 배열의 맨 앞에 새로운 검색어 추가
@@ -186,11 +190,118 @@ document.addEventListener("DOMContentLoaded", function() {
 		  
 		
 		});
+	
+	  function search(searchValue) {
+		  console.log(searchValue + ' 내용검색');
+		  var searchResult = document.getElementById("searchResult");
+		  var notFound = document.getElementById("notFound");
+		  var sListContainer = document.getElementById("sListContainer");
+		  var vListContainer = document.getElementById("vListContainer");
+		  var dListContainer = document.getElementById("dListContainer");
+		  var nullListContainer = document.getElementById("nullListContainer");
 
+		  // div 안의 모든 내용을 지움
+		  notFound.innerHTML = "";
+		  sListContainer.innerHTML = "";
+		  vListContainer.innerHTML = "";
+		  dListContainer.innerHTML = "";
+		  nullListContainer.innerHTML = "";
+		  
+		  $.ajax({
+		    url: '/search', 
+		    method: 'GET', 
+		    data: { keword: searchValue },
+		    success: function (response) {
+		      console.log('Search results:', response);
+		      
+		       if(response.length ===0){
+		    	var noResultParagraph = document.createElement("p");
+		    	    noResultParagraph.textContent = "검색된 내용이 없습니다.";
+				    
+		    	    notFound.appendChild(noResultParagraph);
+		       }
+		      // 카테고리 별로 분류할 리스트 생성
+		      var sList = [];
+		      var vList = [];
+		      var dList = [];
+		      var nullList = [];
+
+		      // JSON 데이터를 반복하며 카테고리에 따라 리스트에 추가
+		      response.forEach(function (item) {
+		        if (item.category === 'S') {
+		          sList.push(item);
+		        } else if (item.category === 'V') {
+		          vList.push(item);
+		        } else if (item.category === 'D') {
+		          dList.push(item);
+		        } else {
+		          nullList.push(item);
+		        }
+		      });
+
+		      // 분류된 리스트를 사용하여 원하는 작업 수행
+		      console.log('S 리스트:', sList);
+		      console.log('V 리스트:', vList);
+		      console.log('D 리스트:', dList);
+		      console.log('Null 리스트:', nullList);
+		      
+		      addCategoryToContainer(dList, dListContainer, "기부");
+		      addCategoryToContainer(vList, vListContainer, "봉사");
+		      addCategoryToContainer(sList, sListContainer, "세미나");
+		      addCategoryToContainer(nullList, nullListContainer, "");
+		      
+
+
+		      
+		      dList.forEach(function (item) {
+		    	    var listItem = document.createElement("li");
+		    	    listItem.textContent = item.pageName;
+		    	    dListContainer.appendChild(listItem);
+		    	});
+		    
+		      
+		      
+		      vList.forEach(function (item) {
+		    	    var listItem = document.createElement("li");
+		    	    listItem.textContent = item.pageName;
+		    	    vListContainer.appendChild(listItem);
+		    	});
+		      
+		      sList.forEach(function (item) {
+		    	    var listItem = document.createElement("li");
+		    	    listItem.textContent = item.pageName;
+		    	    sListContainer.appendChild(listItem);
+		    	});
+		      
+		      nullList.forEach(function (item) {
+		    	    var listItem = document.createElement("li");
+		    	    listItem.textContent = item.pageName;
+		    	    nullListContainer.appendChild(listItem);
+		    	});
+		      
+		      
+		    },
+		    error: function (xhr, status, error) {
+		      console.error('AJAX error:', status, error);
+		    }
+		  });
+		}
+
+	  function addCategoryToContainer(category, container, categoryText) {
+		  if (category.length !== 0) {
+		    var categoryParagraph = document.createElement("p");
+		    categoryParagraph.className = "category";
+		    categoryParagraph.textContent = categoryText;
+		    
+		    container.appendChild(categoryParagraph);
+		  }
+		}
 	  
 	  const initialSearchHistory = getSearchHistory();
 	  renderSearchHistory(initialSearchHistory);
 	  toggleRecentSearchVisibility();
+
+	  
 	});
 
   
@@ -233,15 +344,29 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 		
 		<div id="recentSearchValues">
-		<!-- 최근 검색어 나열... -->
+		
+		</div>
+		<div id="searchResult">
+			<div id="notFound"></div>
+			<div id="nullListContainer"></div>
+	
+			<div id="dListContainer"></div>
+		
+			<div id="vListContainer"></div>
+		
+			<div id="sListContainer"></div>
+		
+		
 		</div>
 		
-		
 
-		<p>인기검색어</p>
-		<p>1 기부</p>
-		<p>2 봉사</p>
-		<p>3 증명서</p>
+			
+		<div id="popularResult">
+			<p>인기검색어</p>
+			<p>1 기부</p>
+			<p>2 봉사</p>
+			<p>3 증명서</p>
+		</div>
 
 	</div>
 </div>

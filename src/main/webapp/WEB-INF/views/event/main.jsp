@@ -32,9 +32,13 @@
 		<div
 			style="text-align: center; display: flex; justify-content: center;"
 			class="col-12">
+			
 			<div class="col-6 row event-buttons">
-				<a href="/event/card">카드게임</a><a href="/event/whackamole">두더지게임</a> <a href="/event/attend">출석체크</a> <a
-					href="/event/ad">광고시청</a> <a href="/event/fourcut">인생네컷</a>
+				<a href="/event/attend">출석체크</a> 
+				<a href="/event/card">카드게임</a>
+				<a href="/event/whackamole">두더지게임</a> 
+				<a href="/event/ad">광고시청</a> 
+				<a href="/event/fourcut">인생네컷</a>
 			</div>
 		</div>
 

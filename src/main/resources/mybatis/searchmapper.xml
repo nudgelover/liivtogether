@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liivtogether.mapper.SearchMapper">
+
+
+
+	<select id="getkewordList" resultType="Search">
+	SELECT
+		sp.page_name AS pageName,
+		sp.description AS des,
+		null AS category,
+		sp.url AS pageUrl,
+		null AS pageImage,
+		null AS endDate
+	FROM seach_pages sp
+	WHERE sp.page_name LIKE '%${kword}%'
+	UNION ALL
+	SELECT
+		c.title AS pageName,
+		null AS des,
+		c.topic_big AS category,
+		c.id AS pageUrl,
+		c.image_main AS pageImage,
+		c.edate AS endDate
+	FROM contents c
+	WHERE c.title LIKE '%${kword}%'
+	ORDER BY pageName
+	</select>
+
+
+
+
+</mapper>

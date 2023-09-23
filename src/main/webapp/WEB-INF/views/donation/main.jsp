@@ -233,7 +233,14 @@
 					
 					<!-- Badge -->
 					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="${obj.ddate}">Jun 20</time>
+						<c:choose>
+						 <c:when test="${obj.dDay >= 0}">
+						    <time class="text-uppercase" datetime="${obj.ddate}">D-${obj.dDay}일 </time>
+						 </c:when>
+						 <c:otherwise>
+						 	<time class="text-uppercase" datetime="${obj.ddate}">기한마감</time>
+						 </c:otherwise>
+						 </c:choose>				
 					</div>
 
 					<!-- Image -->
@@ -257,11 +264,14 @@
 								
 								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <span
 									style="color: gray; font-size: 12px; font-weight: 200;">
-										<fmt:formatNumber value="${obj.targetIn}" pattern="###,###원"/></span></span> 
+										모금액 : <fmt:formatNumber value="${obj.targetIn}" pattern="###,###원"/>/ 
+										목표액 : <fmt:formatNumber value="${obj.target}" pattern="###,###원"/></span></span> 
 									<c:choose>
 									  <c:when test="${formattedAchiQuo >= 100}">
-										<span style="color: gray; font-size: 12px; font-weight: 200;">종료
 										<span style="font-size: 12px; font-weight: 200;">성공</span></span>
+									  </c:when>
+									  <c:when test="${obj.dDay < 0}">
+										<span style="color: gray; font-size: 12px; font-weight: 200;">종료
 									  </c:when>
 									  <c:otherwise>
         								<span style="font-size: 12px; font-weight: 300;">진행중</span>
@@ -277,7 +287,7 @@
 
 						<!-- Button -->
 						<c:choose>
-							  <c:when test="${formattedAchiQuo < 100}">
+							  <c:when test="${obj.dDay >= 0}">
 								<a class="btn btn-link stretched-link px-0 text-reset"
 							href="/donation/detail?id=${obj.donaId}"> 참여하러가기 <i
 							class="fe fe-arrow-right ms-2"></i>
