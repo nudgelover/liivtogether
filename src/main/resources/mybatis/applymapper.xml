@@ -15,7 +15,7 @@
 	
 	
 	<insert id="insert" parameterType="Apply">
-	
+
 	</insert>
 
 	<update id="update" parameterType="Apply">

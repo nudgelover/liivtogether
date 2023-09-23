@@ -61,6 +61,13 @@
   margin-top: 6px;
 }
 
+.col-53 {
+  float: left;
+  width: 53%;
+  margin-top: 6px;
+  padding: 0px 0px 0px 16px; 
+}
+
 .col-30 {
   float: left;
   width: 30%;
@@ -72,6 +79,11 @@
   width: 17%;
   margin-top: 6px;
   padding: 0px;
+}
+
+button #reset{
+	font-color: white !important;
+	cursor: default !important;
 }
 
 /* Clear floats after the columns */
@@ -131,7 +143,44 @@ input[type=textarea]{
 $(document).ready(function(){
 	let currentTabIndex = 1;
    	console.log(currentTabIndex);
+   	
    });
+   
+function setInputValue(amount) {
+	  // 'donaPoint' ID를 가진 input 요소를 찾습니다.
+	  var inputElement = document.getElementById('donaPoint');	  
+	  var intValue = parseInt(inputElement.value);
+	  var intAmount = parseInt(amount);
+	  inputElement.value = intValue + intAmount;
+	}
+
+let dona_form = {
+		init: function(){
+			 $('#donaBtn').click(function() {
+				 console.log("form");
+				 dona_form.send();
+			 });	
+		},
+		send: function(){
+			var donaPoint = $('#donaPoint').val();
+			
+			 $('#donaForm').attr({
+			        'action':'/apply/register',
+			        'method':'post'
+			      });
+			      $('#donaForm').submit();
+			      console.log("send");
+		}
+} 
+
+$(function(){
+	dona_form.init();
+  });
+  
+function donaSubmit(){
+	console.log("Dona");
+}
+
 </script>
 <section class="py-8">
 	<div class="container">
@@ -145,36 +194,43 @@ $(document).ready(function(){
 					<!-- 세미나 정보 확인 탭 내용 -->
 					<h2>기부신청서를 작성해 주세요.</h2>
 					<form id="donaForm">
-																
+						<input type="hidden" name="custId" value="{logincust.custId">
+						<input type="hidden" name="topicBic" value="{donation.topicBig}">
+						<input type="hidden" name="contentsId" value="{donation.contentsId}">
+						<input type="hidden" name="agree" value="{donation.contentsId}">
+										
 						<p>${donation.title}</p>
 						<p><img class="mainImg" src="/uimg/${donation.imageMain}"></p>
 						<p>${donation.comment}<br/>
 						   ${donation.content}</p>
 						<div class="row">
 							<div class="col-30">기부하시는 분 : </div>
-							<div class="col-70"><input type="text" name="donaName" value="${logincust.custName}"/></div>
+							<div class="col-70"><input type="text" name="donaName" value="${logincust.custName}" placeholder="${logincust.custName}" readonly/></div>
 						</div>
 						<div class="row">
 							<div class="col-30">기부 포인트리 : </div>
-							<div class="col-30"><input type="number" name="donaPoint"/></div>
-							<div class="col-40">(기부가능 포인트리 : 100000 P)</div>
+							<div class="col-53"><input type="number" name="donaPoint" id="donaPoint" value="0"/></div>
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="reset" value="0" onclick="setInputValue(0)">초기화</button></div>							
+						</div>
+						<div class="row">
+							<div class="col-50 right-align" style="text-align: right;">(기부가능 포인트리 : 100000 P)</div>
 						</div>
 						<div class="row">
 							<div class="col-30"></div>
-							<div class="col-17"><button class="pointreeSetBtn" id="chunP" value="1000" >천원</button></div>
-							<div class="col-17"><button class="pointreeSetBtn" id="manP" value="10000" >만원</button></div>
-							<div class="col-17"><button class="pointreeSetBtn" id="sipmanP" value="100000" >십만원</button></div>
-							<div class="col-17"><button class="pointreeSetBtn" id="allP" value="1000000" >전액</button></div>
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="chunP" value="1000" onclick="setInputValue(1000)">천원</button></div>
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="manP" value="10000" onclick="setInputValue(10000)">만원</button></div>
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="sipmanP" value="100000" onclick="setInputValue(100000)">십만원</button></div>
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="allP" value="1000000" onclick="setInputValue(1000000)">전액</button></div>
 						</div>
 						<br/>
-						<p><input type="textarea" name="donaMemo" placeholder="기부와 함께 소중한 마음을 전달해드립니다(선택)"></textarea></p>
+						<p><input type="textarea" name="memo" placeholder="기부와 함께 소중한 마음을 전달해드립니다(선택)"></textarea></p>
 					</form>
 				</div>
 
 
 				<div style="display: flex;">
 					<button id="prevBtn" class="grayBtn"  style="width: 50%;" onclick="openPrevTab()">이전으로</button>
-					<button id="donaBtn" style="width: 50%;" onclick="donaSubmit()">기부하기</button>
+					<button id="donaBtn" style="width: 50%;">기부하기</button>
 				</div>
 			</div>
 		</div>
@@ -234,7 +290,6 @@ $(document).ready(function(){
 	 
 	}
 	
-	function pointreeSet(setPoint){
-		console.log(setPoint);
-	}
+
+	
 </script>
