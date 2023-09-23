@@ -39,26 +39,11 @@ public class PointRestController {
 			
 		} catch (Exception e) {
 			
-			result = 999;
+			result = -99999;
 		}
 
 		return result;
 	}
 	
-	
-	@PostMapping("/point/register")
-	public Object applyregister(Point point) throws Exception {
-
-		int result = 0;
-		try {
-			pointService.register(point);
-			result = 1;
-
-		} catch (Exception e) {
-			result = 0;
-		}
-		System.out.print(result + "result");
-		return result;
-	}
 
 }
