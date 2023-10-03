@@ -18,5 +18,12 @@ public class Apply {
     private String custId;
     private String rdate;
     private String memo;
-    private String agree;
+    // contents 테이블과 조인
+    private String title;
+    private String location;
+    private String ddate;
+    private String imageMain;
+    private String content;
+    private String rewordCoin;
+
 }

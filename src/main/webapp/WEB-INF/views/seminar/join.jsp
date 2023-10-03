@@ -471,7 +471,6 @@ $(document).ready(function() {
 
 	function goToJoinComplete(custId, contentsId) {
 	    const url = 'http://localhost/seminar/join-complete'
-
 	    window.location.href = url;
 	}
 

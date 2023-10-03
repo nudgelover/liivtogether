@@ -4,35 +4,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liivtogether.mapper.ReviewMapper">
 
-    <select id="select" parameterType="String" resultType="review">
-        SELECT * FROM review WHERE cust_id=#{cust_id}
-    </select>
+	<select id="select" parameterType="String" resultType="review">
+		SELECT *
+		FROM review WHERE cust_id=#{cust_id}
+	</select>
 
-    <select id="selectall" resultType="review">
-        SELECT * FROM review
-    </select>
+	<select id="preCheck" resultType="Integer">
+		SELECT COUNT(*) AS cnt
+		FROM
+		review
+		WHERE apply_id= #{applyId}
+	</select>
 
-    <insert id="insert" parameterType="review">
-        INSERT INTO review
-        VALUES (#{cust_id}, #{cust_name}, #{cust_pwd}, #{phone}, #{age}, #{gender}, #{email}, SYSDATE, NULL)
-    </insert>
+	<select id="selectall" resultType="review">
+		SELECT
+		review.review_id AS
+		reviewId,
+		review.apply_id AS applyId,
+		review.cust_id AS custId,
+		cust.img
+		AS custImg,
+		contents.title AS title,
+		review.image1,
+		review.image2,
+		review.image3,
+		review.keyword1,
+		review.keyword2,
+		review.keyword3,
+		review.review_contents AS reviewContents,
+		review.review_score AS
+		reviewScore,
+		review.rdate
+		FROM review
+		INNER JOIN apply ON review.apply_id
+		= apply.apply_id
+		INNER JOIN contents ON apply.contents_id = contents.id
+		INNER JOIN cust ON review.cust_id = cust.cust_id
+		ORDER BY review.review_id DESC
+	</select>
 
-    <update id="update" parameterType="review">
-        UPDATE review
-        SET cust_name=#{cust_name},
-            cust_pwd=#{cust_pwd},
-            phone=#{phone},
-            age=#{age},
-            gender=#{gender}
-            email=#{email}
-        WHERE cust_id = #{cust_id}
-    </update>
+
+	<insert id="insert" parameterType="review">
+		INSERT INTO review
+		(apply_id,
+		cust_id, keyword1, keyword2, keyword3,
+		review_contents, review_score,
+		rdate)
+		VALUES(#{applyId}, #{custId},
+		#{keyword1}, #{keyword2},
+		#{keyword3}, #{reviewContents}, #{reviewScore}, NOW());
+
+	</insert>
+
+	<update id="update" parameterType="review">
+		UPDATE review
+		SET
+		cust_name=#{cust_name},
+		cust_pwd=#{cust_pwd},
+		phone=#{phone},
+		age=#{age},
+		gender=#{gender}
+		email=#{email}
+		WHERE cust_id = #{cust_id}
+	</update>
 
 
-    <delete id="delete" parameterType="String">
-        DELETE
-        FROM review
-        WHERE cust_id = #{cust_id}
-    </delete>
+	<delete id="delete" parameterType="String">
+		DELETE
+		FROM review
+		WHERE review_id
+		= #{reviewId}
+	</delete>
 
 </mapper>

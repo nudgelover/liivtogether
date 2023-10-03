@@ -7,17 +7,14 @@
 			<div class="col-12 col-md-10 col-lg-8 col-xl-6 text-center">
 
 				<!-- Icon -->
-				<div class="mb-7 fs-1">🙁</div>
+				<div class="mb-7 fs-1"><img style="width: 50%" src ="/assets/img/starfriends/thank.gif"></div>
 
 				<!-- Heading -->
-				<h2 class="mb-5">404. Page not founaaad.</h2>
-${seminar.title} ${apply.applyId}
+				<h3 class="mb-5">세미나에 참여해주셔서 감사합니다.</h3>
 				<!-- Text -->
-				<p class="mb-7 text-gray-500">Sorry, we couldn't find the page
-					you where looking for. We suggest that you return to home page.</p>
-				MSG: ${msg}
+		
 				<!-- Button -->
-				</br> <a class="btn btn-dark" href="index.html"> Go to Homepage </a>
+				</br> <a class="btn btn-warning" href="/mypage/myseminar"> 나의 세미나로 이동하기</a>
 
 			</div>
 		</div>

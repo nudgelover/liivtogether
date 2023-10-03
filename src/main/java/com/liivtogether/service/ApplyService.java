@@ -47,6 +47,11 @@ public class ApplyService implements LIIVService<Integer, Apply> {
 		return null;
 	}
 
+	public List<Apply> getMyList(String custId, String topicBig) throws Exception {
+		return mapper.getMyList(custId,topicBig);
+	}
+	
+	
 	public Integer preCheck(String contentsId, String topicBig, String custId) throws Exception {
 		return mapper.preCheck(contentsId,topicBig,custId);
 	}
