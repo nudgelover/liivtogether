@@ -16,5 +16,6 @@ import org.springframework.stereotype.Repository;
 public interface ApplyMapper extends LIIVMapper<Integer, Apply> {
 
 	   public Integer preCheck(String contentsId, String topicBig, String custId) throws Exception;
-
+	   
+	   public Apply getJoinComplete(String custId, Integer contentsId)throws Exception;
 }

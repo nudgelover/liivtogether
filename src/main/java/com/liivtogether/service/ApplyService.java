@@ -50,5 +50,12 @@ public class ApplyService implements LIIVService<Integer, Apply> {
 	public Integer preCheck(String contentsId, String topicBig, String custId) throws Exception {
 		return mapper.preCheck(contentsId,topicBig,custId);
 	}
+	
+	
+	public Apply getJoinComplete(String custId, Integer contentsId) throws Exception {
+		
+		return mapper.getJoinComplete(custId, contentsId);
+		
+	}
 
 }

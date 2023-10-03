@@ -37,6 +37,11 @@
 		    AND contents_id = #{contentsId}
 	</select>
 	
-	
+	<select id="getJoinComplete" parameterType="Object" resultType="Apply">
+		SELECT *
+		FROM apply
+		WHERE cust_id = #{custId}
+		    AND contents_id = #{contentsId}
+	</select>
 
 </mapper>

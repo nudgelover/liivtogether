@@ -19,9 +19,29 @@
 	(pointcoin, gplace, uplace, rdate, cust_id, mount)
 	VALUES(#{pointcoin}, #{gplace}, #{uplace}, NOW(), #{custId}, #{mount})
 	</insert>
-
+	
 	<update id="update" parameterType="Point">
+	    UPDATE cust
+	    SET
+	    <choose>
+	        <when test="pointcoin == 'POINT'">
+	            <choose>
+	                <when test="gplace != null"> pointree = pointree + #{mount}</when>
+	                <when test="uplace != null"> pointree = pointree - #{mount}</when>
+	            </choose>
+	        </when>
+	        <when test="pointcoin == 'COIN'">
+	            <choose>
+	                <when test="gplace != null"> starcoin = starcoin + #{mount}</when>
+	                <when test="uplace != null"> starcoin = starcoin - #{mount}</when>
+	            </choose>
+	        </when>
+	    </choose>
+	    WHERE cust_id = #{custId}
 	</update>
+
+
+
 
 	<delete id="delete" parameterType="String">
 
