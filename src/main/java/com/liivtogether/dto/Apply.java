@@ -25,5 +25,5 @@ public class Apply {
     private String imageMain;
     private String content;
     private String rewordCoin;
-
+    private String agree;
 }

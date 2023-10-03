@@ -15,9 +15,9 @@
 	
 	
 	<insert id="insert" parameterType="Point">
-		INSERT INTO phistory
-		(pointcoin, gplace, uplace, rdate, cust_id, mount)
-		VALUES(#{pointcoin}, #{gplace}, #{uplace}, NOW(), #{custId}, #{mount});
+	INSERT INTO phistory
+	(pointcoin, gplace, uplace, rdate, cust_id, mount)
+	VALUES(#{pointcoin}, #{gplace}, #{uplace}, NOW(), #{custId}, #{mount})
 	</insert>
 	
 	<update id="update" parameterType="Point">

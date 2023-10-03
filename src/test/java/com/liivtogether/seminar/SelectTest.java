@@ -24,8 +24,8 @@ class Selectdeadline {
 	    @Test
 	    void contextLoads() {
 	        try {
-	            List<Seminar> seminarList = service.getDeadlineOrder("", "2023-08-19");
-	            log.info("Seminar List: {}", seminarList.toString());
+	            //List<Seminar> seminarList = service.getDeadlineOrder("", "2023-08-19");
+	            //log.info("Seminar List: {}", seminarList.toString());
 	            // seminarList를 적절히 활용하거나 로깅 등을 수행
 	        } catch (Exception e) {
 	            log.error("select error-----------------------------", e);
