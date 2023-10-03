@@ -1,104 +1,94 @@
 .popup-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
 }
 
 .popup-content {
-    background-color: white;
-    padding: 30px 30px 20px 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
+	background-color: white;
+	padding: 30px 30px 20px 30px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
 }
 
 .button-container button {
-	width :100px;
-    margin: 0 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-     
+	width: 100px;
+	margin: 0 5px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 .confirm-button {
-	background-color :#FFBF00;
+	background-color: #FFBF00;
 	color: white;
-   
 }
 
 .cancel-button {
-    background-color: #e0e0e0; /* 은은한 회색 배경색 */
+	background-color: #e0e0e0; /* 은은한 회색 배경색 */
 	color: white;
-
-
 }
 
-/* 스타일링을 위한 기본 스타일 */
+/* 모달 뒷 배경 스타일 */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1100;
+	display: none;
+}
+
 .layer {
-    position: fixed;
-    background-color: white;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 30%; /* 원하는 높이(예: 30%)로 설정 */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* 레이어가 다른 요소 위에 보이도록 설정 */
+	border-radius: 15px 15px 0 0;
+	position: fixed;
+	background-color: white;
+	left: 0;
+	width: 100%;
+	max-height : 80%;
+	min-height: 30%;
+	display: flex;
+	flex-direction: column;
+	z-index: 9999;
 }
 
-.layer-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 20px;
+/* 타이틀과 닫기 버튼 스타일 */
+.layer-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px 0px 22px;
 }
 
-.layer-content {
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px;
-    background-color: #333333;
-    border-radius: 8px;
-    flex-grow: 1; /* 콘텐츠가 남은 공간을 차지하도록 설정 */
+.layer-top>div {
+	font-weight: 800;
+    font-size: 1.1rem;
 }
 
 .layer-close {
-    background-color: #ffffff;
-    color: #333333;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 20px;
-    margin-right: 20px; /* 오른쪽 여백 추가 */
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    align-self: flex-end; /* 버튼을 오른쪽에 정렬 */
+	background-color: #ffffff;
+	border: none;
+	font-weight: bold;
 }
 
-/* 레이어 닫기 버튼 스타일 */
-.layer-close:hover {
-    background-color: #333333;
-    color: #ffffff;
+/* 콘텐츠 스타일 */
+.layer-content {
+	padding: 20px;
 }
-
-
-
-

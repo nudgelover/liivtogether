@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ReviewMapper extends LIIVMapper<String, Review> {
-    
+
+	public Integer preCheck(Integer applyId) throws Exception;
 }
