@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 public interface SearchMapper extends LIIVMapper<String, Search> {
 
-	public List<Search> getkewordList(String keword) throws Exception;
+	public List<Search> getkewordList(String keyword) throws Exception;
 
 
 }

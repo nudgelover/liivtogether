@@ -15,7 +15,7 @@
 		null AS pageImage,
 		null AS endDate
 	FROM seach_pages sp
-	WHERE sp.page_name LIKE '%${kword}%'
+	WHERE sp.page_name LIKE '%${keyword}%'
 	UNION ALL
 	SELECT
 		c.title AS pageName,
@@ -25,7 +25,7 @@
 		c.image_main AS pageImage,
 		c.edate AS endDate
 	FROM contents c
-	WHERE c.title LIKE '%${kword}%'
+	WHERE c.title LIKE '%${keyword}%'
 	ORDER BY pageName
 	</select>
 

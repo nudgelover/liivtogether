@@ -95,22 +95,6 @@ body {
 
 				<!-- Nav -->
 				<ul class="navbar-nav ms-xl-auto">
-					<!-- 	<li class="nav-item"><a class="nav-link active" href="#welcome"
-						data-smoothscroll>기부</a></li>
-					<li class="nav-item"><a class="nav-link" href="#products"
-						data-smoothscroll>봉사</a></li>
-					<li class="nav-item">
-					  <a class="nav-link" href="#about" data-smoothscroll>세미나</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#howItWorks"
-						data-smoothscroll>ESG#</a></li>
-					<li class="nav-item"><a class="nav-link" href="#pricing"
-						data-smoothscroll>후기</a></li>
-					<li class="nav-item"><a class="nav-link" href="#reviews"
-						data-smoothscroll>Reviews</a></li>
-					<li class="nav-item"><a class="nav-link" href="#getStarted"
-						data-smoothscroll>Get Started</a></li>
-						 -->
 					<li class="nav-item"><a class="nav-link " href="/donation"
 						>기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="/volunteer"

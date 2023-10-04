@@ -48,8 +48,8 @@ public class SearchService implements LIIVService<Integer, Search> {
 	}
 	
 
-	public List<Search> getkewordList(String keword) throws Exception {
-		return mapper.getkewordList(keword);
+	public List<Search> getkewordList(String keyword) throws Exception {
+		return mapper.getkewordList(keyword);
 	}
 
 }

@@ -69,12 +69,22 @@ public class AjaxController {
 	
 	
 	@RequestMapping("/search")
-	public List<Search> search(String keword) throws Exception {
-	    log.info("여까지옵네까");
-
-	    List<Search> searchList = searchService.getkewordList(keword);
+	public List<Search> search(String keyword) throws Exception {
+		// log.info(keyword);
+	    List<Search> searchList = searchService.getkewordList(keyword);
 
 	    return searchList;
 	}
+	
+	
+	@RequestMapping("/autocomplete")
+	public List<Search> autocomplete(String keyword) throws Exception {
+	    log.info(keyword);
+
+	    List<Search> searchList = searchService.getkewordList(keyword);
+
+	    return searchList;
+	}
+	
 
 }
