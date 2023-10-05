@@ -76,18 +76,37 @@
 }
 
 .category{
-	font-weight: bold;
-	margin: 5px;
+    font-weight: 200;
+    margin: 15px 0 10px;
+    color: grey;
+    font-size: smaller;
 }
 
+#searchResult{
+	margin-bottom: 30px;
+
+}
 #searchResult li{
+  	padding: 10px 0;
+    border-bottom: 0.1px solid #e5e5e5;
     list-style: none;
     margin: 3px;
 }
 
 #searchResult a{
     color: #424242 !important;
- 
+    font-weight: 600;
+    font-size: small;
+}
+#popularDiv > p{
+    margin: 15px 0;
+    color: gray;
+
+}
+#popularLeft p, #popularRight p{
+	font-weight:600;
+	margin: 15px 0;
+
 }
 </style>
 <script>
@@ -99,11 +118,40 @@ document.addEventListener("DOMContentLoaded", function() {
 	  const recentSearchValues = document.getElementById("recentSearchValues");
 	  const deleteBtn = document.getElementById("deleteAllValues");
 	  
-	  // 모달 열릴 때, 검색어를 입력하는 input에 포커스
-	  modalSearch.addEventListener("shown.bs.offcanvas", function() {
-	    searchInput.focus();
-	  });
+	 let intervalId = null;
 
+	// 모달 열릴 때의 이벤트 핸들러
+	modalSearch.addEventListener('shown.bs.offcanvas', function() {
+	    console.log('모달업');
+	    searchInput.focus(); 
+	    startUpdatingPopularKeywords(); 
+	});
+	
+	// 모달 닫힐 때의 이벤트 핸들러
+	modalSearch.addEventListener('hidden.bs.offcanvas', function() {
+	    console.log('모달다운');
+	    stopUpdatingPopularKeywords();
+	    notFound.innerHTML = "";
+	    sListContainer.innerHTML = "";
+	    vListContainer.innerHTML = "";
+	    dListContainer.innerHTML = "";
+	    nullListContainer.innerHTML = "";
+	});
+	
+	// 인기 키워드 업데이트를 시작하는 함수
+	function startUpdatingPopularKeywords() {
+	    if (intervalId === null) {
+	        intervalId = setInterval(updatePopularKeywords, 10000); // 5초마다 업데이트하는 인터벌을 시작합니다.
+	    }
+	}
+	
+	// 인기 키워드 업데이트를 중지하는 함수
+	function stopUpdatingPopularKeywords() {
+	    if (intervalId !== null) {
+	        clearInterval(intervalId); // 인터벌을 멈춥니다.
+	        intervalId = null;
+	    }
+	}
 	  //저장된게 있을 때만 최근검색어 보여주기
 	  function toggleRecentSearchVisibility() {
 		    const searchHistory = getSearchHistory();
@@ -120,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	  // 로컬 스토리지에서 저장된 검색어 배열을 가져오는 함수
 	  function getSearchHistory() {
 	    const searchHistoryJSON = localStorage.getItem("searchHistory");
-	    //console.log(searchHistoryJSON);
 	    return searchHistoryJSON ? JSON.parse(searchHistoryJSON) : [];
 	  }
 
@@ -292,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		  var autocompleteResults = document.getElementById("autocomplete-results");
 		  autocompleteResults.style.display = "none";
 		  
-		  console.log(searchValue + ' 내용검색');
+		  //console.log(searchValue + ' 내용검색');
 		  var searchResult = document.getElementById("searchResult");
 		  var notFound = document.getElementById("notFound");
 		  var sListContainer = document.getElementById("sListContainer");
@@ -313,13 +360,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		    method: 'GET', 
 		    data: { keyword: searchValue },
 		    success: function (response) {
-		      console.log('Search results:', response);
+		      //console.log('Search results:', response);
 		      
 		       if(response.length ===0){
 		    	var noResultParagraph = document.createElement("p");
 		    	    noResultParagraph.textContent = "검색된 내용이 없습니다.";
 				    
 		    	    notFound.appendChild(noResultParagraph);
+		       }else{
+		    	   //키워드 검색결과가 있을 때만 인기검색어에 저장!
+		    	 	saveKeyword(searchValue);
 		       }
 		      // 카테고리 별로 분류할 리스트 생성
 		      var sList = [];
@@ -341,15 +391,15 @@ document.addEventListener("DOMContentLoaded", function() {
 		      });
 
 		      // 분류된 리스트를 사용하여 원하는 작업 수행
-		      console.log('S 리스트:', sList);
-		      console.log('V 리스트:', vList);
-		      console.log('D 리스트:', dList);
-		      console.log('Null 리스트:', nullList);
+		     // console.log('S 리스트:', sList);
+		     // console.log('V 리스트:', vList);
+		     // console.log('D 리스트:', dList);
+		     // console.log('Null 리스트:', nullList);
 		      
 		      addCategoryToContainer(dList, dListContainer, "기부");
 		      addCategoryToContainer(vList, vListContainer, "봉사");
 		      addCategoryToContainer(sList, sListContainer, "세미나");
-		      addCategoryToContainer(nullList, nullListContainer, "");
+		      addCategoryToContainer(nullList, nullListContainer, "기타");
 		      
 
 
@@ -450,9 +500,94 @@ document.addEventListener("DOMContentLoaded", function() {
 	          autocompleteResults.style.display = 'none';
 	      }
 	  });
+	  
+	  function saveKeyword(keyword) {
+		    $.ajax({
+		        url: '/add_keywords',
+		        method: 'POST',
+		        data: { keyword: keyword },
+		        beforeSend : function(xhr,set){
+					let token = $("meta[name='_csrf']").attr("content");
+					let header =$("meta[name='_csrf_header']").attr("content");
+					
+			        xhr.setRequestHeader("X-CSRF-Token", token);
+					xhr.setRequestHeader(header,token);
+				},
+		        success: function (data) {
+		            if(data =="succ"){
+		            	console.log("succ");
+		            }else{
+		            	console.log("err");
+		            }
+		        },
+		        error: function (error) {
+		          
+		            console.error('Error adding popular keyword:', error);
+		        }
+		    });
+		}
 
 	  
+	  function updatePopularKeywords() {
+		    
+		    $.ajax({
+		        url: '/popular_keywords', 
+		        method: 'GET',
+		        success: function(data) {
+		        
+		            const popularLeft = document.getElementById('popularLeft');
+		            const popularRight = document.getElementById('popularRight');
+
+		            // Clear existing content
+		            popularLeft.innerHTML = '';
+		            popularRight.innerHTML = '';
+
+		        
+		            data.forEach(function (keyword, index) {
+		               // console.log(index);
+		                var keyword10 = keyword.keyword;
+		              //  console.log(keyword10);
+		                const column = index < 5 ? popularLeft : popularRight;
+
+		                const listItem = document.createElement('p');
+		                listItem.innerHTML = '<span style="color: cornflowerblue; margin-right: 10px;">' + (index + 1) + '</span>' + keyword10;
+		       
+		                listItem.addEventListener('click', function () {
+		                    search(keyword10);
+		                    
+            			    // 로컬 스토리지에서 검색어 배열 가져오기
+           			        const searchHistory = getSearchHistory();
+           					// 만약에 searchValue가 searchHistory 안에 없다면!!! 검색어 배열에 새로운 검색어 추가
+           			          if (!searchHistory.includes(keyword10)) {
+           			        	  // 검색어 배열의 맨 앞에 새로운 검색어 추가
+           			              searchHistory.unshift(keyword10);
+           			              searchInput.value ="";
+           			              // 로컬 스토리지에 검색어 배열 저장
+           			              saveSearchHistory(searchHistory);
+           			              renderSearchHistory(searchHistory);
+           		         		}
+           					
+              			      
+		                });
+		               
+		                column.appendChild(listItem);
+		            });
+
+
+		        },
+		        error: function(error) {
+		            console.error('Error fetching popular keywords:', error);
+		        }
+		    });
+		}
+
+
+
+	    updatePopularKeywords();
+	  
 	});
+	
+	
 
 
 </script>
@@ -509,11 +644,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-		<div id="popularResult">
+		<div id="popularDiv">
 			<p>인기검색어</p>
-			<p>1 기부</p>
-			<p>2 봉사</p>
-			<p>3 증명서</p>
+			<div style="display: flex;" class="popularResult col-12">
+				<div class="col-6" id="popularLeft">
+					<!-- 
+					<p><span style="color: cornflowerblue; margin-right: 5px;">1</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">2</span>  봉사</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">3</span>  증명서</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">4</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">5</span>  봉사</p>
+					
+					 -->
+				</div>
+				<div class="col-6" id="popularRight">
+					<!-- 
+					<p><span style="color: cornflowerblue; margin-right: 5px;">1</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">2</span>  봉사</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">3</span>  증명서</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">4</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">5</span>  봉사</p>
+					
+					 -->
+				</div>
+			</div>
 		</div>
 
 	</div>
