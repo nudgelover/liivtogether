@@ -25,6 +25,7 @@
 		cust.img
 		AS custImg,
 		contents.title AS title,
+		contents.topic_big  AS topicBig,
 		review.image1,
 		review.image2,
 		review.image3,
@@ -42,7 +43,35 @@
 		INNER JOIN cust ON review.cust_id = cust.cust_id
 		ORDER BY review.review_id DESC
 	</select>
-
+	
+	<select id="getMyReview" resultType="review">
+		SELECT
+		review.review_id AS
+		reviewId,
+		review.apply_id AS applyId,
+		review.cust_id AS custId,
+		cust.img
+		AS custImg,
+		contents.title AS title,
+		contents.topic_big  AS topicBig,
+		review.image1,
+		review.image2,
+		review.image3,
+		review.keyword1,
+		review.keyword2,
+		review.keyword3,
+		review.review_contents AS reviewContents,
+		review.review_score AS
+		reviewScore,
+		review.rdate
+		FROM review
+		INNER JOIN apply ON review.apply_id
+		= apply.apply_id
+		INNER JOIN contents ON apply.contents_id = contents.id
+		INNER JOIN cust ON review.cust_id = cust.cust_id
+		WHERE review.cust_id = #{cust_id}
+		ORDER BY review.review_id DESC
+	</select>
 
 	<insert id="insert" parameterType="review">
 		INSERT INTO review

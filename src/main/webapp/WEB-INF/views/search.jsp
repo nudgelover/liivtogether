@@ -106,6 +106,7 @@
 #popularLeft p, #popularRight p{
 	font-weight:600;
 	margin: 15px 0;
+	cursor: pointer;
 
 }
 </style>

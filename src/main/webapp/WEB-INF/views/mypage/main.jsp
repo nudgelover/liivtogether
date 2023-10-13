@@ -223,7 +223,7 @@
 				<div class="user-picbox">
 					<div class="avatar-container">
 						<div class="avatar avatar-xl">
-							<img src="../assets/img/avatars/avatar-1.jpg" alt="..."
+							<img src="/uimg/${logincust.img}" alt="custImg"
 								class="avatar-img rounded-circle">
 						</div>
 						<div class="edit-icon">
@@ -232,7 +232,7 @@
 					</div>
 
 					<div class="user-namebox">
-						<span class="user-name">김진희님</span> <span class="user-grade">🌱새싹회원</span>
+						<span class="user-name">${logincust.custName}님</span> <span class="user-grade">🌱새싹회원</span>
 
 					</div>
 				</div>

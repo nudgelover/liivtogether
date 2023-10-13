@@ -40,6 +40,11 @@ public class ReviewService implements LIIVService<String, Review> {
         return mapper.selectall();
     }
     
+
+    public List<Review> getMyReview(String s) throws Exception {
+        return mapper.getMyReview(s);
+    }
+    
 	public Integer preCheck(int applyId) throws Exception {
 		return mapper.preCheck(applyId);
 	}
