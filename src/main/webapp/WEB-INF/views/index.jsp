@@ -65,6 +65,10 @@ body {
 	}
 }
 
+.fixed-bottom, .fixed-top {
+	z-index: 100;
+}
+
 </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="91"
@@ -160,6 +164,8 @@ body {
 	<!-- footer -->
 	<jsp:include page="footer.jsp" />
 
+
+	<jsp:include page="chat.jsp" />
 	<!-- JAVASCRIPT -->
 	<!-- Map (replace the API key to enable) -->
 	<script

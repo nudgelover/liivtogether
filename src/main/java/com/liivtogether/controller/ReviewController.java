@@ -32,19 +32,34 @@ public class ReviewController {
 	ReviewService reviewService;
 
 	@RequestMapping("")
-	public String review(Model model) throws Exception {
-		List<Review> reviewcontent = reviewService.get();
-		List<String> contentList = new ArrayList<>();
-
-		for (Review review : reviewcontent) {
-			String content = review.getReviewContents();
-			contentList.add(content);
-		}
-		model.addAttribute("reviewcontent", reviewcontent);
-		model.addAttribute("contentList", contentList);
-		model.addAttribute("center", dir + "main");
-		return "index";
+	public String review(Model model, HttpSession session) throws Exception {
+	    Cust cust = (Cust) session.getAttribute("logincust");
+	    
+	    // 로그인한 사용자인 경우에만 리뷰 목록을 가져오도록 설정
+	    if (cust != null) {
+	        String custId = cust.getCustId();
+	        
+	        // 로그인한 사용자의 리뷰 목록 가져오기
+	        List<Review> myReviewcontent = reviewService.getMyReview(custId);
+	        model.addAttribute("myReviewcontent", myReviewcontent);
+	    }
+	    
+	    // 모든 사용자에게 리뷰 목록 가져오기
+	    List<Review> reviewcontent = reviewService.get();
+	    List<String> contentList = new ArrayList<>();
+	    for (Review review : reviewcontent) {
+	        String content = review.getReviewContents();
+	        contentList.add(content);
+	    }
+	    
+	    // 모든 사용자에게 리뷰 목록을 전달
+	    model.addAttribute("reviewcontent", reviewcontent);
+	    model.addAttribute("contentList", contentList);
+	    model.addAttribute("center", dir + "main");
+	    
+	    return "index";
 	}
+
 
 	@RequestMapping("/add")
     public String add(Model model, HttpSession session) throws Exception {

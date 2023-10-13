@@ -16,6 +16,7 @@ public class Review {
 	private String custId;
 	private String custImg;
     private String title;
+    private String topicBig;
     private String keyword1;
     private String keyword2;
     private String keyword3;
