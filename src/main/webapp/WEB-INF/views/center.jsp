@@ -2,64 +2,76 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
+
+#welcome {
+  background-image: url(assets/img/main/center.png);
+}
+
+@media (max-width: 1250px) {
+  #welcome {
+    background-image: url(assets/img/main/centersmall.png);
+  }
+}
+
 .main-popup {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 사라짐*/
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 사라짐*/
 }
 
 .main-popup.active {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 표출*/
+	opacity: 1;
+	transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 표출*/
 }
 
 .main-popup-content {
-    position: absolute;
-    bottom: -100%; /* 초기에는 아래로 숨김 */
-    left: 0;
-    width: 100%;
-    background-color: snow;
-    padding: 30px 30px 20px 30px;
-    border-radius: 25px 25px 0 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transform: translateY(100%); /* 초기에는 아래로 숨김 */
-    transition: transform 0.3s ease-in-out;
+	position: absolute;
+	bottom: -100%; /* 초기에는 아래로 숨김 */
+	left: 0;
+	width: 100%;
+	background-color: snow;
+	padding: 30px 30px 20px 30px;
+	border-radius: 25px 25px 0 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	transform: translateY(100%); /* 초기에는 아래로 숨김 */
+	transition: transform 0.3s ease-in-out;
 }
 
 .main-popup.active .main-popup-content {
-    bottom: 0;
-    transform: translateY(0); /* 팝업이 나타날 때 위로 올라오는 효과 */
-    transition: transform 0.3s ease-in-out;
+	bottom: 0;
+	transform: translateY(0); /* 팝업이 나타날 때 위로 올라오는 효과 */
+	transition: transform 0.3s ease-in-out;
 }
 
 .main-popup.remove .main-popup-content {
- 	bottom: 0;
-    transform: translateY(100%); /* 팝업이 내려갈 때 아래로 숨기기효과 */
-    transition: transform 0.3s ease-in-out;
+	bottom: 0;
+	transform: translateY(100%); /* 팝업이 내려갈 때 아래로 숨기기효과 */
+	transition: transform 0.3s ease-in-out;
 }
 
 #mainBanner button {
 	color: white;
-    border: none;
-    margin: 15px 0;
-    background-color: darkorange;
-    padding: 15px;
-    width: 100%;
-    border-radius: 25px;
+	border: none;
+	margin: 15px 0;
+	background-color: darkorange;
+	padding: 15px;
+	width: 100%;
+	border-radius: 25px;
 }
 
-@media (min-width: 768px) {
-    #mainBanner button {
-        width: 50%;
-    }
+@media ( min-width : 768px) {
+	#mainBanner button {
+		width: 50%;
+	}
 }
 
 #mainBanner p {
@@ -69,13 +81,17 @@
 	font-size: small;
 }
 
-#mainBanner img{ 
+#mainBanner img {
 	width: 7rem;
-    margin: 30px;
-    border-radius: 10px;
-
+	margin: 30px;
+	border-radius: 10px;
 }
 
+.font-italic {
+	font-weight: 200 !important;
+	color: lightslategray;
+	font-style: italic;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -148,8 +164,7 @@
 
 
 <!-- WELCOME -->
-<section class="py-14" id="welcome" data-jarallax data-speed=".8"
-	style="background-image: url(assets/img/covers/cover-18.jpg);">
+<section class="py-14" id="welcome" data-jarallax data-speed=".8">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-7 col-lg-5 text-white">
@@ -163,7 +178,7 @@
 				<p class="mb-8 fs-lg">더 나은 세상을 위해 KB국민은행이 함께합니다.</p>
 
 				<!-- Button -->
-				<a href="#!" class="btn btn-primary">작은 손길 더하기</a>
+				<a href="/donation" class="btn btn-primary">작은 손길 더하기</a>
 
 			</div>
 		</div>
@@ -234,6 +249,113 @@
 
 				</div>
 
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- IMAGE -->
+<!-- <section data-jarallax data-speed=".8"
+	style="min-height: 580px; background-image: url(assets/img/covers/cover-20.jpg);"></section> -->
+
+<!-- REVIEWS -->
+<section class="py-12 border-bottom" id="reviews">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-8">
+
+				<!-- Heading -->
+				<h2 class="mb-12 text-center">
+					고객후기<br> <span style="color: sandybrown; font-size: x-large;">더 나은 세상을 함께 만들어
+						나갑니다</span>
+				</h2>
+
+			</div>
+		</div>
+
+
+		<div class="row">
+			<c:forEach var="item" items="${reviewcontent}" varStatus="loop">
+				<c:if test="${loop.index < 6}">
+					<div class="col-12 col-md-6 col-lg-4">
+
+						<!-- Card -->
+						<div class="card card-lg mb-11">
+							<div class="card-body text-center bg-light">
+
+								<!-- Avatar -->
+								<img src="/uimg/${item.custImg}" alt="..."
+									class="img-fluid rounded-circle mb-7 mt-n11"
+									style="max-width: 100px;">
+
+								<!-- Text -->
+								<blockquote class="blockquote mb-0">
+									<c:if test="${item.topicBig == 'D'}">	[기부] ${item.title}</c:if>
+									<c:if test="${item.topicBig == 'V'}">	[봉사] ${item.title}</c:if>
+									<c:if test="${item.topicBig == 'S'}">	[세미나] ${item.title}</c:if>
+
+									<c:set var="substringReviewValue"
+										value="${item.reviewContents}" />
+									<!-- Text -->
+									<div class="fs-lg font-italic">"${fn:substring(substringReviewValue,0,120)}..."</div>
+
+									<!-- Rating -->
+									<div class="rating fs-xs text-warning mb-2"
+										data-value="${item.reviewScore}">
+										<div class="rating-item">
+											<i class="fas fa-star"></i>
+										</div>
+										<div class="rating-item">
+											<i class="fas fa-star"></i>
+										</div>
+										<div class="rating-item">
+											<i class="fas fa-star"></i>
+										</div>
+										<div class="rating-item">
+											<i class="fas fa-star"></i>
+										</div>
+										<div class="rating-item">
+											<i class="fas fa-star"></i>
+										</div>
+									</div>
+
+									<!-- 아이디 마스킹 처리 start -->
+									<c:set var="prefix" value="${fn:substring(item.custId, 0, 3)}" />
+									<c:set var="suffix"
+										value="${fn:substring(item.custId, 3, fn:length(item.custId))}" />
+									<c:set var="maskedSuffix" value="" />
+
+									<c:forEach var="i" begin="0" end="${fn:length(suffix)-1}">
+										<c:set var="maskedSuffix" value="${maskedSuffix}*" />
+									</c:forEach>
+									<c:set var="maskedCustId" value="${prefix}${maskedSuffix}" />
+
+
+									<!-- 아이디 마스킹 처리 end -->
+
+									<c:set var="substringrdate" value="${item.rdate}" />
+									<!-- Footer -->
+									<footer class="blockquote-footer">${fn:substring(maskedCustId,0,10)},
+										${fn:substring(substringrdate,0,10)} </footer>
+
+								</blockquote>
+
+							</div>
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
+
+
+			<div class="row">
+				<div class="col-12">
+
+					<!-- Link -->
+					<div class="text-center">
+						<a class="link-underline" href="/review">더 많은 후기 보러가기</a>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>
@@ -988,322 +1110,7 @@
 	</div>
 </section>
 
-<!-- IMAGE -->
-<section data-jarallax data-speed=".8"
-	style="min-height: 580px; background-image: url(assets/img/covers/cover-20.jpg);"></section>
 
-<!-- REVIEWS -->
-<section class="py-12 border-bottom" id="reviews">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6 col-xl-4">
-
-				<!-- Heading -->
-				<h2 class="mb-12 text-center">A positive Experience in many
-					ways.</h2>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-6 col-lg-4">
-
-				<!-- Card -->
-				<div class="card card-lg mb-11">
-					<div class="card-body text-center bg-light">
-
-						<!-- Avatar -->
-						<img src="assets/img/avatars/avatar-1.jpg" alt="..."
-							class="img-fluid rounded-circle mb-7 mt-n11"
-							style="max-width: 100px;">
-
-						<!-- Text -->
-						<blockquote class="blockquote mb-0">
-
-							<!-- Text -->
-							<p class="fs-lg fst-normal">From creepeth said moved given
-								divide make multiply of him shall itself also above second
-								doesn't unto created saying land herb sea midst night wherein.</p>
-
-							<!-- Rating -->
-							<div class="rating fs-xs text-warning mb-2" data-value="5">
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-							</div>
-
-							<!-- Footer -->
-							<footer class="blockquote-footer"> Catherine Hicks, 21
-								Jul 2019 </footer>
-
-						</blockquote>
-
-					</div>
-				</div>
-
-				<!-- Card -->
-				<div class="card card-lg mb-11">
-					<div class="card-body text-center bg-light">
-
-						<!-- Avatar -->
-						<img src="assets/img/avatars/avatar-4.jpg" alt="..."
-							class="img-fluid rounded-circle mb-7 mt-n11"
-							style="max-width: 100px;">
-
-						<!-- Text -->
-						<blockquote class="blockquote mb-0">
-
-							<!-- Text -->
-							<p class="fs-lg fst-normal">Creeping his under doesn't. Above
-								two fourth dry open blessed our creeping, made great.</p>
-
-							<!-- Rating -->
-							<div class="rating fs-xs text-warning mb-2" data-value="5">
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-							</div>
-
-							<!-- Footer -->
-							<footer class="blockquote-footer"> Jason Griffith, 05
-								Jul 2019 </footer>
-
-						</blockquote>
-
-					</div>
-				</div>
-
-			</div>
-			<div class="col-12 col-md-7 col-lg-4">
-
-				<!-- Card -->
-				<div class="card card-lg mb-11">
-					<div class="card-body text-center bg-light">
-
-						<!-- Avatar -->
-						<img src="assets/img/avatars/avatar-2.jpg" alt="..."
-							class="img-fluid rounded-circle mb-7 mt-n11"
-							style="max-width: 100px;">
-
-						<!-- Text -->
-						<blockquote class="blockquote mb-0">
-
-							<!-- Text -->
-							<p class="fs-lg fst-normal">Gathered to were female. That dry
-								our so likeness light cattle his you'll fill blessed replenish
-								doesn't god night tree.</p>
-
-							<!-- Rating -->
-							<div class="rating fs-xs text-warning mb-2" data-value="5">
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-							</div>
-
-							<!-- Footer -->
-							<footer class="blockquote-footer"> Daisy Turner, 18 Jul
-								2019 </footer>
-
-						</blockquote>
-
-					</div>
-				</div>
-
-				<!-- Card -->
-				<div class="card card-lg mb-11">
-					<div class="card-body text-center bg-light">
-
-						<!-- Avatar -->
-						<img src="assets/img/avatars/avatar-5.jpg" alt="..."
-							class="img-fluid rounded-circle mb-7 mt-n11"
-							style="max-width: 100px;">
-
-						<!-- Text -->
-						<blockquote class="blockquote mb-0">
-
-							<!-- Text -->
-							<p class="fs-lg fst-normal">Yielding place upon heaven
-								created sea So fly you'll had years which good herb hath moveth
-								for grass. Created. Wherein, had every were, face you'll made
-								from.</p>
-
-							<!-- Rating -->
-							<div class="rating fs-xs text-warning mb-2" data-value="5">
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="rating-item">
-									<i class="fas fa-star"></i>
-								</div>
-							</div>
-
-							<!-- Footer -->
-							<footer class="blockquote-footer"> Katrina Willis, 30
-								Jun 2019 </footer>
-
-						</blockquote>
-
-					</div>
-				</div>
-
-			</div>
-			<div class="col-12 col-lg-4">
-				<div class="row">
-					<div class="col-12 col-md-6 col-lg-12">
-
-						<!-- Card -->
-						<div class="card card-lg mb-11">
-							<div class="card-body text-center bg-light">
-
-								<!-- Avatar -->
-								<img src="assets/img/avatars/avatar-3.jpg" alt="..."
-									class="img-fluid rounded-circle mb-7 mt-n11"
-									style="max-width: 100px;">
-
-								<!-- Text -->
-								<blockquote class="blockquote mb-0">
-
-									<!-- Text -->
-									<p class="fs-lg fst-normal">Abundantly behold. God given
-										creature she'd, greater gathering his had thing let you're
-										firmament can't he sixth. Without evening. Given appear days
-										signs abundantly and brought female bring.</p>
-
-									<!-- Rating -->
-									<div class="rating fs-xs text-warning mb-2" data-value="4">
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-									</div>
-
-									<!-- Footer -->
-									<footer class="blockquote-footer"> Logan Edwards, 11
-										Jul 2019 </footer>
-
-								</blockquote>
-
-							</div>
-						</div>
-
-					</div>
-					<div class="col-12 col-md-6 col-lg-12">
-
-						<!-- Card -->
-						<div class="card card-lg mb-11">
-							<div class="card-body text-center bg-light">
-
-								<!-- Avatar -->
-								<img src="assets/img/avatars/avatar-6.jpg" alt="..."
-									class="img-fluid rounded-circle mb-7 mt-n11"
-									style="max-width: 100px;">
-
-								<!-- Text -->
-								<blockquote class="blockquote mb-0">
-
-									<!-- Text -->
-									<p class="fs-lg fst-normal">Place whose a give upon seed
-										Yielding don't cattle living.</p>
-
-									<!-- Rating -->
-									<div class="rating fs-xs text-warning mb-2" data-value="5">
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-										<div class="rating-item">
-											<i class="fas fa-star"></i>
-										</div>
-									</div>
-
-									<!-- Footer -->
-									<footer class="blockquote-footer"> George Sanders, 17
-										Jun 2019 </footer>
-
-								</blockquote>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-
-				<!-- Link -->
-				<div class="text-center">
-					<a class="link-underline" href="#!">Discover more</a>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</section>
 
 <!-- GET STARTED -->
 <section class="pt-12 pb-6" id="getStarted">
@@ -1365,13 +1172,15 @@
 
 <div id="mainBanner" class="main-popup">
 	<div class="main-popup-content">
-		<span class="main-popup-close" onclick="fnBannerclose('')"></span>
-		<img src="https://cdn.psnews.co.kr/news/photo/202208/2013078_56856_1222.png">
+		<span class="main-popup-close" onclick="fnBannerclose('')"></span> <img
+			src="https://cdn.psnews.co.kr/news/photo/202208/2013078_56856_1222.png">
 		<h5>리브투게더 앱출시!🥳</h5>
 		<p>리브투게더 앱은 더욱 다양한 혜택과 고객 맞춤 서비스를 제공합니다.</p>
 		<button onclick="goToApp()">앱 이용하기</button>
-		<p style="color: coral;" onClick="fnBannerclose('');">괜찮아요. 모바일웹으로 볼게요.</p>
-		<p style="text-align: left; margin-top: 20px !important;" onClick="fnBannerclose('stop');">오늘 그만보기</p>
+		<p style="color: coral;" onClick="fnBannerclose('');">괜찮아요. 모바일웹으로
+			볼게요.</p>
+		<p style="text-align: left; margin-top: 20px !important;"
+			onClick="fnBannerclose('stop');">오늘 그만보기</p>
 	</div>
 </div>
 
@@ -1443,4 +1252,5 @@
 			
 		}
 	}
+	
 </script>

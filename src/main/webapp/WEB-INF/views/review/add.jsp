@@ -36,7 +36,7 @@
 	border-radius: 15px;
 }
 .negative{
-	background-color: gainsboro;
+	background-color: aliceblue;
 }
 
 #review-input {
@@ -420,7 +420,7 @@
 		        success: function(response) {
 		          
 		           if(response >= 1){
-		        	   popup('이미 등록된 후기가 있습니다.', false,'','');
+		        	   popup('이미 후기를 등록하신 컨텐츠입니다.', false,'','');
 		        	   
 		           }
 		           if(response ===0){
