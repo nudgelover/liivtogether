@@ -21,6 +21,7 @@ public class Apply {
     // contents 테이블과 조인
     private String title;
     private String location;
+    private String edate;
     private String ddate;
     private String imageMain;
     private String content;

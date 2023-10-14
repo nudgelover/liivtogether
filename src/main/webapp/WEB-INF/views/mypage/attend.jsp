@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <style>
 .mypage-side, .user-picbox, .user-namebox {
 	display: flex;
@@ -73,10 +74,11 @@
 }
 
 #donationContent, #volunteeringContent, #seminarContent, #allContent {
-	margin: 1rem;
+	margin: 1rem 0;
 	padding: 1rem;
 	background: #f9fafb;
 	border-radius: 10px;
+	padding: 1rem;
 }
 
 .heart-icon {
@@ -110,8 +112,19 @@
 	border-radius: 10px;
 }
 
+.titleContainer {
+	display: flex;
+}
+
+.state {
+	margin: 0 !important;
+}
+
 .detail {
-	margin-left: 10px;
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 1rem;
 }
 
 .detail span:first-child {
@@ -121,28 +134,48 @@
 }
 
 .detail span:nth-child(2) {
-	margin: 2rem 0 0 0;
-	font-weight: 800;
-	font-size: large;
+	margin: 1.5rem 0 0 0;
+}
+
+.detail span {
+	color: #424242;
+}
+
+@media ( max-width : 500px) {
+	.detail span:first-child {
+		font-size: medium !important;
+		letter-spacing: -2px;
+	}
+	.detail span:nth-child(2) {
+		margin: 1rem 0 0 0 !important;
+	}
+}
+
+.cancleBtn {
+	font-size: small; 
+	float : right;
+	color: gray;
+	border: none;
+	background-color: transparent;
 }
 </style>
 <script>
-$(document).ready(function() {
+	$(document).ready(function() {
 
-    var myattend = localStorage.getItem('myattend');
-  
-    if (myattend === 'D') {
-        showTab('donation');
-    }
-    if (myattend === 'V') {
-        showTab('volunteering');
-    }
-    if (myattend === 'S') {
-        showTab('seminar');
-    }
-    
-    localStorage.removeItem('myattend');
-});
+		var myattend = localStorage.getItem('myattend');
+
+		if (myattend === 'D') {
+			showTab('donation');
+		}
+		if (myattend === 'V') {
+			showTab('volunteering');
+		}
+		if (myattend === 'S') {
+			showTab('seminar');
+		}
+
+		localStorage.removeItem('myattend');
+	});
 
 	function showTab(tab) {
 		document.getElementById('donationContent').style.display = 'none';
@@ -153,7 +186,6 @@ $(document).ready(function() {
 		document.getElementById('attendTab2').style.color = '#424242';
 		document.getElementById('attendTab3').style.color = '#424242';
 		document.getElementById('attendTab4').style.color = '#424242';
-
 
 		switch (tab) {
 		case 'donation':
@@ -203,87 +235,109 @@ $(document).ready(function() {
 		<div class=".titlelist a col-lg-9">
 			<div class="row">
 				<h2>
-					내가 참여한
-					목록  <img style="width: 50px;"
+					내가 참여한 목록 <img style="width: 50px;"
 						src="https://cdn-icons-png.flaticon.com/512/1642/1642767.png">
 				</h2>
-
+				취소기능, 증명서발급
 				<div class="titlelist col-12">
-					<a id="attendTab1" href="#" onclick="showTab('donation')">기부</a> 
-					<a id="attendTab2" href="#" onclick="showTab('volunteering')">봉사</a> 
-					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> 
-					<a id="attendTab4" href="#" onclick="showTab('all')">모아보기</a>
+					<a id="attendTab1" href="#" onclick="showTab('donation')">기부</a> <a
+						id="attendTab2" href="#" onclick="showTab('volunteering')">봉사</a>
+					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> <a
+						id="attendTab4" href="#" onclick="showTab('all')">모아보기</a>
 				</div>
-				<div id="donationContent" class="col-12 col-lg-9">
-					
-					<c:choose>
-					    <c:when test="${empty dlist}">
-					        <p style="text-align: center; margin: 10px;">신청하신 기부 내역이 없습니다.</p>
-					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="item" items="${dlist}">
-					            <div class="card">
-					                <img src="/uimg/${item.imageMain}">
-					                <div class="detail row">
-					                    <span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
-					                    <span>장소 : ${item.location}</span> 
-					                    <span>날짜: ${item.ddate}</span>
-					                    <span>소요스타코인: <img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png"> ${item.rewordCoin}개</span>
-					                    <span>신청한 날짜 : ${item.rdate}</span>
-					                </div>
-					            </div>
-					        </c:forEach>
-					    </c:otherwise>
-					</c:choose>
+				<div>
+					<div id="donationContent" class="col-12 col-lg-9">
+
+						<c:choose>
+							<c:when test="${empty dlist}">
+								<p style="text-align: center; margin: 10px;">신청하신 기부 내역이
+									없습니다.</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="item" items="${dlist}">
+									<div class="card">
+										<img src="/uimg/${item.imageMain}">
+										<div class="detail">
+											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
+											<span>장소 : ${item.location}</span> <span>날짜:
+												${item.ddate}</span> <span>소요스타코인: <img style="width: 20px;"
+												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
+												${item.rewordCoin}개
+											</span> <span>신청한 날짜 : ${item.rdate}</span>
+										</div>
+									</div>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 
 
 
+					</div>
+					<div id="volunteeringContent" class="col-12 col-lg-9">
+						<c:choose>
+							<c:when test="${empty vlist}">
+								<p style="text-align: center; margin: 10px;">신청하신 봉사 내역이
+									없습니다.</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="item" items="${vlist}">
+									<div class="card">
+										<img src="/uimg/${item.imageMain}">
+										<div class="detail">
+											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
+											<span>장소 : ${item.location}</span> <span>날짜:
+												${item.ddate}</span> <span>소요스타코인: <img style="width: 20px;"
+												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
+												${item.rewordCoin}개
+											</span> <span>신청한 날짜 : ${item.rdate}</span>
+										</div>
+									</div>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<div id="seminarContent" class="col-12 col-lg-9">
+						<c:choose>
+							<c:when test="${empty slist}">
+								<p style="text-align: center; margin: 10px;">신청하신 세미나가 없습니다.</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="item" items="${slist}">
+								 <c:set var="edate" value="${item.edate}" />
+									<div style="display: flex; flex-direction: column;"
+										class="card">
+										<div style="display: flex;">
+											<img src="/uimg/${item.imageMain}">
+											<div class="detail">
+												<div class="titleContainer">
+													<span><a
+														href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
+
+												</div>
+												<span>장소 : ${item.location}</span> <span>날짜:
+													${item.ddate}</span> <span>사용코인: <img style="width: 20px;"
+													src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
+													${item.rewordCoin}개
+												</span> <span style="font-size: small; color: gray;">${item.rdate}</span>
+											</div>
+										</div>
+										<div>
+										
+											<button class="cancleBtn">
+												취소하기<i class="fa fa-close"></i>
+											</button>
+											<button></button>
+										</div>
+									</div>
+
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+
+					<div id="allContent" class="col-12 col-lg-9">모두로딩을 할것이냐말것이냐</div>
 				</div>
-				<div id="volunteeringContent" class="col-12 col-lg-9">
-				<c:choose>
-					    <c:when test="${empty vlist}">
-					        <p style="text-align: center; margin: 10px;">신청하신 봉사 내역이 없습니다.</p>
-					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="item" items="${vlist}">
-					            <div class="card">
-					                <img src="/uimg/${item.imageMain}">
-					                <div class="detail row">
-					                    <span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
-					                    <span>장소 : ${item.location}</span> 
-					                    <span>날짜: ${item.ddate}</span>
-					                    <span>소요스타코인: <img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png"> ${item.rewordCoin}개</span>
-					                    <span>신청한 날짜 : ${item.rdate}</span>
-					                </div>
-					            </div>
-					        </c:forEach>
-					    </c:otherwise>
-					</c:choose>
-				</div>
-				<div id="seminarContent" class="col-12 col-lg-9">
-					<c:choose>
-					    <c:when test="${empty slist}">
-					        <p style="text-align: center; margin: 10px;">신청하신 세미나가 없습니다.</p>
-					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="item" items="${slist}">
-					            <div class="card">
-					                <img src="/uimg/${item.imageMain}">
-					                <div class="detail row">
-					                    <span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
-					                    <span>장소 : ${item.location}</span> 
-					                    <span>날짜: ${item.ddate}</span>
-					                    <span>소요스타코인: <img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png"> ${item.rewordCoin}개</span>
-					                    <span>신청한 날짜 : ${item.rdate}</span>
-					                </div>
-					            </div>
-					        </c:forEach>
-					    </c:otherwise>
-					</c:choose>
-				</div>
-	
-			
-				<div id="allContent" class="col-12 col-lg-9">모두로딩을 할것이냐말것이냐</div>
 			</div>
 		</div>
 
