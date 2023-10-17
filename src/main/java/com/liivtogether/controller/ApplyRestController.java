@@ -6,6 +6,7 @@ package com.liivtogether.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -85,12 +86,12 @@ public class ApplyRestController {
 			cust.setPointree(totalPointree); // targetIn 값을 재설정
 			custService.setPointree(cust);	//고객포인트리 값을 재설정
 			
+			
 			result = 1;
 
 		} catch (Exception e) {
 			result = 0;
 		}
-		
 		return result;
 	}
 
