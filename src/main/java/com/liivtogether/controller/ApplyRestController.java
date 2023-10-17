@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.liivtogether.dto.Cust;
+import com.liivtogether.dto.Donation;
 import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Point;
 import com.liivtogether.service.ApplyService;
 import com.liivtogether.service.PointService;
+import com.liivtogether.service.DonationService;
+import com.liivtogether.service.CustService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +31,10 @@ public class ApplyRestController {
 	ApplyService applyService;
 	@Autowired
 	PointService pointService;
+	@Autowired
+	DonationService donationService;
+	@Autowired
+	CustService custService;
 
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
@@ -49,34 +57,47 @@ public class ApplyRestController {
 	
 	@PostMapping("/apply/register")
 	public Object applyregister(Apply apply, Point point, int mount) throws Exception {
-		log.info("-----도착했니?");
+		log.info("-----도착했니?"+ apply);
 		log.info("-----도착했니?"+ point);
 		// 등록 하는거 
 		int result = 0;
-		applyService.register(apply);
-		try {
-			log.info("-----도착했니?"+apply.getTopicBig());
-			if(apply.getTopicBig()=="D") {
-				log.info("-----되는거니??"+apply.getTopicBig());
-				point.setPointcoin("pointree");
-				point.setUplace("기부");
-				point.setMount(mount);
-				log.info("++++++++++++++++++++"+ point);
-				pointService.register(point);
-				
-				point.setPointcoin("starcoin");
-				point.setUplace("기부");
-				point.setMount(5);
-				log.info("====================="+ point);
-				pointService.register(point);								
-			}
+		
+		try {				
+			//기부신청 내역
+			applyService.register(apply);				
+			
+			//기부포인트리 히스토리
+			point.setPointcoin("POINTREE");
+			point.setUplace("D");
+			point.setMount(mount);
+			pointService.register(point);
+			
+			//기부콘텐츠 모금액(모금액 증가)
+			Donation donation = donationService.get(apply.getContentsId());
+			log.info("기부"+ donation);
+			int totalTargetIn = donation.getTargetIn()+point.getMount();
+			log.info("donation.getTargetIn()"+ donation.getTargetIn() + "point.getMount()" + point.getMount());
+			log.info("totalTargetIn====="+totalTargetIn);
+			
+			donation.setTargetIn(totalTargetIn); // targetIn 값을 재설정
+			donationService.setTargetIn(donation); // targetIn 값을 재설정
+
+			//고객보유 포인트리(보유포인트리 차감)
+			Cust cust = custService.get(apply.getCustId());
+			log.info("고객"+ cust);
+			int totalPointree = cust.getPointree()-point.getMount();
+			log.info("cust.getPointree()==="+ cust.getPointree() + "point.getMount()===" + point.getMount());
+			log.info("totalPointree====="+totalPointree);
+			cust.setPointree(totalPointree); // targetIn 값을 재설정
+			log.info("적용됨??==="+  cust);
+			custService.setPointree(cust);	//고객포인트리 값을 재설정
 			
 			result = 1;
 
 		} catch (Exception e) {
 			result = 0;
 		}
-		System.out.print(result + "result");
+		
 		return result;
 	}
 

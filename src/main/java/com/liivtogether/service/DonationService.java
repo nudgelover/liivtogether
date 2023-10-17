@@ -1,5 +1,6 @@
 package com.liivtogether.service;
 
+import com.liivtogether.dto.Cust;
 import com.liivtogether.dto.Donation;
 import com.liivtogether.frame.LIIVService;
 import com.liivtogether.mapper.DonationMapper;
@@ -39,5 +40,8 @@ public class DonationService implements LIIVService<Integer, Donation> {
     public List<Donation> get() throws Exception {
         return mapper.selectall();
     }
-
+    
+	public void setTargetIn(Donation donation) throws Exception {
+		mapper.setTargetIn(donation);
+	}
 }

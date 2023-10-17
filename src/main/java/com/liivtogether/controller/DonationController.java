@@ -76,7 +76,7 @@ public class DonationController {
 	}
 	
 	@RequestMapping("/success")
-	public String success(Model model,Apply apply) throws Exception {
+	public String success(Model model, Apply apply) throws Exception {
 
 		model.addAttribute("apply", apply);
 		model.addAttribute("center", dir + "success");

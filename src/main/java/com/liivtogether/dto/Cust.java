@@ -20,5 +20,8 @@ public class Cust {
     private int starcoin; 		//스타코인 Default 0
     private String isMaster; 	//마스터여부 Default 0, master 1
 
+	public void setPointree(int pointree) {
+	    this.pointree = pointree;
+	}
     
 }

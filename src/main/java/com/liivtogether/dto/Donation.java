@@ -37,4 +37,7 @@ public class Donation {
 	public void setdDay(int dDay) {
 		this.dDay = dDay;
 	}
+	public void setTargetIn(int targetIn) {
+	    this.targetIn = targetIn;
+	}
 }

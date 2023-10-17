@@ -171,6 +171,7 @@ let dona_form = {
 		    var agree = $('#agreeornot').val();
 		    var memo = $('#memo').val();
 		    var donaPoint = $("#donaPoint").val();
+		    var pointcoin = $("#pointcoin").val();
 		    console.log(donaPoint);
 		
 		    $.ajax({
@@ -181,7 +182,9 @@ let dona_form = {
 		      		custId: loginCustId,
 		      		agree : agree,
 		      		memo : memo,
-		      		mount : donaPoint},
+		      		mount : donaPoint,
+		      		pointcoin : pointcoin,
+		      		uplace : donaPoint},
 		      beforeSend: function(xhr) {
 		        xhr.setRequestHeader("X-CSRF-Token", token);
 		        xhr.setRequestHeader(header, token);
@@ -228,7 +231,8 @@ function donaSubmit(){
 						<input type="hidden" name="custId" value="{logincust.custId">
 						<input type="hidden" name="topicBic" value="{donation.topicBig}">
 						<input type="hidden" name="contentsId" value="{donation.contentsId}">
-						<input type="hidden" name="agree" id="agreeornot" value="Y">
+						<input type="hidden" name="agree" id="agreeornot" value="1">
+						<input type="hidden" name="pointcoin" id="pointcoin" value="POINTREE">
 										
 						<p>${donation.title}</p>
 						<p><img class="mainImg" src="/uimg/${donation.imageMain}"></p>
