@@ -57,8 +57,7 @@ public class ApplyRestController {
 	
 	@PostMapping("/apply/register")
 	public Object applyregister(Apply apply, Point point, int mount) throws Exception {
-		log.info("-----도착했니?"+ apply);
-		log.info("-----도착했니?"+ point);
+
 		// 등록 하는거 
 		int result = 0;
 		
@@ -73,23 +72,17 @@ public class ApplyRestController {
 			pointService.register(point);
 			
 			//기부콘텐츠 모금액(모금액 증가)
-			Donation donation = donationService.get(apply.getContentsId());
-			log.info("기부"+ donation);
+			Donation donation = donationService.get(apply.getContentsId());	
 			int totalTargetIn = donation.getTargetIn()+point.getMount();
-			log.info("donation.getTargetIn()"+ donation.getTargetIn() + "point.getMount()" + point.getMount());
-			log.info("totalTargetIn====="+totalTargetIn);
-			
+
 			donation.setTargetIn(totalTargetIn); // targetIn 값을 재설정
 			donationService.setTargetIn(donation); // targetIn 값을 재설정
 
 			//고객보유 포인트리(보유포인트리 차감)
 			Cust cust = custService.get(apply.getCustId());
-			log.info("고객"+ cust);
 			int totalPointree = cust.getPointree()-point.getMount();
-			log.info("cust.getPointree()==="+ cust.getPointree() + "point.getMount()===" + point.getMount());
-			log.info("totalPointree====="+totalPointree);
+			
 			cust.setPointree(totalPointree); // targetIn 값을 재설정
-			log.info("적용됨??==="+  cust);
 			custService.setPointree(cust);	//고객포인트리 값을 재설정
 			
 			result = 1;
