@@ -40,6 +40,7 @@ public class ApplyRestController {
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
 		// 내가 해당 콘텐트를 참여한적이  있는 지 여부 체크
+		log.info("프리췍");
 		int result = 0;
 		try {
 			
@@ -54,6 +55,30 @@ public class ApplyRestController {
 
 		return result;
 	}
+	
+	
+
+
+    @Transactional(rollbackFor = Exception.class) 
+	@PostMapping("/apply/process")
+	public Object applyprocess(Apply apply, Point point) throws Exception {
+		String result;
+		try {
+			applyService.register(apply);
+			pointService.register(point);
+			pointService.modify(point);
+			
+			result = "success";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "fail";
+		    throw e;
+		}
+		System.out.print(result + "result");
+		return result;
+	}
+
 	
 	
 	@PostMapping("/apply/register")
