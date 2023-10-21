@@ -92,24 +92,18 @@ public class ApplyRestController {
 			applyService.register(apply);				
 			
 			//기부포인트리 히스토리
-			point.setPointcoin("POINTREE");
-			point.setUplace("D");
-			point.setMount(mount);
 			pointService.register(point);
 			
 			//기부콘텐츠 모금액(모금액 증가)
 			Donation donation = donationService.get(apply.getContentsId());	
 			int totalTargetIn = donation.getTargetIn()+point.getMount();
 
-			donation.setTargetIn(totalTargetIn); // targetIn 값을 재설정
+			donation.setTargetIn(totalTargetIn); 
 			donationService.setTargetIn(donation); // targetIn 값을 재설정
 
 			//고객보유 포인트리(보유포인트리 차감)
-			Cust cust = custService.get(apply.getCustId());
-			int totalPointree = cust.getPointree()-point.getMount();
-			
-			cust.setPointree(totalPointree); // targetIn 값을 재설정
-			custService.setPointree(cust);	//고객포인트리 값을 재설정
+			log.info("============="+point);
+			pointService.modify(point);
 			
 			
 			result = 1;
