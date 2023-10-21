@@ -162,7 +162,7 @@ function checkTodayAttend() {
 	
 }
 //-------------------------아래 함수는 실행 못함 ㅠ
-
+<!--
 //대화 데이터를 로컬 스토리지에 저장하는 함수
 function saveChatData(chatData) {
   localStorage.setItem('chatData', JSON.stringify(chatData));
@@ -188,7 +188,7 @@ dfMessenger.addEventListener('df-response-received', function (event) {
 
 dfMessenger.addEventListener('df-request-sent', function (event) {
 	
-  const userMessage = event.detail.requestBody.queryInput.text.text;
+  const userMessage = event.detail.requestBody.queryInput.text; //.text
  // console.log(userMessage);
   chatData.push({ type: 'user', text: userMessage });
   saveChatData(chatData);
