@@ -13,9 +13,9 @@ class DonationInsertTest {
 
 	@Autowired
 	ApplyService service;
-	
+
 	@Test
-	void contextLoads() throws Exception{
-		
+	void contextLoads() throws Exception {
+
 	}
 }

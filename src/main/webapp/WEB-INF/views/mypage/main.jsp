@@ -214,6 +214,7 @@
 }
 </style>
 
+
 <div class="container  mt-5">
 	<div class="row">
 		<div class="col-12 col-lg-3">
@@ -222,7 +223,7 @@
 				<div class="user-picbox">
 					<div class="avatar-container">
 						<div class="avatar avatar-xl">
-							<img src="../assets/img/avatars/avatar-1.jpg" alt="..."
+							<img src="/uimg/${logincust.img}" alt="custImg"
 								class="avatar-img rounded-circle">
 						</div>
 						<div class="edit-icon">
@@ -231,7 +232,7 @@
 					</div>
 
 					<div class="user-namebox">
-						<span class="user-name">김진희님</span> <span class="user-grade">🌱새싹회원</span>
+						<span class="user-name">${logincust.custName}님</span> <span class="user-grade">🌱새싹회원</span>
 
 					</div>
 				</div>
@@ -275,15 +276,15 @@
 					<div class="myjoins">
 						<span><img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/512/2910/2910756.png"> 내가 현재 신청한 프로그램이에요</span>
 						<div class="myjoin col-12">
-							<div style="border-right: 1px solid #FDE6B1;"
-								class="join-section col-4">
+							<div style="border-right: 1px solid #FDE6B1;" 
+								class="join-section col-4" onclick="goMyAttend('D')">
 								<span>기부</span><span>3건</span>
 							</div>
 							<div style="border-right: 1px solid #FDE6B1;"
-								class="join-section col-4">
+								class="join-section col-4" onclick="goMyAttend('V')">
 								<span>봉사</span><span>2건</span>
 							</div>
-							<div class="join-section col-4">
+							<div class="join-section col-4" onclick="goMyAttend('S')">
 								<span>세미나</span><span>1건</span>
 							</div>
 						</div>

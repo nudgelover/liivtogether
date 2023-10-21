@@ -15,6 +15,12 @@ function goToMain() {
 	window.location.href = "http://localhost";
 }
 
+function goMyAttend(item) {
+
+    localStorage.setItem('myattend', item);
+    window.location.href = 'http://localhost/mypage/attend';
+}
+
 
 function goToWish() {
 	window.location.href = "http://localhost/mypage/wish";
@@ -25,11 +31,13 @@ function goToCertificate() {
 	window.location.href = "http://localhost/mypage/certificate";
 }
 
-function goToLogin() {
-	window.location.href = "http://localhost/login";
+function goToReview() {
+	window.location.href = "http://localhost/review";
 }
 
-	
+function goToLogin() {
+	window.location.href = "http://localhost/login";
+}	
 function goToLogout() {
 	window.location.href = "http://localhost/logouts";
 }
@@ -88,31 +96,40 @@ function popup(message, isPrompt, onConfirm, onCancel) {
 }
 
 function layerup(titleUse, title, content, type, closeUse) {
-	//ohyLayer(true,'title','content,'bottom',true)
-    // 레이어 생성 - 바텀시트... css 완전 재정비 필용,,,
+    // 모달 뒷 배경 생성 및 스타일 설정
+    var modalOverlay = document.createElement('div');
+    modalOverlay.className = 'modal-overlay';
+
+    // body에 모달 뒷 배경 추가
+    document.body.appendChild(modalOverlay);
+
+    // 레이어 요소 생성 및 스타일 설정
     var layer = document.createElement('div');
     layer.className = 'layer';
 
-    // 닫기 버튼 생성
-    if (closeUse) {
-        var closeBtn = document.createElement('button');
-        closeBtn.className = 'layer-close';
-        closeBtn.textContent = '닫기';
-        closeBtn.onclick = function() {
-            document.body.removeChild(layer);
-        };
-        layer.appendChild(closeBtn);
-    }
-    
-    
+    var layerTop = document.createElement('div');
+    layerTop.className ='layer-top';
     // 타이틀 영역 생성
     if (titleUse) {
         var titleDiv = document.createElement('div');
         titleDiv.className = 'layer-title';
         titleDiv.textContent = title;
-        layer.appendChild(titleDiv);
+        layerTop.appendChild(titleDiv);
     }
 
+    // 닫기 버튼 생성
+    if (closeUse) {
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'layer-close';
+        closeBtn.textContent = 'X'; // 닫기 버튼 텍스트를 'X'로 변경
+        closeBtn.onclick = function() {
+            document.body.removeChild(layer);
+            modalOverlay.style.display = 'none';
+        };
+        layerTop.appendChild(closeBtn);
+    }
+    
+    layer.appendChild(layerTop);
     // 콘텐츠 영역 생성
     var contentDiv = document.createElement('div');
     contentDiv.className = 'layer-content';
@@ -124,11 +141,13 @@ function layerup(titleUse, title, content, type, closeUse) {
         layer.style.bottom = '0';
     }
 
-   
-
     // body에 레이어 추가
     document.body.appendChild(layer);
+
+    // 팝업을 열 때 모달 뒷 배경을 보이도록 설정
+    modalOverlay.style.display = 'block';
 }
+
 
 
 

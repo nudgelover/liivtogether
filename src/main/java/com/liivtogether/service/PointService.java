@@ -33,7 +33,7 @@ public class PointService implements LIIVService<Integer, Point> {
 
 	@Override
 	public void modify(Point v) throws Exception {
-		// TODO Auto-generated method stub
+		mapper.update(v);
 		
 	}
 

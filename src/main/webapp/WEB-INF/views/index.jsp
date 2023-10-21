@@ -65,6 +65,10 @@ body {
 	}
 }
 
+.fixed-bottom, .fixed-top {
+	z-index: 100;
+}
+
 </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="91"
@@ -95,22 +99,6 @@ body {
 
 				<!-- Nav -->
 				<ul class="navbar-nav ms-xl-auto">
-					<!-- 	<li class="nav-item"><a class="nav-link active" href="#welcome"
-						data-smoothscroll>기부</a></li>
-					<li class="nav-item"><a class="nav-link" href="#products"
-						data-smoothscroll>봉사</a></li>
-					<li class="nav-item">
-					  <a class="nav-link" href="#about" data-smoothscroll>세미나</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#howItWorks"
-						data-smoothscroll>ESG#</a></li>
-					<li class="nav-item"><a class="nav-link" href="#pricing"
-						data-smoothscroll>후기</a></li>
-					<li class="nav-item"><a class="nav-link" href="#reviews"
-						data-smoothscroll>Reviews</a></li>
-					<li class="nav-item"><a class="nav-link" href="#getStarted"
-						data-smoothscroll>Get Started</a></li>
-						 -->
 					<li class="nav-item"><a class="nav-link " href="/donation"
 						>기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="/volunteer"
@@ -134,15 +122,7 @@ body {
 						class="fe fe-search"></i>
 					</a></li>
 
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-					data-bs-toggle="offcanvas" href="#alarmModal"> <span
-						data-cart-items="2"> <i class="fe fe-bell"></i>
-					</span>
-					</a></li>
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-							href="/mypage"><img style="width: 25px; border-radius: 50%" src="/assets/img/starfriends/profile1.png"></i>
-						</a>
-					</li>
+				
 					<c:choose>
 						<c:when test="${logincust == null}">
 							<li class="nav-item ms-lg-n4"><a class="nav-link"
@@ -152,37 +132,20 @@ body {
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item ms-lg-n4"><a class="nav-link"
-									href="/logouts"> 로그아웃 </a></li>
+							data-bs-toggle="offcanvas" href="#alarmModal"> <span
+								data-cart-items="2"> <i class="fe fe-bell"></i>
+							</span>
+							</a></li>
+							<li class="nav-item ms-lg-n4"><a class="nav-link"
+									href="/mypage"><img style="width: 25px; border-radius: 50%" src="/assets/img/starfriends/profile1.png"></i>
+								</a>
+							</li>
 						</c:otherwise>
 					</c:choose>	
 					<li style="display: none;"><a class="nav-link"
 							href="./account-wishlist.html"> <i class="fe fe-heart"></i>
 						</a></li>
 				</ul>
-
-				<!-- Nav 
-				<ul class="navbar-nav ms-xl-4">
-					<li style="display: none;"><a class="nav-link"
-						href="./account-wishlist.html"> <i class="fe fe-heart"></i>
-					</a></li>
-					
-					<div id="userpageDropdown" class="dropdown">
-						<a href="#" role="button" id="userpage" data-bs-toggle="dropdown"
-							aria-expanded="false"> <i class="fe fe-user"></i>
-						</a>
-
-						<ul class="dropdown-menu" aria-labelledby="userpage">
-							<li><a class="dropdown-item" href="/mypage">마이페이지</a></li>
-							<li><a class="dropdown-item" href="#">채팅방</a></li>
-							<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
-						</ul>
-					</div>
-
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						href="/login"> 로그인 </a></li>
-					<li class="nav-item ms-lg-n4"><a class="nav-link"
-						href="/register"> 회원가입 </a></li>
-				</ul> -->
 
 			</div>
 
@@ -201,6 +164,8 @@ body {
 	<!-- footer -->
 	<jsp:include page="footer.jsp" />
 
+
+	<jsp:include page="chat.jsp" />
 	<!-- JAVASCRIPT -->
 	<!-- Map (replace the API key to enable) -->
 	<script

@@ -103,7 +103,7 @@ $(document).ready(function() {
 	var formattedDate = seminarDateStr + ' / '+ seminarDayOfWeek + '요일';
 
 	$("#seminar-date").html(formattedDate);
-
+	
 
 });
 </script> 
@@ -207,10 +207,12 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-<input type="text" id="cust_id" value="${logincust.custId}">
-<input type="text" id="topic_big" value="S">
-<input type="text" id="contents_id" value="${seminar.semiId}">
-<input type="text" id="agreeornot" value="0">
+<input type="hidden" id="cust_id" value="${logincust.custId}">
+<input type="hidden" id="topic_big" value="S">
+<input type="hidden" id="contents_id" value="${seminar.semiId}">
+<input type="hidden" id="agreeornot" value="0">
+<input type="hidden" id="mount" value="${seminar.rewardCoin}">
+<input type="hidden" id="starcoin" value="0">
 </section>
 <script>
 
@@ -219,6 +221,7 @@ $(document).ready(function() {
 	const prevBtn = document.getElementById('prevBtn');
 	const nextBtn = document.getElementById('nextBtn');
 
+	
 	function openPrevTab() {
 
 		if (currentTabIndex > 1) {
@@ -298,70 +301,122 @@ $(document).ready(function() {
 	payBtn.addEventListener('click', payBtnClickListener);
 
 	
-	function goToPay() {
-		console.log('결제시작.');
+
+	
+	async function checkCoin(loginCustId, mount) {
+		
+		console.log(loginCustId+mount)
+	    try {
+	        const response = await $.ajax({
+	            type: "GET",
+	            url: "/point/pre-check",
+	            data: {
+	                pointcoin: "COIN",
+	                custId: loginCustId
+	            }
+	        });
+
+	        const myStarCoin = parseInt(response);
+			console.log(myStarCoin)
+			
+				
+	        
+	        return myStarCoin;
+	    } catch (error) {
+	        console.error("Error checking coin:", error);
+	        throw error;
+	    }
+	}
+
+
+	
+	async function goToPay(contentsId, loginCustId, mount) {
 		// "결제중입니다" 로딩바를 표시하는 로직
 		showLoadingSpinner();
 		
-		var payBtn = document.getElementById('payBtn');
-	    var seminarId = $('#contents_id').val();
+	    var contentsId = $('#contents_id').val();
 	    var loginCustId = $('#cust_id').val();
-	    var topicBig = $('#topic_big').val();
-	    var agree = $('#agreeornot').val();
-	
-	    console.log(seminarId+loginCustId+topicBig+agree)
-	    
- 		if(agree === '0'){
+	    var mount = $('#mount').val();
+		var topicBig = $('#topic_big').val();
+		var agree = $('#agreeornot').val();
 
- 			console.log(' 동의안함');
- 			popup('개인정보 이용동의는 필수동의사항입니다.',false,'','');
- 			hideLoadingSpinner(); // 로딩 스피너 숨기기
-	
- 		}else{
-			$.ajax({
-			      type: "POST", 
-			      url: "/apply/register",
-			      data: {contentsId: seminarId,
-			      		topicBig : topicBig,
-			      		custId: loginCustId,
-			      		agree : agree},
-				  beforeSend : function(xhr,set){
-					let token = $("meta[name='_csrf']").attr("content");
-					let header =$("meta[name='_csrf_header']").attr("content");
+	    try {
+	        const myStarCoin = await checkCoin(loginCustId, mount);
 
-					xhr.setRequestHeader("X-CSRF-Token", token);
-					xhr.setRequestHeader(header,token);
-				  },
-			      success: function(response) {
-			    	  if(response === 1){
-			    		payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
-						payBtn.removeEventListener('click', payBtnClickListener);
-							
-						setTimeout(function() {
-							popup('세미나 신청이 완료되었습니다. 신청 내역 페이지로 이동하시겠습니까? ', true, goToMyPayments,'');
-							hideLoadingSpinner(); // 로딩 스피너 숨기기
-						}, 2000);   		  
-			    	  }else{
-			    		  console.error("Error checkLikesOrNot.");
-				          setTimeout(function() {
-								popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
-								hideLoadingSpinner(); // 로딩 스피너 숨기기
-							}, 2000); 
-			    	  } 		
-			          
-			      },
-			      error: function() {
-			          console.error("Error checkLikesOrNot.");
-			          setTimeout(function() {
-							popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
-							hideLoadingSpinner(); // 로딩 스피너 숨기기
-						}, 2000); 
-			      }
-			});
-		}
+  			if(myStarCoin == -99999){
+  				var payBtn = document.getElementById('payBtn');
+	    		payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
+				payBtn.removeEventListener('click', payBtnClickListener);
+					
+				setTimeout(function() {
+					popup('일시적인 오류가 발생했습니다. 로그인 정상 여부를 확인해주세요', false, '', '');
+					hideLoadingSpinner(); // 로딩 스피너 숨기기
+				}, 2000);
+	            return;
+	        	
+	        }
+	        if (myStarCoin < mount) {
+	            
+	            console.log("스타코인 부족으로 결제 불가능");
+	            
+	            var payBtn = document.getElementById('payBtn');
+	    		payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
+				payBtn.removeEventListener('click', payBtnClickListener);
+					
+				setTimeout(function() {
+					popup('스타코인이 부족하여 결제가 불가능합니다.', false, '', '');
+					hideLoadingSpinner(); // 로딩 스피너 숨기기
+				}, 2000);
+	            return;
+	        }
 
+	        const response = await $.ajax({
+	            type: "POST",
+	            url: "/apply/process",
+	            data: {
+	                contentsId: contentsId,
+	                custId: loginCustId,
+	                mount: mount,
+	                pointcoin: "COIN",
+	                uplace: "S",
+	                topicBig: topicBig,
+	                agree: agree
+	            },
+	            beforeSend: function (xhr, set) {
+	                let token = $("meta[name='_csrf']").attr("content");
+	                let header = $("meta[name='_csrf_header']").attr("content");
+
+	                xhr.setRequestHeader("X-CSRF-Token", token);
+	                xhr.setRequestHeader(header, token);
+	            }
+	        });
+
+	        if (response === "success") {
+	            console.log("모든 결제 완료");
+	            
+	        	var payBtn = document.getElementById('payBtn');
+	    		payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
+				payBtn.removeEventListener('click', payBtnClickListener);
+					
+				setTimeout(function() {
+					goToJoinComplete(loginCustId,contentsId);
+				}, 2000);
+	        } else {
+	            console.error("Error in payment.");
+	            setTimeout(function() {
+					popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
+					hideLoadingSpinner(); // 로딩 스피너 숨기기
+				}, 2000);
+	        }
+	    } catch (error) {
+	        console.error("Error in payment:", error);
+	        setTimeout(function() {
+				popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
+				hideLoadingSpinner(); // 로딩 스피너 숨기기
+			}, 2000);
+	    }
 	}
-	
+
 
 	function showLoadingSpinner() {
 		// 배경을 어둡게 만들기 위한 레이어
@@ -414,14 +469,10 @@ $(document).ready(function() {
 
 	}
 
-
-	
-
-
-	
-	
-	
-	function goToMyPayments() {
-		alert('결제함으로 이동합니다....');
+	function goToJoinComplete(custId, contentsId) {
+	    const url = 'http://localhost/seminar/join-complete'
+	    window.location.href = url;
 	}
+
+
 </script>

@@ -154,7 +154,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	    //페이지네이션 값 초기화
 	    let pageOffset = $('#offset').val();
 	    //이거 9로 바꿔야한다!!!!!!!!!!!!!!!!
-	    $('#offset').val('3');
+	    $('#offset').val('9');
 	    $('.loadmore').css('display', 'inline-block');
 	    $('.loadmore-message').css('display', 'none');
 	    
@@ -285,7 +285,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	        success: function(data) {
 	            console.log(data);
 	            // 나중에 이거 9로 변경!!!!!!!!9개씩 불러올거니까
-	    	    pageOffset = parseInt(pageOffset) + 3;
+	    	    pageOffset = parseInt(pageOffset) + 9;
 
 	    	    // 페이지 오프셋 값을 업데이트
 	    	    $('#offset').val(pageOffset);
@@ -413,7 +413,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 		</div>
 	</c:forEach>
 </div>
-<input type="hidden" id="offset" value="3">
+<input type="hidden" id="offset" value="9">
 
 
 

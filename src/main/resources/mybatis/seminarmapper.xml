@@ -128,7 +128,7 @@
 	    <if test="order == 'views'">
 	        ORDER BY c.view DESC
 	    </if>
-	    LIMIT 3
+	    LIMIT 9
 	    <if test="offset != null and offset != ''">
 	        OFFSET #{offset}
 	    </if> 

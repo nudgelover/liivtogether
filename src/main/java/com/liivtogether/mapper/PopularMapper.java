@@ -2,6 +2,7 @@ package com.liivtogether.mapper;
 
 
 
+import com.liivtogether.dto.PopularKeywords;
 import com.liivtogether.dto.Search;
 import com.liivtogether.frame.LIIVMapper;
 
@@ -15,9 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 
-public interface SearchMapper extends LIIVMapper<String, Search> {
-
-	public List<Search> getkewordList(String keyword) throws Exception;
+public interface PopularMapper extends LIIVMapper<String, PopularKeywords> {
 
 
 }

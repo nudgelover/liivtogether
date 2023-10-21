@@ -1,6 +1,7 @@
 package com.liivtogether.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.liivtogether.dto.Cust;
+import com.liivtogether.dto.Review;
 import com.liivtogether.service.CustService;
 import com.liivtogether.service.KakaoLoginService;
+import com.liivtogether.service.ReviewService;
 
 @Controller
 public class MainController {
@@ -34,8 +37,14 @@ public class MainController {
 	@Autowired
 	KakaoLoginService kakaoLoginService = new KakaoLoginService();
 	
+	@Autowired
+	ReviewService reviewService;
+	
+	
     @RequestMapping("/")
-    public String main(){
+    public String main(Model model) throws Exception{
+    	List<Review> reviewcontent = reviewService.get();
+     	model.addAttribute("reviewcontent", reviewcontent);
         return "index";
     }
     
@@ -68,6 +77,13 @@ public class MainController {
 //			throw new Exception("registerimpl error");
 			e.printStackTrace();
 		}
+    	return "index";
+    }
+    
+    
+    @RequestMapping("/chat")
+    public String chat(Model model) throws Exception {
+      	model.addAttribute("center", "chat");
     	return "index";
     }
     

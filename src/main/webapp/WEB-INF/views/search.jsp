@@ -2,40 +2,68 @@
 	pageEncoding="UTF-8"%>
 <style>
 
-/* CSS 부분 */
+#autocomplete-results {
+    padding: 10px 0;
+    margin-left: 0.5px;
+    top: 100%;
+    position: absolute;
+    width: calc(100% - 0.5px);
+    max-height: 200px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 0 0 15px 15px;
+    z-index: 100;
+    display: none;
+}
+
+
+#autocomplete-results li {
+    cursor: pointer;
+    list-style: none;
+    padding: 2px 10px;
+    color: #424242;
+}
+
+
+#autocomplete-results li:hover {
+  background-color: #f1f1f1;
+}
+
 #recentSearchValues {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to a new line when there's not enough space */
-  gap: 5px; /* Add some gap between each search item */
-  align-items: center;
-  padding: 5px;
-  margin-bottom: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	align-items: center;
+	padding: 5px;
+	margin-bottom: 10px;
 }
 
 #recentSearchValues div {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  padding: 5px 15px;
-  border-radius: 20px;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	background-color: #f0f0f0;
+	padding: 5px 15px;
+	border-radius: 20px;
+	cursor: pointer;
 }
 
 #recentSearchValues span {
- font-size: 13px;
-  margin-right: 5px;
+	font-size: 13px;
+	margin-right: 5px;
 }
 
 .delete-search-value {
-
-  border: none;
-  cursor: pointer;
-  font-size:10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: gray;
+	border: none;
+	cursor: pointer;
+	font-size: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	color: gray;
 }
 
 /* 마우스 호버 시 스타일 변경 */
@@ -43,11 +71,44 @@
 	color: darkorange;
 }
 
-#deleteAllValues{
+#deleteAllValues {
 	cursor: pointer;
 }
 
+.category{
+    font-weight: 200;
+    margin: 15px 0 10px;
+    color: grey;
+    font-size: smaller;
+}
 
+#searchResult{
+	margin-bottom: 30px;
+
+}
+#searchResult li{
+  	padding: 10px 0;
+    border-bottom: 0.1px solid #e5e5e5;
+    list-style: none;
+    margin: 3px;
+}
+
+#searchResult a{
+    color: #424242 !important;
+    font-weight: 600;
+    font-size: small;
+}
+#popularDiv > p{
+    margin: 15px 0;
+    color: gray;
+
+}
+#popularLeft p, #popularRight p{
+	font-weight:600;
+	margin: 15px 0;
+	cursor: pointer;
+
+}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -58,11 +119,40 @@ document.addEventListener("DOMContentLoaded", function() {
 	  const recentSearchValues = document.getElementById("recentSearchValues");
 	  const deleteBtn = document.getElementById("deleteAllValues");
 	  
-	  // 모달 열릴 때, 검색어를 입력하는 input에 포커스
-	  modalSearch.addEventListener("shown.bs.offcanvas", function() {
-	    searchInput.focus();
-	  });
+	 let intervalId = null;
 
+	// 모달 열릴 때의 이벤트 핸들러
+	modalSearch.addEventListener('shown.bs.offcanvas', function() {
+	    console.log('모달업');
+	    searchInput.focus(); 
+	    startUpdatingPopularKeywords(); 
+	});
+	
+	// 모달 닫힐 때의 이벤트 핸들러
+	modalSearch.addEventListener('hidden.bs.offcanvas', function() {
+	    console.log('모달다운');
+	    stopUpdatingPopularKeywords();
+	    notFound.innerHTML = "";
+	    sListContainer.innerHTML = "";
+	    vListContainer.innerHTML = "";
+	    dListContainer.innerHTML = "";
+	    nullListContainer.innerHTML = "";
+	});
+	
+	// 인기 키워드 업데이트를 시작하는 함수
+	function startUpdatingPopularKeywords() {
+	    if (intervalId === null) {
+	        intervalId = setInterval(updatePopularKeywords, 10000); // 5초마다 업데이트하는 인터벌을 시작합니다.
+	    }
+	}
+	
+	// 인기 키워드 업데이트를 중지하는 함수
+	function stopUpdatingPopularKeywords() {
+	    if (intervalId !== null) {
+	        clearInterval(intervalId); // 인터벌을 멈춥니다.
+	        intervalId = null;
+	    }
+	}
 	  //저장된게 있을 때만 최근검색어 보여주기
 	  function toggleRecentSearchVisibility() {
 		    const searchHistory = getSearchHistory();
@@ -79,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	  // 로컬 스토리지에서 저장된 검색어 배열을 가져오는 함수
 	  function getSearchHistory() {
 	    const searchHistoryJSON = localStorage.getItem("searchHistory");
-	    //console.log(searchHistoryJSON);
 	    return searchHistoryJSON ? JSON.parse(searchHistoryJSON) : [];
 	  }
 
@@ -137,9 +226,64 @@ document.addEventListener("DOMContentLoaded", function() {
 	 
 	  }
 	  
-	  
-	  // 검색어를 입력하는 input 요소에 Enter 키가 눌렸을 때의 이벤트를 처리
+	
+	  // 검색어를 입력하는 input 요소에  자동완성기능 추가
 	  searchInput.addEventListener("keyup", function(event) {
+		  
+		const autocompleteResults = document.getElementById('autocomplete-results');
+
+		autocompleteResults.style.display = "block";
+		
+		const keyword = searchInput.value;
+		console.log(keyword+"keyword");
+        
+		  if (keyword.length >= 2) {
+			   $.ajax({
+	                url: '/autocomplete', 
+	                method: 'GET',
+	        	    data: { keyword: keyword },
+	                success: function(data) {
+	                   	
+                	  autocompleteResults.innerHTML = '';
+
+                	  data.forEach(function(result) {
+                		    const listItem = document.createElement('li');
+                		    listItem.textContent = result.pageName;
+                		    
+                		    listItem.onclick = function() {
+                		        search(result.pageName);
+                
+	              			      if (result.pageName) {
+	              			        // 로컬 스토리지에서 검색어 배열 가져오기
+	              			        const searchHistory = getSearchHistory();
+	              					// 만약에 searchValue가 searchHistory 안에 없다면!!! 검색어 배열에 새로운 검색어 추가
+	              			          if (!searchHistory.includes(result.pageName)) {
+	              			        	  // 검색어 배열의 맨 앞에 새로운 검색어 추가
+	              			              searchHistory.unshift(result.pageName);
+	              			              searchInput.value ="";
+	              			              // 로컬 스토리지에 검색어 배열 저장
+	              			              saveSearchHistory(searchHistory);
+	              			              renderSearchHistory(searchHistory);
+	              		         		}
+	              					
+	              			      }
+                		    };
+
+                		    autocompleteResults.appendChild(listItem);
+                		});
+
+                   
+	                },
+	                error: function(error) {
+	                    console.error('자동완성 요청 에러:', error);
+	                }
+	            });
+	        } else {
+	         	  autocompleteResults.innerHTML = '';
+	        } 
+		  
+ 		  
+ 		// 검색어를 입력하는 input 요소에 Enter 키가 눌렸을 때의 이벤트를 처리
 	    if (event.keyCode === 13) {
 	      const searchValue = searchInput.value.trim(); // 입력된 검색어 양 옆의 공백 제거
 	      
@@ -192,7 +336,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	
 	  function search(searchValue) {
-		  console.log(searchValue + ' 내용검색');
+		  //자동검색단어 클릭해서 여기로 넘어올 시  display none
+		  var autocompleteResults = document.getElementById("autocomplete-results");
+		  autocompleteResults.style.display = "none";
+		  
+		  //console.log(searchValue + ' 내용검색');
 		  var searchResult = document.getElementById("searchResult");
 		  var notFound = document.getElementById("notFound");
 		  var sListContainer = document.getElementById("sListContainer");
@@ -200,6 +348,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		  var dListContainer = document.getElementById("dListContainer");
 		  var nullListContainer = document.getElementById("nullListContainer");
 
+		  
 		  // div 안의 모든 내용을 지움
 		  notFound.innerHTML = "";
 		  sListContainer.innerHTML = "";
@@ -210,15 +359,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		  $.ajax({
 		    url: '/search', 
 		    method: 'GET', 
-		    data: { keword: searchValue },
+		    data: { keyword: searchValue },
 		    success: function (response) {
-		      console.log('Search results:', response);
+		      //console.log('Search results:', response);
 		      
 		       if(response.length ===0){
 		    	var noResultParagraph = document.createElement("p");
 		    	    noResultParagraph.textContent = "검색된 내용이 없습니다.";
 				    
 		    	    notFound.appendChild(noResultParagraph);
+		       }else{
+		    	   //키워드 검색결과가 있을 때만 인기검색어에 저장!
+		    	 	saveKeyword(searchValue);
 		       }
 		      // 카테고리 별로 분류할 리스트 생성
 		      var sList = [];
@@ -240,42 +392,79 @@ document.addEventListener("DOMContentLoaded", function() {
 		      });
 
 		      // 분류된 리스트를 사용하여 원하는 작업 수행
-		      console.log('S 리스트:', sList);
-		      console.log('V 리스트:', vList);
-		      console.log('D 리스트:', dList);
-		      console.log('Null 리스트:', nullList);
+		     // console.log('S 리스트:', sList);
+		     // console.log('V 리스트:', vList);
+		     // console.log('D 리스트:', dList);
+		     // console.log('Null 리스트:', nullList);
 		      
 		      addCategoryToContainer(dList, dListContainer, "기부");
 		      addCategoryToContainer(vList, vListContainer, "봉사");
 		      addCategoryToContainer(sList, sListContainer, "세미나");
-		      addCategoryToContainer(nullList, nullListContainer, "");
+		      addCategoryToContainer(nullList, nullListContainer, "기타");
 		      
 
 
 		      
 		      dList.forEach(function (item) {
 		    	    var listItem = document.createElement("li");
-		    	    listItem.textContent = item.pageName;
+		    	    
+		    	    // Create an anchor element
+		    	    var anchor = document.createElement("a");
+		    	    anchor.href = "/donation/detail?id="+item.pageUrl; // Set the href attribute to item.pageUrl
+		    	    anchor.textContent = item.pageName;
+		    	    
+		    	    // Append the anchor element to the list item
+		    	    listItem.appendChild(anchor);
+		    	    
+		    	    // Append the list item to the container
 		    	    dListContainer.appendChild(listItem);
 		    	});
-		    
-		      
-		      
+
+
 		      vList.forEach(function (item) {
 		    	    var listItem = document.createElement("li");
-		    	    listItem.textContent = item.pageName;
+		    	    
+		    	    // Create an anchor element
+		    	    var anchor = document.createElement("a");
+		    	    anchor.href = "/volunteer/detail?id="+item.pageUrl; // Set the href attribute to item.pageUrl
+		    	    anchor.textContent = item.pageName;
+		    	    
+		    	    // Append the anchor element to the list item
+		    	    listItem.appendChild(anchor);
+		    	    
+		    	    // Append the list item to the container
 		    	    vListContainer.appendChild(listItem);
 		    	});
+
 		      
 		      sList.forEach(function (item) {
 		    	    var listItem = document.createElement("li");
-		    	    listItem.textContent = item.pageName;
+		    	    
+		    	    // Create an anchor element
+		    	    var anchor = document.createElement("a");
+		    	    anchor.href = "/seminar/detail?id="+item.pageUrl; // Set the href attribute to item.pageUrl
+		    	    anchor.textContent = item.pageName;
+		    	    
+		    	    // Append the anchor element to the list item
+		    	    listItem.appendChild(anchor);
+		    	    
+		    	    // Append the list item to the container
 		    	    sListContainer.appendChild(listItem);
 		    	});
+
 		      
 		      nullList.forEach(function (item) {
 		    	    var listItem = document.createElement("li");
-		    	    listItem.textContent = item.pageName;
+		    	    
+		    	    // Create an anchor element
+		    	    var anchor = document.createElement("a");
+		    	    anchor.href = item.pageUrl; 
+		    	    anchor.textContent = item.pageName;
+		    	    
+		    	    // Append the anchor element to the list item
+		    	    listItem.appendChild(anchor);
+		    	    
+		    	    // Append the list item to the container
 		    	    nullListContainer.appendChild(listItem);
 		    	});
 		      
@@ -302,13 +491,106 @@ document.addEventListener("DOMContentLoaded", function() {
 	  toggleRecentSearchVisibility();
 
 	  
+	  
+	  //자동완성 키워드 바깥 쪽 클릭 시 자동완성키워드 화면 display none;
+	  const autocompleteResults = document.getElementById('autocomplete-results');
+
+
+	  document.addEventListener('click', function(event) {
+	      if (!autocompleteResults.contains(event.target)) {
+	          autocompleteResults.style.display = 'none';
+	      }
+	  });
+	  
+	  function saveKeyword(keyword) {
+		    $.ajax({
+		        url: '/add_keywords',
+		        method: 'POST',
+		        data: { keyword: keyword },
+		        beforeSend : function(xhr,set){
+					let token = $("meta[name='_csrf']").attr("content");
+					let header =$("meta[name='_csrf_header']").attr("content");
+					
+			        xhr.setRequestHeader("X-CSRF-Token", token);
+					xhr.setRequestHeader(header,token);
+				},
+		        success: function (data) {
+		            if(data =="succ"){
+		            	console.log("succ");
+		            }else{
+		            	console.log("err");
+		            }
+		        },
+		        error: function (error) {
+		          
+		            console.error('Error adding popular keyword:', error);
+		        }
+		    });
+		}
+
+	  
+	  function updatePopularKeywords() {
+		    
+		    $.ajax({
+		        url: '/popular_keywords', 
+		        method: 'GET',
+		        success: function(data) {
+		        
+		            const popularLeft = document.getElementById('popularLeft');
+		            const popularRight = document.getElementById('popularRight');
+
+		            // Clear existing content
+		            popularLeft.innerHTML = '';
+		            popularRight.innerHTML = '';
+
+		        
+		            data.forEach(function (keyword, index) {
+		               // console.log(index);
+		                var keyword10 = keyword.keyword;
+		              //  console.log(keyword10);
+		                const column = index < 5 ? popularLeft : popularRight;
+
+		                const listItem = document.createElement('p');
+		                listItem.innerHTML = '<span style="color: cornflowerblue; margin-right: 10px;">' + (index + 1) + '</span>' + keyword10;
+		       
+		                listItem.addEventListener('click', function () {
+		                    search(keyword10);
+		                    
+            			    // 로컬 스토리지에서 검색어 배열 가져오기
+           			        const searchHistory = getSearchHistory();
+           					// 만약에 searchValue가 searchHistory 안에 없다면!!! 검색어 배열에 새로운 검색어 추가
+           			          if (!searchHistory.includes(keyword10)) {
+           			        	  // 검색어 배열의 맨 앞에 새로운 검색어 추가
+           			              searchHistory.unshift(keyword10);
+           			              searchInput.value ="";
+           			              // 로컬 스토리지에 검색어 배열 저장
+           			              saveSearchHistory(searchHistory);
+           			              renderSearchHistory(searchHistory);
+           		         		}
+           					
+              			      
+		                });
+		               
+		                column.appendChild(listItem);
+		            });
+
+
+		        },
+		        error: function(error) {
+		            console.error('Error fetching popular keywords:', error);
+		        }
+		    });
+		}
+
+
+
+	    updatePopularKeywords();
+	  
 	});
-
-  
-
-
 	
 	
+
+
 </script>
 <!-- Search -->
 <div class="offcanvas offcanvas-end" id="modalSearch" tabindex="-1"
@@ -323,13 +605,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	<div class="offcanvas-body mt-5">
 		<form>
 			<div class="input-group input-group-merge">
-				<input id="search" class="form-control" type="search" placeholder="검색어를 입력해주세요">
+				<input id="search" class="form-control" type="search"
+					placeholder="검색어를 입력해주세요">
 				<div class="input-group-append">
-					<button id ="searchBtn" class="btn btn-outline-border" type="submit">
+					<button id="searchBtn" class="btn btn-outline-border" type="submit">
 						<i class="fe fe-search"></i>
 					</button>
 				</div>
+				<div id="autocomplete-results"></div>
 			</div>
+				
 		</form>
 	</div>
 
@@ -337,36 +622,56 @@ document.addEventListener("DOMContentLoaded", function() {
 	<div class="offcanvas-body border-top fs-sm">
 
 		<!-- Heading -->
-		<div id="searchHeader" style="display : none; ">
-			<span style="color:gray">최근검색어</span>
-			<span id="deleteAllValues" style="color:blue; font-size: 12px; font-weight: 200; float: right;">전체삭제</span>
+		<div id="searchHeader" style="display: none;">
+			<span style="color: gray">최근검색어</span> <span id="deleteAllValues"
+				style="color: blue; font-size: 12px; font-weight: 200; float: right;">전체삭제</span>
 		</div>
-		
-		
-		<div id="recentSearchValues">
-		
-		</div>
+
+
+	
+		<div id="recentSearchValues"></div>
 		<div id="searchResult">
 			<div id="notFound"></div>
 			<div id="nullListContainer"></div>
-	
-			<div id="dListContainer"></div>
-		
-			<div id="vListContainer"></div>
-		
-			<div id="sListContainer"></div>
-		
-		
-		</div>
-		
 
-			
-		<div id="popularResult">
+			<div id="dListContainer"></div>
+
+			<div id="vListContainer"></div>
+
+			<div id="sListContainer"></div>
+
+
+		</div>
+
+
+
+		<div id="popularDiv">
 			<p>인기검색어</p>
-			<p>1 기부</p>
-			<p>2 봉사</p>
-			<p>3 증명서</p>
+			<div style="display: flex;" class="popularResult col-12">
+				<div class="col-6" id="popularLeft">
+					<!-- 
+					<p><span style="color: cornflowerblue; margin-right: 5px;">1</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">2</span>  봉사</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">3</span>  증명서</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">4</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">5</span>  봉사</p>
+					
+					 -->
+				</div>
+				<div class="col-6" id="popularRight">
+					<!-- 
+					<p><span style="color: cornflowerblue; margin-right: 5px;">1</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">2</span>  봉사</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">3</span>  증명서</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">4</span> 기부</p>
+					<p><span style="color: cornflowerblue; margin-right: 5px;">5</span>  봉사</p>
+					
+					 -->
+				</div>
+			</div>
 		</div>
 
 	</div>
 </div>
+
+
