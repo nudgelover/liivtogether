@@ -47,7 +47,12 @@
 		WHERE id=#{donaId}
     </select>
 
-
+  	<update id="setTargetIn" parameterType="donation">
+        UPDATE contents
+        SET target_in =#{targetIn}
+        WHERE id = #{donaId}
+    </update>
+	 
 
 
    <!-- 안하면 지우기 -->

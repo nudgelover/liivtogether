@@ -14,7 +14,7 @@ import java.util.List;
 public class Apply {
     private int applyId;
     private String topicBig;
-    private String contentsId;
+    private int contentsId;
     private String custId;
     private String rdate;
     private String memo;

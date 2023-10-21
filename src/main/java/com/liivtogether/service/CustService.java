@@ -41,5 +41,8 @@ public class CustService implements LIIVService<String, Cust> {
 		return mapper.selectall();
 	}
 
+	public void setPointree(Cust cust) throws Exception {
+		mapper.setPointree(cust);
+	}
 
 }

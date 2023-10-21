@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CustMapper extends LIIVMapper<String, Cust> {
+	public void setPointree(Cust cust);
 }

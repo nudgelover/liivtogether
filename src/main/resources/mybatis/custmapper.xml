@@ -38,7 +38,10 @@
         (#{custId}, #{custPwd}, #{custName}, #{phoneNo}, #{birth}, #{img}, #{pointree}, #{starcoin}, #{isMaster})
     </insert>
 
-    <update id="update" parameterType="cust">
+  	<update id="setPointree" parameterType="Cust">
+        UPDATE cust
+        SET pointree =#{pointree}
+        WHERE cust_id = #{custId}
     </update>
 
     <delete id="delete" parameterType="String">
