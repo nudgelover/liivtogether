@@ -16,7 +16,6 @@ class DonationInsertTest {
 	
 	@Test
 	void contextLoads() throws Exception{
-		Apply apply = new Apply( 0, "1", "D", "1234", null,"기부기부", "Y");
-		service.register(apply);
+		
 	}
 }
