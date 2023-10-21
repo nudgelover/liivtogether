@@ -24,7 +24,7 @@
 	    UPDATE cust
 	    SET
 	    <choose>
-	        <when test="pointcoin == 'POINT'">
+	        <when test="pointcoin == 'POINTREE'">
 	            <choose>
 	                <when test="gplace != null"> pointree = pointree + #{mount}</when>
 	                <when test="uplace != null"> pointree = pointree - #{mount}</when>

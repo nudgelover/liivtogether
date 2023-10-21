@@ -183,8 +183,8 @@ let dona_form = {
 		      		agree : agree,
 		      		memo : memo,
 		      		mount : donaPoint,
-		      		pointcoin : pointcoin,
-		      		uplace : donaPoint},
+		      		pointcoin : "POINTREE",
+		      		uplace : "D"},
 		      beforeSend: function(xhr) {
 		        xhr.setRequestHeader("X-CSRF-Token", token);
 		        xhr.setRequestHeader(header, token);
