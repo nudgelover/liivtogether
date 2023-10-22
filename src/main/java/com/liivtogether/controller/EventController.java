@@ -53,11 +53,43 @@ public class EventController {
 		return "index";
 	}
 
-	@RequestMapping("/ad")
+	@RequestMapping("/admain")
 	public String ad(Model model) throws Exception {
-		model.addAttribute("center", dir + "ad");
+		model.addAttribute("center", dir + "admain");
 		return "index";
 	}
+	
+
+	@RequestMapping("/admain/ad1")
+	public String ad1(Model model) throws Exception {
+		model.addAttribute("center", dir + "/admain/ad1");
+		return "index";
+	}
+	
+	@RequestMapping("/admain/ad2")
+	public String ad2(Model model) throws Exception {
+		model.addAttribute("center", dir + "/admain/ad2");
+		return "index";
+	}
+	
+	@RequestMapping("/admain/ad3")
+	public String ad3(Model model) throws Exception {
+		model.addAttribute("center", dir + "/admain/ad3");
+		return "index";
+	}
+	
+	@RequestMapping("/admain/ad4")
+	public String ad4(Model model) throws Exception {
+		model.addAttribute("center", dir + "/admain/ad4");
+		return "index";
+	}
+	
+	@RequestMapping("/admain/ad5")
+	public String ad5(Model model) throws Exception {
+		model.addAttribute("center", dir + "/admain/ad5");
+		return "index";
+	}
+
 
 	@RequestMapping("/fourcut")
 	public String fourcut(Model model) throws Exception {

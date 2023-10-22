@@ -32,7 +32,9 @@
 		FROM event
 		WHERE cust_id = #{custId}
 		    AND event_name = #{eventName}
-		    AND record_datetime >= #{today}
+		     <if test="today != null">
+            AND record_datetime >= #{today}
+        	</if>
 	</select>
 	
 	
