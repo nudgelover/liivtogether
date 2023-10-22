@@ -11,6 +11,18 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+#btnbox{
+	display: flex;
+	justify-content: space-around;
+	padding: 0 1em;
+}
+
+#btnbox > button{
+	width:100%;
+	border: none;
+	margin: 0 5px;
+	padding: 10px;	
+}
 #img1 {
 	margin-top: 50px;
 }
@@ -21,14 +33,13 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/*background-color: white;*/
 }
 
 .photo_frame {
 	margin: 10px 0;
-	width: 350px;
+	width: 90%;
 	height: 200px;
-	background-color: lightgray;
+	background-color: whitesmoke;
 	position: relative;
 	cursor: pointer;
 }
@@ -59,7 +70,7 @@
 .savebtn{
     width: 100%;
     max-width: 400px;
-    background-color: orange;
+    background-color: #F3D7C9;
     margin: auto;
     margin-bottom :3rem;
     padding: 1rem;
@@ -67,37 +78,32 @@
     color: white;
 }
 .savebtn:hover{
-  	background-color: darkorange;
+  	background-color: lightcoral;
 }
 
 </style>
 
 
 <div style="text-align: center;">
-	<div style="width: 100%; background-color: #DBE9ED;">
+	<div style="width: 100%; background-color: #F3D7C9;">
 		<img style="width: 100%; max-width: 35rem; height: 10rem;'"
-			src="/assets/img/event/attendEvent.png">
+			src="/assets/img/event/forcutMain.png">
 	</div>
-
 </div>
 
-<div
-	style="display: flex; flex-direction: column; justify-content: center;"
-	class="col-12">
-	<!--begin::Content-->
-		푸터 스타프렌즈로다양하게, 배경도 색깔말고 이미지로 다양하게?이미지위치도 조절가능하면좋을듯
-	<div class="mt-5 text-center">
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;" class="col-12">
+	<div id="btnbox" class="mt-5 col-12 col-lg-6">
 		<button style="background-color: whitesmoke; color: gray"
-			class="btn mx-2" id="changWhite">흰색</button>
+			id="changWhite">흰색</button>
 		<button style="background-color: #E0E6F8; color: gray"
-			class="btn mx-2" id="changPink">연보라</button>
-		<button style="background-color: #CEF6F5; color: gray"
-			class="btn mx-2" id="changMint">민트</button>
-		<button style="background-color: #585858; color: gray"
-			class="btn mx-2" id="changBlack">블랙</button>
+			 id="changPink">연보라</button>
+		<button style="background-color: #FFD966; color: gray"
+			id="changMint">연노랑</button>
+		<button style="background-image:url('/assets/img/event/starbtn.jpg'); color: gray"
+			id="changStarfriends">스타프렌즈</button>
 	</div>
 
-
+<div class="col-12" style="padding: 10px; text-align: center;">
 	<div class="fourcut_container">
 		<div class="photo">
 			<div id="img1" class="photo_frame" onclick="openFileInput('file1')">
@@ -122,12 +128,12 @@
 			</div>
 		</div>
 		<div class="fourcut_footer" style="position: relative;">
-			<img class="footer_image" src="/assets/img/logo/logo.png"> <span
+			<img class="footer_image" src="/assets/img/event/fourcutfooter.png"> <span
 				style="position: absolute; top: 110px; right: 28px; font-size: 14px; color: lightblue; z-index: 1;">${now}</span>
 		</div>
 	</div>
 	<button class="savebtn" onclick="captureAndSaveImage()">저장</button>
-
+</div>
 
 </div>
 
@@ -137,32 +143,48 @@
 	const changWhite = document.getElementById('changWhite')
 	const changPink = document.getElementById('changPink');
 	const changMint = document.getElementById('changMint');
-	const changBlack = document.getElementById('changBlack');
+	const changStarfriends = document.getElementById('changStarfriends');
 	const fourcutContainer = document.querySelector('.fourcut_container');
 	const photo = document.querySelector('.photo');
 	const fourcutFooter = document.querySelector('.fourcut_footer');
 	changWhite.addEventListener('click', function() {
+		fourcutContainer.style.backgroundImage = 'none';
+		photo.style.backgroundImage = 'none';
+		fourcutFooter.style.backgroundImage ='none';
+		
 		fourcutContainer.style.backgroundColor = 'white';
 		photo.style.backgroundColor = 'white';
 		fourcutFooter.style.backgroundColor = 'white';
 	});
 
 	changPink.addEventListener('click', function() {
+		fourcutContainer.style.backgroundImage = 'none';
+		photo.style.backgroundImage = 'none';
+		fourcutFooter.style.backgroundImage ='none';
+		
 		fourcutContainer.style.backgroundColor = '#E0E6F8';
 		photo.style.backgroundColor = '#E0E6F8';
 		fourcutFooter.style.backgroundColor = '#E0E6F8';
 	});
 
 	changMint.addEventListener('click', function() {
-		fourcutContainer.style.backgroundColor = '#EFF5FB';
-		photo.style.backgroundColor = '#EFF5FB';
-		fourcutFooter.style.backgroundColor = '#EFF5FB';
+		fourcutContainer.style.backgroundImage = 'none';
+		photo.style.backgroundImage = 'none';
+		fourcutFooter.style.backgroundImage ='none';
+	
+		fourcutContainer.style.backgroundColor = '#FFD966';
+		photo.style.backgroundColor = '#FFD966';
+		fourcutFooter.style.backgroundColor = '#FFD966';
 	});
 
-	changBlack.addEventListener('click', function() {
-		fourcutContainer.style.backgroundColor = 'black';
-		photo.style.backgroundColor = 'black';
-		fourcutFooter.style.backgroundColor = 'black';
+	changStarfriends.addEventListener('click', function() {
+		fourcutContainer.style.backgroundColor = '#EBECEB';
+		photo.style.backgroundImage = 'url(/assets/img/event/fourcutback.png)';
+		photo.style.backgroundColor = '#EBECEB';
+		photo.style.backgroundSize = 'cover';
+		fourcutFooter.style.backgroundImage = 'url(/assets/img/event/fourcutback2.png)'
+		fourcutFooter.style.backgroundSize = 'cover';
+	
 	});
 
 	function handleFileSelect(event) {
