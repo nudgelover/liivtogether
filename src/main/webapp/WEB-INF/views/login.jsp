@@ -145,14 +145,44 @@ body {
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
- <script>
+<script src="/assets/js/common.js"></script>
+<link rel="stylesheet" href="/assets/css/common.css" />
+<script>
  
 $(function(){
+	if (getCookie('liivToSaveId') !== '') {
+		  $('#cust_id').val(getCookie('liivToSaveId'));
+		  $('#saveId').prop('checked', true);
+		}
+	
+	
+	function getCookie(name) {
+	  var cookieName = name + "=";
+	  var cookies = document.cookie.split(';');
+	  for (var i = 0; i < cookies.length; i++) {
+	    var cookie = cookies[i].trim();
+	    if (cookie.indexOf(cookieName) === 0) {
+	      return cookie.substring(cookieName.length);
+	    }
+	  }
+	  return "";
+	}
+	
 	
  	//로그인 버튼 클릭시
  	$(".login_btn").click(function(){
  		custId = $("#cust_id").val();
  		custPwd = $("#cust_pwd").val();
+ 		
+ 		if(!custId){
+ 			popup("아이디를 입력해주세요.",false,gofocusId,"");
+ 		 	return;
+ 		}
+ 		
+ 		if(!custPwd){
+ 			popup("비밀번호를 입력해주세요",false,gofocusPwd,"");
+ 		 	return;
+ 		}
  		console.log("custId"+custId);
  		param = {
  				custId : custId, custPwd : custPwd
@@ -164,16 +194,18 @@ $(function(){
  		})
  		.done(function(result){
  			if(result == 1){
- 				alert("로그인에 성공했습니다.");
- 				location.href='/';
+ 				
+ 				checkSaveIdOrNot();	
+ 				popup("로그인에 성공하셨습니다.",false,goToMain,"");
  			} else if(result == 2){
- 				alert("비밀번호를 다시 확인하세요.");
+ 				popup("비밀번호를 다시 확인해주세요.",false,gofocusPwd,"");
+ 				
  			} else{
- 				alert("회원정보가 없습니다");
+ 				popup("회원정보가 없습니다.",false,gofocusId,"");
  			}
  		})
  		.fail(function(){
- 			alert("로그인 도중 에러가 발생했습니다");
+ 			popup("로그인 도중 에러가 발생했습니다. 다시 시도해주세요.",false,"","");
  		})
  		});
 
@@ -241,6 +273,36 @@ $(function(){
              document.getElementById('SNSLoginClick').classList.add('unclicked'); 
          }
      }
+
+function checkSaveIdOrNot() {
+    var custId = $("#cust_id").val();
+    if ($("input[id='saveId']").is(":checked")) {
+        setCookie("liivToSaveId", custId, 30);
+    } else {
+        setCookie("liivToSaveId", '', 0.00069); // 쿠키 삭제
+    }
+}
+
+function setCookie(name, custId, days) {
+	
+	console.log('saveId'+name+custId+days)  
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + days);
+
+    var cookieValue = name + "=" + custId + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    document.cookie = cookieValue;
+}
+
+function gofocusPwd() {
+	  $('#cust_pwd').focus();
+}
+
+function gofocusId() {
+	  $('#cust_id').focus();
+}
+
+
 
  </script>
 </head>
@@ -357,8 +419,8 @@ $(function(){
 						    <input type="password" class="form-control" id="cust_pwd" name="cust_pwd">
 						  </div>
 						  <div class="mb-3 form-check">
-						    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						    <label class="form-check-label" for="exampleCheck1">아이디 저장</label>
+						    <input type="checkbox" class="form-check-input" id="saveId">
+						    <label class="form-check-label" for="saveId">아이디 저장</label>
 						  </div>
 						
 					</div>
@@ -372,7 +434,7 @@ $(function(){
 				<div class="mt-3">
 				<!-- 아직 css 없음 -->
 					<span>* 아이디, 비밀번호를 잊으셨나요?</span>
-					<a href="#">아이디 찾기</a>||<a href="#">비밀번호 찾기</a> </br>
+					<a href="#">아이디 찾기 </a>||<a href="#"> 비밀번호 찾기</a> </br>
 					<span>* 아직 회원이 아니신가요?</span>
 					<a href="/register">가입 하러가기</a>
 				</div>

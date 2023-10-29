@@ -16,11 +16,12 @@
     margin-bottom: 0 !important;
 
 }
-.event-buttons {
+.ad-list {
 	display: flex;
-	gap: 10px;
+	gap: 2rem;
+	flex-direction: column;
 }
-.event-buttons img{
+.ad-list img{
 	width: 100%;
 	height: 100%; 
 	border-radius: 15px;
@@ -66,12 +67,12 @@
 <section class="pt-7 pb-12">
 	<div class="container">
 		<div style="text-align: center; display: flex; justify-content: center; flex-direction: column; align-items: center;" class="col-12">
-			<div class="col-12 col-lg-6 row event-buttons">			
-				<a id="ad1" href="/event/admain/ad1"><img src="/assets/img/event/ad1.png";></a> 
-				<a id="ad2" href="/event/admain/ad2"><img src="/assets/img/event/ad2.png";></a>
-				<a id="ad3" href="/event/admain/ad3"><img src="/assets/img/event/ad5.png";></a> 
-				<a id="ad4" href="/event/admain/ad4"><img src="/assets/img/event/ad5.png";></a> 
-				<a id="ad5" href="/event/admain/ad5"><img  src="/assets/img/event/ad5.png";></a>
+			<div class="col-12 col-lg-6 ad-list">			
+				<a id="ad1" href="/event/admain/ad1"><img src="/assets/img/event/ad1.png"></a> 
+				<a id="ad2" href="/event/admain/ad2"><img src="/assets/img/event/ad2.png"></a>
+				<a id="ad3" href="/event/admain/ad3"><img src="/assets/img/event/ad3.png"></a> 
+				<a id="ad4" href="/event/admain/ad4"><img src="/assets/img/event/ad4.png"></a> 
+				<a id="ad5" href="/event/admain/ad5"><img  src="/assets/img/event/ad5.png"></a>
 			</div>
 		</div>
 
@@ -148,7 +149,7 @@ function goDisplay() {
                 'position': 'absolute',
                 'top': '50%',
                 'left': '50%',
-                'width': '93%',
+                'width': '100%',
                 'height': '100%',
                 'transform': 'translate(-50%, -50%)',
                 'background-color': 'rgba(192, 192, 192, 0.5)', // 옅은 회색 투명 레이어
