@@ -152,11 +152,27 @@
 }
 
 .cancleBtn {
-	font-size: small; 
-	float : right;
+	font-size: small;
 	color: gray;
 	border: none;
 	background-color: transparent;
+}
+
+.shareBtn{
+ 	color: darkorange;
+	font-size: small;
+	border: none;
+	background-color: transparent;
+}
+
+.shareBtn:hover{
+	color : firebrick;
+}
+
+.shareBtn img{
+	margin-right: 5px;
+	width: 20px;
+	border-radius: 0;
 }
 </style>
 <script>
@@ -215,7 +231,7 @@
 				<div class="user-picbox">
 					<div class="avatar-container">
 						<div class="avatar avatar-xl">
-							<img src="../assets/img/avatars/avatar-1.jpg" alt="..."
+							<img src="/uimg/${logincust.img}" alt="..."
 								class="avatar-img rounded-circle">
 						</div>
 						<div class="edit-icon">
@@ -238,7 +254,7 @@
 					내가 참여한 목록 <img style="width: 50px;"
 						src="https://cdn-icons-png.flaticon.com/512/1642/1642767.png">
 				</h2>
-				취소기능, 증명서발급
+
 				<div class="titlelist col-12">
 					<a id="attendTab1" href="#" onclick="showTab('donation')">기부</a> <a
 						id="attendTab2" href="#" onclick="showTab('volunteering')">봉사</a>
@@ -303,7 +319,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="item" items="${slist}">
-								 <c:set var="edate" value="${item.edate}" />
+									<c:set var="edate" value="${item.edate}" />
 									<div style="display: flex; flex-direction: column;"
 										class="card">
 										<div style="display: flex;">
@@ -321,12 +337,14 @@
 												</span> <span style="font-size: small; color: gray;">${item.rdate}</span>
 											</div>
 										</div>
-										<div>
-										
+										<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+											<button class="shareBtn">
+												<img src="https://cdn-icons-png.flaticon.com/512/3135/3135807.png" onclick="goToCertificate">증명서 발급하기
+											</button>
 											<button class="cancleBtn">
 												취소하기<i class="fa fa-close"></i>
 											</button>
-											<button></button>
+										
 										</div>
 									</div>
 

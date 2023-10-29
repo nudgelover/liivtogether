@@ -3,39 +3,137 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-
+#videoPlayer{
+ border-radius: 10px;
+}
 
 </style>
-<section style="display: flex; flex-direction: column; align-items: center; padding: 10px;">	
-	<div class="col-12 col-md-8">
-<h1>광고 시청 시 포인트지급</h1>
-
-    <video id="videoPlayer" controls width="640" height="360">
-        <source src="/assets/videos/똑똑1388.mp4" type="video/mp4">
-    </video>
+<div style="text-align: center;">
+	<div style="width: 100%; background-color: #FFE699;">
+		<img style="width:100%; max-width:35rem; height: 10rem;'" src="/assets/img/event/adEvent.png">
+	</div>
 </div>
+
+
+<section
+	style="display: flex; flex-direction: column; align-items: center; padding: 10px; text-align: center;">
+	<div class="col-12 col-md-6">
+		<p style="float: left; margin: 5px">
+			[희망부자] 전국 곳곳 희망을 짓는 사람들 (KB작은도서관 편)
+			</p>
+
+			<video id="videoPlayer" controls width="100%" height="100%">
+				<source src="/assets/videos/KB작은도서관.mp4" type="video/mp4">
+			</video>
+	</div>
 </section>
+<input type="hidden" id="loginCustId" value="${logincust.custId}">
+<input type="hidden" id="watchOrNot" value="">
+<script>
+	const loginCust = $("#loginCustId").val();
 
-    <script>
-        var videoPlayer = document.getElementById('videoPlayer');
-        var hasSkipped = false;
+	var videoPlayer = document.getElementById('videoPlayer');
+	var hasSkipped = false;
+	let firstPlay = true; // 처음 실행 여부를 추적하는 변수
+	
+	videoPlayer.addEventListener('play', function() {
+		if (!loginCust) {
+			popup('로그인 하신 회원분들만 포인트가 적립됩니다<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+		} else {
+			 if (firstPlay) {
+		            checkTodayDo(); // 처음 실행일 때만 실행
+		            firstPlay = false; // 다음에는 실행되지 않도록 플래그 변경
+		        }
+		}
+	});
 
-        // 동영상 재생이 완료되었을 때 이벤트 핸들러 추가
-        videoPlayer.addEventListener('ended', function() {
-            if (hasSkipped) {
-                alert('스킵해서 포인트지급x');
-            }else{
-            	//나중엔 여기에 재생시간을 db에 같이 저장해서 그 시간이 초과되었을 때만..!!! 
-            	alert('포인트지급')
-            }
-        });
+	
+	videoPlayer.addEventListener('ended', function() {
+		console.log('영상종료')
+		if (hasSkipped) {
+			popup('영상을 스킵하시어 포인트가 지급되지 않습니다. 다시 시청하시겠습니까?', true, rewatch, '')
+		} else {
+			if($('#watchOrNot').val()==0){
+				savePoint(10);
+			}else{
+				popup('이 영상은 이미 시청하신 영상으로 포인트리가 적립되지 않습니다.',false,'','');
+			}
+			
+		}
+	});
 
-        // 동영상 스킵이 발생했을 때 이벤트 핸들러 추가
-        videoPlayer.addEventListener('seeked', function() {
-            hasSkipped = true;
-            alert('영상을 스킵하시면, 포인트리가 지급되지 않습니다. 처음부터 다시 진행해주세요!');
-        });
+	videoPlayer.addEventListener('seeked', function() {
+		hasSkipped = true;
+		popup('영상을 스킵하시면, 포인트리가 지급되지 않습니다. 처음부터 다시 시청하시겠습니까?', true, rewatch,	'')
+	});
 
-        // 자동배속을 방지하기 위해 playbackRate를 설정
-        videoPlayer.playbackRate = 1; // 일반 재생 속도 (기본값)
-    </script>
+	// 자동배속을 방지하기 위해 playbackRate를 설정
+	videoPlayer.playbackRate = 1; // 일반 재생 속도 (기본값)
+
+	function rewatch() {
+		location.reload();
+	}
+
+	function gotoAdMain() {
+		window.location = 'http://localhost/event/admain'
+	}
+	function checkTodayDo() {
+		
+		// AJAX 호출
+	    $.ajax({
+	        url: '/api/event/check-today-do',
+	        method: 'GET',
+	        data: {
+	            loginCust: loginCust,
+	            eventName: 'ad1',
+	        },
+	        success: function(response) {
+	        		console.log('오늘  참여회수'+response);
+					if(response=='0'){
+						console.log('미참여');
+						$('#watchOrNot').val(response);
+					}else{
+						$('#watchOrNot').val(response);
+						popup('이 영상은 이미 시청하신 영상으로 포인트리가 적립되지 않습니다.',false,'','');
+					}
+
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('AJAX 요청 실패:', error);
+	            popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
+	        }
+	    });
+		
+	}
+	
+	function savePoint(point) {
+		if (loginCust) {
+		    $.ajax({
+		        url: '/api/event/eventdata', 
+		        method: 'POST',
+		        data: {
+		            loginCust: loginCust,
+		            eventName: 'ad1',
+		        	pointsAwarded : point
+		        },
+		    	beforeSend : function(xhr,set){
+					let token = $("meta[name='_csrf']").attr("content");
+					let header =$("meta[name='_csrf_header']").attr("content");
+				
+			        xhr.setRequestHeader("X-CSRF-Token", token);
+					xhr.setRequestHeader(header,token);
+				},
+		        success: function(response) {
+		        	
+	       			popup('광고시청을 완료하셨습니다. 보상으로 '+point + '포인트리가 내일 적립됩니다!',false,'','');
+		        	
+		        },
+		        error: function(xhr, status, error) {
+			   		popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
+		            console.error('AJAX 요청 실패:', error);
+		        }
+		    });
+		
+		}
+	}
+</script>
