@@ -29,7 +29,7 @@ public class Donation {
 	private String rdate;
 	private int dDay;
 	private String currentDate;
-     
+    private int mount;
 	
 	public int getdDay() {
 		return dDay;

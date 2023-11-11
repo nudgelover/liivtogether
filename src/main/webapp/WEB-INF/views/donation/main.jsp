@@ -78,7 +78,6 @@
 } */
 
 </style>
-
 <!-- BREADCRUMB -->
 <nav class="py-5">
 	<div class="container">
@@ -227,7 +226,7 @@
 				<div class="card mb-7">
 
 					<!-- 좋아요 -->
-					<div class="heart-icon">
+					<div class="heart-icon" id="like">
 						<i class="fa-solid fa-heart white"></i>
 					</div>
 					
@@ -262,7 +261,7 @@
 
 							<div style="display: flex; align-items: center;">
 								
-								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <span
+								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <br><span
 									style="color: gray; font-size: 12px; font-weight: 200;">
 										모금액 : <fmt:formatNumber value="${obj.targetIn}" pattern="###,###원"/>/ 
 										목표액 : <fmt:formatNumber value="${obj.target}" pattern="###,###원"/></span></span> 
@@ -334,3 +333,4 @@
 		</div>
 	</div>
 </section>
+

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liivtogether.mapper.DonationMapper">
 
-    <select id="selectall" resultType="donation">
+    <select id="selectall" resultType="Donation">
         SELECT id as donaId
 		, topic_big as topicBig
 		, topic_small as topicSmall
@@ -23,10 +23,10 @@
 		, rdate
 		FROM contents
 		WHERE topic_big = 'D'
-		ORDER BY donaId DESC
+		ORDER BY ddate DESC
     </select>
 
-    <select id="select" parameterType="Integer" resultType="donation">
+    <select id="select" parameterType="Integer" resultType="Donation">
 		SELECT id as donaId
 		, topic_big as topicBig
 		, topic_small as topicSmall
@@ -46,8 +46,8 @@
 		FROM contents
 		WHERE id=#{donaId}
     </select>
-
-  	<update id="setTargetIn" parameterType="donation">
+    
+    <update id="setTargetIn" parameterType="donation">
         UPDATE contents
         SET target_in =#{targetIn}
         WHERE id = #{donaId}
@@ -56,21 +56,17 @@
 
 
    <!-- 안하면 지우기 -->
-    <insert id="insert" parameterType="donation">
+    <insert id="insert" parameterType="Donation">
         INSERT INTO contents
         VALUES (#{topic_big}, #{topic_small}, #{title}, #{location}, #{edate}, #{ddate}, #{target}, #{image_main}, #{image_sub}, #{comment}, #{content}, #{reward_coin}, SYSDATE)
     </insert>
 
-    <update id="update" parameterType="donation">
-        UPDATE contents
-        SET cust_name=#{cust_name},
-            cust_pwd=#{cust_pwd},
-            phone=#{phone},
-            age=#{age},
-            gender=#{gender}
-            email=#{email}
-        WHERE cust_id = #{cust_id}
-    </update>
+	<update id="update" parameterType="Donation">
+	    UPDATE contents
+	    SET
+	    target_in = #{targetIn} + #{mount}
+	    WHERE id = #{donaId}
+	</update>
 
 
     <delete id="delete" parameterType="String">

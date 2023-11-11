@@ -80,32 +80,37 @@ public class ApplyRestController {
 	}
 
 	
-	
-	@PostMapping("/apply/register")
-	public Object applyregister(Apply apply, Point point, int mount) throws Exception {
+    @Transactional(rollbackFor = Exception.class) 
+	@PostMapping("/apply/donation")
+	public Object applydonation(Apply apply, Point point, Donation donation) throws Exception {
 
 		// 등록 하는거 
 		int result = 0;
 		
 		try {				
 			//기부신청 내역
-			applyService.register(apply);				
-			
-			//기부포인트리 히스토리
-			pointService.register(point);
-			
+			applyService.register(apply);							
 			//기부콘텐츠 모금액(모금액 증가)
-			Donation donation = donationService.get(apply.getContentsId());	
-			int totalTargetIn = donation.getTargetIn()+point.getMount();
-
-			donation.setTargetIn(totalTargetIn); 
-			donationService.setTargetIn(donation); // targetIn 값을 재설정
-
+			donationService.modify(donation);			
+			//기부포인트리 히스토리
+			pointService.register(point);			
 			//고객보유 포인트리(보유포인트리 차감)
-			log.info("============="+point);
 			pointService.modify(point);
+					
+			//기부 스타코인
+			
+			Point starcoin = (Point) point.clone();
+			starcoin.setPointcoin("COIN");
+			starcoin.setGplace("D");
+			starcoin.setUplace(null);
+			starcoin.setMount(5);
 			
 			
+			//기부스타코인 히스토리
+			pointService.register(starcoin);
+			//고객보유 스타코인(스타코인 적립)
+			pointService.modify(starcoin);
+		
 			result = 1;
 
 		} catch (Exception e) {

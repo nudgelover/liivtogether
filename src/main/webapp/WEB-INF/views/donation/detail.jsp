@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 .location-detail {
 	margin-top: 10px;
@@ -177,7 +178,7 @@ function updateViews() {
 
 				<!-- Image -->
 				<img class="card-img-top"
-					src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg">
+					src="/uimg/${donation.imageMain}">
 			</div>
 		</div>
 		<div style="display: flex; flex-direction: column;"
@@ -186,8 +187,12 @@ function updateViews() {
 			<h5>${donation.title}</h5>
 			<p>${donation.comment}</p>
 			<div style="display: flex;">
-				<span class="recruitment">목표금액 <br/> ${donation.target}원</span><span
-					class="participants">${donation.targetIn}원 <br/> 기부중</span> <span
+				<span class="recruitment">목표금액 <br/>
+				<fmt:formatNumber value="${donation.target}" pattern="###,###원"/>
+				</span><span
+					class="participants">
+					<fmt:formatNumber value="${donation.targetIn}" pattern="###,###원"/>
+					<br/> 기부중</span> <span
 					class="${(donation.dDay == 0) ? 'deadline-red' : (donation.dDay < 0) ? 'deadline-gray' : (donation.dDay <= 3) ? 'deadline-red' : 'deadline-orange'}">
 					<c:choose>
 						<c:when test="${donation.dDay <= 0}">
@@ -234,11 +239,9 @@ function updateViews() {
 			<!-- 종료 시 참여하기 -> 종료로 변경  -->
 
 			<div class="location-detail">
-				<span class="mb-3"><img style="width: 20px;"
-					src="https://cdn-icons-png.flaticon.com/512/727/727606.png">
-					장소 : ${donation.location}</span> <span><img style="width: 20px;"
+				<span class="mb-3"><span><img style="width: 20px;"
 					src="https://cdn-icons-png.flaticon.com/512/10691/10691802.png">
-					날짜 : <span id="donation-date"></span></span>
+					마감일 : <span id="donation-date"></span></span>
 			</div>
 			
 			<div id="sharingBtn">
@@ -255,12 +258,12 @@ function updateViews() {
 
 			<div>${donation.content}</div>
 			<img class="card-img-top"
-				src="https://ticketimage.interpark.com/230043252023/07/17/e8fed53f.jpg">
+				src="/uimg/${donation.imageSub}">
 
 		</div>
 
 		<div class="col-12 col-md-8 mt-10">
-			<h5>같이 보면 좋은 세미나, 이건 어떠세요?</h5>
+			<h5>나눌수록 커지는 기쁨, 이런 기부는 어떠세요?</h5>
 			<div class="row">
 				<div class="col-6 col-md-4">
 
@@ -268,7 +271,7 @@ function updateViews() {
 					<div class="card mb-7 mb-md-0">
 
 						<!-- Image -->
-						<img src="/assets/img/blog/blog-1.jpg" alt="..."
+						<img src="/uimg/${obj.imageMain}" alt="..."
 							class="card-img-top">
 
 						<!-- Badge -->
@@ -493,6 +496,7 @@ function updateViews() {
 <input id="location" style="display: none;" value="${donation.location}">
 <input id="ddate" style="display: none;" value="${donation.ddate}">
 <input id="starcoin" style="display: none;" value="${donation.rewardCoin}">
+<input id="pointree" style="display: none;" value="${logincust.pointree}">
 
 
 
@@ -504,8 +508,9 @@ function donationPopup() {
     const location = document.getElementById('location').value;
     const ddate = document.getElementById('ddate').value;
     const starcoin = document.getElementById('starcoin').value;
+    const pointree = document.getElementById('pointree').value;
 
-    const text = "<span style='font-size: 1.4rem;'>" + title + "에 기부하시겠습니까? <br></span><br>🔸기부가능 포인트리: " + starcoin + "P";
+    const text = "<span style='font-size: 1.4rem;'>" + title + "에 기부하시겠습니까? <br></span><br>🔸기부가능 포인트리: " + pointree + "P";
     
     popup(text, true, donation, "");
 }

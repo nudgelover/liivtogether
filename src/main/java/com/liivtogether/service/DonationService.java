@@ -41,7 +41,4 @@ public class DonationService implements LIIVService<Integer, Donation> {
         return mapper.selectall();
     }
     
-	public void setTargetIn(Donation donation) throws Exception {
-		mapper.setTargetIn(donation);
-	}
 }
