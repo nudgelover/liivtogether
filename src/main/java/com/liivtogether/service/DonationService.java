@@ -41,4 +41,7 @@ public class DonationService implements LIIVService<Integer, Donation> {
         return mapper.selectall();
     }
     
+    public List<Donation> getrecommend() throws Exception {
+    	return mapper.selectrecommend();
+    }
 }

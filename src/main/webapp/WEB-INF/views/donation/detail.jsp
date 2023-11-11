@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
+.card-img-bottom {
+	height: 9rem;
+}
+
 .location-detail {
 	margin-top: 10px;
 	padding: 20px;
@@ -230,7 +234,7 @@ function updateViews() {
 						<button style="width: 33%">
 						<i class="fa fa-heart"></i> 찜하기
 						</button>
-        	    		<button style="width: 66%" onclick="donationPopup()">기부하기</button>
+        	    		<button style="width: 66%" onclick="loginCheck()">기부하기</button>
         	    		
 		           	</c:otherwise>
 				</c:choose>
@@ -263,8 +267,11 @@ function updateViews() {
 		</div>
 
 		<div class="col-12 col-md-8 mt-10">
-			<h5>나눌수록 커지는 기쁨, 이런 기부는 어떠세요?</h5>
+			<h5> 달성률이 너무 낮아 슬퍼요! 이런 기부에 참여해보는 것은 어떠신가요?</h5>
 			<div class="row">
+			<c:forEach var="obj" items="${rlist}">
+			<c:set var="achiQuo" value="${(obj.targetIn)/(obj.target)*100}"/>
+			<fmt:formatNumber value="${achiQuo}" pattern="###" var="formattedAchiQuo" />
 				<div class="col-6 col-md-4">
 
 					<!-- Card -->
@@ -272,27 +279,26 @@ function updateViews() {
 
 						<!-- Image -->
 						<img src="/uimg/${obj.imageMain}" alt="..."
-							class="card-img-top">
+							class="card-img-bottom">
 
 						<!-- Badge -->
 						<div
 							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-20"> Jun 20 </time>
+							<time datetime="2019-06-20">${formattedAchiQuo}% 달성
+							</time>
 						</div>
 
 						<!-- Body -->
 						<div class="card-body px-0 py-7">
 
 							<!-- Heading -->
-							<h6 class="mb-3">Us yielding Fish sea night night the said
-								him two</h6>
+							<h6 class="mb-3">${obj.title}</h6>
 
 							<!-- Text -->
-							<p class="mb-2">Fill his waters wherein signs likeness
-								waters. Second light gathered appear sixth.</p>
+							<p class="mb-2">${obj.comment}</p>
 
 							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+							<a class="btn btn-link px-0 text-body" href="/donation/detail?id=${obj.donaId}"> 자세히보기 <i
 								class="fe fe-arrow-right ms-2"></i>
 							</a>
 
@@ -301,192 +307,7 @@ function updateViews() {
 					</div>
 
 				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -517,10 +338,18 @@ function donationPopup() {
 
 
 function donation() {
-	window.location.href = "http://localhost/donation/join?id=${donation.donaId}";
+	window.location.href = "http://localhost/donation/join?id=${donation.donaId}";		
 }
 
-
+function loginCheck(){
+	var loginCustId = $('#loginCustId').val();
+	
+	if(loginCustId) {
+		donationPopup();
+	}else{
+		popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+	}
+}
 
 function sharingLiivTT() {
 	alert('리브똑똑 공유하기  : 죄송합니다. 준비 중입니다.');

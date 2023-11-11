@@ -12,6 +12,6 @@ import java.util.List;
 @Mapper
 public interface DonationMapper extends LIIVMapper<Integer, Donation> {
 	List<Donation> selectall();
-	
+	List<Donation> selectrecommend();
 	public void setTargetIn(Donation donation);
 }

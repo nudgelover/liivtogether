@@ -49,13 +49,17 @@ public class DonationController {
     @RequestMapping("/detail")
     public String detail(Model model, int id) throws Exception {
     	 Donation donation = Donationservice.get(id);
+    	 List<Donation> list = Donationservice.getrecommend();
     	 
     	 LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
  		 LocalDate ddate = LocalDate.parse(donation.getDdate()); // ddate 형식 2023-08-10
  		 int daysUntil = (int) ChronoUnit.DAYS.between(today, ddate);
  		 donation.setdDay(daysUntil);
- 		log.info("+++++++++++++"+donation);
+ 		
+ 		 log.info("++++recomend"+list);
+ 		 
     	 model.addAttribute("donation", donation);
+    	 model.addAttribute("rlist", list);
     	 model.addAttribute("center", dir + "detail");
         return "index";
     }

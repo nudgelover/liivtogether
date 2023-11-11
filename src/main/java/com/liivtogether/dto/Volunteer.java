@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @ToString
 public class Volunteer {
-	private String voluId;
+	private int voluId;
     private String topicBig;
     private String topicSmall;
     private String title;
@@ -27,4 +27,17 @@ public class Volunteer {
     private int rewardCoin;
     private int view;
     private String rdate;
+    private int dDay;
+	private String currentDate;
+    private int mount;
+	
+	public int getdDay() {
+		return dDay;
+	}
+	public void setdDay(int dDay) {
+		this.dDay = dDay;
+	}
+	public void setTargetIn(int targetIn) {
+	    this.targetIn = targetIn;
+	}
 }
