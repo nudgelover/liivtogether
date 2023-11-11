@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	
 <style>
 .card-img-top {
 	height: 13rem;
@@ -189,6 +192,7 @@
 			</div>
 		</div>
 		<div class="row">
+		<c:forEach var="obj" items="${vlist}">
 			<div class="col-12 col-md-4">
 				<!-- Card -->
 				<div class="card mb-7">
@@ -199,27 +203,34 @@
 					</div>
 					<!-- Badge -->
 					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
+						<c:choose>
+						 <c:when test="${obj.dDay >= 0}">
+						    <time class="text-uppercase" datetime="${obj.ddate}">D-${obj.dDay}일 </time>
+						 </c:when>
+						 <c:otherwise>
+						 	<time class="text-uppercase" datetime="${obj.ddate}">기한마감</time>
+						 </c:otherwise>
+						 </c:choose>				
 					</div>
 
 					<!-- Image -->
 					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
+						 src="/uimg/${obj.imageMain}"
+						 alt="/volunteer/detail">
 
 					<!-- Body -->
 					<div class="card-body px-0">
 
 						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
+						<h6>${obj.title}</h6>
 						<div class="event-info">
 							<span><img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 								5개</span> <span><img
 								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
+								${obj.targetIn}/${obj.target}명 참가</span> <span><img
 								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
+								${obj.view} 명 조회</span>
 
 						</div>
 						<!-- Text -->
@@ -228,250 +239,14 @@
 							grass face one every light of under.</p>
  -->
 						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
+								<a class="btn btn-link stretched-link px-0 text-reset"
+							href="/volunteer/detail?id=${obj.voluId}"> 참여하러가기 <i
 							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
+								</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
-						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
-
-						</div>
-						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
-						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
-
-						</div>
-						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
-						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
-
-						</div>
-						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
-						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
-
-						</div>
-						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<!-- Card -->
-				<div class="card mb-7">
-
-					<!-- 좋아요 -->
-					<div class="heart-icon">
-						<i class="fa-solid fa-heart white"></i>
-					</div>
-					<!-- Badge -->
-					<div class="badge bg-white text-body card-badge">
-						<time class="text-uppercase" datetime="2019-06-20">Jun 20</time>
-					</div>
-
-					<!-- Image -->
-					<img class="card-img-top"
-						src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg"
-						alt="/seminar/detail">
-
-					<!-- Body -->
-					<div class="card-body px-0">
-
-						<!-- Heading -->
-						<h6>우수고객 초청 자산관리 세미나</h6>
-						<div class="event-info">
-							<span><img
-								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
-								5개</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/1286/1286827.png">
-								34/120명 참가</span> <span><img
-								src="https://cdn-icons-png.flaticon.com/512/2354/2354573.png">
-								222명 조회</span>
-
-						</div>
-						<!-- Text -->
-						<!-- <p class="mb-0 text-gray-500">Midst one brought greater also
-							morning green saying had good. Open stars day let over gathered,
-							grass face one every light of under.</p>
- -->
-						<!-- Button -->
-						<a class="btn btn-link stretched-link px-0 text-reset"
-							href="/seminar/detail"> 참여하러가기 <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-			</div>
-		</div>
+			</c:forEach>
 		<div class="row">
 			<div class="col-12">
 

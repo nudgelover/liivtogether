@@ -26,6 +26,29 @@
 		ORDER BY ddate DESC
     </select>
 
+    <select id="selectrecommend" resultType="Donation">
+        SELECT id as donaId
+		, topic_big as topicBig
+		, topic_small as topicSmall
+		, title
+		, location
+		, edate 
+		, ddate
+		, target
+		, target_in as targetIn
+		, image_main as imageMain
+		, image_sub as imageSub
+		, comment
+		, content
+		, reword_coin as rewardCoin
+		, view
+		, rdate
+		FROM contents
+		WHERE topic_big = 'D'
+		ORDER BY (target_in / target) ASC
+		LIMIT 3
+    </select>
+
     <select id="select" parameterType="Integer" resultType="Donation">
 		SELECT id as donaId
 		, topic_big as topicBig

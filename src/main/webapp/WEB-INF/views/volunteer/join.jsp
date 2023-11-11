@@ -91,20 +91,21 @@
 }
 
 
+
 </style>
 <script>
 $(document).ready(function() {
 	let currentTabIndex = 1;
 
-	var seminarDateStr = "${seminar.ddate}"; // 날짜 문자열
-	var seminarDate = new Date(seminarDateStr);
+	var volunteerDateStr = "${volunteer.ddate}"; // 날짜 문자열
+	var volunteerDate = new Date(volunteerDateStr);
 	var days = [ '일', '월', '화', '수', '목', '금', '토' ];
-	var seminarDayOfWeek = days[seminarDate.getDay()]; // 0~6을 요일로 매핑
-	var formattedDate = seminarDateStr + ' / '+ seminarDayOfWeek + '요일';
+	var volunteerDayOfWeek = days[volunteerDate.getDay()]; // 0~6을 요일로 매핑
+	var formattedDate = volunteerDateStr + ' / '+ volunteerDayOfWeek + '요일';
 
-	$("#seminar-date").html(formattedDate);
+	$("#volunteer-date").html(formattedDate);
 	
-
+	generateTimeSlots();
 });
 </script> 
 <section class="py-8">
@@ -116,19 +117,20 @@ $(document).ready(function() {
 
 
 				<div style="display: block;" class="join-tab-content" id="tab1">
-					<h3>💡선택하시는 세미나의 정보입니다.</h3>
-					<img style="width: 90%" src="/uimg/${seminar.imageMain}">
-					<p style="font-size: 1.5rem;">세미나명 : ${seminar.title}</p>
-					<p>
-						진행날짜 : <span id="seminar-date"></span>
+					<h3>💡신청하시는 봉사의 정보입니다.</h3>
+					<img style="width: 90%" src="/uimg/${volunteer.imageMain}">
+					<p style="font-size: 1.5rem;">${volunteer.title}</p>
+					<p><br><img style="width: 20px;"
+					src="https://cdn-icons-png.flaticon.com/512/10691/10691802.png">
+						봉사일자 : <span id="volunteer-date"></span>
 					</p>
+					<br>
 					<p>
-						필요코인 : <img style="width: 30px;"
-							src="/assets/img/payment/starcoin.png">
-						${seminar.rewardCoin} 개
+						${volunteer.comment}<br><br>
+						${volunteer.content}						
 					</p>
 				</div>
-
+				<br>
 				<div class="join-tab-content" id="tab2">
 					<!-- 개인정보 이용동의 탭 내용 -->
 					<h2>개인정보 이용동의 [필수]</h2>
@@ -136,7 +138,7 @@ $(document).ready(function() {
 						<p>
 							<strong>1. 개인 정보 수집 목적</strong>
 						</p>
-						<p>당사는 이 세미나 신청을 위해 아래의 개인 정보를 수집하고자 합니다.</p>
+						<p>당사는 이 봉사 신청을 위해 아래의 개인 정보를 수집하고자 합니다.</p>
 						<ul>
 							<li>성명</li>
 							<li>연락처 정보 (전화번호, 이메일 주소 등)</li>
@@ -148,15 +150,15 @@ $(document).ready(function() {
 						</p>
 						<p>당사는 수집한 개인 정보를 다음과 같은 목적으로 이용합니다.</p>
 						<ul>
-							<li>세미나 참가 신청 및 관리</li>
-							<li>세미나 안내 및 업데이트 제공</li>
-							<li>세미나 관련 서비스 제공 및 운영</li>
+							<li>봉사 참가 신청 및 관리</li>
+							<li>봉사 안내 및 업데이트 제공</li>
+							<li>봉사 관련 서비스 제공 및 운영</li>
 						</ul>
 
 						<p>
 							<strong>3. 개인 정보 보유 기간</strong>
 						</p>
-						<p>수집한 개인 정보는 세미나 종료 후 최대 5년까지 보관됩니다. 보유 기간 이후에는 해당 정보를 즉시
+						<p>수집한 개인 정보는 봉사 종료 후 최대 5년까지 보관됩니다. 보유 기간 이후에는 해당 정보를 즉시
 							파기합니다.</p>
 
 						<p>
@@ -168,8 +170,8 @@ $(document).ready(function() {
 						<p>
 							<strong>5. 개인 정보의 동의 거부</strong>
 						</p>
-						<p>개인 정보의 수집 및 이용에 대한 동의는 세미나 참가 신청을 위해 필요한 사항입니다. 동의를 거부하실 경우
-							세미나 참가 신청이 제한될 수 있습니다.</p>
+						<p>개인 정보의 수집 및 이용에 대한 동의는 봉사 참가 신청을 위해 필요한 사항입니다. 동의를 거부하실 경우
+							봉사 참가 신청이 제한될 수 있습니다.</p>
 
 						<p>
 							<strong>6. 개인 정보 열람 및 수정</strong>
@@ -185,19 +187,19 @@ $(document).ready(function() {
 					
 					</div>
 					<div class="button-container">
-						<button id="agreeBtn">동의합니다</button>
+						<button id="agreeBtn" >동의합니다</button>
 					</div>
 				</div>
 
-				<div class="join-tab-content" id="tab3">
-					<!-- 결제 탭 내용 -->
-					<h2>결제</h2>
-					<img class="starcoin" src="/assets/img/starfriends/starcoin.png">
+				<div class="join-tab-content" id="tab3">					
+					봉사활동 가능시간을 선택해 주세요.
+					<h2>신청</h2>
+					  <div id="timeSlotsContainer"></div>
 					<div id="cointest" class="button-container">
-						<button id="payBtn">스타코인으로 결제하기</button>
+						<button id="payBtn">스타코인 받기</button>
 					</div>
 				</div>
-
+			 
 
 				<div style="display: flex;">
 					<button id="prevBtn" class="grayBtn" style="width: 50%;"
@@ -209,9 +211,9 @@ $(document).ready(function() {
 	</div>
 <input type="hidden" id="cust_id" value="${logincust.custId}">
 <input type="hidden" id="topic_big" value="S">
-<input type="hidden" id="contents_id" value="${seminar.semiId}">
+<input type="hidden" id="contents_id" value="${volunteer.voluId}">
 <input type="hidden" id="agreeornot" value="0">
-<input type="hidden" id="mount" value="${seminar.rewardCoin}">
+<input type="hidden" id="mount" value="${volunteer.rewardCoin}">
 <input type="hidden" id="starcoin" value="0">
 </section>
 <script>
@@ -292,16 +294,37 @@ $(document).ready(function() {
 
 	// 이벤트 리스너 함수를 저장해둘 변수
 	var payBtnClickListener = function() {
-	    var starCoin = ${seminar.rewardCoin};
-	    var text = "<span style='font-size: 1.4rem;'>" + starCoin + " 스타코인이 소요됩니다.</span></br>신청하신 세미나는 취소하실 수 없습니다. 정말로 결제하시겠습니까?";
+	    var starCoin = ${volunteer.rewardCoin};
+	    var text = "<span style='font-size: 1.4rem;'>" + starCoin + " 스타코인이 소요됩니다.</span></br>신청하신 봉사는 취소하실 수 없습니다. 정말로 결제하시겠습니까?";
 	    popup(text, true, goToPay, '');
 	};
 
 	// 클릭 이벤트 리스너 추가
 	payBtn.addEventListener('click', payBtnClickListener);
+      	
 
 	
+	
+	function generateTimeSlots() {
+        const container = document.getElementById('timeSlotsContainer');
+        
+        for (let hour = 6; hour <= 18; hour++) {
+            // Create a button for each hour
+            const button = document.createElement('button');
+            button.textContent = hour + ":00 - " + (hour + 1) + ":00";
+            
+            button.classList.add('time-slot-button');
+            
+            // Add a click event listener (you can customize this part)
+            button.addEventListener('click', function() {
+                alert(`You selected the time slot ${hour}:00 - ${hour + 1}:00`);
+                // Add your logic for handling the selected time slot
+            });
 
+            // Append the button to the container
+            container.appendChild(button);
+        }
+    }
 	
 	async function checkCoin(loginCustId, mount) {
 		
@@ -470,7 +493,7 @@ $(document).ready(function() {
 	}
 
 	function goToJoinComplete(custId, contentsId) {
-	    const url = 'http://localhost/seminar/join-complete'
+	    const url = 'http://localhost/volunteer/join-complete'
 	    window.location.href = url;
 	}
 
