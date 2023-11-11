@@ -145,13 +145,25 @@ $(document).ready(function(){
    	console.log(currentTabIndex);
    	
    });
-   
+
+function setZero() {
+	var inputElement = document.getElementById('donaPoint');	
+	inputElement.value = 0;
+}
+
 function setInputValue(amount) {
 	  // 'donaPoint' ID를 가진 input 요소를 찾습니다.
 	  var inputElement = document.getElementById('donaPoint');	  
 	  var intValue = parseInt(inputElement.value);
 	  var intAmount = parseInt(amount);
-	  inputElement.value = intValue + intAmount;
+	  var intTotal = intValue + intAmount;
+	  var intPointree = ${logincust.pointree};
+	  
+	  if(intPointree < intTotal){
+		  alert("포인트리가 부족합니다.");
+	  }else{	  	  
+	  	inputElement.value = intTotal;
+	  }
 	}
 
 let dona_form = {
@@ -166,6 +178,7 @@ let dona_form = {
 		    let token = $("meta[name='_csrf']").attr("content");
 		    let header = $("meta[name='_csrf_header']").attr("content");
 		    var donaId = $('#contents_id').val();
+		    var targetIn = $('#target_in').val();
 		    var loginCustId = $('#cust_id').val();
 		    var topicBig = $('#topic_big').val();
 		    var agree = $('#agreeornot').val();
@@ -175,9 +188,10 @@ let dona_form = {
 		    console.log(donaPoint);
 		
 		    $.ajax({
-		      url: '/apply/register',
+		      url: '/apply/donation',
 		      method: 'POST',
-		      data: {contentsId: donaId,
+		      data: {donaId: donaId,
+		    	  	targetIn: targetIn,
 		      		topicBig : topicBig,
 		      		custId: loginCustId,
 		      		agree : agree,
@@ -245,17 +259,17 @@ function donaSubmit(){
 						<div class="row">
 							<div class="col-30">기부 포인트리 : </div>
 							<div class="col-53"><input type="number" name="donaPoint" id="donaPoint" value="0"/></div>
-							<div class="col-17"><button type="button" class="pointreeSetBtn" id="reset" value="0" onclick="setInputValue(0)">초기화</button></div>							
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="reset" value="0" onclick="setZero()">초기화</button></div>							
 						</div>
 						<div class="row">
-							<div class="col-50 right-align" style="text-align: right;">(기부가능 포인트리 : 100000 P)</div>
+							<div class="col-50 right-align" style="text-align: right;">(기부가능 포인트리 : ${logincust.pointree} P)</div>
 						</div>
 						<div class="row">
 							<div class="col-30"></div>
 							<div class="col-17"><button type="button" class="pointreeSetBtn" id="chunP" value="1000" onclick="setInputValue(1000)">천원</button></div>
 							<div class="col-17"><button type="button" class="pointreeSetBtn" id="manP" value="10000" onclick="setInputValue(10000)">만원</button></div>
 							<div class="col-17"><button type="button" class="pointreeSetBtn" id="sipmanP" value="100000" onclick="setInputValue(100000)">십만원</button></div>
-							<div class="col-17"><button type="button" class="pointreeSetBtn" id="allP" value="1000000" onclick="setInputValue(1000000)">전액</button></div>
+							<div class="col-17"><button type="button" class="pointreeSetBtn" id="allP" value="${logincust.pointree}" onclick="setInputValue(${logincust.pointree})">전액</button></div>
 						</div>
 						<br/>
 						<p><input type="textarea" id ="memo" name="memo" placeholder="기부와 함께 소중한 마음을 전달해드립니다(선택)"></textarea></p>
@@ -273,7 +287,10 @@ function donaSubmit(){
 <input type="text" id="cust_id" value="${logincust.custId}">
 <input type="text" id="topic_big" value="D">
 <input type="text" id="contents_id" value="${donation.donaId}">
+<input type="text" id="target_in" value="${donation.targetIn}">
 <input type="text" id="agreeornot" value="0">
+<input type="text" id="pointree" value="${logincust.pointree}">
+
 </section>
 <script>
 
