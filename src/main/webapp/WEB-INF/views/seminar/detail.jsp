@@ -622,7 +622,7 @@ function sharingTwitter() {
 	
 }
 function goToMyPayments() {
-	alert('결제함으로 이동합니다....');
+	goMyAttend('S');
 }
 
 </script>

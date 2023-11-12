@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script>
+$(document).ready(function() {
+    sendAlarm();
+});
+
+function sendAlarm() {
+    const content = "세미나신청완료!!"
+    const postid = "5번세미나"
+    const receiveId = $('#loginCustId').val();
+    alarm.sendTo(postid, receiveId, content);
+};
+</script>
+
+
+
 <!-- CONTENT -->
 <section class="py-12">
 	<div class="container">
@@ -11,12 +26,15 @@
 
 				<!-- Heading -->
 				<h3 class="mb-5">세미나에 참여해주셔서 감사합니다.</h3>
+				<p>${seminar.title}</p>
 				<!-- Text -->
 		
 				<!-- Button -->
-				</br> <a class="btn btn-warning" href="/mypage/myseminar"> 나의 세미나로 이동하기</a>
+				</br> <button class="btn btn-warning" onclick="goMyAttend('S')"> 나의 세미나로 이동하기</button>
 
 			</div>
 		</div>
 	</div>
 </section>
+<input type="text" id="loginCustId" value="${logincust.custId}">
+<input type="text" id="loginCustName" value="${logincust.custName}">

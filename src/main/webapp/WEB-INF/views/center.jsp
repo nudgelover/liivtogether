@@ -92,6 +92,10 @@
 	color: lightslategray;
 	font-style: italic;
 }
+
+.card-img-top{
+	padding: 10%;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -192,8 +196,7 @@
 			<div class="col-12 col-lg-3">
 
 				<!-- Heading -->
-				<h3 class="mb-10 text-center text-lg-start">How is Contact
-					Lenses different?</h3>
+				<h3 class="mb-10 text-center text-lg-start">리브투게더 </br> 이것만 알 면 돼요!</h3>
 
 			</div>
 			<div class="col-12 col-md">
@@ -202,7 +205,7 @@
 				<div class="card mb-7 mb-md-0 shadow">
 
 					<!-- Image -->
-					<img src="assets/img/products/product-91.jpg" alt="..."
+					<img src="assets/img/starfriends/cuteeeee.gif" alt="..."
 						class="card-img-top">
 
 					<!-- Body -->
@@ -220,7 +223,7 @@
 				<div class="card mb-7 mb-md-0 shadow">
 
 					<!-- Image -->
-					<img src="assets/img/products/product-92.jpg" alt="..."
+					<img src="assets/img/starfriends/money.gif" alt="..."
 						class="card-img-top">
 
 					<!-- Body -->
@@ -238,7 +241,7 @@
 				<div class="card shadow">
 
 					<!-- Image -->
-					<img src="assets/img/products/product-93.jpg" alt="..."
+						<img src="assets/img/starfriends/gift.gif" alt="..."
 						class="card-img-top">
 
 					<!-- Body -->
