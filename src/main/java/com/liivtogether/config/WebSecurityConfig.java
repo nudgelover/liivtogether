@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedMethod(CorsConfiguration.ALL);
         configuration.addAllowedHeader(CorsConfiguration.ALL);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**, /ws, /chbot", configuration);
+        source.registerCorsConfiguration("/**, /ws,/alarm,/deliveryalarm, /chbot", configuration);
 
         http.httpBasic()
                 .and().authorizeRequests()
