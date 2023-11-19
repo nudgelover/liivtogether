@@ -31,7 +31,7 @@
 }
 
 #notification, #delNotification {
-	padding: 1rem;
+    padding: 0.2rem 1rem;
 
 }
 
@@ -50,6 +50,21 @@
     color: lightgray;
 }
 
+.del-alarm, #clearAllAlarm{
+ 	background: none;
+ 	border: none;
+}
+.del-alarm img, #clearAllAlarm img{
+	width: 15px;
+	margin: 1px;
+}
+
+#clearAllAlarm{
+	color: #424242;
+    font-size: small;
+    font-weight: 200 !important;
+   
+}
 </style>
 
 <script>
@@ -69,11 +84,11 @@ let alarm = {
             self.stompClient.subscribe('/alarm/to/' + sid, function (msg) {
           
                 var sendid = JSON.parse(msg.body).sendid;
-                var postid = JSON.parse(msg.body).postid;
+                var time = JSON.parse(msg.body).time;
                 var content = JSON.parse(msg.body).content;
-                var alarmData = {
+                var alarmData = {	
                     sendid   : sendid,
-                    postid   : postid,
+                    time   : time,
                     content  : content,
                     isAlerted: true
                 };
@@ -88,11 +103,11 @@ let alarm = {
             self.stompClient.subscribe('/deliveryalarm/to/' + sid, function (msg) {
                 
                 var sendid = JSON.parse(msg.body).sendid;
-                var postid = JSON.parse(msg.body).postid;
+                var time = JSON.parse(msg.body).time;
                 var content = JSON.parse(msg.body).content;
                 var alarmData = {
                     sendid   : sendid,
-                    postid   : postid,
+                    time   : time,
                     content  : content,
                     isAlerted: true
                 };
@@ -109,15 +124,15 @@ let alarm = {
             event.preventDefault();
        
             const currentDate = new Date();
-            const options = { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            const options = { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
             const koreanTime = currentDate.toLocaleString('ko-KR', options);
             
-            const postid = koreanTime;
+            const time = koreanTime;
             const receiveId = $('#loginCustId').val();
             const custName = $('#loginCustName').val();
             const content = custName + '님, [세상을 바꾸는 금융] 세미나 신청이 완료되셨습니다.</br> <a class="alarm-link" href="/seminar/detail?id=19">세미나 상세 페이지로 이동하기<img style="width:15px; margin-left : 5px;" src="/assets/img/icons/link.png"></a>';
           
-            alarm.sendTo(postid, receiveId,content);
+            alarm.sendTo(time, receiveId,content);
 
         });
         
@@ -126,20 +141,19 @@ let alarm = {
      
             
             const currentDate = new Date();
-            const options = { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            const options = { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
             const koreanTime = currentDate.toLocaleString('ko-KR', options);
             
-            const postid = koreanTime;
+            const time = koreanTime;
             const receiveId = $('#loginCustId').val();
             const custName = $('#loginCustName').val();
             const content = custName + '님, [친환경 종이 테이프] 배송이 시작되었습니다.</br><a class="alarm-link" href="/seminar/detail?id=19">배송상태 확인하러가기<img style="width:15px; margin-left : 5px;" src="/assets/img/icons/link.png"></a>';
             
             
-            alarm.delsendTo(postid, receiveId, content);
+            alarm.delsendTo(time, receiveId, content);
 
         });
-        
-        
+
         this.loadAndDisplayAlarms();
     },
     disconnect : function () {
@@ -148,58 +162,63 @@ let alarm = {
         }
         console.log("Disconnected");
     },
-    sendTo     : function (postid, receiveId, content) {
+    sendTo     : function (time, receiveId, content) {
         var msg = JSON.stringify({
             'sendid'   : this.id,
-            'postid'   : postid,
+            'time'   : time,
             'receiveid': receiveId,
             'content'  : content
         });
         this.stompClient.send('/alarmto', {}, msg);
     },
-    delsendTo     : function (postid, receiveId, content) {
+    delsendTo     : function (time, receiveId, content) {
         var msg = JSON.stringify({
             'sendid'   : this.id,
-            'postid'   : postid,
+            'time'   : time,
             'receiveid': receiveId,
             'content'  : content
         });
         this.stompClient.send('/deliveryalarm', {}, msg);
     },
     saveAlarm  : function (alarmData) {
-      //  var storedAlarms = this.getStoredAlarms();  -> 이제 디비 저장으로 하자!!!!!!!!!!!!!!!!!!!!
-      //  storedAlarms.push(alarmData);
-      //  localStorage.setItem('alarms', JSON.stringify(storedAlarms));
+        var storedAlarms = this.getStoredAlarms();  
+        const loginCustId = $('#loginCustId').val();
+        const userKey = 'alarms_' + loginCustId;
+        
+        
+        storedAlarms.push(alarmData);
+        localStorage.setItem(userKey, JSON.stringify(storedAlarms));
     },
-    loadAndDisplayAlarms: function () { //디비에서 가져와서 뿌리는거로!!!!!!!!!!!!!!!!!!!!!!!
-      //  var storedAlarms = this.getStoredAlarms();
-      //  for (var i = 0; i < storedAlarms.length; i++) {
-      //      var alarmData = storedAlarms[i];
-      //      this.displayAlarm(alarmData);
-       //     if (alarmData.isAlerted) {
-      //          this.showAlarm();
-      //      }
-     //   }
+    loadAndDisplayAlarms: function () { 
+        var storedAlarms = this.getStoredAlarms();
+
+        // 역순으로 저장된 알람을 가져와서 처리
+        for (var i = storedAlarms.length - 1; i >= 0; i--) {
+            var alarmData = storedAlarms[i];
+            this.displayAlarm(alarmData);
+            if (alarmData.isAlerted) {
+                this.showAlarm();
+            }
+        }
     },
     displayAlarm: function (alarmData) {
         var sendid = alarmData.sendid;
-        var postid = alarmData.postid;
+        var time = alarmData.time;
         var content = alarmData.content;
 
-        var alarmhtml =	'<div style="display: flex; margin-bottom: 10px;">'
+        var alarmhtml =	'<div style="display: flex; margin-bottom: 10px;" id="'+time+'">'
     		alarmhtml += '<div style="margin-right: 10px;">'
    			+'<img style="width:25px;" src="https://cdn-icons-png.flaticon.com/512/11520/11520014.png">'
     		+'</div>'
 			+'<div>'
 			+content
-			+'<p class="alarm-time">'+postid+'</p>'
-			+'</div>';	    
+			+'<p class="alarm-time">'+time+'</p>'
+			+'</div>'	    
+			+'<div><button class="del-alarm" onclick="deleteAlarm(\''+time+'\')"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png"></button></div>';
 
-
-        $("#notification").append(alarmhtml);
+        $("#notification").prepend(alarmhtml);
         $(".pulse-ring").show();
-    }
-    ,
+    } ,
     saveDeliveryAlarm  : function (alarmData) {
         //  var storedAlarms = this.getStoredAlarms();  -> 이제 디비 저장으로 하자!!!!!!!!!!!!!!!!!!!!
         //  storedAlarms.push(alarmData);
@@ -208,7 +227,7 @@ let alarm = {
 	,
 	displayDeliveryAlarm: function (alarmData) {
         var sendid = alarmData.sendid;
-        var postid = alarmData.postid;
+        var time = alarmData.time;
         var content = alarmData.content;
 
         var delalarmhtml =	'<div style="display: flex; margin-bottom: 10px;">'
@@ -217,31 +236,67 @@ let alarm = {
 			+'</div>'
 			+'<div>'
 			+content
-			+'<p class="alarm-time">'+postid+'</p>'
+			+'<p class="alarm-time">'+time+'</p>'
 			+'</div>';	    
 
 
-        $("#delNotification").append(delalarmhtml);
+        $("#delNotification").prepend(delalarmhtml);
         $(".pulse-ring").show();
     }
 	,
     showAlarm: function () {
         $(".pulse-ring").show();
     },
+
     getStoredAlarms: function () {
-    //    var storedAlarms = localStorage.getItem('alarms');
-      //  if (storedAlarms) {
-        //    return JSON.parse(storedAlarms);
-       // } else {
-         //   return [];
-        //}
+        const loginCustId = $('#loginCustId').val();
+        const userKey = 'alarms_' + loginCustId;
+        var storedAlarms = localStorage.getItem(userKey);
+        
+          if (storedAlarms) {
+            return JSON.parse(storedAlarms);
+        } else {
+            return [];
+        }
     }
    
 };
 $(function () {
-	alarm.init();
-	
+    alarm.init();
+    
+    $('#clearAllAlarm').on('click', function () {
+        clearAllAlarm();
+    });
+
 });
+
+
+
+function clearAllAlarm() {
+    const loginCustId = $('#loginCustId').val();
+    const userKey = 'alarms_' + loginCustId;
+
+
+    localStorage.removeItem(userKey);
+
+
+    $("#notification").empty();
+};
+
+function deleteAlarm(id) {
+    $('[id=\'' + id + '\']').css('display', 'none');
+    
+
+    const userKey = 'alarms_' + loginCustId;
+    var storedAlarms = localStorage.getItem(userKey);
+    storedAlarms = JSON.parse(storedAlarms);
+
+    const updatedAlarms = storedAlarms.filter(alarm => alarm.time !== id);
+
+    localStorage.setItem(userKey, JSON.stringify(updatedAlarms));
+}
+
+
 </script>
 
 
@@ -272,6 +327,9 @@ $(function () {
 		</button>
 	</div>
 	<div id="alarmTab1" class="tab-content">
+		<div style="display: flex; justify-content: end; padding: 2px 10px 0 0;">
+			<button id="clearAllAlarm">알림함 비우기<img src="https://cdn-icons-png.flaticon.com/512/484/484560.png"></button>
+		</div>
 		<div id="notification">
 		
 		</div>

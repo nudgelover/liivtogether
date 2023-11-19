@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class Msg {
 
-	private String postid;
+	private String time;
 	private String sendid;
 	private String receiveid;
 	private String content;
