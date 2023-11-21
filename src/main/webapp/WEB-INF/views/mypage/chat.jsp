@@ -135,7 +135,7 @@
 				<div class="user-picbox">
 					<div class="avatar-container">
 						<div class="avatar avatar-xl">
-							<img src="../assets/img/avatars/avatar-1.jpg" alt="..."
+							<img src="/uimg/${logincust.img}" alt="..."
 								class="avatar-img rounded-circle">
 						</div>
 						<div class="edit-icon">

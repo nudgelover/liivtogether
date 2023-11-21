@@ -54,4 +54,18 @@ public class PointService implements LIIVService<Integer, Point> {
 		return mapper.preCheck(custId, pointcoin);
 	}
 
+	
+	public List<Point> getMyList(String custId,String pointcoin) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.getMyList(custId, pointcoin);
+	}
+	
+	
+	
+	public Point getMyTotal(String custId,String pointcoin) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.getMyTotal(custId, pointcoin);
+	}
+	
+	
 }

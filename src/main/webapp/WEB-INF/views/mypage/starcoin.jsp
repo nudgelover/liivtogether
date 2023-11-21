@@ -306,7 +306,7 @@
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToChat()">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/2076/2076218.png">채팅하기<img
+								src="https://cdn-icons-png.flaticon.com/512/2076/2076218.png">채팅하기aaa<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 					</div>

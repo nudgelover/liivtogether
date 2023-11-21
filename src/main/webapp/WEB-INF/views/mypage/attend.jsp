@@ -197,11 +197,11 @@
 		document.getElementById('donationContent').style.display = 'none';
 		document.getElementById('volunteeringContent').style.display = 'none';
 		document.getElementById('seminarContent').style.display = 'none';
-		document.getElementById('allContent').style.display = 'none';
+		
 		document.getElementById('attendTab1').style.color = '#424242';
 		document.getElementById('attendTab2').style.color = '#424242';
 		document.getElementById('attendTab3').style.color = '#424242';
-		document.getElementById('attendTab4').style.color = '#424242';
+		
 
 		switch (tab) {
 		case 'donation':
@@ -215,10 +215,6 @@
 		case 'seminar':
 			document.getElementById('seminarContent').style.display = 'block';
 			document.getElementById('attendTab3').style.color = '#ff6f61';
-			break;
-		case 'all':
-			document.getElementById('allContent').style.display = 'block';
-			document.getElementById('attendTab4').style.color = '#ff6f61';
 			break;
 		}
 	}
@@ -258,11 +254,10 @@
 				<div class="titlelist col-12">
 					<a id="attendTab1" href="#" onclick="showTab('donation')">기부</a> <a
 						id="attendTab2" href="#" onclick="showTab('volunteering')">봉사</a>
-					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> <a
-						id="attendTab4" href="#" onclick="showTab('all')">모아보기</a>
+					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> 
 				</div>
 				<div>
-					<div id="donationContent" class="col-12 col-lg-9">
+			"src/main/webapp/WEB-INF/views/mypage/certificate.jsp"		<div id="donationContent" class="col-12 col-lg-9">
 
 						<c:choose>
 							<c:when test="${empty dlist}">
@@ -275,8 +270,9 @@
 										<img src="/uimg/${item.imageMain}">
 										<div class="detail">
 											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
-											<span>장소 : ${item.location}</span> <span>날짜:
-												${item.ddate}</span> <span>소요스타코인: <img style="width: 20px;"
+											<span>기부금액 : 어떻게표출하지</span>
+											 <span>전달메모:  ${item.memo}</span>
+											<span>보상스타코인: <img style="width: 20px;"
 												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 												${item.rewordCoin}개
 											</span> <span>신청한 날짜 : ${item.rdate}</span>
@@ -353,8 +349,6 @@
 						</c:choose>
 					</div>
 
-
-					<div id="allContent" class="col-12 col-lg-9">모두로딩을 할것이냐말것이냐</div>
 				</div>
 			</div>
 		</div>
