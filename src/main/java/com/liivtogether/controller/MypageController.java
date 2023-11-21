@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Cust;
+import com.liivtogether.dto.Point;
 import com.liivtogether.service.ApplyService;
+import com.liivtogether.service.PointService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,9 +27,19 @@ public class MypageController {
 	@Autowired
 	ApplyService applyService;
 	
+	@Autowired
+	PointService pointService;
+	
     String dir = "mypage/";
     @RequestMapping("")
-    public String mypage(Model model) throws Exception {
+    public String mypage(Model model,HttpSession session ) throws Exception {
+
+    	Cust cust = (Cust) session.getAttribute("logincust");
+    	String custId = cust.getCustId();
+    	
+        List<Apply> attendCount= applyService.getMyAttendCount(custId);
+
+        model.addAttribute("attendCount", attendCount);
     	 model.addAttribute("center", dir + "main");
         return "index";
     }
@@ -68,4 +80,32 @@ public class MypageController {
         return "index";
     }
  
+    @RequestMapping("/starcoin")
+    public String starcoin(Model model, HttpSession session) throws Exception {
+    	Cust cust = (Cust) session.getAttribute("logincust");
+    	String custId = cust.getCustId();
+
+        List<Point> MyStarcoinList = pointService.getMyList(custId,"STARCOIN");
+        
+        model.addAttribute("MyPointreeList", MyStarcoinList);
+    	model.addAttribute("center", dir + "starcoin");
+        return "index";
+    }
+    @RequestMapping("/pointree")
+    public String pointree(Model model, HttpSession session) throws Exception {
+   
+
+    	Cust cust = (Cust) session.getAttribute("logincust");
+    	String custId = cust.getCustId();
+    	
+
+        List<Point> MyPointreeList = pointService.getMyList(custId,"POINTREE");
+        Point totalPoint = pointService.getMyTotal(custId,"POINTREE");
+        
+     
+        model.addAttribute("MyPointreeList", MyPointreeList);
+        model.addAttribute("totalPoint", totalPoint);
+     	model.addAttribute("center", dir + "pointree");
+        return "index";
+    }
 }

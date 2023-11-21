@@ -76,4 +76,16 @@
 	</select>
 
 
+	<select id="getMyAttendCount" parameterType="Object" resultType="Apply">
+		SELECT topics.topic_big AS topicBig, IFNULL(COUNT(apply.cust_id), 0) AS cnt
+		FROM (
+		    SELECT 'D' AS topic_big
+		    UNION SELECT 'V' AS topic_big
+		    UNION SELECT 'S' AS topic_big
+		) AS topics
+		LEFT JOIN liivtogether.apply
+		ON topics.topic_big = SUBSTRING(apply.topic_big, 1, 1) AND apply.cust_id = #{custId}
+		GROUP BY topics.topic_big;
+
+	</select>
 </mapper>

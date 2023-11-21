@@ -27,4 +27,5 @@ public class Apply {
     private String content;
     private String rewordCoin;
     private String agree;
+    private int cnt;
 }

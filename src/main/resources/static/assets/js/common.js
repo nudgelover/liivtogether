@@ -45,6 +45,15 @@ function goToChat() {
 	window.location.href = "http://localhost/mypage/chat";
 }
 
+function goToMyStarcoin() {
+	window.location.href = "http://localhost/mypage/starcoin";
+}
+
+function goToMyPointree() {
+	window.location.href = "http://localhost/mypage/pointree";
+}
+
+
 function popup(message, isPrompt, onConfirm, onCancel) {
 	//모달 팝업띄울 때 쓰는 함수. 사용하는 방법은 다음과 같습니다. 
 	//popup('이벤트에 참여하시겠습니까?', true, goToJoin, gotoMain);

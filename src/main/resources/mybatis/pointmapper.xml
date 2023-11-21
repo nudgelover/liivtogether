@@ -62,6 +62,25 @@
 	  WHERE cust_id = #{custId}
 	</select>
 
+	<select id="getMyList" resultType="Point">
+		SELECT history_id as historyId, pointcoin, gplace, uplace, DATE(rdate) as rdate, cust_id as custId, mount
+		FROM liivtogether.phistory
+		WHERE cust_id=#{custId}
+		and pointcoin =#{pointcoin}
+		order BY history_id desc
+	</select>
+	
+	
+	<select id="getMyTotal" resultType="Point">
+		SELECT 
+			SUM(CASE WHEN gplace is not null THEN mount ELSE 0 END) as totalEarned,
+		    SUM(CASE WHEN uplace is not null THEN mount ELSE 0 END) as totalUsed,
+		    SUM(CASE WHEN gplace IS NOT NULL THEN mount ELSE 0 END) - SUM(CASE WHEN uplace IS NOT NULL THEN mount ELSE 0 END) as difference
+			
+		FROM phistory
+		WHERE cust_id=#{custId}
+		and pointcoin =#{pointcoin}
+	</select>
 	
 
 </mapper>

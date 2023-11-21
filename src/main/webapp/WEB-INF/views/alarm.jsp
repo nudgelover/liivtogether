@@ -124,7 +124,7 @@ let alarm = {
             event.preventDefault();
        
             const currentDate = new Date();
-            const options = { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const options = { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 3 };
             const koreanTime = currentDate.toLocaleString('ko-KR', options);
             
             const time = koreanTime;
@@ -192,8 +192,7 @@ let alarm = {
     loadAndDisplayAlarms: function () { 
         var storedAlarms = this.getStoredAlarms();
 
-        // 역순으로 저장된 알람을 가져와서 처리
-        for (var i = storedAlarms.length - 1; i >= 0; i--) {
+        for (var i = 0; i < storedAlarms.length; i++) {
             var alarmData = storedAlarms[i];
             this.displayAlarm(alarmData);
             if (alarmData.isAlerted) {
