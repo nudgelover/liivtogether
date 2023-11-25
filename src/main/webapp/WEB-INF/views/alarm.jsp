@@ -199,11 +199,18 @@ let alarm = {
                 this.showAlarm();
             }
         }
+        //개수를 카운트해서 
+        var numberOfAlarms = storedAlarms.length;
+        
+        $('#countAlarm').attr('data-cart-items', numberOfAlarms);
+
+
     },
     displayAlarm: function (alarmData) {
         var sendid = alarmData.sendid;
         var time = alarmData.time;
         var content = alarmData.content;
+      
 
         var alarmhtml =	'<div style="display: flex; margin-bottom: 10px;" id="'+time+'">'
     		alarmhtml += '<div style="margin-right: 10px;">'
@@ -216,7 +223,7 @@ let alarm = {
 			+'<div><button class="del-alarm" onclick="deleteAlarm(\''+time+'\')"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png"></button></div>';
 
         $("#notification").prepend(alarmhtml);
-        $(".pulse-ring").show();
+        
     } ,
     saveDeliveryAlarm  : function (alarmData) {
         //  var storedAlarms = this.getStoredAlarms();  -> 이제 디비 저장으로 하자!!!!!!!!!!!!!!!!!!!!
@@ -278,8 +285,9 @@ function clearAllAlarm() {
 
     localStorage.removeItem(userKey);
 
-
     $("#notification").empty();
+    
+    $('#countAlarm').attr('data-cart-items', 0);
 };
 
 function deleteAlarm(id) {
@@ -293,6 +301,12 @@ function deleteAlarm(id) {
     const updatedAlarms = storedAlarms.filter(alarm => alarm.time !== id);
 
     localStorage.setItem(userKey, JSON.stringify(updatedAlarms));
+    
+
+    const numberOfAlarms = updatedAlarms.length;
+
+
+    $('#countAlarm').attr('data-cart-items', numberOfAlarms);
 }
 
 
@@ -343,8 +357,8 @@ function deleteAlarm(id) {
 	 </div>
 	</div>
 
-	<button class="btn" id="sendalarm">활동 알람 테스트</button>
-	<button class="btn" id="sendDeliveryalarm">배송 알람  테스트</button>
+<!-- 	<button class="btn" id="sendalarm">활동 알람 테스트</button>
+	<button class="btn" id="sendDeliveryalarm">배송 알람  테스트</button> -->
 	
 	
 	<input type="hidden" id="loginCustId" value="${logincust.custId}">

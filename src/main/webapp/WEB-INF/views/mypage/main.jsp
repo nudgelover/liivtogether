@@ -312,41 +312,26 @@
 					</div>
 
 
-					<p class="section-header">나의 문의내역</p>
+					<p class="section-header">나의 문의내역  <span style="color: orange;">⚠️준비 중</span></p>
 					<div class="col-12 mysection">
 						<div class="col-12 col-lg-6 section-list">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">증명서
-							발급하기<img
-								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
-						</div>
-						<div class="col-12 col-lg-6 section-list">
-							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
-								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
-						</div>
-						<div class="col-12 col-lg-6 section-list">
-							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">채팅하기<img
+								src="https://cdn-icons-png.flaticon.com/512/3378/3378645.png">
+								 	내가 문의한 내역
+								<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 					</div>
-					<p class="section-header">고객센터</p>
+					<p class="section-header">고객센터  <span style="color: orange;">⚠️ 준비 중</span></p>
 					<div class="col-12 mysection mb-10">
 						<div class="col-12 col-lg-6 section-list">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">증명서
-							발급하기<img
+								src="https://cdn-icons-png.flaticon.com/512/126/126509.png">고객전용 고객센터<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToWish()">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
-								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
-						</div>
-						<div class="col-12 col-lg-6 section-list" onclick="goToChat()">
-							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">채팅하기<img
+								src="https://cdn-icons-png.flaticon.com/512/126/126509.png">협업사전용 고객센터<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 					</div>

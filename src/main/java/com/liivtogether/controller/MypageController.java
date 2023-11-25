@@ -85,12 +85,15 @@ public class MypageController {
     	Cust cust = (Cust) session.getAttribute("logincust");
     	String custId = cust.getCustId();
 
-        List<Point> MyStarcoinList = pointService.getMyList(custId,"STARCOIN");
+        List<Point> MyStarcoinList = pointService.getMyList(custId,"COIN");
+        Point totalStarcoin = pointService.getMyTotal(custId,"COIN");
         
-        model.addAttribute("MyPointreeList", MyStarcoinList);
+        model.addAttribute("MyStarcoinList", MyStarcoinList);
+        model.addAttribute("totalStarcoin", totalStarcoin);
     	model.addAttribute("center", dir + "starcoin");
         return "index";
     }
+    
     @RequestMapping("/pointree")
     public String pointree(Model model, HttpSession session) throws Exception {
    
