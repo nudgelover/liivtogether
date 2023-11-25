@@ -197,7 +197,7 @@
 						src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 					목록
 				</h2>
-<p>여기 디비 연결 하나도안됨</p>
+				<p>준비 중입니다.</p>
 				<div class="titlelist col-12">
 					<a id="wishtab1" href="#" onclick="showTab('donation')">기부</a> <a
 						id="wishtab2" href="#" onclick="showTab('volunteering')">봉사</a> <a

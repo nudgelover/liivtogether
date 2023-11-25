@@ -257,7 +257,7 @@
 					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> 
 				</div>
 				<div>
-			"src/main/webapp/WEB-INF/views/mypage/certificate.jsp"		<div id="donationContent" class="col-12 col-lg-9">
+				<div id="donationContent" class="col-12 col-lg-9">
 
 						<c:choose>
 							<c:when test="${empty dlist}">
@@ -333,7 +333,7 @@
 												</span> <span style="font-size: small; color: gray;">${item.rdate}</span>
 											</div>
 										</div>
-										<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+									<!-- 	<div style="display: flex; justify-content: space-between; margin-top: 5px;">
 											<button class="shareBtn">
 												<img src="https://cdn-icons-png.flaticon.com/512/3135/3135807.png" onclick="goToCertificate">증명서 발급하기
 											</button>
@@ -341,7 +341,7 @@
 												취소하기<i class="fa fa-close"></i>
 											</button>
 										
-										</div>
+										</div> -->
 									</div>
 
 								</c:forEach>
