@@ -210,7 +210,7 @@
 
 					<!-- Body -->
 					<div class="card-body text-center">
-						<img class="me-4" src="/assets/img/icons/icon-hands.svg" alt="...">
+						<img class="me-4" style="width: 30px;" src="https://cdn-icons-png.flaticon.com/512/1692/1692181.png" alt="...">
 						<strong>기부와 봉사로 세상의 온도를 높여주세요.</strong>
 					</div>
 
@@ -228,7 +228,7 @@
 
 					<!-- Body -->
 					<div class="card-body text-center">
-						<img class="me-4" src="assets/img/icons/icon-wrap.svg" alt="...">
+						<img class="me-4" style="width: 30px;" src="assets/img/payment/starcoin.png" alt="...">
 						<strong>보상으로 스타코인을 드려요!</strong>
 					</div>
 
@@ -246,7 +246,7 @@
 
 					<!-- Body -->
 					<div class="card-body text-center">
-						<img class="me-4" src="assets/img/icons/icon-bottle.svg" alt="...">
+						<img class="me-4" style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/1139/1139982.png" alt="...">
 						<strong>세미나 참여, ESG 상품으로 교환해요!</strong>
 					</div>
 
