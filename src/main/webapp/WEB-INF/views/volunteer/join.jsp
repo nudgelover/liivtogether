@@ -25,6 +25,18 @@
 	margin: 5px;
 }
 
+#timeSlotsContainer button {
+	width: 30%;
+	padding: 1rem;
+	border-radius: 5px;
+	font-weight: 700;
+	color: black;
+	height: 3.5rem;
+	border: none;
+	background-color: #E6E6E6;
+	margin: 5px;
+}
+
 #tab1 p {
 	margin: 10px;
 	font-size: large;
@@ -36,6 +48,10 @@
 
 .grayBtn {
 	background-color: #E6E6E6 !important;
+	cursor: default !important;
+}
+.timeSelectBtn {
+	background-color: #b0aeae !important;
 	cursor: default !important;
 }
 
@@ -194,12 +210,13 @@ $(document).ready(function() {
 				<div class="join-tab-content" id="tab3">					
 					봉사활동 가능시간을 선택해 주세요.
 					<h2>신청</h2>
-					  <div id="timeSlotsContainer"></div>
+					  <div id="timeSlotsContainer"></div>	
+					  
 					<div id="cointest" class="button-container">
-						<button id="payBtn">스타코인 받기</button>
+						<button id="payBtn">봉사 신청하기</button>
 					</div>
 				</div>
-			 
+
 
 				<div style="display: flex;">
 					<button id="prevBtn" class="grayBtn" style="width: 50%;"
@@ -210,8 +227,9 @@ $(document).ready(function() {
 		</div>
 	</div>
 <input type="hidden" id="cust_id" value="${logincust.custId}">
-<input type="hidden" id="topic_big" value="S">
+<input type="hidden" id="topic_big" value="V">
 <input type="hidden" id="contents_id" value="${volunteer.voluId}">
+<input id="target_in" value="${volunteer.targetIn}">
 <input type="hidden" id="agreeornot" value="0">
 <input type="hidden" id="mount" value="${volunteer.rewardCoin}">
 <input type="hidden" id="starcoin" value="0">
@@ -223,6 +241,7 @@ $(document).ready(function() {
 	const prevBtn = document.getElementById('prevBtn');
 	const nextBtn = document.getElementById('nextBtn');
 
+	let selectedTime = '';
 	
 	function openPrevTab() {
 
@@ -295,7 +314,7 @@ $(document).ready(function() {
 	// 이벤트 리스너 함수를 저장해둘 변수
 	var payBtnClickListener = function() {
 	    var starCoin = ${volunteer.rewardCoin};
-	    var text = "<span style='font-size: 1.4rem;'>" + starCoin + " 스타코인이 소요됩니다.</span></br>신청하신 봉사는 취소하실 수 없습니다. 정말로 결제하시겠습니까?";
+	    var text = "<span style='font-size: 1.4rem;'> 봉사활동 후 " + starCoin + " 스타코인이 적립됩니다.</span></br> 봉사를 정말로 신청하시겠습니까?";
 	    popup(text, true, goToPay, '');
 	};
 
@@ -308,21 +327,38 @@ $(document).ready(function() {
 	function generateTimeSlots() {
         const container = document.getElementById('timeSlotsContainer');
         
-        for (let hour = 6; hour <= 18; hour++) {
+        for (let hour = 6; hour < 18; hour++) {
             // Create a button for each hour
-            const button = document.createElement('button');
-            button.textContent = hour + ":00 - " + (hour + 1) + ":00";
+            const timeBtn = document.createElement('button');
+            timeBtn.textContent = hour + ":00 - " + (hour + 1) + ":00";
             
-            button.classList.add('time-slot-button');
+            timeBtn.classList.add('time-slot-button');
             
             // Add a click event listener (you can customize this part)
-            button.addEventListener('click', function() {
-                alert(`You selected the time slot ${hour}:00 - ${hour + 1}:00`);
-                // Add your logic for handling the selected time slot
+            timeBtn.addEventListener('click', function() {
+                if (selectedTime == '') {
+                    // 최초 선택된 경우
+                    selectedTime = hour + ":00 - " + (hour + 1) + ":00";
+                    console.log("선택한 시간:", selectedTime);
+                    timeBtn.classList.add('timeSelectBtn');
+                } else if (selectedTime === hour + ":00 - " + (hour + 1) + ":00") {
+                    // 이미 선택된 버튼을 다시 클릭한 경우
+                    alert("이미 선택된 시간입니다.");
+                } else {
+                    // 다른 버튼을 선택한 경우
+                    // 다른 버튼들의 토글을 해제
+                    document.querySelectorAll('.time-slot-button').forEach(btn => {
+                        btn.classList.remove('timeSelectBtn');
+                    });
+                    // 현재 선택된 시간 갱신
+                    selectedTime = hour + ":00 - " + (hour + 1) + ":00";
+                    console.log("Selected Time:", selectedTime);
+                    timeBtn.classList.add('timeSelectBtn');
+                }
             });
 
             // Append the button to the container
-            container.appendChild(button);
+            container.appendChild(timeBtn);
         }
     }
 	
@@ -361,8 +397,10 @@ $(document).ready(function() {
 	    var loginCustId = $('#cust_id').val();
 	    var mount = $('#mount').val();
 		var topicBig = $('#topic_big').val();
+		var targetIn = $('#target_in').val();
 		var agree = $('#agreeornot').val();
-
+		var memo = selectedTime;
+		
 	    try {
 	        const myStarCoin = await checkCoin(loginCustId, mount);
 
@@ -398,11 +436,14 @@ $(document).ready(function() {
 	            url: "/apply/process",
 	            data: {
 	                contentsId: contentsId,
+	                //voluId: contentsId,
 	                custId: loginCustId,
+	                memo: memo,
 	                mount: mount,
 	                pointcoin: "COIN",
-	                uplace: "S",
+	                gplace: "V",
 	                topicBig: topicBig,
+	                targetIn: targetIn,
 	                agree: agree
 	            },
 	            beforeSend: function (xhr, set) {
@@ -415,7 +456,7 @@ $(document).ready(function() {
 	        });
 
 	        if (response === "success") {
-	            console.log("모든 결제 완료");
+	            console.log("신청완료");
 	            
 	        	var payBtn = document.getElementById('payBtn');
 	    		payBtn.classList.add('grayBtn'); // 버튼 스타일 변경
@@ -470,7 +511,7 @@ $(document).ready(function() {
 		
 		// "로딩 중입니다" 텍스트 추가
 		const loadingText = document.createElement('div');
-		loadingText.textContent = '결제 중입니다. 잠시만 기다려주세요.';
+		loadingText.textContent = '신청 중입니다. 잠시만 기다려주세요.';
 		loadingText.style.color = 'white';
 
 		// 로딩 스피너를 컨테이너에 추가합니다.

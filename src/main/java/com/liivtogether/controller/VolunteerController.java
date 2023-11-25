@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Donation;
+import com.liivtogether.dto.Seminar;
 import com.liivtogether.dto.Volunteer;
+import com.liivtogether.service.ApplyService;
 import com.liivtogether.service.VolunteerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,9 @@ public class VolunteerController {
 	
 	@Autowired
 	VolunteerService Volunteerservice;
+	
+	@Autowired
+	ApplyService applyService;
 	
     String dir = "volunteer/";
     @RequestMapping("")
@@ -73,6 +79,18 @@ public class VolunteerController {
 
 		model.addAttribute("volunteer", volunteer);
 		model.addAttribute("center", dir + "join");
+
+		return "index";
+	}
+	
+	@RequestMapping("/join-complete")
+	public String joincomplete(Model model,String custId,Integer contentsId) throws Exception {
+		Volunteer volunteer = Volunteerservice.get(contentsId);
+		Apply apply = applyService.getJoinComplete(custId, contentsId);
+		
+		model.addAttribute("volunteer", volunteer);
+		model.addAttribute("apply", apply);
+		model.addAttribute("center", dir + "joincomplete");
 
 		return "index";
 	}

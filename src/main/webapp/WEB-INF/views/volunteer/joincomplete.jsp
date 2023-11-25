@@ -10,11 +10,11 @@
 				<div class="mb-7 fs-1"><img style="width: 50%" src ="/assets/img/starfriends/thank.gif"></div>
 
 				<!-- Heading -->
-				<h3 class="mb-5">세미나에 참여해주셔서 감사합니다.</h3>
+				<h3 class="mb-5">봉사에 참여해주셔서 감사합니다.</h3>
 				<!-- Text -->
 		
 				<!-- Button -->
-				</br> <a class="btn btn-warning" href="/mypage/myseminar"> 나의 세미나로 이동하기</a>
+				</br> <a class="btn btn-warning" href="/mypage/myvolunteer"> 나의 봉사로 이동하기</a>
 
 			</div>
 		</div>

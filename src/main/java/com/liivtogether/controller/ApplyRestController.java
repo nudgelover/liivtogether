@@ -16,8 +16,12 @@ import com.liivtogether.dto.Cust;
 import com.liivtogether.dto.Donation;
 import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Point;
+import com.liivtogether.dto.Seminar;
+import com.liivtogether.dto.Volunteer;
 import com.liivtogether.service.ApplyService;
 import com.liivtogether.service.PointService;
+import com.liivtogether.service.SeminarService;
+import com.liivtogether.service.VolunteerService;
 import com.liivtogether.service.DonationService;
 import com.liivtogether.service.CustService;
 
@@ -36,6 +40,10 @@ public class ApplyRestController {
 	DonationService donationService;
 	@Autowired
 	CustService custService;
+	@Autowired
+	VolunteerService volunteerService;
+	@Autowired
+	SeminarService seminarService;
 
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
@@ -61,12 +69,23 @@ public class ApplyRestController {
 
     @Transactional(rollbackFor = Exception.class) 
 	@PostMapping("/apply/process")
-	public Object applyprocess(Apply apply, Point point) throws Exception {
+	public Object applyprocess(Apply apply, Point point, Volunteer volunteer, Seminar seminar) throws Exception {
 		String result;
 		try {
 			applyService.register(apply);
 			pointService.register(point);
 			pointService.modify(point);
+			
+			int Id = apply.getContentsId();
+			String topicBic = apply.getTopicBig();
+
+			if ("V".equals(topicBic)) {
+				volunteer.setVoluId(Id);
+				volunteerService.modify(volunteer);
+			}else if ("S".equals(topicBic)){
+				seminar.setSemiId(Id);
+				seminarService.modify(seminar);
+			}
 			
 			result = "success";
 

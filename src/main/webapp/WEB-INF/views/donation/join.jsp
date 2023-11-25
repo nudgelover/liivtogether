@@ -185,12 +185,13 @@ let dona_form = {
 		    var memo = $('#memo').val();
 		    var donaPoint = $("#donaPoint").val();
 		    var pointcoin = $("#pointcoin").val();
-		    console.log(donaPoint);
+		    console.log("donaid:"+donaId);
 		
 		    $.ajax({
 		      url: '/apply/donation',
 		      method: 'POST',
 		      data: {donaId: donaId,
+		    	    contentsId: donaId,
 		    	  	targetIn: targetIn,
 		      		topicBig : topicBig,
 		      		custId: loginCustId,

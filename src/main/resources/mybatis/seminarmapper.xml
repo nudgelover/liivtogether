@@ -147,6 +147,10 @@
 	</insert>
 
 	<update id="update" parameterType="Seminar">
+	  UPDATE contents
+	    SET
+	    target_in = #{targetIn} + 1
+	    WHERE id = #{semiId}
 	</update>
 
 	<delete id="delete" parameterType="String">
