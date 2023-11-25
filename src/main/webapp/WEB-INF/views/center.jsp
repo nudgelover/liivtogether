@@ -247,7 +247,7 @@
 					<!-- Body -->
 					<div class="card-body text-center">
 						<img class="me-4" style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/1139/1139982.png" alt="...">
-						<strong>세미나 참여, ESG 상품으로 교환해요!</strong>
+						<strong>세미나 참여, ESG 상품으로 교환해요! </strong>
 					</div>
 
 				</div>
