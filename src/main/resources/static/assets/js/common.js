@@ -23,6 +23,7 @@ function goMyAttend(item) {
 
 
 function goToWish() {
+
 	window.location.href = "http://localhost/mypage/wish";
 }
 

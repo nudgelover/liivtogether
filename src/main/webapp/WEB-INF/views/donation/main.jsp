@@ -324,7 +324,7 @@
 						</div>
 
 						<!-- Button -->
-						<button class="btn btn-sm btn-outline-dark">Load more</button>
+						<button class="btn btn-sm btn-outline-dark">더보기</button>
 
 					</div>
 				</div>

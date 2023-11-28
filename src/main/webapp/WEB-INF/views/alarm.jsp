@@ -355,6 +355,7 @@ function deleteAlarm(id) {
 	 
 	 
 	 </div>
+	 <button style="margin: 28%" class="btn btn-warning" id="sendDeliveryalarm">배송 알람  테스트</button> 
 	</div>
 
 <!-- 	<button class="btn" id="sendalarm">활동 알람 테스트</button>

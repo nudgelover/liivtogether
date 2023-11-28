@@ -129,6 +129,11 @@
 }
 </style>
 <script>
+$(document).ready(function() {
+	popup('해당 페이지는 준비 중입니다. 내년 1월에 만나요~!',false,'','')
+});
+
+
 	function showTab(wishtab) {
 		// Hide all content
 		document.getElementById('donationContent').style.display = 'none';
@@ -197,7 +202,6 @@
 						src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 					목록
 				</h2>
-				<p>준비 중입니다.</p>
 				<div class="titlelist col-12">
 					<a id="wishtab1" href="#" onclick="showTab('donation')">기부</a> <a
 						id="wishtab2" href="#" onclick="showTab('volunteering')">봉사</a> <a

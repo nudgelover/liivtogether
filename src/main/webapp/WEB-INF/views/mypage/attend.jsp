@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <style>
 .mypage-side, .user-picbox, .user-namebox {
@@ -269,13 +270,13 @@
 									<div class="card">
 										<img src="/uimg/${item.imageMain}">
 										<div class="detail">
-											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
-											<span>기부금액 : 어떻게표출하지</span>
+											<span><a href="/donation/detail?id=${item.contentsId}">${item.title}</a></span>
+											<span>기부금액 : <fmt:formatNumber value="${item.donationAmount}" pattern="#,##0"/>원</span>
 											 <span>전달메모:  ${item.memo}</span>
 											<span>보상스타코인: <img style="width: 20px;"
 												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 												${item.rewordCoin}개
-											</span> <span>신청한 날짜 : ${item.rdate}</span>
+											</span>  <span style="font-size: small; color: gray;">${item.rdate}</span>
 										</div>
 									</div>
 								</c:forEach>
@@ -298,10 +299,10 @@
 										<div class="detail">
 											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
 											<span>장소 : ${item.location}</span> <span>날짜:
-												${item.ddate}</span> <span>소요스타코인: <img style="width: 20px;"
+												${item.ddate} / ${item.memo}</span> <span>보상스타코인: <img style="width: 20px;"
 												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 												${item.rewordCoin}개
-											</span> <span>신청한 날짜 : ${item.rdate}</span>
+											</span> <span style="font-size: small; color: gray;">${item.rdate}</span>
 										</div>
 									</div>
 								</c:forEach>
@@ -327,7 +328,7 @@
 
 												</div>
 												<span>장소 : ${item.location}</span> <span>날짜:
-													${item.ddate}</span> <span>사용코인: <img style="width: 20px;"
+													${item.ddate}</span> <span>사용스타코인: <img style="width: 20px;"
 													src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 													${item.rewordCoin}개
 												</span> <span style="font-size: small; color: gray;">${item.rdate}</span>

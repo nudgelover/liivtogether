@@ -105,10 +105,11 @@ public class ApplyRestController {
 
 		// 등록 하는거 
 		int result = 0;
-		
+		log.info(apply.toString()+"기부금액");
 		try {				
 			//기부신청 내역
-			applyService.register(apply);							
+			applyService.register(apply);
+			log.info(apply.toString()+"기부금액");
 			//기부콘텐츠 모금액(모금액 증가)
 			donationService.modify(donation);			
 			//기부포인트리 히스토리

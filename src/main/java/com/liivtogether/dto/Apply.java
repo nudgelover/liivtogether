@@ -28,4 +28,5 @@ public class Apply {
     private String rewordCoin;
     private String agree;
     private int cnt;
+    private int donationAmount;
 }

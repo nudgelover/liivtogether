@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
 .mypage-side, .user-picbox, .user-namebox {
 	display: flex;
@@ -263,7 +264,7 @@
 										d="M21.19 12.5h-5.91v15.16h2.16v-4.59h3.75a7 7 0 0 0 4.63-1.41 4.75 4.75 0 0 0 1.69-3.87 4.77 4.77 0 0 0-1.69-3.88 7 7 0 0 0-4.63-1.41zm3.07 7.81a4.84 4.84 0 0 1-3.14.88h-3.68v-6.8h3.68a4.9 4.9 0 0 1 3.14.87 3.06 3.06 0 0 1 1.09 2.53 3 3 0 0 1-1.09 2.52z"></path>
 								<path
 										d="M20 1.67A18.33 18.33 0 1 0 38.33 20 18.35 18.35 0 0 0 20 1.67zm0 34.66A16.33 16.33 0 1 1 36.33 20 16.35 16.35 0 0 1 20 36.33z"></path>
-								<path fill="none" d="M0 0h40v40H0z"></path></g></svg> 포인트 </span> <span>${logincust.pointree}p</span>
+								<path fill="none" d="M0 0h40v40H0z"></path></g></svg> 포인트 </span> <span> <fmt:formatNumber value="${logincust.pointree}" pattern="#,##0"/>p</span>
 						</div>
 						<div class="point col-6 col-lg-12" onclick="goToMyStarcoin()">
 							<span> <img
@@ -301,7 +302,7 @@
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToWish()">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
+								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜한목록<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToChat()">
@@ -312,8 +313,18 @@
 					</div>
 
 
-					<p class="section-header">나의 문의내역  <span style="color: orange;">⚠️준비 중</span></p>
+					<p class="section-header">ESG SHOP <span style="color: orange;">⚠️준비 중</span></p>
 					<div class="col-12 mysection">
+						<div class="col-12 col-lg-6 section-list">
+							<img
+								src="https://cdn-icons-png.flaticon.com/512/2435/2435281.png">
+								 	나의 주문 내역
+								<img
+								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
+						</div>
+					</div>
+					<p class="section-header">고객센터  <span style="color: orange;">⚠️ 준비 중</span></p>
+					<div class="col-12 mysection mb-10">
 						<div class="col-12 col-lg-6 section-list">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3378/3378645.png">
@@ -321,9 +332,13 @@
 								<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
-					</div>
-					<p class="section-header">고객센터  <span style="color: orange;">⚠️ 준비 중</span></p>
-					<div class="col-12 mysection mb-10">
+						<div class="col-12 col-lg-6 section-list">
+							<img
+								src="https://cdn-icons-png.flaticon.com/512/159/159469.png">
+								 	공지사항
+								<img
+								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
+						</div>
 						<div class="col-12 col-lg-6 section-list">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/126/126509.png">고객전용 고객센터<img

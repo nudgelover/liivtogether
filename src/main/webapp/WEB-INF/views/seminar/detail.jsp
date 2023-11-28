@@ -181,12 +181,10 @@ function checkLikesOrNot() {
    	        data: { contentsId: seminarId,
    	        		custId: loginCustId},
        		beforeSend : function(xhr,set){
-        		console.log('beforeSend 탄다. csrf 토큰확인!!');
+
     			let token = $("meta[name='_csrf']").attr("content");
-    			//let token = 'fd6d1c70-afcd-4f76-80b1-69bba0910809' //내가 임의로 토큰값 수정해서 보내면 오류난다..!!신기함
     			let header =$("meta[name='_csrf_header']").attr("content");
     			
-    		
     	        xhr.setRequestHeader("X-CSRF-Token", token);
     			xhr.setRequestHeader(header,token);
     		},
@@ -199,7 +197,7 @@ function checkLikesOrNot() {
 	                
 	            }else if (response === 1) {
 	            	//이미 좋아요 누른상태
-	            	popup('이미 관심상품으로 등록하셨습니다. 관심상품 페이지로 이동할까요?', true, "" , "");
+	            	popup('이미 관심상품으로 등록하셨습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
    	                
    	            }else if (response === 2) {
    	           		//좋아요 눌렀던 이력이 있으나, is_likes N 인상태
@@ -237,10 +235,18 @@ function regLike() {
         url: "/seminar/reg-like",
         data: { contentsId: seminarId,
        			custId: loginCustId}, // 세미나 아이디를 전달
+ 		beforeSend : function(xhr,set){
+        	console.log('beforeSend 탄다. csrf 토큰확인!!');
+    		let token = $("meta[name='_csrf']").attr("content");
+    		let header =$("meta[name='_csrf_header']").attr("content");
+    		
+    	    xhr.setRequestHeader("X-CSRF-Token", token);
+    		xhr.setRequestHeader(header,token);
+    	},
         success: function(response) {
             console.log(response + ' response');
            
-            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, "" , "");
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
         },
         error: function() {
             console.error("Error updating views.");
@@ -267,7 +273,7 @@ function updateLike() {
         success: function(response) {
             console.log(response + ' response');
            
-            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, "" , "");
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
         },
         error: function() {
             console.error("Error updating views.");
@@ -341,7 +347,7 @@ function updateLike() {
 			<div class="preference">
 				<span><img style="width: 25px;"
 					src="/assets/img/starfriends/starcoin.png">
-					${seminar.rewardCoin}개</span> <span style="margin-left: 3px;" oncl><img
+					${seminar.rewardCoin}개</span> <span style="margin-left: 3px;"><img
 					style="width: 25px;"
 					src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">찜하기<span
 					id="likesNum">${seminar.likesCount}</span>명 </span> <span>👀조회 <span
