@@ -11,47 +11,51 @@
  * 김진희  START
  * ----------------------------------------------------
  * */
+
+let serviceServer = 'http://192.168.35.15';
+
 function goToMain() {
-	window.location.href = "http://localhost";
+	window.location.href = serviceServer;
 }
+
 
 function goMyAttend(item) {
 
     localStorage.setItem('myattend', item);
-    window.location.href = 'http://localhost/mypage/attend';
+    window.location.href = serviceServer+'/mypage/attend';
 }
 
 
 function goToWish() {
 
-	window.location.href = "http://localhost/mypage/wish";
+	window.location.href = serviceServer+"/mypage/wish";
 }
 
 
 function goToCertificate() {
-	window.location.href = "http://localhost/mypage/certificate";
+	window.location.href = serviceServer+"/mypage/certificate";
 }
 
 function goToReview() {
-	window.location.href = "http://localhost/review";
+	window.location.href = serviceServer+"/review";
 }
 
 function goToLogin() {
-	window.location.href = "http://localhost/login";
+	window.location.href = serviceServer+"/login";
 }	
 function goToLogout() {
-	window.location.href = "http://localhost/logouts";
+	window.location.href = serviceServer+"/logouts";
 }
 function goToChat() {
-	window.location.href = "http://localhost/mypage/chat";
+	window.location.href = serviceServer+"/mypage/chat";
 }
 
 function goToMyStarcoin() {
-	window.location.href = "http://localhost/mypage/starcoin";
+	window.location.href = serviceServer+"/mypage/starcoin";
 }
 
 function goToMyPointree() {
-	window.location.href = "http://localhost/mypage/pointree";
+	window.location.href = serviceServer+"/mypage/pointree";
 }
 
 

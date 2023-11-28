@@ -37,8 +37,7 @@ public class ApplyService implements LIIVService<Integer, Apply> {
 
 	@Override
 	public Apply get(Integer k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.select(k);
 	}
 
 	@Override

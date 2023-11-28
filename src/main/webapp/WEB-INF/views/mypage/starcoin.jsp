@@ -89,7 +89,7 @@
 }
 
 .point img, .point svg {
-	width: 2rem;
+	width: 1.5rem;
 }
 
 .changeborder {
@@ -307,16 +307,38 @@
 							<div style="border-right: 1px solid #FDE6B1;"
 								class="join-section col-4">
 								<span>총 획득 P </span>
-								<span>${totalStarcoin.totalEarned}P</span>
+								<c:choose>
+								    <c:when test="${not empty totalStarcoin.totalEarned}">
+								        <span><fmt:formatNumber value="${totalStarcoin.totalEarned}" pattern="#,##0"/>P</span>
+								    </c:when>
+								    <c:otherwise>
+								        <span>0P</span>
+								    </c:otherwise>
+								</c:choose>
 							</div>
 							<div style="border-right: 1px solid #FDE6B1;"
 								class="join-section col-4">
 								<span>총 사용 P</span>
-								<span>${totalStarcoin.totalUsed}P</span>
+								<c:choose>
+								    <c:when test="${not empty totalStarcoin.totalUsed}">
+								        <span><fmt:formatNumber value="${totalStarcoin.totalUsed}" pattern="#,##0"/>P</span>
+								    </c:when>
+								    <c:otherwise>
+								        <span>0P</span>
+								    </c:otherwise>
+								</c:choose>
 							</div>
 							<div class="join-section col-4">
 								<span>잔액 P</span>
-								<span>${totalStarcoin.difference}P</span>
+								<c:choose>
+								    <c:when test="${not empty totalStarcoin.difference}">
+								        <span><fmt:formatNumber value="${totalStarcoin.difference}" pattern="#,##0"/>P</span>
+								    </c:when>
+								    <c:otherwise>
+								        <span>0P</span>
+								    </c:otherwise>
+								</c:choose>
+
 							</div>
 
 						</div>
