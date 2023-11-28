@@ -15,6 +15,7 @@ import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Cust;
 import com.liivtogether.dto.Point;
 import com.liivtogether.service.ApplyService;
+import com.liivtogether.service.CustService;
 import com.liivtogether.service.PointService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,16 +31,20 @@ public class MypageController {
 	@Autowired
 	PointService pointService;
 	
+	@Autowired
+	CustService custService;
+	
     String dir = "mypage/";
     @RequestMapping("")
     public String mypage(Model model,HttpSession session ) throws Exception {
 
-    	Cust cust = (Cust) session.getAttribute("logincust");
-    	String custId = cust.getCustId();
+    	Cust logincust = (Cust) session.getAttribute("logincust");
+    	String custId = logincust.getCustId();
     	
         List<Apply> attendCount= applyService.getMyAttendCount(custId);
-
+        Cust cust = custService.get(custId);
         model.addAttribute("attendCount", attendCount);
+        model.addAttribute("cust", cust);
     	 model.addAttribute("center", dir + "main");
         return "index";
     }
@@ -60,7 +65,7 @@ public class MypageController {
         List<Apply> dlist = applyService.getMyList(custId, "D");
         List<Apply> vlist = applyService.getMyList(custId, "V");
         List<Apply> slist = applyService.getMyList(custId, "S");
-        log.info(slist.toString());
+       
         model.addAttribute("dlist", dlist);
         model.addAttribute("vlist", vlist);
         model.addAttribute("slist", slist);
@@ -69,7 +74,13 @@ public class MypageController {
     }
 
     @RequestMapping("/certificate")
-    public String certificate(Model model) throws Exception {
+    public String certificate(Model model,HttpSession session) throws Exception {
+        
+    	Cust cust = (Cust) session.getAttribute("logincust");
+    	String custId = cust.getCustId();
+    	
+    	List<Apply> dlist = applyService.getMyList(custId, "D");
+        model.addAttribute("dlist", dlist);
     	model.addAttribute("center", dir + "certificate");
         return "index";
     }

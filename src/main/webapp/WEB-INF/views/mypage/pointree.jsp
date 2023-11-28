@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <style>
 .mypage-side, .user-picbox, .user-namebox {
 	display: flex;
@@ -89,7 +90,7 @@
 }
 
 .point img, .point svg {
-	width: 2rem;
+	width: 1.5rem;
 }
 
 .changeborder {
@@ -224,7 +225,6 @@
 
 </style>
 
-
 <div class="container  mt-5">
 	<div class="row">
 		<div class="col-12 col-lg-3">
@@ -307,16 +307,41 @@
 							<div style="border-right: 1px solid #FDE6B1;"
 								class="join-section col-4">
 								<span>총 획득 P </span>
-								<span> <fmt:formatNumber value="${totalPoint.totalEarned}" pattern="#,##0"/>P</span>
+								
+								<c:choose>
+								    <c:when test="${not empty totalPoint.totalEarned}">
+								        <span><fmt:formatNumber value="${totalPoint.totalEarned}" pattern="#,##0"/>P</span>
+								    </c:when>
+								    <c:otherwise>
+								        <span>0P</span>
+								    </c:otherwise>
+								</c:choose>
+
 							</div>
 							<div style="border-right: 1px solid #FDE6B1;"
 								class="join-section col-4">
 								<span>총 사용 P</span>
-								<span> <fmt:formatNumber value="${totalPoint.totalUsed}" pattern="#,##0"/>P</span>
+								
+								<c:choose>
+								    <c:when test="${not empty totalPoint.totalUsed}">
+								        <span><fmt:formatNumber value="${totalPoint.totalUsed}" pattern="#,##0"/>P</span>
+								    </c:when>
+								    <c:otherwise>
+								        <span>0P</span>
+								    </c:otherwise>
+								</c:choose>
+							
 							</div>
 							<div class="join-section col-4">
 								<span>잔액 P</span>
-								<span> <fmt:formatNumber value="${totalPoint.difference}" pattern="#,##0"/>P</span>
+								<c:choose>
+								    <c:when test="${not empty totalPoint.difference}">
+								        <span><fmt:formatNumber value="${totalPoint.difference}" pattern="#,##0"/>P</span>
+								    </c:when>
+								    <c:otherwise>
+								        <span>0P</span>
+								    </c:otherwise>
+								</c:choose>
 							</div>
 
 						</div>
@@ -385,5 +410,4 @@
 		</div>
 	</div>
 </div>
-
 

@@ -468,7 +468,7 @@ function donationPopup() {
 
 
 function donation() {
-	window.location.href = "http://localhost/donation/join?id=${donation.donaId}";		
+	window.location.href = serviceServer+"/donation/join?id=${donation.donaId}";		
 }
 
 function loginCheck(){

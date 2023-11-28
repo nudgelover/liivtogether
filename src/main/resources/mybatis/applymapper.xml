@@ -5,8 +5,18 @@
 <mapper namespace="com.liivtogether.mapper.ApplyMapper">
 
 
-	<select id="select" parameterType="String" resultType="Apply">
-
+	<select id="select" parameterType="Integer" resultType="Apply">
+		SELECT apply_id as applyId
+			, contents_id as contentsId
+			, cust_id as custId
+			, rdate
+			, memo
+			, topic_big as topicBig
+			, agree
+			, donation_amount as donationAmount
+		FROM apply
+		WHERE apply_id= #{applyId}
+		
 	</select>
 
 	<select id="selectall" resultType="Apply">
