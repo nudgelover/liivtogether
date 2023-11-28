@@ -97,5 +97,11 @@
         FROM contents
         WHERE cust_id = #{cust_id}
     </delete>
+    
+    <update id="updateViews" parameterType="Integer">
+	    UPDATE contents
+	    SET view = view + 1
+	    WHERE id = #{donaId}
+	</update>
 
 </mapper>

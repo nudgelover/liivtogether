@@ -179,7 +179,7 @@
 				</h1>
 
 				<!-- Text -->
-				<p class="mb-8 fs-lg">더 나은 세상을 위해 KB국민은행이 함께합니다.</p>
+				<p class="mb-8 fs-lg">더 나은 세상을 위해 KB국민은행이 함께합니다. 알람, 주소 변경, 챗봇 연결주소 변경</p>
 
 				<!-- Button -->
 				<a href="/donation" class="btn btn-primary">작은 손길 더하기</a>
