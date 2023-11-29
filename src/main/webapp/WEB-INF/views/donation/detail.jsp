@@ -447,7 +447,7 @@ function updateLike() {
 <input id="location" style="display: none;" value="${donation.location}">
 <input id="ddate" style="display: none;" value="${donation.ddate}">
 <input id="starcoin" style="display: none;" value="${donation.rewardCoin}">
-<input id="pointree" style="display: none;" value="${logincust.pointree}">
+<input id="pointree" style="display: none;" value="${cust.pointree}">
 
 
 

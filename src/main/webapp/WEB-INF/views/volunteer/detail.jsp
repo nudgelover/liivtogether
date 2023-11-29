@@ -508,7 +508,7 @@ function preCheck() {
 
 
 function joinVolunteer() {
-	window.location.href = "http://localhost/volunteer/join?id=${volunteer.voluId}";
+	window.location.href = serviceServer+"/volunteer/join?id=${volunteer.voluId}";
 };
 
 

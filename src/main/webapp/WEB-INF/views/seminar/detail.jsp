@@ -504,7 +504,7 @@ function displaySeminars(seminarDetails) {
 		const cardElement = $('<div></div>').addClass('card mb-7 mb-md-0');
 		
 		// 이미지를 감싸는 링크 엘리먼트 생성
-		const imageLinkElement = $('<a></a>').attr('href', 'http://localhost/seminar/detail?id=' + seminar.semiId);
+		const imageLinkElement = $('<a></a>').attr('href', serviceServer+'/seminar/detail?id=' + seminar.semiId);
 		
 		// 이미지 엘리먼트 생성
 		const imgElement = $('<img>').attr('src', '/uimg/' + seminar.imageMain).addClass('card-img-top');
@@ -514,13 +514,13 @@ function displaySeminars(seminarDetails) {
 		const cardBodyElement = $('<div></div>').addClass('card-body px-0 py-7');
 		
 		// 제목을 감싸는 링크 엘리먼트 생성
-		const titleLinkElement = $('<a></a>').attr('href', 'http://localhost/seminar/detail?id=' + seminar.semiId);
+		const titleLinkElement = $('<a></a>').attr('href', serviceServer+'/seminar/detail?id=' + seminar.semiId);
 		
 		// 제목 엘리먼트 생성
 		const titleElement = $('<p></p>').addClass('mb-3 recent-title').text(seminar.title);
 		
 		const contentElement = $('<p></p>').addClass('mb-2').text(seminar.comment);
-		const linkElement = $('<a></a>').addClass('btn btn-link px-0 text-body').attr('href', 'http://localhost/seminar/detail?id=' + seminar.semiId).text('자세히 보러가기');
+		const linkElement = $('<a></a>').addClass('btn btn-link px-0 text-body').attr('href', serviceServer+'/seminar/detail?id=' + seminar.semiId).text('자세히 보러가기');
 		const iconElement = $('<i></i>').addClass('fe fe-arrow-right ms-2');
 		
 		// 이미지를 링크 엘리먼트에 추가
@@ -598,7 +598,7 @@ function preCheck() {
 }
 
 function joinSeminar() {
-	window.location.href = "http://localhost/seminar/join?id=${seminar.semiId}";
+	window.location.href = serviceServer+"/seminar/join?id=${seminar.semiId}";
 }
 
 
