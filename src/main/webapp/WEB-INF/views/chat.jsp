@@ -145,7 +145,7 @@ function checkTodayAttend() {
 	    			                "rawUrl": "https://cdn-icons-png.flaticon.com/512/3992/3992301.png"
 	    			              }
 	    			            },
-	    			            "link": "http://localhost/event/attend"
+	    			            "link": serviceServer+"/event/attend"
 	    			          }
 	    			        ]
 	    			      }

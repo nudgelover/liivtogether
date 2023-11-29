@@ -74,7 +74,7 @@
 	}
 
 	function gotoAdMain() {
-		window.location = 'http://localhost/event/admain'
+		window.location = serviceServer+'/event/admain'
 	}
 	function checkTodayDo() {
 		

@@ -207,11 +207,14 @@ let dona_form = {
 		        xhr.setRequestHeader(header, token);
 		      },
 		      success: function(response) {
-		    	  console.log("succ");
+		    	  console.log(response+"succ");
 		    	  if(response === 1){
 		    		  setTimeout(function() {
 						goToJoinComplete(loginCustId,donaId);
 						}, 2000);
+		    	  }else{
+		    		 popup('이미 참여한 기부입니다.', false, "", "");
+		    		 
 		    	  }
 		      },
 		      error: function(xhr, status, error) {
@@ -233,7 +236,8 @@ function donaSubmit(){
 }
 
 function goToJoinComplete(custId, contentsId) {
-    const url = 'http://localhost/donation/success?custId=' + custId + '&contentsId=' + contentsId;
+    const url = serviceServer+'/donation/success?custId=' + custId + '&contentsId=' + contentsId;
+   
     window.location.href = url;
 }
 

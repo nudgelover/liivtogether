@@ -470,7 +470,7 @@ $(document).ready(function() {
 	}
 	
 	function goToJoinComplete(custId, contentsId) {
-	    const url = 'http://localhost/seminar/join-complete?custId=' + custId + '&contentsId=' + contentsId;
+	    const url = serviceServer+'/seminar/join-complete?custId=' + custId + '&contentsId=' + contentsId;
 	    window.location.href = url;
 	}
 

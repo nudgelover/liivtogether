@@ -391,10 +391,10 @@
 								<button onclick="reviewPrecheck('${item.applyId}', '[세미나] ${item.title}')">[세미나] ${item.title}</button>
 			                </c:when>
 			                <c:when test="${item.topicBig eq 'V'}">
-			                    <button onclick="reviewPrecheck('${item.applyId}')">[봉사] ${item.title}</button>
+			                    <button onclick="reviewPrecheck('${item.applyId}','[봉사] ${item.title}')">[봉사] ${item.title}</button>
 			                </c:when>
 			                <c:when test="${item.topicBig eq 'D'}">
-			                    <button onclick="reviewPrecheck('${item.applyId}')">[기부] ${item.title}</button>
+			                    <button onclick="reviewPrecheck('${item.applyId}','[기부] ${item.title}')">[기부] ${item.title}</button>
 			                </c:when>
 			            </c:choose>
 			        </c:forEach>

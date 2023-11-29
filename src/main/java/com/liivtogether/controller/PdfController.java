@@ -183,7 +183,7 @@ public class PdfController {
 
             // Set response headers
             response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=example.pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=KB_LiivTogether_donation.pdf");
 
             // Write the PDF content to the response output stream
             response.getOutputStream().write(byteArrayOutputStream.toByteArray());
