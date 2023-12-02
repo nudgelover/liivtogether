@@ -12,7 +12,7 @@
  * ----------------------------------------------------
  * */
 
-let serviceServer = 'http://49.50.166.191:8443';
+let serviceServer = 'https://49.50.166.191:8443';
 
 function goToMain() {
 	window.location.href = serviceServer;
