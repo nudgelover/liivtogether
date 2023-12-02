@@ -31,6 +31,10 @@ public class MainController {
 	@Value("${app.kakaojs}")
 	String kakaojs;
 	
+    @Value("${serviceserver}")
+    private String serviceServer;
+
+    
 	@Autowired
 	CustService custService = new CustService();
 	
@@ -45,6 +49,7 @@ public class MainController {
     public String main(Model model) throws Exception{
     	List<Review> reviewcontent = reviewService.get();
      	model.addAttribute("reviewcontent", reviewcontent);
+     	model.addAttribute("serviceServer", serviceServer);
         return "index";
     }
     

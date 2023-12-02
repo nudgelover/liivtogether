@@ -13,6 +13,7 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface DonationMapper extends LIIVMapper<Integer, Donation> {
+    public void updateViews(Integer donaId) throws Exception;
 	List<Donation> selectall();
 	List<Donation> selectrecommend();
 	public void setTargetIn(Donation donation);

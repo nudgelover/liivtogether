@@ -40,6 +40,9 @@
 	background: #FFBF00;
 	border-radius: 5px;
 }
+.form-check>.form-check-input:disabled+.form-check-label {
+    text-decoration: none !important;
+}
 
 input {
 	border: 1px solid #dde2e6 !important;
@@ -108,16 +111,41 @@ function selectBackAllAgreements(){
 }
 
 $(function(){
+
 	selectAllAgreements();
 	
 	// 회원가입 form 전송하는 함수
 	$("#register_btn").click(function(){
-		$("#register_form").attr({
-			action : '/registerimpl',
-			method : 'post'
+	  if (!$('#exampleCheck1').prop('checked')) {
+	        popup("회원가입 필수 동의는 필수 사항입니다.", false, "", "");
+	        return;
+	    }
+
+		    $.ajax({
+		        url: '/registerimpl',
+		        type: 'POST',
+		        data: $("#register_form").serialize(), // 폼 데이터를 직렬화하여 전송
+		        beforeSend: function(xhr) {
+		            console.log('beforeSend 탄다. csrf 토큰확인');
+		            let token = $("meta[name='_csrf']").attr("content");
+		            let header = $("meta[name='_csrf_header']").attr("content");
+
+		            // headers 속성을 사용하여 헤더를 설정
+		            xhr.setRequestHeader("X-CSRF-Token", token);
+		            xhr.setRequestHeader(header, token);
+		        },
+		        success: function(response) {
+		            console.log(response);
+		            goToLogin();
+		        },
+		        error: function(error) {
+		            // 오류 발생 시 수행할 코드
+		            console.log(error);
+		        }
+		   
 		});
-		$("#register_form").submit();
-	})
+	});
+
 	
 	// id중복체크. 중복체크 확인을 누르면 비활성화로 만듦
 	$("#idcheck").click(function(){
@@ -171,7 +199,30 @@ $(function(){
 		kakaoLogin();
 	})
 	
+	$("#agreeBtn").click(function () {
+	    // essential, essential2 중 하나라도 체크되어 있지 않으면 '필수동의체크' 알림
+	    if (!$('#essential').prop('checked')) {
+	        popup("회원서비스가입 약관은 필수사항입니다.", false, "", "");
+	        return;
+	    }
+	    if (!$('#essential2').prop('checked')) {
+	        popup("만 14세 이상 여부를 확인해주세요", false, "", "");
+	        return;
+	    }
+
+	    $(".btn-close").click();
+
+	  
+
+	    // $('#exampleCheck1') 체크 여부를 true로 변경
+	    $('#exampleCheck1').prop('checked', true);
+	    $('#exampleCheck1').prop('disabled', true);
+	});
+ 	
+ 
 })
+
+
 </script>
 
 
@@ -314,9 +365,9 @@ $(function(){
 				</div>
 				
 				<div style="position: relative;" class="form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">전체동의 </label> <a
-						class="nav-link" data-bs-toggle="offcanvas" href="#agreeModal"><i
+					<a class="nav-link" data-bs-toggle="offcanvas" href="#agreeModal">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<label style="margin-left: 5px;" class="form-check-label" for="exampleCheck1"> 전체동의 </label> <i
 						class="fas fa-angle-down"></i></a>
 				</div>
 
@@ -325,7 +376,7 @@ $(function(){
 
 				<div style="padding: 0 0 0 35px;" class="form-text mb-3 ">회원·서비스(필수),
 					스타트업찾기 서비스 (선택), 이벤트·혜택알림 동의(선택), 만 14세 이상(필수)</div>
-				<button class="btn" id="register_btn">완료</button>
+				<button type="button" class="btn" id="register_btn">완료</button>
 			</form>
 		</div>
 	</div>
@@ -419,7 +470,7 @@ $(function(){
 				동의를 거부하셔도 리브투게더 서비스 이용이 가능합니다.</p>
 			<div
 				style="position: sticky; bottom: 0px; background-color: white; margin-top: 10rem; height: 80px;">
-				<button class="btn">확인</button>
+				<button type="button" id="agreeBtn" class="btn">확인</button>
 			</div>
 
 		</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <style>
 .mypage-side, .user-picbox, .user-namebox {
@@ -152,11 +153,27 @@
 }
 
 .cancleBtn {
-	font-size: small; 
-	float : right;
+	font-size: small;
 	color: gray;
 	border: none;
 	background-color: transparent;
+}
+
+.shareBtn{
+ 	color: darkorange;
+	font-size: small;
+	border: none;
+	background-color: transparent;
+}
+
+.shareBtn:hover{
+	color : firebrick;
+}
+
+.shareBtn img{
+	margin-right: 5px;
+	width: 20px;
+	border-radius: 0;
 }
 </style>
 <script>
@@ -181,11 +198,11 @@
 		document.getElementById('donationContent').style.display = 'none';
 		document.getElementById('volunteeringContent').style.display = 'none';
 		document.getElementById('seminarContent').style.display = 'none';
-		document.getElementById('allContent').style.display = 'none';
+		
 		document.getElementById('attendTab1').style.color = '#424242';
 		document.getElementById('attendTab2').style.color = '#424242';
 		document.getElementById('attendTab3').style.color = '#424242';
-		document.getElementById('attendTab4').style.color = '#424242';
+		
 
 		switch (tab) {
 		case 'donation':
@@ -200,10 +217,6 @@
 			document.getElementById('seminarContent').style.display = 'block';
 			document.getElementById('attendTab3').style.color = '#ff6f61';
 			break;
-		case 'all':
-			document.getElementById('allContent').style.display = 'block';
-			document.getElementById('attendTab4').style.color = '#ff6f61';
-			break;
 		}
 	}
 </script>
@@ -215,7 +228,7 @@
 				<div class="user-picbox">
 					<div class="avatar-container">
 						<div class="avatar avatar-xl">
-							<img src="../assets/img/avatars/avatar-1.jpg" alt="..."
+							<img src="/uimg/${logincust.img}" alt="..."
 								class="avatar-img rounded-circle">
 						</div>
 						<div class="edit-icon">
@@ -238,15 +251,14 @@
 					내가 참여한 목록 <img style="width: 50px;"
 						src="https://cdn-icons-png.flaticon.com/512/1642/1642767.png">
 				</h2>
-				취소기능, 증명서발급
+
 				<div class="titlelist col-12">
 					<a id="attendTab1" href="#" onclick="showTab('donation')">기부</a> <a
 						id="attendTab2" href="#" onclick="showTab('volunteering')">봉사</a>
-					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> <a
-						id="attendTab4" href="#" onclick="showTab('all')">모아보기</a>
+					<a id="attendTab3" href="#" onclick="showTab('seminar')">세미나</a> 
 				</div>
 				<div>
-					<div id="donationContent" class="col-12 col-lg-9">
+				<div id="donationContent" class="col-12 col-lg-9">
 
 						<c:choose>
 							<c:when test="${empty dlist}">
@@ -258,12 +270,13 @@
 									<div class="card">
 										<img src="/uimg/${item.imageMain}">
 										<div class="detail">
-											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
-											<span>장소 : ${item.location}</span> <span>날짜:
-												${item.ddate}</span> <span>소요스타코인: <img style="width: 20px;"
+											<span><a href="/donation/detail?id=${item.contentsId}">${item.title}</a></span>
+											<span>기부금액 : <fmt:formatNumber value="${item.donationAmount}" pattern="#,##0"/>원</span>
+											 <span>전달메모:  ${item.memo}</span>
+											<span>보상스타코인: <img style="width: 20px;"
 												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 												${item.rewordCoin}개
-											</span> <span>신청한 날짜 : ${item.rdate}</span>
+											</span>  <span style="font-size: small; color: gray;">${item.rdate}</span>
 										</div>
 									</div>
 								</c:forEach>
@@ -286,10 +299,10 @@
 										<div class="detail">
 											<span><a href="/seminar/detail?id=${item.contentsId}">${item.title}</a></span>
 											<span>장소 : ${item.location}</span> <span>날짜:
-												${item.ddate}</span> <span>소요스타코인: <img style="width: 20px;"
+												${item.ddate} / ${item.memo}</span> <span>보상스타코인: <img style="width: 20px;"
 												src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 												${item.rewordCoin}개
-											</span> <span>신청한 날짜 : ${item.rdate}</span>
+											</span> <span style="font-size: small; color: gray;">${item.rdate}</span>
 										</div>
 									</div>
 								</c:forEach>
@@ -303,7 +316,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="item" items="${slist}">
-								 <c:set var="edate" value="${item.edate}" />
+									<c:set var="edate" value="${item.edate}" />
 									<div style="display: flex; flex-direction: column;"
 										class="card">
 										<div style="display: flex;">
@@ -315,19 +328,21 @@
 
 												</div>
 												<span>장소 : ${item.location}</span> <span>날짜:
-													${item.ddate}</span> <span>사용코인: <img style="width: 20px;"
+													${item.ddate}</span> <span>사용스타코인: <img style="width: 20px;"
 													src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">
 													${item.rewordCoin}개
 												</span> <span style="font-size: small; color: gray;">${item.rdate}</span>
 											</div>
 										</div>
-										<div>
-										
+									<!-- 	<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+											<button class="shareBtn">
+												<img src="https://cdn-icons-png.flaticon.com/512/3135/3135807.png" onclick="goToCertificate">증명서 발급하기
+											</button>
 											<button class="cancleBtn">
 												취소하기<i class="fa fa-close"></i>
 											</button>
-											<button></button>
-										</div>
+										
+										</div> -->
 									</div>
 
 								</c:forEach>
@@ -335,8 +350,6 @@
 						</c:choose>
 					</div>
 
-
-					<div id="allContent" class="col-12 col-lg-9">모두로딩을 할것이냐말것이냐</div>
 				</div>
 			</div>
 		</div>

@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @Controller
 @RequestMapping("/donation")
@@ -24,6 +26,10 @@ public class DonationController {
     @Autowired
     ApplyService Applyservice;
     
+
+	@Autowired
+	CustService custService;
+
     String dir = "donation/";
     
     @RequestMapping("")
@@ -46,7 +52,12 @@ public class DonationController {
     }
  
     @RequestMapping("/detail")
-    public String detail(Model model, int id) throws Exception {
+    public String detail(Model model, int id, HttpSession session) throws Exception {
+
+    	 Cust logincust = (Cust) session.getAttribute("logincust");
+    	 String custId = logincust.getCustId();
+    	 Cust cust = custService.get(custId);
+    	 
     	 Donation donation = Donationservice.get(id);
     	 List<Donation> list = Donationservice.getrecommend();
     	 
@@ -57,6 +68,7 @@ public class DonationController {
  		
  		 log.info("++++recomend"+list);
  		 
+ 	     model.addAttribute("cust", cust);
     	 model.addAttribute("donation", donation);
     	 model.addAttribute("rlist", list);
     	 model.addAttribute("center", dir + "detail");
@@ -79,8 +91,11 @@ public class DonationController {
 	}
 	
 	@RequestMapping("/success")
-	public String success(Model model, Apply apply) throws Exception {
-
+	public String success(Model model, String custId,Integer contentsId) throws Exception {
+		Donation donation = Donationservice.get(contentsId);
+		Apply apply = Applyservice.getJoinComplete(custId, contentsId);
+		
+		model.addAttribute("donation", donation);
 		model.addAttribute("apply", apply);
 		model.addAttribute("center", dir + "success");
 		return "index";

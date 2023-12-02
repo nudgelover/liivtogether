@@ -179,7 +179,9 @@
 		</div>
 	</div>
 </section>
+<input type="hidden" id="loginCustId" value="${logincust.custId}">
 <script>
+const loginCust = $("#loginCustId").val();
 let flag = 0;
 let moleNumber;
 let randomNum;
@@ -241,10 +243,50 @@ function randomHole(){
 
 
 
-
 let startBtn = document.getElementById('start-btn');
 
-startBtn.addEventListener('click', startMole);
+//startBtn.addEventListener('click', startMole);
+
+startBtn.addEventListener('click', function() {
+	if (!loginCust) {
+		popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+	} else {
+		checkTodayDo();
+	}
+});
+
+function checkTodayDo() {
+	
+	let koreaToday = new Date(); 
+	koreaToday.setHours(koreaToday.getHours() + 9);
+	
+	// AJAX 호출
+    $.ajax({
+        url: '/api/event/check-today-do',
+        method: 'GET',
+        data: {
+            loginCust: loginCust,
+            eventName: 'whackamole',
+            today: koreaToday.toISOString().split('T')[0] //2023-09-01 이러식으로 오늘의 날짜가 들어가야함
+        },
+        success: function(response) {
+        		console.log('오늘  참여회수'+response);
+				if(response=='0'){
+					console.log('미참여');
+					 startMole();
+				}else{
+					popup('오늘은 이미 <콜리를 잡아라>게임에 참여하셨습니다. 내일 다시 참여해주세요~!',false,'','');
+				}
+
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX 요청 실패:', error);
+            popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
+        }
+    });
+	
+}
+
 
 function startMole() {
 	startBtn.removeEventListener('click', startMole);
@@ -279,9 +321,6 @@ function showingMole() {
 		turn++;
 	} else {
 		resultModal();
-		//startBtn.addEventListener('click', startMole);
-		//startBtn.textContent = '재도전'; 재도전막기!
-		//startBtn.style.color = '#f2ecff';
 	}
 }
 
@@ -323,14 +362,48 @@ function resultModal() {
 	if (point < 50) {
 		popup('안타깝지만 '+ point +'점으로 게임 실패에요. 다시 도전해보세요!',false,restart(),'');
 
-	} else if(point == 100) {
-		popup('축하합니다! 모든 콜리를 잡으셨네요!</br>' + point + '점으로 30포인트리가 내일 적립됩니다!',false,'','');
-	}else{
-		popup('축하합니다!</br>' + point + '점으로 10포인트리가 내일 적립됩니다!',false,'','');
-		
+	} else {
+		savePoint(point);
 	}
-
 }
 
+function savePoint(point) {
+	let pointsAwarded;
 
+	if(point == 100) {
+		pointsAwarded = 30;
+	} else {
+		pointsAwarded = 10;
+	}
+	 
+    $.ajax({
+        url: '/api/event/eventdata', 
+        method: 'POST',
+        data: {
+            loginCust: loginCust,
+            eventName: 'whackamole',
+        	pointsAwarded : pointsAwarded
+        },
+    	beforeSend : function(xhr,set){
+			let token = $("meta[name='_csrf']").attr("content");
+			let header =$("meta[name='_csrf_header']").attr("content");
+		
+	        xhr.setRequestHeader("X-CSRF-Token", token);
+			xhr.setRequestHeader(header,token);
+		},
+        success: function(response) {
+        	if(point == 100) {
+        	   	popup('축하합니다! 모든 콜리를 잡으셨네요!</br>' + point + '점으로 30포인트리가 내일 적립됩니다!',false,'','');
+        	} else {
+        		popup('축하합니다!</br>' + point + '점으로 10포인트리가 내일 적립됩니다!',false,'','');
+        	}
+        },
+        error: function(xhr, status, error) {
+	   		popup('일시적인 오류가 발생했습니다. 다시시도해주세요', false, '', '');
+            console.error('AJAX 요청 실패:', error);
+        }
+    });
+	
+
+}
 </script>

@@ -11,39 +11,53 @@
  * 김진희  START
  * ----------------------------------------------------
  * */
+
+let serviceServer = 'https://49.50.166.191:8443';
+
 function goToMain() {
-	window.location.href = "http://localhost";
+	window.location.href = serviceServer;
 }
+
 
 function goMyAttend(item) {
 
     localStorage.setItem('myattend', item);
-    window.location.href = 'http://localhost/mypage/attend';
+    window.location.href = serviceServer+'/mypage/attend';
 }
 
 
 function goToWish() {
-	window.location.href = "http://localhost/mypage/wish";
+
+	window.location.href = serviceServer+"/mypage/wish";
 }
 
 
 function goToCertificate() {
-	window.location.href = "http://localhost/mypage/certificate";
+	window.location.href = serviceServer+"/mypage/certificate";
 }
 
 function goToReview() {
-	window.location.href = "http://localhost/review";
+	window.location.href = serviceServer+"/review";
 }
 
 function goToLogin() {
-	window.location.href = "http://localhost/login";
+	window.location.href = serviceServer+"/login";
 }	
 function goToLogout() {
-	window.location.href = "http://localhost/logouts";
+	window.location.href = serviceServer+"/logouts";
 }
 function goToChat() {
-	window.location.href = "http://localhost/mypage/chat";
+	window.location.href = serviceServer+"/mypage/chat";
 }
+
+function goToMyStarcoin() {
+	window.location.href = serviceServer+"/mypage/starcoin";
+}
+
+function goToMyPointree() {
+	window.location.href = serviceServer+"/mypage/pointree";
+}
+
 
 function popup(message, isPrompt, onConfirm, onCancel) {
 	//모달 팝업띄울 때 쓰는 함수. 사용하는 방법은 다음과 같습니다. 

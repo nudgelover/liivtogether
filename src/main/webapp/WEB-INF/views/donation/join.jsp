@@ -185,6 +185,7 @@ let dona_form = {
 		    var memo = $('#memo').val();
 		    var donaPoint = $("#donaPoint").val();
 		    var pointcoin = $("#pointcoin").val();
+
 		    console.log("donaid:"+donaId);
 		
 		    $.ajax({
@@ -199,22 +200,29 @@ let dona_form = {
 		      		memo : memo,
 		      		mount : donaPoint,
 		      		pointcoin : "POINTREE",
-		      		uplace : "D"},
+		      		uplace : "D",
+	      			donationAmount : donaPoint},
 		      beforeSend: function(xhr) {
 		        xhr.setRequestHeader("X-CSRF-Token", token);
 		        xhr.setRequestHeader(header, token);
 		      },
 		      success: function(response) {
+		    	  console.log(response+"succ");
 		    	  if(response === 1){
-		    		  window.location.href = '/donation/success';
+		    		  setTimeout(function() {
+						goToJoinComplete(loginCustId,donaId);
+						}, 2000);
+		    	  }else{
+		    		 popup('이미 참여한 기부입니다.', false, "", "");
+		    		 
 		    	  }
 		      },
 		      error: function(xhr, status, error) {
-		        // Ajax 요청이 실패한 경우 실행될 코드
+		    	  console.error(error); 
 		      }
 		    });
 
-		    console.log("send");
+		    console.log("send 완료");
 		  }   
 		}
 
@@ -227,6 +235,11 @@ function donaSubmit(){
 	console.log("Dona");
 }
 
+function goToJoinComplete(custId, contentsId) {
+    const url = serviceServer+'/donation/success?custId=' + custId + '&contentsId=' + contentsId;
+   
+    window.location.href = url;
+}
 
 
 
@@ -285,12 +298,12 @@ function donaSubmit(){
 			</div>
 		</div>
 	</div>
-<input type="text" id="cust_id" value="${logincust.custId}">
-<input type="text" id="topic_big" value="D">
-<input type="text" id="contents_id" value="${donation.donaId}">
-<input type="text" id="target_in" value="${donation.targetIn}">
-<input type="text" id="agreeornot" value="0">
-<input type="text" id="pointree" value="${logincust.pointree}">
+<input type="hidden" id="cust_id" value="${logincust.custId}">
+<input type="hidden" id="topic_big" value="D">
+<input type="hidden" id="contents_id" value="${donation.donaId}">
+<input type="hidden" id="target_in" value="${donation.targetIn}">
+<input type="hidden" id="agreeornot" value="0">
+<input type="hidden" id="pointree" value="${logincust.pointree}">
 
 </section>
 <script>

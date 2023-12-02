@@ -30,6 +30,9 @@ public class Volunteer {
     private int dDay;
 	private String currentDate;
     private int mount;
+	private int likesCount;
+	private String isLike;
+	
 	
 	public int getdDay() {
 		return dDay;

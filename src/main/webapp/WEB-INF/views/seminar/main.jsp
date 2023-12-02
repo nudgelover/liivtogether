@@ -206,11 +206,9 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     var cardInner = $('<div></div>').addClass('card mb-7');
                     var heartIcon = $('<div></div>').addClass('heart-icon').attr('data-id', obj.semiId).append($('<i></i>').addClass('fa-solid fa-heart white'));
                     var badge = $('<div></div>').addClass('badge bg-white text-body card-badge').append($('<time></time>').addClass('text-uppercase').attr('datetime', obj.ddate).text(obj.ddate));
-                    var cardImage = $('<img/>').addClass('card-img-top').attr('src', 'uimg/' + obj.imageMain);
+                    var cardImage = $('<img/>').addClass('card-img-top').attr('src', '/uimg/' + obj.imageMain);
                     var cardBody = $('<div></div>').addClass('card-body px-0');
-                    
-                
-
+                               
                     var title = obj.title;
                     var rewardCoin = obj.rewardCoin;
                     var targetIn = obj.targetIn;

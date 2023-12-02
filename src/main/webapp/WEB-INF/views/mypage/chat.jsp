@@ -126,6 +126,14 @@
 	font-size: large;
 }
 </style>
+<script>
+$(document).ready(function() {
+	popup('해당 페이지는 준비 중입니다. 내년 1월에 만나요~!',false,'','')
+});
+
+
+
+</script>
 
 <div class="container  mt-5">
 	<div class="row">
@@ -135,7 +143,7 @@
 				<div class="user-picbox">
 					<div class="avatar-container">
 						<div class="avatar avatar-xl">
-							<img src="../assets/img/avatars/avatar-1.jpg" alt="..."
+							<img src="/uimg/${logincust.img}" alt="..."
 								class="avatar-img rounded-circle">
 						</div>
 						<div class="edit-icon">
@@ -161,8 +169,7 @@
 				<div class="titlelist col-12">
 					<a id="tab1" href="#" onclick="showTab('donation')">진행중</a> <a
 						id="tab2" href="#" onclick="showTab('volunteering')">종료</a>
-								<button data-tab href="#tab1">활동</button>
-		<button data-tab href="#tab2">배송</button>
+		
 				</div>
 				<div id="tab1" class="col-12 col-lg-9 tab-content">
 

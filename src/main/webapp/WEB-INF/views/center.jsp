@@ -92,6 +92,10 @@
 	color: lightslategray;
 	font-style: italic;
 }
+
+.card-img-top{
+	padding: 10%;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -192,8 +196,7 @@
 			<div class="col-12 col-lg-3">
 
 				<!-- Heading -->
-				<h3 class="mb-10 text-center text-lg-start">How is Contact
-					Lenses different?</h3>
+				<h3 class="mb-10 text-center text-lg-start">리브투게더 </br> 이것만 알 면 돼요!</h3>
 
 			</div>
 			<div class="col-12 col-md">
@@ -202,12 +205,12 @@
 				<div class="card mb-7 mb-md-0 shadow">
 
 					<!-- Image -->
-					<img src="assets/img/products/product-91.jpg" alt="..."
+					<img src="assets/img/starfriends/cuteeeee.gif" alt="..."
 						class="card-img-top">
 
 					<!-- Body -->
 					<div class="card-body text-center">
-						<img class="me-4" src="/assets/img/icons/icon-hands.svg" alt="...">
+						<img class="me-4" style="width: 30px;" src="https://cdn-icons-png.flaticon.com/512/1692/1692181.png" alt="...">
 						<strong>기부와 봉사로 세상의 온도를 높여주세요.</strong>
 					</div>
 
@@ -220,12 +223,12 @@
 				<div class="card mb-7 mb-md-0 shadow">
 
 					<!-- Image -->
-					<img src="assets/img/products/product-92.jpg" alt="..."
+					<img src="assets/img/starfriends/money.gif" alt="..."
 						class="card-img-top">
 
 					<!-- Body -->
 					<div class="card-body text-center">
-						<img class="me-4" src="assets/img/icons/icon-wrap.svg" alt="...">
+						<img class="me-4" style="width: 30px;" src="assets/img/payment/starcoin.png" alt="...">
 						<strong>보상으로 스타코인을 드려요!</strong>
 					</div>
 
@@ -238,13 +241,13 @@
 				<div class="card shadow">
 
 					<!-- Image -->
-					<img src="assets/img/products/product-93.jpg" alt="..."
+						<img src="assets/img/starfriends/gift.gif" alt="..."
 						class="card-img-top">
 
 					<!-- Body -->
 					<div class="card-body text-center">
-						<img class="me-4" src="assets/img/icons/icon-bottle.svg" alt="...">
-						<strong>세미나 참여, ESG 상품으로 교환해요!</strong>
+						<img class="me-4" style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/1139/1139982.png" alt="...">
+						<strong>세미나 참여, ESG 상품으로 교환해요! </strong>
 					</div>
 
 				</div>
@@ -266,8 +269,7 @@
 
 				<!-- Heading -->
 				<h2 class="mb-12 text-center">
-					고객후기<br> <span style="color: sandybrown; font-size: x-large;">더 나은 세상을 함께 만들어
-						나갑니다</span>
+					고객후기<br> <span style="color: sandybrown; font-size: x-large;">더 나은 세상을 함께 만들어 나갑니다</span>
 				</h2>
 
 			</div>
@@ -361,6 +363,7 @@
 	</div>
 </section>
 
+
 <!-- OUR PRODUCTS -->
 <section class="pt-12 pb-10" id="products">
 	<div class="container">
@@ -368,45 +371,93 @@
 			<div class="col-12 text-center">
 
 				<!-- Preheading -->
-				<h6 class="heading-xxs mb-3 text-gray-400">Our products</h6>
+				<h6 class="heading-xxs mb-3 text-gray-400">ESG SHOP</h6>
 
 				<!-- Heading -->
-				<h2 class="mb-10">Get your Perfect Lenses</h2>
+				<h2 class="mb-10">따뜻한 마음, 착한 소비로 되받아가세요.</h2>
 
 				<!-- Slider -->
 				<div class="flickity-buttons-lg px-lg-12 mt-n3"
 					data-flickity='{"prevNextButtons": true}'>
 
 					<!-- Item -->
-					<div class="col-12 col-md-4 pt-3 pb-7 px-4">
-						<div class="card card-lg shadow-hover">
+					<div class="col-12 col-md-4 pt-3 pb-7 px-4" >
+						<div class="card card-lg shadow-hover" style="align-items: center;">
 
 							<!-- Circle -->
 							<div class="card-circle card-circle-end">
-								<strong class="fs-xs">save</strong> <span class="h6 mb-0">30%</span>
+								<strong class="fs-xs">인기최고</strong> <span class="h6 mb-0">HOT</span>
 							</div>
 
 							<!-- Image -->
-							<img src="assets/img/products/product-94.jpg" alt="..."
-								class="card-img-top">
+						<img src="assets/img/starfriends/텀블러1.png" style="max-width: 10rem;" alt="..."
+						class="card-img-top">
 
 							<!-- Body -->
+						<div class="card-body mt-n6 text-center">
+
+								<!-- Heading -->
+								<p class="mb-3 fw-bold">
+									[스타프렌즈 키키 에코텀블러] <br> <img style="width: 20px;" src="/assets/img/payment/starcoin.png">10 스타코인
+								</p>
+
+								<!-- Text -->
+								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
+
+								<!-- Button -->
+								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Item -->
+					<div class="col-12 col-md-4 pt-3 pb-7 px-4" >
+						<div class="card card-lg shadow-hover" style="align-items: center;">
+
+							<!-- Image -->
+							<img src="assets/img/starfriends/텀블러2.png" style="max-width: 10rem;" alt="..."
+							class="card-img-top">
+
+								<div class="card-body mt-n6 text-center">
+
+								<!-- Heading -->
+								<p class="mb-3 fw-bold">
+									[스타프렌즈 아거 에코텀블러] <br> <img style="width: 20px;" src="/assets/img/payment/starcoin.png">10 스타코인
+								</p>
+
+								<!-- Text -->
+								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
+
+								<!-- Button -->
+								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Item -->
+					<div class="col-12 col-md-4 pt-3 pb-7 px-4" >
+						<div class="card card-lg shadow-hover" style="align-items: center;">
+
+							<!-- Image -->
+							<img src="assets/img/starfriends/텀블러3.png" style="max-width: 10rem;" alt="..."
+							class="card-img-top">
+
 							<div class="card-body mt-n6 text-center">
 
 								<!-- Heading -->
 								<p class="mb-3 fw-bold">
-									Blue contact Lenses <br> <span
-										class="fs-xs text-gray-350 text-decoration-line-through">$40.00</span>
-									<span class="text-primary">$28.00</span>
+									[스타프렌즈 비비 에코텀블러] <br> <img style="width: 20px;" src="/assets/img/payment/starcoin.png">10 스타코인
 								</p>
 
 								<!-- Text -->
-								<p class="text-muted">Good male give subdue set one, image
-									that his beginning.</p>
+								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary"> Add to
-									Cart </a>
+								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 
@@ -415,39 +466,33 @@
 
 					<!-- Item -->
 					<div class="col-12 col-md-4 pt-3 pb-7 px-4">
-						<div class="card card-lg shadow-hover">
+						<div class="card card-lg shadow-hover" style="align-items: center;">
 
 							<!-- Image -->
-							<img src="assets/img/products/product-95.jpg" alt="..."
+							<img src="assets/img/starfriends/텀블러4.png" style="max-width: 10rem;" alt="..."
 								class="card-img-top">
 
-							<!-- Body -->
 							<div class="card-body mt-n6 text-center">
 
 								<!-- Heading -->
 								<p class="mb-3 fw-bold">
-									Green contact Lenses <br> $40.00
+									[스타프렌즈 콜리 에코텀블러] <br> <img style="width: 20px;" src="/assets/img/payment/starcoin.png">10 스타코인
 								</p>
 
 								<!-- Text -->
-								<p class="text-muted">Heaven one kind created god, sea
-									beginning yielding.</p>
+								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary"> Add to
-									Cart </a>
+								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
-
 						</div>
 					</div>
-
-					<!-- Item -->
 					<div class="col-12 col-md-4 pt-3 pb-7 px-4">
-						<div class="card card-lg shadow-hover">
+						<div class="card card-lg shadow-hover" style="align-items: center;">
 
 							<!-- Image -->
-							<img src="assets/img/products/product-96.jpg" alt="..."
+							<img src="assets/img/starfriends/텀블러5.png" style="max-width: 10rem;" alt="..."
 								class="card-img-top">
 
 							<!-- Body -->
@@ -455,45 +500,14 @@
 
 								<!-- Heading -->
 								<p class="mb-3 fw-bold">
-									Red contact Lenses <br> $40.00
+									[스타프렌즈 라무 에코텀블러] <br> <img style="width: 20px;" src="/assets/img/payment/starcoin.png">10 스타코인
 								</p>
 
 								<!-- Text -->
-								<p class="text-muted">Called fruitful fill also, creature
-									moved Morning saying and our.</p>
+								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary"> Add to
-									Cart </a>
-
-							</div>
-
-						</div>
-					</div>
-
-					<!-- Item -->
-					<div class="col-12 col-md-4 pt-3 pb-7 px-4">
-						<div class="card card-lg shadow-hover">
-
-							<!-- Image -->
-							<img src="assets/img/products/product-129.jpg" alt="..."
-								class="card-img-top">
-
-							<!-- Body -->
-							<div class="card-body mt-n6 text-center">
-
-								<!-- Heading -->
-								<p class="mb-3 fw-bold">
-									Yellow contact Lenses <br> $40.00
-								</p>
-
-								<!-- Text -->
-								<p class="text-muted">That isn't, dominion saw meat beast
-									lights sea him signs.</p>
-
-								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary"> Add to
-									Cart </a>
+								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 
@@ -509,7 +523,7 @@
 
 <!-- ABOUT -->
 <section class="py-12" id="about" data-jarallax data-speed=".8"
-	style="background-image: url(assets/img/covers/cover-19.jpg);">
+	style="background-image: url(assets/img/event/cardgame.png);">
 	<div class="container">
 		<div class="row justify-content-end">
 			<div class="col-12 col-md-7 col-lg-5">
@@ -519,16 +533,16 @@
 					<div class="card-body p-10">
 
 						<!-- Heading -->
-						<h3 class="mb-6">About Lenses</h3>
+						<h4 class="mb-6">이벤트 참여하고</br>포인트리를 모아보세요!</h4>
 
 						<!-- Text -->
-						<p class="text-muted">Fifth they're greater. You'll own years
-							bring set in said their. Bearing you created. Dominion earth very
-							doesn't good our also gathering can't very. Evening which that
-							waters meat form grass of is them own herb creeping from.</p>
+						<p class="text-muted"><span style="font-style: italic; color: #424242">다양한 이벤트가 여러분을 기다리고 있습니다! </span>
+						매일매일 참여가능한 <span style="font-weight: bold; color: orange;">출석체크, 카드맞추기게임, 콜리를 잡아라</span> 등 다양한 이벤트들이 상시대기 중 이니,
+						포인트리를 신나고 즐겁게 모아보세요!😆 심지어 스타프렌즈와 함께하는  <span style="font-weight: bold; color: hotpink;">예쁜 리브네컷</span>도 만들 수 있다구요!
+						</p>
 
 						<!-- Link -->
-						<a class="link-underline" href="#!"> Discover more </a>
+						<a class="link-underline" href="/event"> 이벤트 참여하러가기 </a>
 
 					</div>
 				</div>
@@ -549,15 +563,14 @@
 					<div class="card-body">
 
 						<!-- Icon -->
-						<img class="img-fluid mb-7" src="assets/img/icons/icon-eye.svg"
+						<img class="img-fluid mb-7"  style="width: 100%; max-width: 10rem; max-height: 10rem;"  src="assets/img/event/점프콜리.png"
 							alt="...">
 
 						<!-- Heading -->
-						<h6 class="mb-4">For eyes of any Color</h6>
+						<h6 class="mb-4">콜리를 잡아라</h6>
 
 						<!-- Text -->
-						<p class="mb-0 text-muted">I over whose fruitful together fish
-							likeness moved our. Give made firmament female set divided make.
+						<p class="mb-0 text-muted">날아가려는 콜리를 잡아주세요! 콜리를 잡으면 하루 최대 30포인트리!
 						</p>
 
 					</div>
@@ -571,15 +584,14 @@
 					<div class="card-body mb-7 mb-md-0">
 
 						<!-- Icon -->
-						<img class="img-fluid mb-7" src="assets/img/icons/icon-drops.svg"
-							alt="...">
+						<img class="img-fluid mb-7" style="width: 100%; max-width: 10rem; max-height: 10rem;"  src="assets/img/event/flower.gif"
+							alt="꽃도장비비">
 
 						<!-- Heading -->
-						<h6 class="mb-4">Convenient Packaging</h6>
+						<h6 class="mb-4">출석체크</h6>
 
 						<!-- Text -->
-						<p class="mb-0 text-muted">I over whose fruitful together fish
-							likeness moved our. Give made firmament female set divided make.
+						<p class="mb-0 text-muted"> 출석체크하고 귀여운 꽃비비도장을 획득하세요! 매일 매일 10포인트리 지급해드립니다!
 						</p>
 
 					</div>
@@ -593,575 +605,18 @@
 					<div class="card-body">
 
 						<!-- Icon -->
-						<img class="img-fluid mb-7" src="assets/img/icons/icon-pack.svg"
+						<img class="img-fluid mb-7"  style="width: 100%; max-width: 10rem; max-height: 10rem;"  src="assets/img/event/은빈네컷.png"
 							alt="...">
 
 						<!-- Heading -->
-						<h6 class="mb-4">Airtight Materials</h6>
+						<h6 class="mb-4">인생네컷</h6>
 
 						<!-- Text -->
-						<p class="mb-0 text-muted">I over whose fruitful together fish
-							likeness moved our. Give made firmament female set divided make.
+						<p class="mb-0 text-muted"> 예쁜 립투네컷 만들고 인스타그램에 올려주시면 추첨을 통해 선물을 드려요~!
 						</p>
 
 					</div>
 				</div>
-
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- INFO-->
-<section class="bg-light">
-	<div class="container">
-		<div class="row gx-0 justify-content-between">
-			<div class="col-12 col-md-5 py-12">
-
-				<!-- Heading -->
-				<h3 class="mb-7">We use advanced technology in the development
-					of contact lenses.</h3>
-
-				<!-- Text -->
-				<p class="mb-7 text-muted">Male his our upon seed had said
-					wherein their i great wherein under you'll deep first multiply.
-					Fish waters they're herb shall saying.</p>
-
-				<!-- Button -->
-				<a href="#!" class="btn btn-primary"> Get Sample Pack </a>
-
-			</div>
-			<div class="col-12 col-md-6 mt-12 mb-n12 bg-cover"
-				style="background-image: url(assets/img/products/product-97.jpg);"></div>
-		</div>
-	</div>
-</section>
-
-<!-- FEATURES-->
-<section class="section pt-12 pt-md-15 pb-12">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 text-center">
-
-				<!-- Preheading -->
-				<h6 class="heading-xxs mb-3 text-gray-400">Our features</h6>
-
-				<!-- Heading -->
-				<h2 class="mb-10">Lenses Features</h2>
-
-			</div>
-		</div>
-		<div class="row align-items-center justify-content-between">
-			<div class="col-12 col-md-3 text-md-end">
-
-				<!-- Item -->
-				<div class="mb-7 mb-md-13">
-
-					<!-- Heading -->
-					<h6 class="position-relative mb-4">
-						Convenient tight Box <span class="line line-end d-none d-lg-block"></span>
-					</h6>
-
-					<!-- Text -->
-					<p class="mb-0 text-muted">Together days thing land fifth,
-						gathered fish wherein fruit called moveth their, which good air
-						gathered.</p>
-
-				</div>
-
-				<!-- Item -->
-				<div class="mb-7 mb-md-0">
-
-					<!-- Heading -->
-					<h6 class="position-relative mb-4">
-						Monthly contact Lenses <span
-							class="line line-end d-none d-lg-block"></span>
-					</h6>
-
-					<!-- Text -->
-					<p class="mb-0 text-muted">There face that be dry morning to
-						his saying, them is sixth won't fly doesn't His he For there he.</p>
-
-				</div>
-
-			</div>
-			<div class="col-12 col-md-5">
-
-				<!-- Image -->
-				<img src="assets/img/products/product-98.jpg" alt="..."
-					class="img-fluid mb-7 mb-md-0">
-
-			</div>
-			<div class="col-12 col-md-3">
-
-				<!-- Item -->
-				<div class="mt-md-10 mb-7 mb-md-13">
-
-					<!-- Heading -->
-					<h6 class="position-relative mb-4">
-						Daily contact Lenses <span
-							class="line line-start d-none d-lg-block"></span>
-					</h6>
-
-					<!-- Text -->
-					<p class="mb-0 text-muted">Together days thing land fifth,
-						gathered fish wherein fruit called moveth their, which good air
-						gathered.</p>
-
-				</div>
-
-				<!-- Item -->
-				<div>
-
-					<!-- Heading -->
-					<h6 class="position-relative mb-4">
-						Airtight Container <span class="line line-start d-none d-lg-block"></span>
-					</h6>
-
-					<!-- Text -->
-					<p class="mb-0 text-muted">There face that be dry morning to
-						his saying, them is sixth won't fly doesn't His he For there he.</p>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="py-12 bg-dark bg-pattern" id="howItWorks">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-
-				<!-- Heading -->
-				<h2 class="mb-10 text-center text-white">How it Works</h2>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-4">
-
-				<!-- Card -->
-				<div class="card bg-none mb-7 mb-md-0">
-
-					<!-- Image -->
-					<div class="card-img-top position-relative mx-auto"
-						style="max-width: 120px;">
-
-						<!-- Circle -->
-						<div class="card-circle card-circle-sm card-circle-top-end">1</div>
-
-						<!-- Image -->
-						<img class="img-fluid rounded-circle"
-							src="assets/img/products/product-99.jpg" alt="...">
-
-					</div>
-
-					<!-- Body -->
-					<div class="card-body text-center">
-
-						<!-- Heading -->
-						<h6 class="mb-4 text-white">Take out the Lens from the
-							container</h6>
-
-						<!-- Text -->
-						<p class="mb-0 text-gray-300">Under above saying waters saying
-							wherein stars fourth made appear won't darkness fill, form rule i
-							dry his god.</p>
-
-					</div>
-
-				</div>
-
-			</div>
-			<div class="col-12 col-md-4">
-
-				<!-- Card -->
-				<div class="card bg-none mb-7 mb-md-0">
-
-					<!-- Image -->
-					<div class="card-img-top position-relative mx-auto"
-						style="max-width: 120px;">
-
-						<!-- Circle -->
-						<div class="card-circle card-circle-sm card-circle-top-end">2</div>
-
-						<!-- Image -->
-						<img class="img-fluid rounded-circle"
-							src="assets/img/products/product-100.jpg" alt="...">
-
-					</div>
-
-					<!-- Body -->
-					<div class="card-body text-center">
-
-						<!-- Heading -->
-						<h6 class="mb-4 text-white">Put the lens on a clean and dry
-							finger</h6>
-
-						<!-- Text -->
-						<p class="mb-0 text-gray-300">Under above saying waters saying
-							wherein stars fourth made appear won't darkness fill, form rule i
-							dry his god.</p>
-
-					</div>
-
-				</div>
-
-			</div>
-			<div class="col-12 col-md-4">
-
-				<!-- Card -->
-				<div class="card bg-none mb-7 mb-md-0">
-
-					<!-- Image -->
-					<div class="card-img-top position-relative mx-auto"
-						style="max-width: 120px;">
-
-						<!-- Circle -->
-						<div class="card-circle card-circle-sm card-circle-top-end">3</div>
-
-						<!-- Image -->
-						<img class="img-fluid rounded-circle"
-							src="assets/img/products/product-101.jpg" alt="...">
-
-					</div>
-
-					<!-- Body -->
-					<div class="card-body text-center">
-
-						<!-- Heading -->
-						<h6 class="mb-4 text-white">Look upward as you place it on
-							your eye.</h6>
-
-						<!-- Text -->
-						<p class="mb-0 text-gray-300">Under above saying waters saying
-							wherein stars fourth made appear won't darkness fill, form rule i
-							dry his god.</p>
-
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- INFO-->
-<section class="bg-light">
-	<div class="container">
-		<div class="row gx-0 justify-content-between">
-			<div class="col-12 col-md-6 mt-12 mb-n12 bg-cover"
-				style="background-image: url(assets/img/products/product-102.jpg);"></div>
-			<div class="col-12 col-md-5 py-12">
-
-				<!-- Heading -->
-				<h3 class="mb-7">Our lenses are designed for your clear and
-					brilliant vision.</h3>
-
-				<!-- Text -->
-				<ul class="list-styled mb-7">
-					<li class="list-styled-item"><i
-						class="fe fe-check me-2 text-primary"></i> <span>Male his
-							our upon seed had</span></li>
-					<li class="list-styled-item"><i
-						class="fe fe-check me-2 text-primary"></i> <span>Day
-							together third</span></li>
-					<li class="list-styled-item"><i
-						class="fe fe-check me-2 text-primary"></i> <span>You're
-							seed is creepeth gathered</span></li>
-					<li class="list-styled-item"><i
-						class="fe fe-check me-2 text-primary"></i> <span>Given
-							moved it so lights</span></li>
-				</ul>
-
-				<!-- Button -->
-				<a href="#!" class="btn btn-primary"> Get Sample Pack </a>
-
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- BEST PICKS -->
-<section class="pt-12 pt-md-15 pb-12">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12 col-md-10 col-lg-8 col-xl-7 text-center">
-
-				<!-- Preheading -->
-				<h6 class="heading-xxs mb-3 text-gray-400">Before & after</h6>
-
-				<!-- Heading -->
-				<h2 class="mb-4">The best solution for Eyes of any Color</h2>
-
-				<!-- Subheading -->
-				<p class="mb-10 text-gray-500">Appear, dry there darkness
-					they're seas, dry waters thing fly midst. Beast, above fly brought
-					Very green.</p>
-
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-12 col-lg-10">
-
-				<!-- Card -->
-				<div class="card">
-
-					<!-- Badge -->
-					<div
-						class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-						Before</div>
-
-					<!-- Badge -->
-					<div
-						class="badge bg-white text-body card-badge card-badge-end text-uppercase">
-						After</div>
-
-					<!-- Comparision -->
-					<div class="img-comp">
-
-						<!-- Back -->
-						<div class="img-comp-back">
-							<img src="assets/img/products/product-104.jpg" alt="..."
-								class="img-comp-img">
-						</div>
-
-						<!-- Front -->
-						<div class="img-comp-front">
-							<img src="assets/img/products/product-103.jpg" alt="..."
-								class="img-comp-img">
-						</div>
-
-						<!-- Handle -->
-						<div class="img-comp-handle btn btn-sm btn-circle btn-white">
-							<i class="fe fe-arrow-left"></i> <i class="fe fe-arrow-right"></i>
-						</div>
-
-						<!-- Input -->
-						<input class="img-comp-input" type="range">
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- PRICING -->
-<section class="py-12 bg-light" id="pricing">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 text-center">
-
-				<!-- Preheading -->
-				<h6 class="heading-xxs mb-3 text-gray-400">Pricing plans</h6>
-
-				<!-- Heading -->
-				<h2 class="mb-10">Something for Everyone</h2>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-lg-4">
-
-				<!-- Card -->
-				<div class="card card-lg shadow mb-7 mb-lg-0">
-					<div class="card-body border-bottom text-center">
-
-						<!-- Subheading -->
-						<h5>Basic</h5>
-
-						<!-- Heading -->
-						<h2 class="mb-0 fw-bolder">
-							$29.00 <span class="fs-lg fw-bold">/ month</span>
-						</h2>
-
-					</div>
-					<div class="card-body">
-
-						<!-- Text -->
-						<p class="text-muted">Called life don't called darkness spirit
-							abundantly so Wherein the.</p>
-
-						<!-- List -->
-						<ul class="list-styled mb-8">
-							<li class="list-styled-item"><i
-								class="fe fe-check me-2 text-primary"></i> Behold in creature
-								likeness</li>
-							<li class="list-styled-item text-muted"><i
-								class="fe fe-x me-2 text-muted"></i> To hath for fly land</li>
-							<li class="list-styled-item text-muted"><i
-								class="fe fe-x me-2 text-muted"></i> Third under god above
-								bearing</li>
-						</ul>
-
-						<!-- Button -->
-						<div class="text-center">
-							<a class="btn btn-outline-primary" href="#!"> Get Started Now
-							</a>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-			<div class="col-12 col-lg-4">
-
-				<!-- Card -->
-				<div class="card card-lg shadow mb-7 mb-lg-0">
-
-					<!-- Badge -->
-					<div
-						class="badge bg-primary card-badge card-badge-start text-uppercase">
-						Popular</div>
-
-					<!-- Context -->
-					<div class="card-body border-bottom text-center">
-
-						<!-- Subheading -->
-						<h5>Standart</h5>
-
-						<!-- Heading -->
-						<h2 class="mb-0 fw-bolder text-primary">
-							$59.00 <span class="fs-lg fw-bold">/ month</span>
-						</h2>
-
-					</div>
-					<div class="card-body">
-
-						<!-- Text -->
-						<p class="text-muted">In herb seed land divided together
-							seasons night good years.</p>
-
-						<!-- List -->
-						<ul class="list-styled mb-8">
-							<li class="list-styled-item"><i
-								class="fe fe-check me-2 text-primary"></i> Behold in creature
-								likeness</li>
-							<li class="list-styled-item"><i
-								class="fe fe-check me-2 text-primary"></i> To hath for fly land
-							</li>
-							<li class="list-styled-item text-muted"><i
-								class="fe fe-x me-2 text-muted"></i> Third under god above
-								bearing</li>
-						</ul>
-
-						<!-- Button -->
-						<div class="text-center">
-							<a class="btn btn-outline-primary" href="#!"> Get Started Now
-							</a>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-			<div class="col-12 col-lg-4">
-
-				<!-- Card -->
-				<div class="card card-lg shadow">
-					<div class="card-body border-bottom text-center">
-
-						<!-- Subheading -->
-						<h5>Premium</h5>
-
-						<!-- Heading -->
-						<h2 class="mb-0 fw-bolder">
-							$79.99 <span class="fs-lg fw-bold">/ month</span>
-						</h2>
-
-					</div>
-					<div class="card-body">
-
-						<!-- Text -->
-						<p class="text-muted">Fly which shall, male replenish stars
-							called i sixth without.</p>
-
-						<!-- List -->
-						<ul class="list-styled mb-8">
-							<li class="list-styled-item"><i
-								class="fe fe-check me-2 text-primary"></i> Behold in creature
-								likeness</li>
-							<li class="list-styled-item"><i
-								class="fe fe-check me-2 text-primary"></i> To hath for fly land
-							</li>
-							<li class="list-styled-item"><i
-								class="fe fe-check me-2 text-primary"></i> Third under god above
-								bearing</li>
-						</ul>
-
-						<!-- Button -->
-						<div class="text-center">
-							<a class="btn btn-outline-primary" href="#!"> Get Started Now
-							</a>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</section>
-
-
-
-<!-- GET STARTED -->
-<section class="pt-12 pb-6" id="getStarted">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 text-center">
-
-				<!-- Heading -->
-				<h2 class="mb-8">Ready to get Started? 😍</h2>
-
-				<!-- Button -->
-				<a href="#!" class="btn btn-primary mb-10"> Get Sample Pack </a>
-
-			</div>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row align-items-end">
-			<div class="col">
-
-				<!-- Image -->
-				<img src="assets/img/products/product-105.jpg" alt="..."
-					class="img-fluid">
-
-			</div>
-			<div class="col d-none d-md-block">
-
-				<!-- Image -->
-				<img src="assets/img/products/product-106.jpg" alt="..."
-					class="img-fluid">
-
-			</div>
-			<div class="col">
-
-				<!-- Image -->
-				<img src="assets/img/products/product-107.jpg" alt="..."
-					class="img-fluid">
-
-			</div>
-			<div class="col d-none d-md-block">
-
-				<!-- Image -->
-				<img src="assets/img/products/product-108.jpg" alt="..."
-					class="img-fluid">
-
-			</div>
-			<div class="col">
-
-				<!-- Image -->
-				<img src="assets/img/products/product-109.jpg" alt="..."
-					class="img-fluid">
 
 			</div>
 		</div>

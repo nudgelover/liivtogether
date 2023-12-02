@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
 .mypage-side, .user-picbox, .user-namebox {
 	display: flex;
@@ -87,7 +88,7 @@
 }
 
 .point img, .point svg {
-	width: 2rem;
+	width: 1.5rem;
 }
 
 .changeborder {
@@ -254,7 +255,7 @@
 			<div class="row">
 				<div style="padding: 10px;" class="col-12 col-lg-4 ">
 					<div class="points">
-						<div class="point col-6 col-lg-12 changeborder">
+						<div class="point col-6 col-lg-12 changeborder" onclick="goToMyPointree()">
 							<span><svg viewBox="0 0 40 40" focusable="false"
 									role="presentation" class="withIcon_icon__3VTbq"
 									aria-hidden="true">
@@ -263,12 +264,12 @@
 										d="M21.19 12.5h-5.91v15.16h2.16v-4.59h3.75a7 7 0 0 0 4.63-1.41 4.75 4.75 0 0 0 1.69-3.87 4.77 4.77 0 0 0-1.69-3.88 7 7 0 0 0-4.63-1.41zm3.07 7.81a4.84 4.84 0 0 1-3.14.88h-3.68v-6.8h3.68a4.9 4.9 0 0 1 3.14.87 3.06 3.06 0 0 1 1.09 2.53 3 3 0 0 1-1.09 2.52z"></path>
 								<path
 										d="M20 1.67A18.33 18.33 0 1 0 38.33 20 18.35 18.35 0 0 0 20 1.67zm0 34.66A16.33 16.33 0 1 1 36.33 20 16.35 16.35 0 0 1 20 36.33z"></path>
-								<path fill="none" d="M0 0h40v40H0z"></path></g></svg> 포인트 </span> <span>1000p</span>
+								<path fill="none" d="M0 0h40v40H0z"></path></g></svg> 포인트 </span> <span> <fmt:formatNumber value="${cust.pointree}" pattern="#,##0"/>p</span>
 						</div>
-						<div class="point col-6 col-lg-12">
+						<div class="point col-6 col-lg-12" onclick="goToMyStarcoin()">
 							<span> <img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">스타코인
-							</span> <span>1000p</span>
+							</span> <span>${cust.starcoin}개</span>
 						</div>
 					</div>
 				</div>
@@ -276,17 +277,16 @@
 					<div class="myjoins">
 						<span><img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/512/2910/2910756.png"> 내가 현재 신청한 프로그램이에요</span>
 						<div class="myjoin col-12">
-							<div style="border-right: 1px solid #FDE6B1;" 
-								class="join-section col-4" onclick="goMyAttend('D')">
-								<span>기부</span><span>3건</span>
+							<div style="border-right: 1px solid #FDE6B1;" class="join-section col-4" onclick="goMyAttend('D')">
+							    <span>기부</span><span>${attendCount[0].cnt}건</span>
 							</div>
-							<div style="border-right: 1px solid #FDE6B1;"
-								class="join-section col-4" onclick="goMyAttend('V')">
-								<span>봉사</span><span>2건</span>
+							<div style="border-right: 1px solid #FDE6B1;" class="join-section col-4" onclick="goMyAttend('V')">
+							    <span>봉사</span><span>${attendCount[1].cnt}건</span>
 							</div>
 							<div class="join-section col-4" onclick="goMyAttend('S')">
-								<span>세미나</span><span>1건</span>
+							    <span>세미나</span><span>${attendCount[2].cnt}건</span>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -302,7 +302,7 @@
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToWish()">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
+								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜한목록<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToChat()">
@@ -313,41 +313,40 @@
 					</div>
 
 
-					<p class="section-header">나의 문의내역</p>
+					<p class="section-header">ESG SHOP <span style="color: orange;">⚠️준비 중</span></p>
 					<div class="col-12 mysection">
 						<div class="col-12 col-lg-6 section-list">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">증명서
-							발급하기<img
-								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
-						</div>
-						<div class="col-12 col-lg-6 section-list">
-							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
-								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
-						</div>
-						<div class="col-12 col-lg-6 section-list">
-							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">채팅하기<img
+								src="https://cdn-icons-png.flaticon.com/512/2435/2435281.png">
+								 	나의 주문 내역
+								<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 					</div>
-					<p class="section-header">고객센터</p>
+					<p class="section-header">고객센터  <span style="color: orange;">⚠️ 준비 중</span></p>
 					<div class="col-12 mysection mb-10">
 						<div class="col-12 col-lg-6 section-list">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">증명서
-							발급하기<img
+								src="https://cdn-icons-png.flaticon.com/512/3378/3378645.png">
+								 	내가 문의한 내역
+								<img
+								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
+						</div>
+						<div class="col-12 col-lg-6 section-list">
+							<img
+								src="https://cdn-icons-png.flaticon.com/512/159/159469.png">
+								 	공지사항
+								<img
+								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
+						</div>
+						<div class="col-12 col-lg-6 section-list">
+							<img
+								src="https://cdn-icons-png.flaticon.com/512/126/126509.png">고객전용 고객센터<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 						<div class="col-12 col-lg-6 section-list" onclick="goToWish()">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">찜하기<img
-								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
-						</div>
-						<div class="col-12 col-lg-6 section-list" onclick="goToChat()">
-							<img
-								src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">채팅하기<img
+								src="https://cdn-icons-png.flaticon.com/512/126/126509.png">협업사전용 고객센터<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
 					</div>
@@ -371,3 +370,5 @@
 		</div>
 	</div>
 </div>
+
+

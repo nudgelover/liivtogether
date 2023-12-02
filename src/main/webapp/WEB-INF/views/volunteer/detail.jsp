@@ -132,14 +132,24 @@ function joinVolunteerPopup() {
     popup(text, true, preCheck, "");
 };
 
+
 function updateViews() {
 
-    var volunteerId = ${volunteer.voluId};
+	 var volunteerId = ${volunteer.voluId};
 
     $.ajax({
         type: "POST", 
         url: "/volunteer/update-views",
-        data: { id: volunteerId }, // 아이디를 전달
+        data: { id: volunteerId }, // 세미나 아이디를 전달
+    	beforeSend : function(xhr,set){
+    		console.log('beforeSend 탄다. csrf 토큰확인');
+			let token = $("meta[name='_csrf']").attr("content");
+			let header =$("meta[name='_csrf_header']").attr("content");
+			
+		
+	        xhr.setRequestHeader("X-CSRF-Token", token);
+			xhr.setRequestHeader(header,token);
+		},
         success: function(response) {
             console.log(response + ' response');
             if (response === 1) {
@@ -154,8 +164,122 @@ function updateViews() {
     });
 }
 
+function checkLikesOrNot() {
+    // 사용자가 좋아요를 누른 상태인지 아닌지 체크
+    console.log('좋아요 누른 이력을 확인합니다.');
+    
+    var volunteerId = ${volunteer.voluId};
+    let loginCustId = $('#loginCustId').val();
+    
+    if (loginCustId) {
+    	console.log(loginCustId+'님접속')
+    	
+   	  $.ajax({
+   	        type: "POST", 
+   	        url: "/volunteer/check-likes",
+   	        data: { contentsId: volunteerId,
+   	        		custId: loginCustId},
+       		beforeSend : function(xhr,set){
+        		console.log('beforeSend 탄다. csrf 토큰확인!!');
+    			let token = $("meta[name='_csrf']").attr("content");
+    			let header =$("meta[name='_csrf_header']").attr("content");
+    		
+    	        xhr.setRequestHeader("X-CSRF-Token", token);
+    			xhr.setRequestHeader(header,token);
+    		},
+   	        success: function(response) {
+   	            console.log(response + ' response');
 
+   	       		if (response === 0){
+	            	// 좋아요 한번도 안누른 상태 
+   	       			popup('해당 봉사활동를 관심 봉사활동으로 등록하시겠습니까?', true, regLike , "");
+	                
+	            }else if (response === 1) {
+	            	//이미 좋아요 누른상태
+	            	popup('이미 관심 봉사활동으로 등록하셨습니다. 관심 봉사 페이지로 이동할까요?', true, goToWish , "");
+   	                
+   	            }else if (response === 2) {
+   	           		//좋아요 눌렀던 이력이 있으나, is_likes N 인상태
+   	       			popup('해당 봉사를 관심 봉사로 등록하시겠습니까?', true, updateLike , "");
+   	            }
+	            else{
+   	            	popup('일시적인 오류가 발생했습니다. 다시 시도해 주세요.', false, "" , "");
+   	                
+   	            }
+   	            
+   	        },
+   	        error: function() {
+   	            console.error("Error checkLikesOrNot.");
+   	        }
+   	    });
+      
+    }else{
+    	popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+    };
+    
+}
 
+function regLike() {
+	console.log('처음으로 찜을 하신 고객님이십니다.');
+	
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    var volunteerId = ${volunteer.voluId};
+    var loginCustId = $('#loginCustId').val();
+    
+    $.ajax({
+        type: "POST", 
+        url: "/volunteer/reg-like",
+        data: { contentsId: volunteerId,
+       			custId: loginCustId}, // 세미나 아이디를 전달
+        beforeSend : function(xhr,set){
+       	     console.log('beforeSend 탄다. csrf 토큰확인!!');
+       	     let token = $("meta[name='_csrf']").attr("content");
+       	     let header =$("meta[name='_csrf_header']").attr("content");
+       	     	
+       	     xhr.setRequestHeader("X-CSRF-Token", token);
+       	     xhr.setRequestHeader(header,token);
+      	},
+        success: function(response) {
+            console.log(response + ' response');
+           
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
+        },
+        error: function() {
+            console.error("Error updating views.");
+        }
+    });
+    
+    
+}
+
+function updateLike() {
+	console.log('이전에 찜했다가 삭제하신 고객님이십니다.');
+	
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    var volunteerId = ${volunteer.voluId};
+    var loginCustId = $('#loginCustId').val();
+    
+    $.ajax({
+        type: "POST", 
+        url: "/volunteer/update-like",
+        data: { contentsId: volunteerId,
+       			custId: loginCustId}, // 세미나 아이디를 전달
+        success: function(response) {
+            console.log(response + ' response');
+           
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
+        },
+        error: function() {
+            console.error("Error updating views.");
+        }
+    });
+    
+    
+}
 
 
 </script>
@@ -198,7 +322,7 @@ function updateViews() {
 			<p>📒 봉사</p>
 			<h5>${volunteer.title}</h5>
 			<p>${volunteer.comment}</p>
-			<div style="display: flex;">
+			<div style="display: flex; text-align: center;">
 				<span class="recruitment">모집 인원<br/>
 				${volunteer.target} 명
 				</span><span
@@ -225,9 +349,14 @@ function updateViews() {
 
 			</div>
 			<div class="preference">
-				<span><img style="width: 25px;" src="/assets/img/starfriends/starcoin.png"> ${volunteer.rewardCoin}개</span> 
-				<span style="margin-left: 3px;"><img style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"> 찜하기 11명 </span> <span>👀조회
-				<span style="margin-right: 0" id="view-count"> ${volunteer.view}</span>명</span>
+				<span><img style="width: 25px;"
+					src="/assets/img/starfriends/starcoin.png">
+					${volunteer.rewardCoin}개</span> <span style="margin-left: 3px;"><img
+					style="width: 25px;"
+					src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">찜하기<span
+					id="likesNum">${volunteer.likesCount}</span>명 </span> <span>👀조회 <span
+					style="margin-right: 0" id="view-count"> ${volunteer.view}</span>명
+				</span>
 			</div>
 			<div id="buttons">
 				
@@ -239,8 +368,9 @@ function updateViews() {
 	            	  	 <button style="width: 66%; background-color: #E6E6E6; cursor: default;">종료</button>
 	          		</c:when>
 					<c:otherwise>
-						<button style="width: 33%">
-						<i class="fa fa-heart"></i> 찜하기
+						<button id="likesBtn" style="width: 33%"
+							onclick="checkLikesOrNot()">
+							<i class="fa fa-heart"></i> 찜하기
 						</button>
         	    		<button style="width: 66%" onclick="joinVolunteerPopup()">봉사 참여하기</button>
         	    		
@@ -332,7 +462,6 @@ function updateViews() {
 <script>
 
 
-
 function preCheck() {
     var volunteerId = $('#voluId').val();
     var loginCustId = $('#loginCustId').val();
@@ -373,8 +502,13 @@ function preCheck() {
     }
 };
 
+
+
+
+
+
 function joinVolunteer() {
-	window.location.href = "http://localhost/volunteer/join?id=${volunteer.voluId}";
+	window.location.href = serviceServer+"/volunteer/join?id=${volunteer.voluId}";
 };
 
 
