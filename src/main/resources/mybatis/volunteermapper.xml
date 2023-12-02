@@ -110,27 +110,6 @@
         WHERE cust_id = #{cust_id}
     </delete>
     
-	<select id="getBannerList" resultType="volunteer">
-	 <![CDATA[
-	    SELECT
-	        id AS voluId,
-	        title,
-	        image_main AS imageMain,
-	        comment,
-	        content
-	    FROM
-	        contents
-	    WHERE
-	        topic_big = 'V'
-	        AND edate >= CURDATE() -- 오늘보다 크거나 같은 날짜
-	        AND (target_in < target) -- 인원이 차지 않은 경우만 포함
-	    ORDER BY
-	        edate ASC
-	    LIMIT 3;
-    ]]>
-
-	</select>
-
 
 	<select id="getVolunteerList" parameterType="java.util.Map" resultType="volunteer">
 	    SELECT c.id as voluId

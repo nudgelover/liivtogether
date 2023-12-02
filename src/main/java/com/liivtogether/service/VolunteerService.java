@@ -49,12 +49,6 @@ public class VolunteerService implements LIIVService<Integer, Volunteer> {
         return mapper.selectrecommend();
     }
 
-	public List<Volunteer> getBannerList()throws Exception {		
-		return mapper.getBannerList();
-	}
-    
-    
-
 	public void updateViews(Integer k) throws Exception {
 		mapper.updateViews(k);
 	}

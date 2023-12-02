@@ -19,7 +19,6 @@ public interface VolunteerMapper extends LIIVMapper<Integer, Volunteer> {
 	
    public void updateViews(Integer voluId) throws Exception;
 
-   public List<Volunteer> getBannerList() throws Exception;
 	
    public List<Volunteer> getVolunteerList(Map<String, Object> params) throws Exception;
 

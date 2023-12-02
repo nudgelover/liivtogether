@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VolunteerController {
 	
 	@Autowired
-	VolunteerService volunteerservice;
+	VolunteerService Volunteerservice;
 	
 	@Autowired
 	ApplyService applyService;
@@ -46,20 +46,14 @@ public class VolunteerController {
     	 model.addAttribute("vlist", list);
     	 model.addAttribute("bannerList", bannerList);
 
-    	List<Volunteer> list = volunteerservice.getBannerList();
-		log.info(list.toString()+"getBannerList");
-		
-		model.addAttribute("bannerList", list);
-		model.addAttribute("center", dir + "main");
-
         return "index";
     }
  
     
     @RequestMapping("/detail")
     public String detail(Model model, int id) throws Exception {
-    	 Volunteer volunteer = volunteerservice.get(id);
-    	 List<Volunteer> list = volunteerservice.getrecommend();
+    	 Volunteer volunteer = Volunteerservice.get(id);
+    	 List<Volunteer> list = Volunteerservice.getrecommend();
      	
     	 LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
  		 LocalDate ddate = LocalDate.parse(volunteer.getDdate()); // ddate 형식 2023-08-10
@@ -74,7 +68,7 @@ public class VolunteerController {
     
 	@RequestMapping("/join")
 	public String join(Model model,Integer id) throws Exception {
-		 Volunteer volunteer = volunteerservice.get(id);
+		 Volunteer volunteer = Volunteerservice.get(id);
 		
 		LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
 		LocalDate ddate = LocalDate.parse(volunteer.getDdate()); // edate 형식 2023-08-10
@@ -89,7 +83,7 @@ public class VolunteerController {
 	
 	@RequestMapping("/join-complete")
 	public String joincomplete(Model model,String custId,Integer contentsId) throws Exception {
-		Volunteer volunteer = volunteerservice.get(contentsId);
+		Volunteer volunteer = Volunteerservice.get(contentsId);
 		Apply apply = applyService.getJoinComplete(custId, contentsId);
 		
 		model.addAttribute("volunteer", volunteer);
