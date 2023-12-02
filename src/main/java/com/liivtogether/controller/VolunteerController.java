@@ -33,21 +33,19 @@ public class VolunteerController {
     @RequestMapping("")
     public String volunteer(Model model) throws Exception {
     	List<Volunteer> list = Volunteerservice.get();
-    	
+    	List<Volunteer> bannerList = Volunteerservice.getBannerList();
     	
     	LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
     	
     	for(Volunteer volunteer : list) {
     		 LocalDate ddate = LocalDate.parse(volunteer.getDdate()); // ddate 형식 2023-08-10
      		 int daysUntil = (int) ChronoUnit.DAYS.between(today, ddate);
-     		 log.info("++++++++++++++++++"+daysUntil);
      		 volunteer.setdDay(daysUntil);
-     		 log.info("+++++++++++++"+volunteer);
     	}
-    	
-    	log.info("+++++++++++++" + list);
+		 log.info("++++bannerList"+bannerList);
     	 model.addAttribute("center", dir + "main");
     	 model.addAttribute("vlist", list);
+    	 model.addAttribute("bannerList", bannerList);
         return "index";
     }
  

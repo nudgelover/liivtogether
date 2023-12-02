@@ -14,7 +14,7 @@
 				<!-- Text -->
 		
 				<!-- Button -->
-				</br> <a class="btn btn-warning" href="/mypage/myvolunteer"> 나의 봉사로 이동하기</a>
+				</br> <a class="btn btn-warning" href="/mypage"> 마이페이지로 이동하기</a>
 
 			</div>
 		</div>

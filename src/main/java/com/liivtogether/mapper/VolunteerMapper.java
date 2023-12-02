@@ -1,6 +1,6 @@
 package com.liivtogether.mapper;
 
-import com.liivtogether.dto.Donation;
+
 //import com.github.pagehelper.Page;
 import com.liivtogether.dto.Volunteer;
 import com.liivtogether.frame.LIIVMapper;
@@ -13,5 +13,5 @@ import java.util.List;
 @Mapper
 public interface VolunteerMapper extends LIIVMapper<Integer, Volunteer> {
 	List<Volunteer> selectrecommend();
-    
+	public List<Volunteer> getBannerList() throws Exception;
 }

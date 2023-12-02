@@ -72,83 +72,36 @@
 	data-flickity='{"pageDots": true}'>
 
 	<!-- Item -->
-	<div class="w-100">
-		<div class="card bg-h-100 bg-start"
-			style="background-image: url(/assets/img/covers/cover-24.jpg);">
-			<div class="row" style="height: 15rem">
-				<div class="col-12 col-md-10 col-lg-8 col-xl-6 align-self-center">
-					<div class="card-body px-md-10 py-11">
-
-						<!-- Heading -->
-						<h4>곧 마감하는 봉사 배너띄우기</h4>
-
-						<!-- Button -->
-						<a class="btn btn-link px-0 text-body" href="shop.html"> 
-						봉사하면 스타코인받고 봉사시간 인정받고 증명서 발급? 
+	<c:forEach items="${bannerList}" var="obj">
+		<div class="w-100">
+			<div class="card bg-cover"
+				style="background-image: url('/uimg/${obj.imageSub}');">
+				<div class="row align-items-center" style="height: 15rem">
+					<div class="col-12 col-md-10 col-lg-8 col-xl-6">
+						<div class="card-body px-md-10 py-5">
+							<!-- Heading -->
+							<h4 class="mb-5" style="color: white;">${obj.title}</h4>
 						
-						<i class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-				<div
-					class="col-12 col-md-2 col-lg-4 col-xl-6 d-none d-md-block bg-cover"
-					style="background-image: url(/assets/img/covers/cover-16.jpg);"></div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Item -->
-	<div class="w-100">
-		<div class="card bg-cover"
-			style="background-image: url(/assets/img/covers/cover-29.jpg)">
-			<div class="row align-items-center" style="height: 15rem">
-				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
-					<div class="card-body px-md-10 py-11">
-						<!-- Heading -->
-						<h4 class="mb-5">Get -50% from Summer Collection</h4>
-
-						<!-- Text -->
-						<p class="mb-7">
-							Appear, dry there darkness they're seas. <br> <strong
-								class="text-primary">Use code 4GF5SD</strong>
-						</p>
-
-						<!-- Button -->
-						<a class="btn btn-outline-dark" href="shop.html"> Shop Now <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
+					   
+						    <!-- obj의 다른 속성에 접근할 수도 있습니다. 예: ${obj.imageMain}, ${obj.comment}, 등 -->
+						
+							<!-- Text -->
+							<p class="mb-7" style="color: white;">
+								${obj.comment} <br> <strong
+									class="text-primary">마감이 얼마 남지 않았어요!</strong>
+							</p>
+	
+							<!-- Button -->
+							<a class="btn btn-outline-dark" style="color: white;" href="/volunteer/detail?id=${obj.voluId}"> 참여하러가기 <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+	
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<!-- Item -->
-	<div class="w-100">
-		<div class="card bg-cover"
-			style="background-image: url(/assets/img/covers/cover-30.jpg);">
-			<div class="row align-items-center" style="height: 15rem">
-				<div class="col-12">
-					<div class="card-body px-md-10 py-11 text-center text-white">
-
-						<!-- Preheading -->
-						<p class="text-uppercase">Enjoy an extra</p>
-
-						<!-- Heading -->
-						<h1 class="display-4 text-uppercase">50% off</h1>
-
-						<!-- Link -->
-						<a class="link-underline text-reset" href="shop.html">Shop
-							Collection</a>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	</c:forEach>
 
 </div>
 
@@ -173,18 +126,7 @@
 
 			</div>
 		</div>
-		<div style="display: flex; justify-content: right;">
-			<div class="col-12 col-md-4">
-				<div class="input-group input-group-merge mb-5">
-				  <input class="form-control" type="search" placeholder="Search">
-				  <div class="input-group-append">
-				    <button class="btn btn-outline-border" type="submit">
-				      <i class="fe fe-search"></i>
-				    </button>
-				  </div>
-				</div>
-			</div>
-		</div>
+
 		<div class="menulist">
 			<h2>전체</h2>
 			<div>

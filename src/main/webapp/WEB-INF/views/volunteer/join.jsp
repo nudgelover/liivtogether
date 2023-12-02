@@ -229,7 +229,7 @@ $(document).ready(function() {
 <input type="hidden" id="cust_id" value="${logincust.custId}">
 <input type="hidden" id="topic_big" value="V">
 <input type="hidden" id="contents_id" value="${volunteer.voluId}">
-<input id="target_in" value="${volunteer.targetIn}">
+<input type="hidden" id="target_in" value="${volunteer.targetIn}">
 <input type="hidden" id="agreeornot" value="0">
 <input type="hidden" id="mount" value="${volunteer.rewardCoin}">
 <input type="hidden" id="starcoin" value="0">
@@ -327,7 +327,7 @@ $(document).ready(function() {
 	function generateTimeSlots() {
         const container = document.getElementById('timeSlotsContainer');
         
-        for (let hour = 6; hour < 18; hour++) {
+        for (let hour = 9; hour < 18; hour++) {
             // Create a button for each hour
             const timeBtn = document.createElement('button');
             timeBtn.textContent = hour + ":00 - " + (hour + 1) + ":00";
