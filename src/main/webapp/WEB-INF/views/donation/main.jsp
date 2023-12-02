@@ -77,6 +77,16 @@
   }
 } */
 
+
+.row.align-items-center {
+  height: 15rem;
+}
+
+@media (min-width: 768px) {
+  .row.align-items-center {
+    height: 20rem;
+  }
+}
 </style>
 <!-- BREADCRUMB -->
 <nav class="py-5">
@@ -105,23 +115,20 @@
 		<div class="w-100">
 			<div class="card bg-cover"
 				style="background-image: url('/uimg/${obj.imageSub}');">
-				<div class="row align-items-center" style="height: 15rem">
-					<div class="col-12 col-md-10 col-lg-8 col-xl-6">
+				<div class="row align-items-center">
+					<div class="col-12">
 						<div class="card-body px-md-10 py-5">
 							<!-- Heading -->
-							<h4 class="mb-5" style="color: white;">${obj.title}</h4>
-						
-					   
-						    <!-- obj의 다른 속성에 접근할 수도 있습니다. 예: ${obj.imageMain}, ${obj.comment}, 등 -->
+							<div style="background-color: rgba(255, 255, 255, 0.5);">
+							<h4 class="mb-5">${obj.title}</h4>
 						
 							<!-- Text -->
-							<p class="mb-7" style="color: white;">
-								${obj.comment} <br> <strong
+							<p class="mb-7">
+								${obj.comment} <br> <strong style="font-weight: 800;"
 									class="text-primary">마감이 얼마 남지 않았어요!</strong>
 							</p>
-	
-							<!-- Button -->
-							<a class="btn btn-outline-dark" style="color: white;" href="/donation/detail?id=${obj.donaId}"> 참여하러가기 <i
+							</div>
+							<a style="background-color: rgba(255, 255, 255, 0.5);" class="btn btn-outline-dark" href="/seminar/detail?id=${obj.donaId}"> 참여하러가기 <i
 								class="fe fe-arrow-right ms-2"></i>
 							</a>
 	

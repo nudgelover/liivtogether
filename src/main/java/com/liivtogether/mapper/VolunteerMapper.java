@@ -14,12 +14,9 @@ import java.util.Map;
 public interface VolunteerMapper extends LIIVMapper<Integer, Volunteer> {
 	List<Volunteer> selectrecommend();
 
-	public List<Volunteer> getBannerList() throws Exception;
-
+   public List<Volunteer> getBannerList() throws Exception;
 	
    public void updateViews(Integer voluId) throws Exception;
-
-   public List<Volunteer> getBannerList() throws Exception;
 	
    public List<Volunteer> getVolunteerList(Map<String, Object> params) throws Exception;
 

@@ -270,7 +270,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	}
 	
 	function getMoreList(topicSmall) {
-	    console.log('나클릭함');
 	    console.log('topicSmall :' + topicSmall);
 	    console.log('currentOrder : ' + currentOrder);
 
@@ -396,10 +395,10 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			<div class="card bg-cover"
 				style="background-image: url('/uimg/${obj.imageMain}');">
 				<div class="row align-items-center">
-					<div class="col-12 col-md-10 col-lg-8">
+					<div class="col-12">
 						<div class="card-body px-md-10 py-5">
 							<!-- Heading -->
-							<div style="background-color: rgba(255, 255, 255, 0.8);">
+							<div style="background-color: rgba(255, 255, 255, 0.5);">
 							<h4 class="mb-5">${obj.title}</h4>
 						
 							<!-- Text -->
@@ -408,7 +407,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 									class="text-primary">마감이 얼마 남지 않았어요!</strong>
 							</p>
 							</div>
-							<a style="background-color: rgba(255, 255, 255, 0.8);" class="btn btn-outline-dark" href="/seminar/detail?id=${obj.semiId}"> 참여하러가기 <i
+							<a style="background-color: rgba(255, 255, 255, 0.5);" class="btn btn-outline-dark" href="/seminar/detail?id=${obj.semiId}"> 참여하러가기 <i
 								class="fe fe-arrow-right ms-2"></i>
 							</a>
 	
