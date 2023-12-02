@@ -59,12 +59,6 @@ public class VolunteerService implements LIIVService<Integer, Volunteer> {
 		mapper.updateViews(k);
 	}
 	
-
-	public List<Volunteer> getBannerList()throws Exception {
-		
-		return mapper.getBannerList();
-	}
-
    public List<Volunteer> getVolunteerList(String topicSmall, String currentDate, boolean includeClosed, String order, Integer offset)throws Exception {
         Map<String, Object> params = new HashMap<>();
         params.put("topicSmall", topicSmall);

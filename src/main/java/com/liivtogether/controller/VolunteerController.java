@@ -31,8 +31,8 @@ public class VolunteerController {
     
     @RequestMapping("")
     public String volunteer(Model model) throws Exception {
-    	List<Volunteer> list = Volunteerservice.get();
-    	List<Volunteer> bannerList = Volunteerservice.getBannerList();
+    	List<Volunteer> list = volunteerservice.get();
+    	List<Volunteer> bannerList = volunteerservice.getBannerList();
     	
     	LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
     	
@@ -45,12 +45,7 @@ public class VolunteerController {
     	 model.addAttribute("center", dir + "main");
     	 model.addAttribute("vlist", list);
     	 model.addAttribute("bannerList", bannerList);
-
-    	List<Volunteer> list = volunteerservice.getBannerList();
-		log.info(list.toString()+"getBannerList");
-		
-		model.addAttribute("bannerList", list);
-		model.addAttribute("center", dir + "main");
+	 	model.addAttribute("center", dir + "main");
 
         return "index";
     }
