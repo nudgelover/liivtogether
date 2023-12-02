@@ -39,7 +39,10 @@ function sendAlarm() {
 				<!-- Text -->
 		
 				<!-- Button -->
+
+				</br> <a class="btn btn-warning" href="/mypage"> 마이페이지로 이동하기</a>
 				</br> <button class="btn btn-warning" onclick="goMyAttend('V')"> 나의 봉사로 이동하기</button>
+
 
 			</div>
 		</div>

@@ -69,7 +69,27 @@
 		FROM contents
 		WHERE id=#{donaId}
     </select>
-    
+    <select id="getBannerList" resultType="Donation">
+	 <![CDATA[
+	    SELECT
+	        id AS donaId,
+	        title,
+	        image_main AS imageMain,
+	        image_sub AS imageSub,
+	        comment,
+	        content
+	    FROM
+	        contents
+	    WHERE
+	        topic_big = 'D'
+	        AND ddate >= CURDATE() -- 오늘보다 크거나 같은 날짜
+	        AND (target_in < target) -- 인원이 차지 않은 경우만 포함
+	    ORDER BY
+	        edate ASC
+	    LIMIT 3;
+    ]]>
+
+	</select>
     <update id="setTargetIn" parameterType="donation">
         UPDATE contents
         SET target_in =#{targetIn}

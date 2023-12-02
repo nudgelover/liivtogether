@@ -380,26 +380,42 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	data-flickity='{"pageDots": true}'>
 	
 
+
+	<!-- Item -->
+	<c:forEach items="${bannerList}" var="obj">
+		<div class="w-100">
+			<div class="card bg-cover"
+				style="background-image: url('/uimg/${obj.imageSub}');">
+
 	<c:forEach items="${bannerList}" var="obj">
 		<div class="w-100">
 			<div class="card bg-cover"
 				style="background-image: url('/uimg/${obj.imageMain}');">
+
 				<div class="row align-items-center" style="height: 15rem">
 					<div class="col-12 col-md-10 col-lg-8 col-xl-6">
 						<div class="card-body px-md-10 py-5">
 							<!-- Heading -->
+
+							<h4 class="mb-5" style="color: white;">${obj.title}</h4>
 							<h4 class="mb-5">${obj.title}</h4>
+
 						
 					   
 						    <!-- obj의 다른 속성에 접근할 수도 있습니다. 예: ${obj.imageMain}, ${obj.comment}, 등 -->
 						
 							<!-- Text -->
+
+							<p class="mb-7" style="color: white;">
 							<p class="mb-7">
+
 								${obj.comment} <br> <strong
 									class="text-primary">마감이 얼마 남지 않았어요!</strong>
 							</p>
 	
 							<!-- Button -->
+
+							<a class="btn btn-outline-dark" style="color: white;" href="/volunteer/detail?id=${obj.voluId}"> 참여하러가기 <i
 							<a class="btn btn-outline-dark" href="/volunteer/detail?id=${obj.voluId}"> 참여하러가기 <i
 								class="fe fe-arrow-right ms-2"></i>
 							</a>
@@ -411,9 +427,9 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 		</div>
 	</c:forEach>
 </div>
+
+</div>
 <input type="hidden" id="offset" value="9">
-
-
 
 <!-- CONTENT -->
 <section class="pt-7 pb-12">
@@ -441,6 +457,12 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			</div>
 		</div>
 
+
+		<div class="menulist">
+			<h2>전체</h2>
+			<div>
+				<span>인기순</span><span>마감임박순</span><span>신청률순</span><span>최신순</span><span>조회순</span>
+
 		<div id="taball">
 			<div class="menulist">
 				<h2>전체보기</h2>
@@ -460,7 +482,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 
 			<div class="row volunteer-list">
 			
-
 			</div>
 			<div class="row">
 				<div class="col-12">

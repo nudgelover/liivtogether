@@ -1,5 +1,7 @@
 package com.liivtogether.service;
 
+
+import com.liivtogether.dto.Donation;
 import com.liivtogether.dto.Seminar;
 import com.liivtogether.dto.Volunteer;
 import com.liivtogether.frame.LIIVService;
@@ -46,6 +48,10 @@ public class VolunteerService implements LIIVService<Integer, Volunteer> {
     public List<Volunteer> getrecommend() throws Exception {
         return mapper.selectrecommend();
     }
+
+	public List<Volunteer> getBannerList()throws Exception {		
+		return mapper.getBannerList();
+	}
     
     
 
@@ -73,5 +79,6 @@ public class VolunteerService implements LIIVService<Integer, Volunteer> {
 
         return mapper.getVolunteerList(params);
     }
+
 
 }

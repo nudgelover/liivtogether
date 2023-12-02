@@ -20,32 +20,34 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/donation")
 public class DonationController {
-    @Autowired
+ 
+	@Autowired
     DonationService Donationservice;
     @Autowired
     ApplyService Applyservice;
     
+
 	@Autowired
 	CustService custService;
-    
+
     String dir = "donation/";
+    
     @RequestMapping("")
     public String donation(Model model) throws Exception {
     	List<Donation> list = Donationservice.get();
-    	
+    	List<Donation> bannerList = Donationservice.getBannerList();
     	
     	LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
     	
     	for(Donation donation : list) {
     		 LocalDate ddate = LocalDate.parse(donation.getDdate()); // ddate 형식 2023-08-10
      		 int daysUntil = (int) ChronoUnit.DAYS.between(today, ddate);
-     		 log.info("++++++++++++++++++"+daysUntil);
      		 donation.setdDay(daysUntil);
-     		 log.info("+++++++++++++"+donation);
     	}
-    	log.info("=================="+list);
+
     	 model.addAttribute("center", dir + "main");
     	 model.addAttribute("dlist", list);
+    	 model.addAttribute("bannerList", bannerList);
         return "index";
     }
  
