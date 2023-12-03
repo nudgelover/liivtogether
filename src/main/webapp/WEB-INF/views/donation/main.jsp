@@ -189,12 +189,20 @@
 						 </c:otherwise>
 						 </c:choose>				
 					</div>
+						<c:choose>
+							<c:when test="${obj.dDay < 0}">
+							<div style="position: relative; display: inline-block;">
+							    <div style="position: absolute; top: 0; left: 0; background-color: #808080; opacity: 0.7; width: 100%; height: 100%;"></div>
+							    <img class="card-img-top ended" src="/uimg/${obj.imageMain}" alt="${obj.title}" style="z-index: 1;">
+							</div>
 
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top" src="/uimg/${obj.imageMain}" alt="${obj.title}">
+							</c:otherwise>
+						</c:choose>
 					<!-- Image -->
-					<img class="card-img-top"
-						 src="/uimg/${obj.imageMain}"
-						 alt="/donation/detail">
-
+					
 					<!-- Body -->
 					<div class="card-body px-0">
 								<c:set var="achiQuo" value="${(obj.targetIn)/(obj.target)*100}"/>
@@ -202,11 +210,20 @@
 						<!-- Heading -->
 						<h6>${obj.title}</h6>
 						<div class="event-info">
-							<div class="progress">
+						<c:choose>
+							 <c:when test="${obj.dDay >= 0}">
+							   <div class="progress">
 								<div class="progress-bar bg-info progress-bar-striped"
 									style="width: ${formattedAchiQuo}%"></div>
-							</div>
-
+								</div>
+							 </c:when>
+							 <c:otherwise>
+						 		<div class="progress">
+									<div class="progress-bar progress-bar-striped" style="background-color: darkgray !important; animation:none !important; width: ${formattedAchiQuo}%;"></div>
+								</div>
+							 </c:otherwise>
+						 </c:choose>		
+						
 							<div style="display: flex; align-items: center;">
 								
 								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <br><span
@@ -218,7 +235,7 @@
 										<span style="font-size: 12px; font-weight: 200;">성공</span></span>
 									  </c:when>
 									  <c:when test="${obj.dDay < 0}">
-										<span style="color: gray; font-size: 12px; font-weight: 200;">종료
+										<span style="color: gray; font-size: 12px; font-weight: 200;">종료</span>
 									  </c:when>
 									  <c:otherwise>
         								<span style="font-size: 12px; font-weight: 300;">진행중</span>
@@ -254,31 +271,6 @@
 			</div>
 			</c:forEach>
 			
-		<div class="row">
-			<div class="col-12">
-
-				<!-- Progress -->
-				<div class="row justify-content-center mt-7">
-					<div class="col-12 text-center">
-
-						<!-- Caption -->
-						<p class="fs-sm text-muted">Showing 16 of 24 products</p>
-
-						<!-- Progress -->
-						<div class="progress mx-auto mb-7" style="max-width: 250px;">
-							<div class="progress-bar bg-dark" role="progressbar"
-								style="width: 66%" aria-valuenow="66" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
-
-						<!-- Button -->
-						<button class="btn btn-sm btn-outline-dark">더보기</button>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
 	</div>
 </section>
 

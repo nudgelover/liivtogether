@@ -39,7 +39,7 @@
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-8 col-xl-6 text-center">
 				<!-- Icon -->
-				<div class="mb-7 fs-1">증명서발급하기</div>	
+				<div class="mb-7 fs-1">기부 증명서 발급하기</div>	
 				<button id="btnChoice" style="border: gold 1px solid; margin: 10px 0 20px 0" onclick="openLayer()">증명서를 발급하실 기부 내역을 선택해주세요.</button>
 
 				

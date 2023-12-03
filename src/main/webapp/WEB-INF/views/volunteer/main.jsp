@@ -422,7 +422,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	</c:forEach>
 </div>
 
-</div>
+
 <input type="hidden" id="offset" value="9">
 
 <!-- CONTENT -->
@@ -451,11 +451,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 			</div>
 		</div>
 
-
-		<div class="menulist">
-			<h2>전체</h2>
-			<div>
-				<span>인기순</span><span>마감임박순</span><span>신청률순</span><span>최신순</span><span>조회순</span>
 
 		<div id="taball">
 			<div class="menulist">

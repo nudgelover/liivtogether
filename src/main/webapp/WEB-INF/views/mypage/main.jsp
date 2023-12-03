@@ -310,6 +310,11 @@
 								src="https://cdn-icons-png.flaticon.com/512/2076/2076218.png">채팅하기<img
 								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
 						</div>
+						<div style="color: red;" class="col-12 col-lg-6 section-list" onclick="getTestMoney()">
+							<img
+								src="https://cdn-icons-png.flaticon.com/512/3103/3103277.png">테스트 충전<img
+								src="https://cdn-icons-png.flaticon.com/512/709/709586.png">
+						</div>
 					</div>
 
 
@@ -371,4 +376,40 @@
 	</div>
 </div>
 
+
+<input type="hidden" id="loginCustId" value="${logincust.custId}">
+<script>
+
+function getTestMoney() {
+	var loginCustId = $('#loginCustId').val();
+
+    $.ajax({
+        url: '/getTestMoney',
+        method: 'POST',
+        data: { loginCustId: loginCustId }, 
+        beforeSend: function (xhr, set) {
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+
+            xhr.setRequestHeader("X-CSRF-Token", token);
+            xhr.setRequestHeader(header, token);
+        },
+        success: function(response) {
+        	popup('테스트용 5만 포인트리와  스타코인 100개가 충전되었습니다.', false, refreshPage, "");
+        },
+        error: function(error) {
+            // Handle the error response here
+            console.error(error);
+        }
+    });
+	
+	
+}
+
+function refreshPage() {
+    location.reload();
+}
+
+
+</script>
 
