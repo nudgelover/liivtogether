@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
+.card-img-bottom {
+	height: 9rem;
+}
+
 .location-detail {
 	margin-top: 10px;
 	padding: 20px;
@@ -119,6 +124,7 @@ $(document).ready(function() {
     $("#donation-date").html(formattedDate);
 });
 
+
 function updateViews() {
 
     var donationId = ${donation.donaId};
@@ -127,6 +133,15 @@ function updateViews() {
         type: "POST", 
         url: "/donation/update-views",
         data: { id: donationId }, // 아이디를 전달
+    	beforeSend : function(xhr,set){
+    		console.log('beforeSend 탄다. csrf 토큰확인');
+			let token = $("meta[name='_csrf']").attr("content");
+			let header =$("meta[name='_csrf_header']").attr("content");
+			
+		
+	        xhr.setRequestHeader("X-CSRF-Token", token);
+			xhr.setRequestHeader(header,token);
+		},
         success: function(response) {
             console.log(response + ' response');
             if (response === 1) {
@@ -141,8 +156,123 @@ function updateViews() {
     });
 }
 
+function checkLikesOrNot() {
+    // 사용자가 좋아요를 누른 상태인지 아닌지 체크
+    console.log('좋아요 누른 이력을 확인합니다.');
+    
+    var donationId = ${donation.donaId};
+    let loginCustId = $('#loginCustId').val();
+    
+    if (loginCustId) {
+    	console.log(loginCustId+'님접속')
+    	
+   	  $.ajax({
+   	        type: "POST", 
+   	        url: "/donation/check-likes",
+   	        data: { contentsId: donationId,
+   	        		custId: loginCustId},
+       		beforeSend : function(xhr,set){
+    			let token = $("meta[name='_csrf']").attr("content");
+    			let header =$("meta[name='_csrf_header']").attr("content");
+    			
+    		
+    	        xhr.setRequestHeader("X-CSRF-Token", token);
+    			xhr.setRequestHeader(header,token);
+    		},
+   	        success: function(response) {
+   	            console.log(response + ' response');
+
+   	       		if (response === 0){
+	            	// 좋아요 한번도 안누른 상태 
+   	       			popup('해당 기부를 관심기부로 등록하시겠습니까?', true, regLike , "");
+	                
+	            }else if (response === 1) {
+	            	//이미 좋아요 누른상태
+	            	popup('이미 관심상품으로 등록하셨습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
+   	                
+   	            }else if (response === 2) {
+   	           		//좋아요 눌렀던 이력이 있으나, is_likes N 인상태
+   	       			popup('해당 기부를 관심기부로 등록하시겠습니까?', true, updateLike , "");
+   	            }
+	            else{
+   	            	popup('일시적인 오류가 발생했습니다. 다시 시도해 주세요.', false, "" , "");
+   	                
+   	            }
+   	            
+   	        },
+   	        error: function() {
+   	            console.error("Error checkLikesOrNot.");
+   	        }
+   	    });
+      
+    }else{
+    	popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+    };
+    
+    
+}
 
 
+function regLike() {
+	console.log('처음으로 찜을 하신 고객님이십니다.');
+	
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    var donationId = ${donation.donaId};
+    var loginCustId = $('#loginCustId').val();
+    
+    $.ajax({
+        type: "POST", 
+        url: "/donation/reg-like",
+        data: { contentsId: donationId,
+       			custId: loginCustId}, // 세미나 아이디를 전달
+ 		beforeSend : function(xhr,set){
+    		let token = $("meta[name='_csrf']").attr("content");
+    		let header =$("meta[name='_csrf_header']").attr("content");
+    		
+    	    xhr.setRequestHeader("X-CSRF-Token", token);
+    		xhr.setRequestHeader(header,token);
+    	},
+        success: function(response) {
+            console.log(response + ' response');
+           
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
+        },
+        error: function() {
+            console.error("Error regLike.");
+        }
+    });
+    
+    
+}
+
+function updateLike() {
+	console.log('이전에 찜했다가 삭제하신 고객님이십니다.');
+	
+    var likesCount = document.getElementById('likesNum');
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    
+    var donationId = ${donation.donaId};
+    var loginCustId = $('#loginCustId').val();
+    
+    $.ajax({
+        type: "POST", 
+        url: "/donation/update-like",
+        data: { contentsId: donationId,
+       			custId: loginCustId}, // 세미나 아이디를 전달
+        success: function(response) {
+            console.log(response + ' response');
+           
+            popup('관심상품으로 등록되었습니다. 관심상품 페이지로 이동할까요?', true, goToWish , "");
+        },
+        error: function() {
+            console.error("Error updating views.");
+        }
+    });
+    
+    
+}
 
 
 </script>
@@ -177,7 +307,7 @@ function updateViews() {
 
 				<!-- Image -->
 				<img class="card-img-top"
-					src="https://t1.daumcdn.net/news/202211/25/yonhap/20221125144657838kmeg.jpg">
+					src="/uimg/${donation.imageMain}">
 			</div>
 		</div>
 		<div style="display: flex; flex-direction: column;"
@@ -185,9 +315,13 @@ function updateViews() {
 			<p>📒 기부</p>
 			<h5>${donation.title}</h5>
 			<p>${donation.comment}</p>
-			<div style="display: flex;">
-				<span class="recruitment">목표금액 <br/> ${donation.target}원</span><span
-					class="participants">${donation.targetIn}원 <br/> 기부중</span> <span
+			<div style="display: flex; text-align: center;letter-spacing: -1px; font-size: small;">
+				<span class="recruitment">목표금액 <br/>
+				<fmt:formatNumber value="${donation.target}" pattern="###,###원"/>
+				</span><span
+					class="participants">
+					<fmt:formatNumber value="${donation.targetIn}" pattern="###,###원"/>
+					<br/> 기부중</span> <span
 					class="${(donation.dDay == 0) ? 'deadline-red' : (donation.dDay < 0) ? 'deadline-gray' : (donation.dDay <= 3) ? 'deadline-red' : 'deadline-orange'}">
 					<c:choose>
 						<c:when test="${donation.dDay <= 0}">
@@ -208,9 +342,14 @@ function updateViews() {
 
 			</div>
 			<div class="preference">
-				<span><img style="width: 25px;" src="/assets/img/starfriends/starcoin.png"> ${donation.rewardCoin}개</span> 
-				<span style="margin-left: 3px;"><img style="width: 25px;" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"> 찜하기 11명 </span> <span>👀조회
-				<span style="margin-right: 0" id="view-count"> ${donation.view}</span>명</span>
+						<span><img style="width: 25px;"
+					src="/assets/img/starfriends/starcoin.png">
+					${donation.rewardCoin}개</span> <span style="margin-left: 3px;"><img
+					style="width: 25px;"
+					src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">찜하기<span
+					id="likesNum">${donation.likesCount}</span>명 </span> <span>👀조회 <span
+					style="margin-right: 0" id="view-count"> ${donation.view}</span>명
+				</span>
 			</div>
 			<div id="buttons">
 				
@@ -222,10 +361,10 @@ function updateViews() {
 	            	  	 <button style="width: 66%; background-color: #E6E6E6; cursor: default;">종료</button>
 	          		</c:when>
 					<c:otherwise>
-						<button style="width: 33%">
+						<button onclick="checkLikesOrNot()" style="width: 33%">
 						<i class="fa fa-heart"></i> 찜하기
 						</button>
-        	    		<button style="width: 66%" onclick="donationPopup()">기부하기</button>
+        	    		<button style="width: 66%" onclick="loginCheck()">기부하기</button>
         	    		
 		           	</c:otherwise>
 				</c:choose>
@@ -234,11 +373,9 @@ function updateViews() {
 			<!-- 종료 시 참여하기 -> 종료로 변경  -->
 
 			<div class="location-detail">
-				<span class="mb-3"><img style="width: 20px;"
-					src="https://cdn-icons-png.flaticon.com/512/727/727606.png">
-					장소 : ${donation.location}</span> <span><img style="width: 20px;"
+				<span class="mb-3"><span><img style="width: 20px;"
 					src="https://cdn-icons-png.flaticon.com/512/10691/10691802.png">
-					날짜 : <span id="donation-date"></span></span>
+					마감일 : <span id="donation-date"></span></span>
 			</div>
 			
 			<div id="sharingBtn">
@@ -255,41 +392,43 @@ function updateViews() {
 
 			<div>${donation.content}</div>
 			<img class="card-img-top"
-				src="https://ticketimage.interpark.com/230043252023/07/17/e8fed53f.jpg">
+				src="/uimg/${donation.imageSub}">
 
 		</div>
 
 		<div class="col-12 col-md-8 mt-10">
-			<h5>같이 보면 좋은 세미나, 이건 어떠세요?</h5>
+			<h5> 달성률이 너무 낮아 슬퍼요! 이런 기부에 참여해보는 것은 어떠신가요?</h5>
 			<div class="row">
+			<c:forEach var="obj" items="${rlist}">
+			<c:set var="achiQuo" value="${(obj.targetIn)/(obj.target)*100}"/>
+			<fmt:formatNumber value="${achiQuo}" pattern="###" var="formattedAchiQuo" />
 				<div class="col-6 col-md-4">
 
 					<!-- Card -->
 					<div class="card mb-7 mb-md-0">
 
 						<!-- Image -->
-						<img src="/assets/img/blog/blog-1.jpg" alt="..."
-							class="card-img-top">
+						<img src="/uimg/${obj.imageMain}" alt="..."
+							class="card-img-bottom">
 
 						<!-- Badge -->
 						<div
 							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-20"> Jun 20 </time>
+							<time datetime="2019-06-20">${formattedAchiQuo}% 달성
+							</time>
 						</div>
 
 						<!-- Body -->
 						<div class="card-body px-0 py-7">
 
 							<!-- Heading -->
-							<h6 class="mb-3">Us yielding Fish sea night night the said
-								him two</h6>
+							<h6 class="mb-3">${obj.title}</h6>
 
 							<!-- Text -->
-							<p class="mb-2">Fill his waters wherein signs likeness
-								waters. Second light gathered appear sixth.</p>
+							<p class="mb-2">${obj.comment}</p>
 
 							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
+							<a class="btn btn-link px-0 text-body" href="/donation/detail?id=${obj.donaId}"> 자세히보기 <i
 								class="fe fe-arrow-right ms-2"></i>
 							</a>
 
@@ -298,192 +437,7 @@ function updateViews() {
 					</div>
 
 				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
-				<div class="col-6 col-md-4">
-
-					<!-- Card -->
-					<div class="card mb-7 mb-md-0">
-
-						<!-- Badge -->
-						<div
-							class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-							<time datetime="2019-06-13"> Jun 13 </time>
-						</div>
-
-						<!-- Image -->
-						<img src="/assets/img/blog/blog-2.jpg" alt="..."
-							class="card-img-top">
-
-						<!-- Body -->
-						<div class="card-body px-0 py-7">
-
-							<!-- Heading -->
-							<h6 class="mb-3">Tree earth fowl given moveth deep lesser
-								After</h6>
-
-							<!-- Text -->
-							<p class="mb-2">Called life don't called darkness spirit
-								have, abundantly so Wherein the third cattle.</p>
-
-							<!-- Link -->
-							<a class="btn btn-link px-0 text-body" href="#!"> Read more <i
-								class="fe fe-arrow-right ms-2"></i>
-							</a>
-
-						</div>
-
-					</div>
-
-
-				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -493,6 +447,7 @@ function updateViews() {
 <input id="location" style="display: none;" value="${donation.location}">
 <input id="ddate" style="display: none;" value="${donation.ddate}">
 <input id="starcoin" style="display: none;" value="${donation.rewardCoin}">
+<input id="pointree" style="display: none;" value="${cust.pointree}">
 
 
 
@@ -504,18 +459,27 @@ function donationPopup() {
     const location = document.getElementById('location').value;
     const ddate = document.getElementById('ddate').value;
     const starcoin = document.getElementById('starcoin').value;
+    const pointree = document.getElementById('pointree').value;
 
-    const text = "<span style='font-size: 1.4rem;'>" + title + "에 기부하시겠습니까? <br></span><br>🔸기부가능 포인트리: " + starcoin + "P";
+    const text = "<span style='font-size: 1.4rem;'>" + title + "에 기부하시겠습니까? <br></span><br>🔸기부가능 포인트리: " + pointree + "P";
     
     popup(text, true, donation, "");
 }
 
 
 function donation() {
-	window.location.href = "http://localhost/donation/join?id=${donation.donaId}";
+	window.location.href = serviceServer+"/donation/join?id=${donation.donaId}";		
 }
 
-
+function loginCheck(){
+	var loginCustId = $('#loginCustId').val();
+	
+	if(loginCustId) {
+		donationPopup();
+	}else{
+		popup('로그인 후 이용하실 수 있습니다.<br> 로그인하러 가시겠습니까?', true, goToLogin, '');
+	}
+}
 
 function sharingLiivTT() {
 	alert('리브똑똑 공유하기  : 죄송합니다. 준비 중입니다.');

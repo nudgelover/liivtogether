@@ -5,8 +5,18 @@
 <mapper namespace="com.liivtogether.mapper.ApplyMapper">
 
 
-	<select id="select" parameterType="String" resultType="Apply">
-
+	<select id="select" parameterType="Integer" resultType="Apply">
+		SELECT apply_id as applyId
+			, contents_id as contentsId
+			, cust_id as custId
+			, rdate
+			, memo
+			, topic_big as topicBig
+			, agree
+			, donation_amount as donationAmount
+		FROM apply
+		WHERE apply_id= #{applyId}
+		
 	</select>
 
 	<select id="selectall" resultType="Apply">
@@ -16,9 +26,8 @@
 
 	<insert id="insert" parameterType="Apply">
 		INSERT INTO apply
-		(contents_id, cust_id, memo, topic_big, agree, rdate)
-		VALUES(#{contentsId}, #{custId}, #{memo}, #{topicBig}, #{agree},
-		NOW())
+		(contents_id, cust_id, memo, topic_big, agree, donation_amount, rdate)
+		VALUES(#{contentsId}, #{custId}, #{memo}, #{topicBig}, #{agree}, #{donationAmount}, NOW());
 	</insert>
 
 	<update id="update" parameterType="Apply">
@@ -62,7 +71,8 @@
 		c.content,
 		c.reword_coin as rewordCoin,
 		a.rdate,
-		a.memo
+		a.memo,
+		a.donation_amount as donationAmount
 		FROM apply a
 		INNER JOIN contents c ON a.contents_id = c.id
 		WHERE
@@ -76,4 +86,16 @@
 	</select>
 
 
+	<select id="getMyAttendCount" parameterType="Object" resultType="Apply">
+		SELECT topics.topic_big AS topicBig, IFNULL(COUNT(apply.cust_id), 0) AS cnt
+		FROM (
+		    SELECT 'D' AS topic_big
+		    UNION SELECT 'V' AS topic_big
+		    UNION SELECT 'S' AS topic_big
+		) AS topics
+		LEFT JOIN liivtogether.apply
+		ON topics.topic_big = SUBSTRING(apply.topic_big, 1, 1) AND apply.cust_id = #{custId}
+		GROUP BY topics.topic_big;
+
+	</select>
 </mapper>

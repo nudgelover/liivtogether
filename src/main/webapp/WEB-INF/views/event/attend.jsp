@@ -304,7 +304,7 @@ td div img {
 			},
 	        success: function(response) {
 	            console.log('저장완료')
-	            popup('출석완료되었습니다! 10포인트가 지급 되었습니다.', false, '', '');
+	            popup('출석완료되었습니다! 내일 10포인트가 지급될 예정입니다.', false, '', '');
 
 	         	clicked = true;
 	        },

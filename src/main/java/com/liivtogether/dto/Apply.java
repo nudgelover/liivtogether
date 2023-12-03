@@ -27,7 +27,9 @@ public class Apply {
     private String content;
     private String rewordCoin;
     private String agree;
-	public int getApplyId() {
+
+  //
+  public int getApplyId() {
 		return applyId;
 	}
 	public void setApplyId(int applyId) {
@@ -111,5 +113,7 @@ public class Apply {
 	public void setAgree(String agree) {
 		this.agree = agree;
 	}
-    
+  //혜림부분 끝
+    private int cnt;
+    private int donationAmount;
 }

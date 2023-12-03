@@ -2,6 +2,7 @@ package com.liivtogether.service;
 
 import com.liivtogether.dto.Cust;
 import com.liivtogether.dto.Donation;
+import com.liivtogether.dto.Seminar;
 import com.liivtogether.frame.LIIVService;
 import com.liivtogether.mapper.DonationMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,17 @@ public class DonationService implements LIIVService<Integer, Donation> {
         return mapper.selectall();
     }
     
-	public void setTargetIn(Donation donation) throws Exception {
-		mapper.setTargetIn(donation);
+
+
+	public void updateViews(Integer k) throws Exception {
+		mapper.updateViews(k);
+	}
+	
+	
+    public List<Donation> getrecommend() throws Exception {
+    	return mapper.selectrecommend();
+    }
+	public List<Donation> getBannerList()throws Exception {		
+		return mapper.getBannerList();
 	}
 }

@@ -16,8 +16,12 @@ import com.liivtogether.dto.Cust;
 import com.liivtogether.dto.Donation;
 import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Point;
+import com.liivtogether.dto.Seminar;
+import com.liivtogether.dto.Volunteer;
 import com.liivtogether.service.ApplyService;
 import com.liivtogether.service.PointService;
+import com.liivtogether.service.SeminarService;
+import com.liivtogether.service.VolunteerService;
 import com.liivtogether.service.DonationService;
 import com.liivtogether.service.CustService;
 
@@ -36,6 +40,10 @@ public class ApplyRestController {
 	DonationService donationService;
 	@Autowired
 	CustService custService;
+	@Autowired
+	VolunteerService volunteerService;
+	@Autowired
+	SeminarService seminarService;
 
 	@GetMapping("/apply/pre-check")
 	public Object applyprecheck(String contentsId, String topicBig, String custId) throws Exception {
@@ -61,12 +69,23 @@ public class ApplyRestController {
 
     @Transactional(rollbackFor = Exception.class) 
 	@PostMapping("/apply/process")
-	public Object applyprocess(Apply apply, Point point) throws Exception {
+	public Object applyprocess(Apply apply, Point point, Volunteer volunteer, Seminar seminar) throws Exception {
 		String result;
 		try {
 			applyService.register(apply);
 			pointService.register(point);
 			pointService.modify(point);
+			
+			int Id = apply.getContentsId();
+			String topicBic = apply.getTopicBig();
+
+			if ("V".equals(topicBic)) {
+				volunteer.setVoluId(Id);
+				volunteerService.modify(volunteer);
+			}else if ("S".equals(topicBic)){
+				seminar.setSemiId(Id);
+				seminarService.modify(seminar);
+			}
 			
 			result = "success";
 
@@ -80,32 +99,38 @@ public class ApplyRestController {
 	}
 
 	
-	
-	@PostMapping("/apply/register")
-	public Object applyregister(Apply apply, Point point, int mount) throws Exception {
+    @Transactional(rollbackFor = Exception.class) 
+	@PostMapping("/apply/donation")
+	public Object applydonation(Apply apply, Point point, Donation donation) throws Exception {
 
 		// 등록 하는거 
 		int result = 0;
-		
+		log.info(apply.toString()+"기부금액");
 		try {				
 			//기부신청 내역
-			applyService.register(apply);				
-			
-			//기부포인트리 히스토리
-			pointService.register(point);
-			
+			applyService.register(apply);
+			log.info(apply.toString()+"기부금액");
 			//기부콘텐츠 모금액(모금액 증가)
-			Donation donation = donationService.get(apply.getContentsId());	
-			int totalTargetIn = donation.getTargetIn()+point.getMount();
-
-			donation.setTargetIn(totalTargetIn); 
-			donationService.setTargetIn(donation); // targetIn 값을 재설정
-
+			donationService.modify(donation);			
+			//기부포인트리 히스토리
+			pointService.register(point);			
 			//고객보유 포인트리(보유포인트리 차감)
-			log.info("============="+point);
 			pointService.modify(point);
+					
+			//기부 스타코인
+			
+			Point starcoin = (Point) point.clone();
+			starcoin.setPointcoin("COIN");
+			starcoin.setGplace("D");
+			starcoin.setUplace(null);
+			starcoin.setMount(5);
 			
 			
+			//기부스타코인 히스토리
+			pointService.register(starcoin);
+			//고객보유 스타코인(스타코인 적립)
+			pointService.modify(starcoin);
+		
 			result = 1;
 
 		} catch (Exception e) {

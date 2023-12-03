@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class Point {
+public class Point implements Cloneable {
 	
     private int historyId;
     private String pointcoin;
@@ -20,4 +20,11 @@ public class Point {
     private String rdate;
     private String custId;
     private int mount;
+    private int totalEarned;
+    private int totalUsed;
+    private int difference;
+    
+    public Object clone() throws CloneNotSupportedException { // CloneNotSupportedException는 checked exception 이라 반드시 예외처리
+        return super.clone(); // 기본적으로 부모의 clone을 그대로 불러와 반환
+    }
 }

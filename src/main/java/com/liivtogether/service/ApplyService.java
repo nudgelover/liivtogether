@@ -37,8 +37,7 @@ public class ApplyService implements LIIVService<Integer, Apply> {
 
 	@Override
 	public Apply get(Integer k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.select(k);
 	}
 
 	@Override
@@ -51,7 +50,11 @@ public class ApplyService implements LIIVService<Integer, Apply> {
 		return mapper.getMyList(custId,topicBig);
 	}
 	
+	public List<Apply> getMyAttendCount(String custId) throws Exception {
+		return mapper.getMyAttendCount(custId);
+	}
 	
+
 	public Integer preCheck(String contentsId, String topicBig, String custId) throws Exception {
 		return mapper.preCheck(contentsId,topicBig,custId);
 	}

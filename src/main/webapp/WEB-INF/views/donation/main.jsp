@@ -77,8 +77,17 @@
   }
 } */
 
-</style>
 
+.row.align-items-center {
+  height: 15rem;
+}
+
+@media (min-width: 768px) {
+  .row.align-items-center {
+    height: 20rem;
+  }
+}
+</style>
 <!-- BREADCRUMB -->
 <nav class="py-5">
 	<div class="container">
@@ -102,83 +111,33 @@
 	data-flickity='{"pageDots": true}'>
 
 	<!-- Item -->
-	<div class="w-100">
-		<div class="card bg-h-100 bg-start"
-			style="background-image: url(/assets/img/covers/cover-24.jpg);">
-			<div class="row" style="height: 15rem">
-				<div class="col-12 col-md-10 col-lg-8 col-xl-6 align-self-center">
-					<div class="card-body px-md-10 py-11">
-
-						<!-- Heading -->
-						<h4>곧 마감하는 기부 배너띄우기</h4>
-
-						<!-- Button -->
-						<a class="btn btn-link px-0 text-body" href="shop.html"> 100%e
-							달성하면 국민은행이 얼마 보태고 30%이상하면 뭐하고~ 기부는 고객들이름이 다 기재되고..영수증발행해주고..? <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
-					</div>
-				</div>
-				<div
-					class="col-12 col-md-2 col-lg-4 col-xl-6 d-none d-md-block bg-cover"
-					style="background-image: url(/assets/img/covers/cover-16.jpg);"></div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Item -->
-	<div class="w-100">
-		<div class="card bg-cover"
-			style="background-image: url(/assets/img/covers/cover-29.jpg)">
-			<div class="row align-items-center" style="height: 15rem">
-				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
-					<div class="card-body px-md-10 py-11">
-						<!-- Heading -->
-						<h4 class="mb-5">Get -50% from Summer Collection</h4>
-
-						<!-- Text -->
-						<p class="mb-7">
-							Appear, dry there darkness they're seas. <br> <strong
-								class="text-primary">Use code 4GF5SD</strong>
-						</p>
-
-						<!-- Button -->
-						<a class="btn btn-outline-dark" href="shop.html"> Shop Now <i
-							class="fe fe-arrow-right ms-2"></i>
-						</a>
-
+	<c:forEach items="${bannerList}" var="obj">
+		<div class="w-100">
+			<div class="card bg-cover"
+				style="background-image: url('/uimg/${obj.imageSub}');">
+				<div class="row align-items-center">
+					<div class="col-12">
+						<div class="card-body px-md-10 py-5">
+							<!-- Heading -->
+							<div style="background-color: rgba(255, 255, 255, 0.5);">
+							<h4 class="mb-5">${obj.title}</h4>
+						
+							<!-- Text -->
+							<p class="mb-7">
+								${obj.comment} <br> <strong style="font-weight: 800;"
+									class="text-primary">마감이 얼마 남지 않았어요!</strong>
+							</p>
+							</div>
+							<a style="background-color: rgba(255, 255, 255, 0.5);" class="btn btn-outline-dark" href="/seminar/detail?id=${obj.donaId}"> 참여하러가기 <i
+								class="fe fe-arrow-right ms-2"></i>
+							</a>
+	
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<!-- Item -->
-	<div class="w-100">
-		<div class="card bg-cover"
-			style="background-image: url(/assets/img/covers/cover-30.jpg);">
-			<div class="row align-items-center" style="height: 15rem">
-				<div class="col-12">
-					<div class="card-body px-md-10 py-11 text-center text-white">
-
-						<!-- Preheading -->
-						<p class="text-uppercase">Enjoy an extra</p>
-
-						<!-- Heading -->
-						<h1 class="display-4 text-uppercase">50% off</h1>
-
-						<!-- Link -->
-						<a class="link-underline text-reset" href="shop.html">Shop
-							Collection</a>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	</c:forEach>
 </div>
 
 <!-- CONTENT -->
@@ -199,19 +158,7 @@
 
 			</div>
 		</div>
-		<div style="display: flex; justify-content: right;">
-			<div class="col-12 col-md-4">
-				<div class="input-group input-group-merge mb-5">
-					<input class="form-control" type="search" placeholder="Search">
-					<div class="input-group-append">
-						<button class="btn btn-outline-border" type="submit">
-							<i class="fe fe-search"></i>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
+	
 
 
 		<div class="menulist">
@@ -227,7 +174,7 @@
 				<div class="card mb-7">
 
 					<!-- 좋아요 -->
-					<div class="heart-icon">
+					<div class="heart-icon" id="like">
 						<i class="fa-solid fa-heart white"></i>
 					</div>
 					
@@ -242,12 +189,20 @@
 						 </c:otherwise>
 						 </c:choose>				
 					</div>
+						<c:choose>
+							<c:when test="${obj.dDay < 0}">
+							<div style="position: relative; display: inline-block;">
+							    <div style="position: absolute; top: 0; left: 0; background-color: #808080; opacity: 0.7; width: 100%; height: 100%;"></div>
+							    <img class="card-img-top ended" src="/uimg/${obj.imageMain}" alt="${obj.title}" style="z-index: 1;">
+							</div>
 
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top" src="/uimg/${obj.imageMain}" alt="${obj.title}">
+							</c:otherwise>
+						</c:choose>
 					<!-- Image -->
-					<img class="card-img-top"
-						 src="/uimg/${obj.imageMain}"
-						 alt="/donation/detail">
-
+					
 					<!-- Body -->
 					<div class="card-body px-0">
 								<c:set var="achiQuo" value="${(obj.targetIn)/(obj.target)*100}"/>
@@ -255,14 +210,23 @@
 						<!-- Heading -->
 						<h6>${obj.title}</h6>
 						<div class="event-info">
-							<div class="progress">
+						<c:choose>
+							 <c:when test="${obj.dDay >= 0}">
+							   <div class="progress">
 								<div class="progress-bar bg-info progress-bar-striped"
 									style="width: ${formattedAchiQuo}%"></div>
-							</div>
-
+								</div>
+							 </c:when>
+							 <c:otherwise>
+						 		<div class="progress">
+									<div class="progress-bar progress-bar-striped" style="background-color: darkgray !important; animation:none !important; width: ${formattedAchiQuo}%;"></div>
+								</div>
+							 </c:otherwise>
+						 </c:choose>		
+						
 							<div style="display: flex; align-items: center;">
 								
-								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <span
+								<span style="margin-right: auto;"> ${formattedAchiQuo}% 달성 <br><span
 									style="color: gray; font-size: 12px; font-weight: 200;">
 										모금액 : <fmt:formatNumber value="${obj.targetIn}" pattern="###,###원"/>/ 
 										목표액 : <fmt:formatNumber value="${obj.target}" pattern="###,###원"/></span></span> 
@@ -271,7 +235,7 @@
 										<span style="font-size: 12px; font-weight: 200;">성공</span></span>
 									  </c:when>
 									  <c:when test="${obj.dDay < 0}">
-										<span style="color: gray; font-size: 12px; font-weight: 200;">종료
+										<span style="color: gray; font-size: 12px; font-weight: 200;">종료</span>
 									  </c:when>
 									  <c:otherwise>
         								<span style="font-size: 12px; font-weight: 300;">진행중</span>
@@ -307,30 +271,6 @@
 			</div>
 			</c:forEach>
 			
-		<div class="row">
-			<div class="col-12">
-
-				<!-- Progress -->
-				<div class="row justify-content-center mt-7">
-					<div class="col-12 text-center">
-
-						<!-- Caption -->
-						<p class="fs-sm text-muted">Showing 16 of 24 products</p>
-
-						<!-- Progress -->
-						<div class="progress mx-auto mb-7" style="max-width: 250px;">
-							<div class="progress-bar bg-dark" role="progressbar"
-								style="width: 66%" aria-valuenow="66" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
-
-						<!-- Button -->
-						<button class="btn btn-sm btn-outline-dark">Load more</button>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
 	</div>
 </section>
+

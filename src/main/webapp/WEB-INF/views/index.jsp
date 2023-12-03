@@ -132,8 +132,8 @@ body {
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item ms-lg-n4"><a class="nav-link"
-							data-bs-toggle="offcanvas" href="#alarmModal"> <span
-								data-cart-items="2"> <i class="fe fe-bell"></i>
+							data-bs-toggle="offcanvas" href="#alarmModal"> <span id="countAlarm"
+							> <i class="fe fe-bell"></i>
 							</span>
 							</a></li>
 							<li class="nav-item ms-lg-n4"><a class="nav-link"

@@ -15,6 +15,10 @@ import org.springframework.stereotype.Repository;
 public interface ApplyMapper extends LIIVMapper<Integer, Apply> {
 
 	public List<Apply> getMyList(String custId, String topicBig) throws Exception;
+	
+
+	public List<Apply> getMyAttendCount(String custId) throws Exception;
+
 
 	public Integer preCheck(String contentsId, String topicBig, String custId) throws Exception;
 
