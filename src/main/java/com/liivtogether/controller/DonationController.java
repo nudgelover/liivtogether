@@ -25,7 +25,6 @@ public class DonationController {
     DonationService Donationservice;
     @Autowired
     ApplyService Applyservice;
-    
 
 	@Autowired
 	CustService custService;
@@ -76,7 +75,12 @@ public class DonationController {
     }
     
 	@RequestMapping("/join")
-	public String join(Model model,Integer id) throws Exception {
+	public String join(Model model,Integer id, HttpSession session) throws Exception {
+
+   	 	Cust logincust = (Cust) session.getAttribute("logincust");
+   	 	String custId = logincust.getCustId();
+   	 	Cust cust = custService.get(custId);
+   	 	
 		Donation donation = Donationservice.get(id);
 		
 		LocalDate today = LocalDate.now(); // 오늘 날짜 가져오기
@@ -84,6 +88,7 @@ public class DonationController {
 		int daysUntil = (int) ChronoUnit.DAYS.between(today, ddate);
 		donation.setdDay(daysUntil);
 
+		model.addAttribute("cust", cust);
 		model.addAttribute("donation", donation);
 		model.addAttribute("center", dir + "join");
 

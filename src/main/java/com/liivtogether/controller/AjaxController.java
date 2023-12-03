@@ -5,17 +5,22 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.liivtogether.dto.Apply;
 import com.liivtogether.dto.Cust;
+import com.liivtogether.dto.Point;
 import com.liivtogether.dto.PopularKeywords;
 import com.liivtogether.dto.Search;
 import com.liivtogether.dto.Seminar;
+import com.liivtogether.dto.Volunteer;
 import com.liivtogether.service.CustService;
+import com.liivtogether.service.PointService;
 import com.liivtogether.service.PopularService;
 import com.liivtogether.service.SearchService;
 
@@ -31,6 +36,8 @@ public class AjaxController {
 	@Autowired
 	SearchService searchService;
 	
+	@Autowired
+	PointService pointService;
 	
 	@Autowired
 	PopularService popularService;
@@ -123,6 +130,40 @@ public class AjaxController {
 
 	    return popularKeywordsList;
 	}
+	
+	
+	@Transactional(rollbackFor = Exception.class) 
+	@PostMapping("/getTestMoney")
+	public Object applyprocess(String loginCustId) throws Exception {
+	    String result;
+	    
+	    try {
+	       
+	        Point point = new Point();
+	        point.setCustId(loginCustId);
+	        point.setGplace("테스트충전");
+	        point.setPointcoin("POINTREE");
+	        point.setMount(50000);
 
+	        Point point2 = new Point();
+	        point2.setCustId(loginCustId);
+	        point2.setGplace("테스트충전");
+	        point2.setPointcoin("COIN");
+	        point2.setMount(100);
 
+	        // Register and modify the points
+	        pointService.register(point);
+	        pointService.register(point2);
+	        pointService.modify(point);
+	        pointService.modify(point2);
+
+	        result = "success";
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        result = "fail";
+	        throw e;
+	    }
+	    return result;
+	}
 }
