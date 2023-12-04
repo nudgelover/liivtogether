@@ -32,6 +32,10 @@
 	transition: opacity 0.3s ease-in-out; /*팝업 바깥 회색 배경화면이 천천이 표출*/
 }
 
+ body.popup-open {
+   overflow: hidden;
+ }
+
 .main-popup-content {
 	position: absolute;
 	bottom: -100%; /* 초기에는 아래로 숨김 */
@@ -557,28 +561,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-4 text-center">
-
-				<!-- Card -->
-				<div class="card mb-7 mb-md-0">
-					<div class="card-body">
-
-						<!-- Icon -->
-						<img class="img-fluid mb-7"  style="width: 100%; max-width: 10rem; max-height: 10rem;"  src="assets/img/event/점프콜리.png"
-							alt="...">
-
-						<!-- Heading -->
-						<h6 class="mb-4">콜리를 잡아라</h6>
-
-						<!-- Text -->
-						<p class="mb-0 text-muted">날아가려는 콜리를 잡아주세요! 콜리를 잡으면 하루 최대 30포인트리!
-						</p>
-
+				<a href="/event/whackamole">
+					<!-- Card -->
+					<div class="card mb-7 mb-md-0">
+						<div class="card-body">
+	
+							<!-- Icon -->
+							<img class="img-fluid mb-7"  style="width: 100%; max-width: 10rem; max-height: 10rem;"  src="assets/img/event/점프콜리.png"
+								alt="...">
+	
+							<!-- Heading -->
+							<h6 class="mb-4">콜리를 잡아라</h6>
+	
+							<!-- Text -->
+							<p class="mb-0 text-muted">날아가려는 콜리를 잡아주세요! 콜리를 잡으면 하루 최대 30포인트리!
+							</p>
+	
+						</div>
 					</div>
-				</div>
-
+				</a>
 			</div>
 			<div class="col-12 col-md-4 text-center">
-
+				<a href="/event/attend">
 				<!-- Card -->
 				<div class="card">
 					<div class="card-body mb-7 mb-md-0">
@@ -596,10 +600,10 @@
 
 					</div>
 				</div>
-
+				</a>	
 			</div>
 			<div class="col-12 col-md-4 text-center">
-
+				<a href="/event/fourcut">
 				<!-- Card -->
 				<div class="card">
 					<div class="card-body">
@@ -617,7 +621,7 @@
 
 					</div>
 				</div>
-
+				</a>
 			</div>
 		</div>
 	</div>
@@ -648,12 +652,14 @@
 	//팝업 열기 함수
 	function openMainPopup() {
 	    document.getElementById('mainBanner').classList.add('active');
+	    document.body.classList.add('popup-open');
 	}
 	
 	// 팝업 닫기 함수
 	function closePopup() {
 	    document.getElementById('mainBanner').classList.remove('active');
 	    document.getElementById('mainBanner').classList.add('remove');
+	    document.body.classList.remove('popup-open');
 		setTimeout(() => {
 			const popup = document.getElementById('mainBanner');
 			popup.style.display = 'none';

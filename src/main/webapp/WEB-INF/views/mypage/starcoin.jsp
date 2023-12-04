@@ -289,12 +289,12 @@
 										d="M21.19 12.5h-5.91v15.16h2.16v-4.59h3.75a7 7 0 0 0 4.63-1.41 4.75 4.75 0 0 0 1.69-3.87 4.77 4.77 0 0 0-1.69-3.88 7 7 0 0 0-4.63-1.41zm3.07 7.81a4.84 4.84 0 0 1-3.14.88h-3.68v-6.8h3.68a4.9 4.9 0 0 1 3.14.87 3.06 3.06 0 0 1 1.09 2.53 3 3 0 0 1-1.09 2.52z"></path>
 								<path
 										d="M20 1.67A18.33 18.33 0 1 0 38.33 20 18.35 18.35 0 0 0 20 1.67zm0 34.66A16.33 16.33 0 1 1 36.33 20 16.35 16.35 0 0 1 20 36.33z"></path>
-								<path fill="none" d="M0 0h40v40H0z"></path></g></svg> 포인트 </span> <span> <fmt:formatNumber value="${logincust.pointree}" pattern="#,##0"/>p</span>
+								<path fill="none" d="M0 0h40v40H0z"></path></g></svg> 포인트 </span> <span> <fmt:formatNumber value="${cust.pointree}" pattern="#,##0"/>p</span>
 						</div>
 						<div class="point col-6 col-lg-12" onclick="goToMyStarcoin()">
 							<span> <img
 								src="https://cdn-icons-png.flaticon.com/512/8146/8146818.png">스타코인
-							</span> <span>${logincust.starcoin}개</span>
+							</span> <span>${cust.starcoin}개</span>
 						</div>
 					</div>
 				</div>
