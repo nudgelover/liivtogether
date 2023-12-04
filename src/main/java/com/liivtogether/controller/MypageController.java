@@ -93,12 +93,16 @@ public class MypageController {
  
     @RequestMapping("/starcoin")
     public String starcoin(Model model, HttpSession session) throws Exception {
-    	Cust cust = (Cust) session.getAttribute("logincust");
-    	String custId = cust.getCustId();
 
+    	Cust logincust = (Cust) session.getAttribute("logincust");
+    	String custId = logincust.getCustId();
+    	Cust cust = custService.get(custId);
+    	
+    	
         List<Point> MyStarcoinList = pointService.getMyList(custId,"COIN");
         Point totalStarcoin = pointService.getMyTotal(custId,"COIN");
         
+        model.addAttribute("cust", cust);
         model.addAttribute("MyStarcoinList", MyStarcoinList);
         model.addAttribute("totalStarcoin", totalStarcoin);
     	model.addAttribute("center", dir + "starcoin");
@@ -107,11 +111,10 @@ public class MypageController {
     
     @RequestMapping("/pointree")
     public String pointree(Model model, HttpSession session) throws Exception {
-   
 
-    	Cust cust = (Cust) session.getAttribute("logincust");
-    	String custId = cust.getCustId();
-    	
+    	Cust logincust = (Cust) session.getAttribute("logincust");
+    	String custId = logincust.getCustId();
+    	Cust cust = custService.get(custId);
 
         List<Point> MyPointreeList = pointService.getMyList(custId,"POINTREE");
         Point totalPoint = pointService.getMyTotal(custId,"POINTREE");
