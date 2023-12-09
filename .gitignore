@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -32,3 +33,6 @@ build/
 ### VS Code ###
 .vscode/
 /bin/
+=======
+/liivtogether-master/
+>>>>>>> branch 'hyerimmy2' of https://github.com/nudgelover/liivtogether.git

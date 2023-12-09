@@ -53,7 +53,7 @@
 		, view
 		, rdate
 		FROM contents
-		WHERE topic_big = 'S'
+		WHERE topic_big = 'E'
 		ORDER BY esgId DESC
 	</select>
 
@@ -69,7 +69,7 @@
 	        content
 	    FROM
 	        contents
-	    WHERE topic_big = 'S'
+	    WHERE topic_big = 'E'
 	    AND edate >= CURDATE()
 	    AND (target_in < target)
 	    ORDER BY
@@ -102,7 +102,7 @@
 	   		likes l
 		ON 
 	   		c.id = l.contents_id
-	    WHERE c.topic_big = 'S'
+	    WHERE c.topic_big = 'E'
 	    <if test="topicSmall != null and topicSmall != ''">
 	        AND c.topic_small = #{topicSmall}
 	    </if>
