@@ -409,7 +409,7 @@
 								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+								<a href="/esgshop/detail?id=37" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 
@@ -435,7 +435,7 @@
 								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+								<a href="/esgshop/detail?id=36" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 
@@ -461,7 +461,7 @@
 								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+								<a href="/esgshop/detail?id=35" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 
@@ -487,7 +487,7 @@
 								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+								<a href="/esgshop/detail?id=34" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 						</div>
@@ -511,7 +511,7 @@
 								<p class="text-muted"> <span style="font-weight: bold; color: orange;">리브투게더 단독 시즌 상품</span></br>추운 겨울, 따듯하게 품어줄게요! 당신의 핫아 지키미</p>
 
 								<!-- Button -->
-								<a href="#!" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
+								<a href="/esgshop/detail?id=33" class="btn btn-sm btn-outline-primary">상품 보러 가기 </a>
 
 							</div>
 

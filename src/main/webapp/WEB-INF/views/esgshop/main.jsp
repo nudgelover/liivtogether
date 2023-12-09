@@ -27,11 +27,12 @@
 	color: lightgray; /* Adjust the color of the bookmark icon here */
 	font-size: 16px;
 }
+
 .white:hover {
 	color: red;
 	opacity: 50%;
-
 }
+
 .red {
 	color: red; /* Adjust the color of the bookmark icon here */
 	font-size: 16px;
@@ -55,11 +56,11 @@
 	}
 }
 
-.menulist label{
-	 display: block;
-	 float: right;
-
+.menulist label {
+	display: block;
+	float: right;
 }
+
 .menulist span {
 	margin-left: 10px;
 	cursor: pointer;
@@ -77,11 +78,10 @@
 	width: 20px;
 }
 
-.dday{
- font-size: small;
- color : orange;
+.dday {
+	font-size: small;
+	color: orange;
 }
-
 
 .form-check-input:checked {
 	background-color: #FFBF00 !important;
@@ -205,7 +205,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     var card = $('<div></div>').addClass('col-12 col-md-4');
                     var cardInner = $('<div></div>').addClass('card mb-7');
                     var heartIcon = $('<div></div>').addClass('heart-icon').attr('data-id', obj.esgId).append($('<i></i>').addClass('fa-solid fa-heart white'));
-                    var badge = $('<div></div>').addClass('badge bg-white text-body card-badge').append($('<time></time>').addClass('text-uppercase').attr('datetime', obj.ddate).text(obj.ddate));
+                   // var badge = $('<div></div>').addClass('badge bg-white text-body card-badge').append($('<time></time>').addClass('text-uppercase').attr('datetime', obj.ddate).text(obj.ddate));
                     var cardImage = $('<img/>').addClass('card-img-top').attr('src', '/uimg/' + obj.imageMain);
                     var cardBody = $('<div></div>').addClass('card-body px-0');
                                
@@ -232,13 +232,13 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     // 요소를 순서대로 추가
                     card.append(cardInner);
                     cardInner.append(heartIcon);
-                    cardInner.append(badge);
+                    //cardInner.append(badge);
                     cardInner.append(cardImage);
                     cardInner.append(cardBody);
 
-                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span></span>').html(dDayText)));
-                    cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/1286/1286827.png'), ' '+targetIn + '/' + target + '명 참가'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
-                    cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/esgshop/detail?id=' + obj.esgId).text('참여하러가기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
+                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title)));
+                    cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
+                    cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/esgshop/detail?id=' + obj.esgId).text('상품구입하기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
 
                     $('.esgshop-list').append(card);
                     
@@ -259,7 +259,6 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	}
 	
 	function getMoreList(topicSmall) {
-	    console.log('나클릭함');
 	    console.log('topicSmall :' + topicSmall);
 	    console.log('currentOrder : ' + currentOrder);
 
@@ -304,7 +303,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     var card = $('<div></div>').addClass('col-12 col-md-4');
                     var cardInner = $('<div></div>').addClass('card mb-7');
                     var heartIcon = $('<div></div>').addClass('heart-icon').attr('data-id', obj.esgId).append($('<i></i>').addClass('fa-solid fa-heart white'));
-                    var badge = $('<div></div>').addClass('badge bg-white text-body card-badge').append($('<time></time>').addClass('text-uppercase').attr('datetime', obj.ddate).text(obj.ddate));
+                  //  var badge = $('<div></div>').addClass('badge bg-white text-body card-badge').append($('<time></time>').addClass('text-uppercase').attr('datetime', obj.ddate).text(obj.ddate));
                     var cardImage = $('<img/>').addClass('card-img-top').attr('src', 'uimg/' + obj.imageMain);
                     var cardBody = $('<div></div>').addClass('card-body px-0');
                     
@@ -333,13 +332,13 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     // 요소를 순서대로 추가
                     card.append(cardInner);
                     cardInner.append(heartIcon);
-                    cardInner.append(badge);
+                   // cardInner.append(badge);
                     cardInner.append(cardImage);
                     cardInner.append(cardBody);
 
-                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span></span>').html(dDayText)));
-                    cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/1286/1286827.png'), ' '+targetIn + '/' + target + '명 참가'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
-                    cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/esgshop/detail?id=' + obj.esgId).text('참여하러가기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
+                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title)));
+                    cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
+                    cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/esgshop/detail?id=' + obj.esgId).text('상품구입하기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
 
                     $('.esgshop-list').append(card);
 
@@ -379,12 +378,11 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 <!-- Slider -->
 <div class="flickity-page-dots-inner mb-9"
 	data-flickity='{"pageDots": true}'>
-
 	<!-- Item -->
 	<div class="w-100">
-		<div class="card bg-h-100 bg-start"
-			style="background-image: url(/assets/img/covers/cover-24.jpg);">
-			<div class="row" style="height: 15rem">
+		<div class="card"
+			style="background-image: url(/assets/img/esgshop/지속가능한내일.png); background-size: contain; background-position: right; background-color: #FFCC06; background-repeat: no-repeat;">
+			<div class="row" style="height: 18rem">
 				<div class="col-12 col-md-10 col-lg-8 col-xl-6 align-self-center">
 					<div class="card-body px-md-10 py-11">
 
@@ -392,15 +390,13 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 						<h4>지속 가능한 내일, KB가 함께합니다</h4>
 
 						<!-- Button -->
-						<a class="btn btn-link px-0 text-body" href="https://omoney.kbstar.com/quics?page=C101240#loading">
-						 ESG STAR 보러가기 <i class="fe fe-arrow-right ms-2"></i>
+						<a class="btn btn-link px-0 text-body"
+							href="https://omoney.kbstar.com/quics?page=C101240#loading">
+							ESG STAR 보러가기 <i class="fe fe-arrow-right ms-2"></i>
 						</a>
 
 					</div>
 				</div>
-				<div
-					class="col-12 col-md-2 col-lg-4 col-xl-6 d-none d-md-block bg-cover"
-					style="background-image: url(/assets/img/covers/cover-16.jpg);"></div>
 			</div>
 		</div>
 	</div>
@@ -408,18 +404,20 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 
 	<!-- Item -->
 	<div class="w-100">
-		<div class="card bg-cover"
-			style="background-image: url(/assets/img/covers/cover-29.jpg)">
-			<div class="row align-items-center" style="height: 15rem">
+		<div class="card"
+			style="background-image: url(/assets/img/esgshop/스타프렌즈.png); background-size: contain; background-position: center center; background-repeat: no-repeat;">
+			<div class="row align-items-center" style="height: 18rem">
 				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
 					<div class="card-body px-md-10 py-11">
 						<!-- Heading -->
 						<h4 class="mb-5">지구에게 더 다정한 오늘을 선물하세요!</h4>
 
 						<!-- Button -->
-						<a class="btn btn-outline-dark" href="https://ko.wikipedia.org/wiki/%EC%83%88%ED%99%9C%EC%9A%A9"> 업사이클링이란? <i
-							class="fe fe-arrow-right ms-2"></i>
+						<a class="btn btn-outline-dark"
+							href="https://ko.wikipedia.org/wiki/%EC%83%88%ED%99%9C%EC%9A%A9">
+							업사이클링이란? <i class="fe fe-arrow-right ms-2"></i>
 						</a>
+
 
 					</div>
 				</div>
@@ -429,11 +427,11 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 
 	<!-- Item -->
 	<div class="w-100">
-		<div class="card bg-cover"
-			style="background-image: url(/assets/img/covers/cover-30.jpg);">
-			<div class="row align-items-center" style="height: 15rem">
+		<div class="card"
+			style="background-image: url(/assets/img/esgshop/ESGBanner2.jpg); background-size: contain; background-position: right; background-color: #FAF7F2; background-repeat: no-repeat;">
+			<div class="row align-items-center" style="height: 18rem">
 				<div class="col-12">
-					<div class="card-body px-md-10 py-11 text-center text-white">
+					<div class="card-body px-md-10 py-11 text-center">
 
 						<!-- Preheading -->
 						<p class="text-uppercase">KB금융그룹</p>
@@ -442,7 +440,9 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 						<h1 class="display-4 text-uppercase">ESG REPORTING</h1>
 
 						<!-- Link -->
-						<a class="link-underline text-reset" href="https://kbfg.com/Kor/about/sustainability/sustainability.jsp">지속가능경영보고서 보러가기</a>
+						<a class="link-underline text-reset"
+							href="https://kbfg.com/Kor/about/sustainability/sustainability.jsp">지속가능경영보고서
+							보러가기</a>
 
 					</div>
 				</div>
@@ -451,6 +451,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 	</div>
 
 </div>
+<input type="hidden" id="offset" value="9">
 
 <!-- CONTENT -->
 <section class="pt-7 pb-12">
@@ -466,13 +467,13 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 					<a id="tabAllBtn" class="nav-link active"
 						href="javascript:void(0);" onclick="showTab('taball')">All</a> <a
 						class="nav-link" href="javascript:void(0);"
-						onclick="showTab('tab_1')">에코백</a> <a class="nav-link"
-						href="javascript:void(0);" onclick="showTab('tab_2')">텀블러</a> <a
+						onclick="showTab('tab_1')">텀블러</a> <a class="nav-link"
+						href="javascript:void(0);" onclick="showTab('tab_2')">친환경상품</a> <a
 						class="nav-link" href="javascript:void(0);"
-						onclick="showTab('tab3')">종이테이프</a> <a class="nav-link"
-						href="javascript:void(0);" onclick="showTab('tab4')">업사이클링 스타프렌즈 상품</a> <a
+						onclick="showTab('tab3')">업사이클링</a> <a class="nav-link"
+						href="javascript:void(0);" onclick="showTab('tab4')">우대금리쿠폰</a> <a
 						class="nav-link" href="javascript:void(0);"
-						onclick="showTab('tab5')">우대금리쿠폰</a>
+						onclick="showTab('tab5')">기타</a>
 				</nav>
 
 			</div>
@@ -481,74 +482,72 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 		<div id="taball">
 			<div class="menulist">
 				<h2>전체</h2>
-			
+
 				<div>
-				 <span style="color:orange;" onclick="fetchOrder('brandNew', '')">최신순</span>
-		         <span onclick="fetchOrder('popular', '')">인기순</span>
-		         <span onclick="fetchOrder('deadline', '')">마감임박순</span>
-		         <span onclick="fetchOrder('targetIn', '')">신청률순</span>
-		         <span onclick="fetchOrder('views', '')">조회순</span>
-		         </br>
-		         <label>	
-				    <input class="form-check-input" type="checkbox" id="includeClosed" name="includeClosed" onclick="updateEsgshopList('')"> 마감 포함
-				 </label>
+					<span style="color: orange;" onclick="fetchOrder('brandNew', '')">최신순</span>
+					<span onclick="fetchOrder('popular', '')">인기순</span> <span
+						onclick="fetchOrder('deadline', '')">마감임박순</span> <span
+						onclick="fetchOrder('targetIn', '')">신청률순</span> <span
+						onclick="fetchOrder('views', '')">조회순</span> </br> <label> <input
+						class="form-check-input" type="checkbox" id="includeClosed"
+						name="includeClosed" onclick="updateEsgshopList('')"> 마감
+						포함
+					</label>
 				</div>
 			</div>
 
-			<div class="row esgshop-list">
-			
-
-			</div>
+			<div class="row esgshop-list"></div>
 			<div class="row">
 				<div class="col-12">
-	
+
 					<!-- Progress -->
 					<div class="row justify-content-center mt-7">
 						<div class="col-12 text-center load-more-box">
-						
+
 							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
+							<button class="btn btn-sm btn-outline-dark loadmore"
+								onclick="getMoreList('')">더보기</button>
+							<p style="display: none;" class="loadmore-message">더 이상 불러올
+								데이터가 없습니다.</p>
 						</div>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>
 
 		<div id="tab_1" style="display: none;">
 			<div class="menulist">
-				<h2>에코백</h2>
-						<div>
-				 <span style="color:orange;" onclick="fetchOrder('brandNew', 'A')">최신순</span>
-		         <span onclick="fetchOrder('popular', 'A')">인기순</span>
-		         <span onclick="fetchOrder('deadline', 'A')">마감임박순</span>
-		         <span onclick="fetchOrder('targetIn', 'A')">신청률순</span>
-		         <span onclick="fetchOrder('views', 'A')">조회순</span>
-		         </br>
-		         <label>	
-				    <input class="form-check-input" type="checkbox" id="includeClosedA" name="includeClosed" onclick="updateEsgshopList('A')"> 마감 포함
-				 </label>
+				<h2>텀블러</h2>
+				<div>
+					<span style="color: orange;" onclick="fetchOrder('brandNew', 'A')">최신순</span>
+					<span onclick="fetchOrder('popular', 'A')">인기순</span> <span
+						onclick="fetchOrder('deadline', 'A')">마감임박순</span> <span
+						onclick="fetchOrder('targetIn', 'A')">신청률순</span> <span
+						onclick="fetchOrder('views', 'A')">조회순</span> </br> <label> <input
+						class="form-check-input" type="checkbox" id="includeClosedA"
+						name="includeClosed" onclick="updateEsgshopList('A')"> 마감
+						포함
+					</label>
 				</div>
 			</div>
 
-			<div class="row esgshop-list">
-				
-
-			</div>
+			<div class="row esgshop-list"></div>
 			<div class="row">
 				<div class="col-12">
-	
+
 					<!-- Progress -->
 					<div class="row justify-content-center mt-7">
 						<div class="col-12 text-center load-more-box">
-						
+
 							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('A')">Load more</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
+							<button class="btn btn-sm btn-outline-dark loadmore"
+								onclick="getMoreList('A')">더보기</button>
+							<p style="display: none;" class="loadmore-message">더 이상 불러올
+								데이터가 없습니다.</p>
 						</div>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>
@@ -557,147 +556,144 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
 
 		<div id="tab_2" style="display: none;">
 			<div class="menulist">
-				<h2>텀블러</h2>
-						<div>
-				 <span style="color:orange;" onclick="fetchOrder('brandNew', 'B')">최신순</span>
-		         <span onclick="fetchOrder('popular', 'B')">인기순</span>
-		         <span onclick="fetchOrder('deadline', 'B')">마감임박순</span>
-		         <span onclick="fetchOrder('targetIn', 'B')">신청률순</span>
-		         <span onclick="fetchOrder('views', 'B')">조회순</span>
-		         </br>
-		         <label>	
-				    <input class="form-check-input" type="checkbox" id="includeClosedB" name="includeClosed" onclick="updateEsgshopList('B')"> 마감 포함
-				 </label>
+				<h2>친환경 상품</h2>
+				<div>
+					<span style="color: orange;" onclick="fetchOrder('brandNew', 'B')">최신순</span>
+					<span onclick="fetchOrder('popular', 'B')">인기순</span> <span
+						onclick="fetchOrder('deadline', 'B')">마감임박순</span> <span
+						onclick="fetchOrder('targetIn', 'B')">신청률순</span> <span
+						onclick="fetchOrder('views', 'B')">조회순</span> </br> <label> <input
+						class="form-check-input" type="checkbox" id="includeClosedB"
+						name="includeClosed" onclick="updateEsgshopList('B')"> 마감
+						포함
+					</label>
 				</div>
 			</div>
 
-			<div class="row esgshop-list">
-				
-			</div>
+			<div class="row esgshop-list"></div>
 			<div class="row">
 				<div class="col-12">
-	
+
 					<!-- Progress -->
 					<div class="row justify-content-center mt-7">
 						<div class="col-12 text-center load-more-box">
-						
+
 							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('B')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
+							<button class="btn btn-sm btn-outline-dark loadmore"
+								onclick="getMoreList('B')">더보기</button>
+							<p style="display: none;" class="loadmore-message">더 이상 불러올
+								데이터가 없습니다.</p>
 						</div>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>
 
 		<div id="tab3" style="display: none;">
 			<div class="menulist">
-				<h2>종이테이프</h2>
+				<h2>업사이클링</h2>
 				<div>
-				 <span style="color:orange;" onclick="fetchOrder('brandNew', 'C')">최신순</span>
-		         <span onclick="fetchOrder('popular', 'C')">인기순</span>
-		         <span onclick="fetchOrder('deadline', 'C')">마감임박순</span>
-		         <span onclick="fetchOrder('targetIn', 'C')">신청률순</span>
-		         <span onclick="fetchOrder('views', 'C')">조회순</span>
-		         </br>
-		         <label>	
-				    <input class="form-check-input" type="checkbox" id="includeClosedC" name="includeClosed" onclick="updateEsgshopList('C')"> 마감 포함
-				 </label>
+					<span style="color: orange;" onclick="fetchOrder('brandNew', 'C')">최신순</span>
+					<span onclick="fetchOrder('popular', 'C')">인기순</span> <span
+						onclick="fetchOrder('deadline', 'C')">마감임박순</span> <span
+						onclick="fetchOrder('targetIn', 'C')">신청률순</span> <span
+						onclick="fetchOrder('views', 'C')">조회순</span> </br> <label> <input
+						class="form-check-input" type="checkbox" id="includeClosedC"
+						name="includeClosed" onclick="updateEsgshopList('C')"> 마감
+						포함
+					</label>
 				</div>
 			</div>
 
-			<div class="row esgshop-list">
-				
-			</div>
+			<div class="row esgshop-list"></div>
 			<div class="row">
 				<div class="col-12">
-	
+
 					<!-- Progress -->
 					<div class="row justify-content-center mt-7">
 						<div class="col-12 text-center load-more-box">
-						
+
 							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('C')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
+							<button class="btn btn-sm btn-outline-dark loadmore"
+								onclick="getMoreList('C')">더보기</button>
+							<p style="display: none;" class="loadmore-message">더 이상 불러올
+								데이터가 없습니다.</p>
 						</div>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>
 		<div id="tab4" style="display: none;">
 
 			<div class="menulist">
-				<h2>업사이클링 스타프렌즈 상품</h2>
+				<h2>우대금리쿠폰</h2>
 				<div>
-				 <span style="color:orange;" onclick="fetchOrder('brandNew', 'D')">최신순</span>
-		         <span onclick="fetchOrder('popular', 'D')">인기순</span>
-		         <span onclick="fetchOrder('deadline', 'D')">마감임박순</span>
-		         <span onclick="fetchOrder('targetIn', 'D')">신청률순</span>
-		         <span onclick="fetchOrder('views', 'D')">조회순</span>
-		         </br>
-		         <label>	
-				    <input class="form-check-input" type="checkbox" id="includeClosedD" name="includeClosed" onclick="updateEsgshopList('D')"> 마감 포함
-				 </label>
+					<span style="color: orange;" onclick="fetchOrder('brandNew', 'D')">최신순</span>
+					<span onclick="fetchOrder('popular', 'D')">인기순</span> <span
+						onclick="fetchOrder('deadline', 'D')">마감임박순</span> <span
+						onclick="fetchOrder('targetIn', 'D')">신청률순</span> <span
+						onclick="fetchOrder('views', 'D')">조회순</span> </br> <label> <input
+						class="form-check-input" type="checkbox" id="includeClosedD"
+						name="includeClosed" onclick="updateEsgshopList('D')"> 마감
+						포함
+					</label>
 				</div>
 			</div>
 
-			<div class="row esgshop-list">
-				
-			
-
-			</div>
+			<div class="row esgshop-list"></div>
 			<div class="row">
 				<div class="col-12">
-	
-						<!-- Progress -->
+
+					<!-- Progress -->
 					<div class="row justify-content-center mt-7">
 						<div class="col-12 text-center load-more-box">
-						
+
 							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('D')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
+							<button class="btn btn-sm btn-outline-dark loadmore"
+								onclick="getMoreList('D')">더보기</button>
+							<p style="display: none;" class="loadmore-message">더 이상 불러올
+								데이터가 없습니다.</p>
 						</div>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>
 		<div id="tab5" style="display: none;">
 			<div class="menulist">
-				<h2>우대금리쿠폰</h2>
+				<h2>기타</h2>
 				<div>
-				 <span style="color:orange;" onclick="fetchOrder('brandNew', 'E')">최신순</span>
-		         <span onclick="fetchOrder('popular', 'E')">인기순</span>
-		         <span onclick="fetchOrder('deadline', 'E')">마감임박순</span>
-		         <span onclick="fetchOrder('targetIn', 'E')">신청률순</span>
-		         <span onclick="fetchOrder('views', 'E')">조회순</span>
-		         </br>
-		         <label>	
-				    <input class="form-check-input" type="checkbox" id="includeClosedE" name="includeClosed" onclick="updateEsgshopList('E')"> 마감 포함
-				 </label>
+					<span style="color: orange;" onclick="fetchOrder('brandNew', 'E')">최신순</span>
+					<span onclick="fetchOrder('popular', 'E')">인기순</span> <span
+						onclick="fetchOrder('deadline', 'E')">마감임박순</span> <span
+						onclick="fetchOrder('targetIn', 'E')">신청률순</span> <span
+						onclick="fetchOrder('views', 'E')">조회순</span> </br> <label> <input
+						class="form-check-input" type="checkbox" id="includeClosedE"
+						name="includeClosed" onclick="updateEsgshopList('E')"> 마감
+						포함
+					</label>
 				</div>
 			</div>
 
-			<div class="row esgshop-list">
-			
+			<div class="row esgshop-list"></div>
 
-			</div>
-			
 			<div class="row">
 				<div class="col-12">
-	
+
 					<!-- Progress -->
 					<div class="row justify-content-center mt-7">
 						<div class="col-12 text-center load-more-box">
-						
+
 							<!-- Button -->
-							<button class="btn btn-sm btn-outline-dark loadmore" onclick="getMoreList('E')">더보기</button>
-							<p style="display: none;" class="loadmore-message">더 이상 불러올 데이터가 없습니다.</p>
+							<button class="btn btn-sm btn-outline-dark loadmore"
+								onclick="getMoreList('E')">더보기</button>
+							<p style="display: none;" class="loadmore-message">더 이상 불러올
+								데이터가 없습니다.</p>
 						</div>
 					</div>
-	
+
 				</div>
 			</div>
 		</div>

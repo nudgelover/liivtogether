@@ -312,32 +312,11 @@ function updateLike() {
 			</div>
 		</div>
 		<div style="display: flex; flex-direction: column;"
-			class="col-12 col-md-4 sticky-container"">
+			class="col-12 col-md-4 sticky-container">
 			<p>📒 상품</p>
 			<h5>${esgshop.title}</h5>
 			<p>${esgshop.comment}</p>
-			<div style="display: flex;">
-				<span class="recruitment">정원 ${esgshop.target}명</span><span
-					class="participants">${esgshop.targetIn}명 참여</span> <span
-					class="${(esgshop.dDay == 0) ? 'deadline-red' : (esgshop.dDay < 0) ? 'deadline-gray' : (esgshop.dDay <= 3) ? 'deadline-red' : 'deadline-orange'}">
-					<c:choose>
-						<c:when test="${esgshop.dDay <= 0}">
-							<c:choose>
-								<c:when test="${esgshop.dDay == 0}">
-				               	 금일마감
-				           		</c:when>
-								<c:otherwise>
-				            	    마감완료
-				            	</c:otherwise>
-							</c:choose>
-						</c:when>
-						<c:otherwise>
-				       	 마감 ${esgshop.dDay}일 전
-				    	</c:otherwise>
-					</c:choose>
-				</span>
 
-			</div>
 			<div class="preference">
 				<span><img style="width: 25px;"
 					src="/assets/img/starfriends/starcoin.png">
@@ -372,13 +351,7 @@ function updateLike() {
 			</div>
 			<!-- 종료 시 참여하기 -> 종료로 변경  -->
 
-			<div class="location-detail">
-				<span class="mb-3"><img style="width: 20px;"
-					src="https://cdn-icons-png.flaticon.com/512/727/727606.png">
-					장소 : ${esgshop.location}</span> <span><img style="width: 20px;"
-					src="https://cdn-icons-png.flaticon.com/512/10691/10691802.png">
-					날짜 : <span id="esgshop-date"></span></span>
-			</div>
+
 
 			<div id="sharingBtn">
 				<img src="/assets/img/logo/liivtalktalk.png"
@@ -554,32 +527,7 @@ function preCheck() {
 	
     if (loginCustId) {
    	
-   	  $.ajax({
-   	        type: "GET", 
-   	        url: "/apply/pre-check",
-   	        data: { contentsId: esgshopId,
-   	        		topicBig : topicBig,
-   	        		custId: loginCustId},
-   	        success: function(response) {
-   	        	console.log(response)
-   	     		if(response === 0){
-   	     			joinEsgshop() 
-   	     			
-   	     		}else if(response === 1){
-   	     	   	
-   					popup('이미 신청하신 상품 입니다. 신청 내역 페이지로 이동하시겠습니까? ', true, goToMyPayments,'');
-   	     			
-   	     		}else{
-   					popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
-   	     			
-   	     		}
-   	            
-   	        },
-   	        error: function() {
-   	            console.error("Error checkLikesOrNot.");
-   	     		popup('일시적인 오류가 발생했습니다. 다시 시도해주세요', false, '','');
-   	        }
-   	    });
+    	popup('죄송합니다. 해당 서비스는 준비 중 입니다.',false,'', '');
 
       
     }else{

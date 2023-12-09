@@ -74,7 +74,6 @@ body {
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="91"
 	style="padding-top: 90px;">
 
-	<jsp:include page="modal.jsp" />
 	<jsp:include page="search.jsp" />
 	<jsp:include page="alarm.jsp" />
 	<!-- 상단 네비바 -->

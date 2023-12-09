@@ -32,10 +32,10 @@ mybatis:
 
 # User Define
 app:
-  imgdir: file:/root/uimg/
-  logdir: file:/root/logs/
-#  imgdir: file:///c:/project/uimg/
-#  logdir: file:///c:/project/logs/
+#  imgdir: file:/root/uimg/
+#  logdir: file:/root/logs/
+  imgdir: file:///c:/project/uimg/
+  logdir: file:///c:/project/logs/
   kakaorest: ENC(0DoCTcIuytz/+jWIBW6u4NyyXOdNTSk4aXXIKV39DyhDbNmu0gjBpGWq0Y0q/BDW)
   kakaojs: ENC(WbIiCweUuB9CHl/lv/5oo4v+Gm8zY27ThCB9g01bvo94uByfVGRm+se5Rk+jaEB8)
   
@@ -43,4 +43,3 @@ jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
  
 serviceserver: https://49.50.166.191:8443
- 
