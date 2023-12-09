@@ -43,4 +43,3 @@ jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
  
 serviceserver: https://49.50.166.191:8443
-
