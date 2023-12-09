@@ -60,7 +60,7 @@
 
 
 	<select id="getBannerList" resultType="Seminar">
-	 <![CDATA[
+	<![CDATA[
 	    SELECT
 	        id AS semiId,
 	        title,
@@ -68,16 +68,14 @@
 	        comment,
 	        content
 	    FROM
-	        liivtogether.contents
-	    WHERE
-	        topic_big = 'S'
-	        AND edate >= CURDATE() -- 오늘보다 크거나 같은 날짜
-	        AND (target_in < target) -- 인원이 차지 않은 경우만 포함
+	        contents
+	    WHERE topic_big = 'S'
+	    AND edate >= CURDATE()
+	    AND (target_in < target)
 	    ORDER BY
 	        edate ASC
 	    LIMIT 3;
-    ]]>
-
+	]]>
 	</select>
 
 
