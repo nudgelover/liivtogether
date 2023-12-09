@@ -42,5 +42,5 @@ app:
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
  
-serviceserver: http://192.168.35.15
- 
+serviceserver: https://49.50.166.191:8443
+
