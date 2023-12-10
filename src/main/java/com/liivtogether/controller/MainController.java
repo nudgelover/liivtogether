@@ -95,7 +95,7 @@ public class MainController {
     // 카카오 로그인창 호출(ajax로는 호출 안됨)
     @RequestMapping(value = "/login/getKakaoAuthUrl")
     public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
-    	String reqUrl = "https://kauth.kakao.com/oauth/authorize?client_id="+kakaorest+"&redirect_uri=http://localhost/kakaoLogin&response_type=code";
+    	String reqUrl = "https://kauth.kakao.com/oauth/authorize?client_id="+kakaorest+"&redirect_uri=https://49.50.166.191:8443/kakaoLogin&response_type=code";
     	return reqUrl;
     }
 
