@@ -246,7 +246,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     cardInner.append(cardImage);
                     cardInner.append(cardBody);
 
-                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span></span>').html(dDayText)));
+                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span style="white-space: nowrap;margin-left: 5px;"></span>').html(dDayText)));
                     cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/1286/1286827.png'), ' '+targetIn + '/' + target + '명 참가'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
                     cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/volunteer/detail?id=' + obj.voluId).text('참여하러가기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
 
@@ -347,7 +347,7 @@ let currentOrder = ''; // 현재 정렬 순서를 저장할 변수
                     cardInner.append(cardImage);
                     cardInner.append(cardBody);
 
-                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span></span>').html(dDayText)));
+                    cardBody.append($('<div></div>').addClass('d-flex justify-content-between').append($('<h6></h6>').text(title), $('<span style="white-space: nowrap;margin-left: 5px;"></span>').html(dDayText)));
                     cardBody.append($('<div></div>').addClass('event-info').append($('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/8146/8146818.png'), rewardCoin + '개'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/1286/1286827.png'), ' '+targetIn + '/' + target + '명 참가'), $('<span></span>').append($('<img/>').attr('src', 'https://cdn-icons-png.flaticon.com/512/2354/2354573.png'), view + '명 조회')));
                     cardBody.append($('<a></a>').addClass('btn btn-link stretched-link px-0 text-reset').attr('href', '/volunteer/detail?id=' + obj.voluId).text('참여하러가기').append($('<i></i>').addClass('fe fe-arrow-right ms-2')));
 
