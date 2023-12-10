@@ -105,7 +105,7 @@ public class KakaoLoginService implements IKakaoLoginService {
 			sb.append("grant_type=authorization_code");
 
 			sb.append("&client_id="+kakaorest); // REST_API키 본인이 발급받은 key 넣어주기
-			sb.append("&redirect_uri=http://localhost/kakaoLogin"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
+			sb.append("&redirect_uri=https://49.50.166.191:8443/kakaoLogin"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
